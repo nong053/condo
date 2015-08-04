@@ -1,7 +1,7 @@
 <form class="sky-form" id="sky-form4" action="#" novalidate="novalidate">
 									<header>
 										<div class="headline headline-md">
-											<h2><i class="fa fa-search-plus"></i> ค้นหาประกาศขายอสังหาริมทรัพย์</h2>
+											<h2><i class="fa fa-search-plus"></i> เมนูค้นหาประกาศขายฟรี</h2>
 										</div>
 										<button type="button" class="btn-u btn-mainmenu ">ขายบ้าน</button>
 										<button type="button" class="btn-u btn-mainmenu">ขายคอนโดมิเนียม</button>
@@ -30,23 +30,7 @@
 									</header>
 
 
-									<fieldset> 
-										<div class="row">
-													
-													<div class="col-md-12 col-padding-2">
-													<!--
-													<label class="input">
-														<input type="text" placeholder="ค้นหา" name="firstname">
-													</label>
-													-->
-													<label class="input">
-														<i class="icon-prepend fa fa-search-plus"></i>
-														<input type="text" placeholder="ค้นหา" name="lname">
-													</label>
-
-													</div>
-										</div>
-									</fieldset> 
+									
 									
 
 									<fieldset>  
@@ -217,18 +201,46 @@
 																</label>
 															</section>
 													</div>
+													
+													<div class="col-md-4 col-padding-2">
+														 <section>
+															    <input type="text" class="form-control" placeholder="กรอกเลขที่ประกาศ">
+														 </section>
+													</div>
 										</div>
 										
 										
 										
 									</fieldset>
 									<footer>
-										<button class="btn-u btn-u-light-green" type="submit"><i class="fa fa-folder-open "></i> บันทึกการค้นหา</button>
-										<button class="btn-u btn-u-dark-blue" type="submit"><i class="fa fa-envelope-o"></i> แจ้งเตือนทางอีเมลล์</button>
-										
-										<button class="btn-u btn-u-orange"  onclick="window.location.href='index.php?page=post_detail'"  type="button">
-										<i class="fa fa-search-plus"></i> ค้นหาประกาศ
-										</button>
+									
+											
+											<button type="button" onclick="window.location.href='index.php?page=post_detail'" class="btn-u btn-u-orange btn-search1">
+											<i class="fa fa-search-plus"></i> ค้นหา
+											</button>
+									
+									</footer>
+									<footer>
+										<button class="btn-u  btn-u-xs btn-u-light-green" type="submit"><i class=" fa fa-folder-open "></i> บันทึกการค้นหา</button>
+										<button class="btn-u  btn-u-xs btn-u-dark-blue" type="submit"><i class="fa fa-envelope-o"></i> แจ้งเตือนทางอีเมลล์</button>
 										
 									</footer>
+									
+									<fieldset> 
+										<div class="row">
+													
+													<div class="col-md-12 col-padding-2">
+													<!--
+													<label class="input">
+														<input type="text" placeholder="ค้นหา" name="firstname">
+													</label>
+													-->
+													<label class="input">
+														<i class="icon-append fa fa-search-plus"></i>
+														<input type="text" placeholder="ค้นหาทางลัด" name="lname">
+													</label>
+
+													</div>
+										</div>
+									</fieldset> 
 								</form>

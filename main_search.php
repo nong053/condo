@@ -11,9 +11,10 @@
                                     <!-- tab1-->
                                    <div class="tab-v1">
                                             <ul class="nav nav-tabs">
+                                                 <!--
                                                 <li class="active"><a data-toggle="tab" href="#seachSalesRealty"> 
-												<i class="fa fa-search-plus"></i> ค้นหาประกาศขายอสังหาริมทรัพย์</a></li>
-                                                <!--<li class=""><a data-toggle="tab" href="#searchSalesContractor">ค้นหาประกาศขายสำหรับผู้หรับเหมา</a></li>-->
+												<i class="fa fa-search-plus"></i> ค้นหาประกาศขายฟรี</a></li>
+                                               <li class=""><a data-toggle="tab" href="#searchSalesContractor">ค้นหาประกาศขายสำหรับผู้หรับเหมา</a></li>-->
                                             </ul>                
                                             <div class="tab-content">
                                             <!-- seachSalesRealty-->
@@ -59,10 +60,11 @@
                                    <!-- tab1-->
                                    <div class="tab-v1">
                                             <ul class="nav nav-tabs">
+                                                <!--
                                                 <li class="active"><a data-toggle="tab" href="#seachRentRealty">
 												<i class="fa fa-search-plus"></i>
-												ค้นหาประกาศเช่าอสังหาริมทรัพย์</a></li>
-												<!--
+												ค้นหาประกาศเช่าฟรี</a></li>
+												
                                                  <li class=""><a data-toggle="tab" href="#searchRentContractor">ค้นหาประกาศเช่าสำหรับผู้หรับเหมา</a></li>
 												 -->
                                             </ul>                

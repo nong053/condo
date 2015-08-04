@@ -37,7 +37,7 @@
     <!--[if lt IE 9]><link rel="stylesheet" href="assets/plugins/sky-forms-pro/skyforms/css/sky-forms-ie8.css"><![endif]-->
 
     <!-- CSS Customization -->
-    <link rel="stylesheet" href="assets/css/custom.css">
+     <link rel="stylesheet" href="assets/css/custom.css">
 	 <link rel="stylesheet" href="assets/css/custom_kosit.css">
 	 <link rel="stylesheet" href="assets/plugins/brand-buttons/brand-buttons-inversed.css">
 	  
@@ -59,35 +59,43 @@
 						</a>
 						 <!-- End Logo -->
 					</div>
-					<div id="adHeader" style=" background:#dddddd; margin-top:2px; height:75px" class="col-md-7 ">
+					<div id="adHeader" style=" background:#dddddd; margin-top:2px; height:75px" class="col-md-6 ">
 					Advertising
 					</div>
-					<div class="col-md-3">
+					<div class="col-md-4">
 					 <!-- Topbar -->
 						<div class="topbar" style="padding: 2px 0;">
 
                             <div class="row">
                                 <div class="col-md-6" style=" padding-left:2px;padding-right:1px;">
+                                   
                                     <button class="btn btn-social btn-block btn-facebook-inversed " style="height:38px;">
-                                      <i class="fa fa-facebook"></i> เฟสบุ๊ค
+                                      <i class="fa fa-facebook"></i> สมัครสมาชิกผ่านเฟสบุ๊ค
                                     </button>
+                                   
                                 </div>
+                                
+                                
 
                                  <div class="col-md-6" style="padding-left:0px;padding-right:0px;" > 
                                     <button class="btn btn-social  btn-block btn-android-inversed " style="height:38px;">
                                       <i class="fa fa-globe"></i> เลือกภาษา
                                     </button>
                                 </div>
+                                
                                 <div class="col-md-6" style="padding-left:2px;padding-right:1px;">
                                     <button class="btn btn-social  btn-block  btn-windows-inversed" style="height:38px;">
-                                      <i class="fa fa-dropbox"></i> เข้าสู่ระบบ
+                                      
+                                      <i class="fa fa-rss"></i> สมัครสมาชิกใหม่ฟรี
                                     </button>
                                 </div>
 
                                  <div class="col-md-6"style="padding-left:0px;padding-right:0px;" >
-                                    <button class="btn btn-social  btn-block btn-xing-inversed " style="height:38px;">
-                                      <i class="fa fa-rss"></i> สมัครสามาชิก
-                                    </button>
+                                     <a href="index.php?page=register">
+	                                    <button class="btn btn-social  btn-block btn-xing-inversed " style="height:38px;">
+	                                      <i class="fa fa-dropbox"></i> สมาชิกเข้าสู่ระบบ
+	                                    </button>
+                                   	</a>
                                 </div>
                             </div>
 
@@ -97,8 +105,6 @@
 					</div>
 			</div>
 			
-           
-            
            
 
             <!-- Toggle get grouped for better mobile display -->
@@ -112,8 +118,8 @@
 
     </div>
     <!--=== End Header ===-->
-
-    <!--=== Breadcrumbs ===-->
+	<div class="breadcrumbs">
+    <!--===Start Top Buttons ===-->
 	<div class="container">
 		<div class="col-md-2">
 				 <h1 class="pull-left" style="margin-bottom: 5px;margin-top: 5px;">
@@ -127,13 +133,12 @@
 				 <h1  style="margin-bottom: 5px;margin-top: 5px;">
 					<!--ประกาศขายฟรี-->
 						<button class="btn btn-block  btn-info rounded" style="font-size:19px;">
-						  <i class="fa fa-unlink"></i>ลงประกาศโฆษณา
+						  <i class="fa fa-unlink"></i> ลงประกาศโฆษณาพิเศษ
 						</button>
 				</h1>
 		</div>
 		<div class="col-md-2">
 			<h1 class="pull-right" style="margin-bottom: 5px; margin-top: 5px;">
-			
            <!--     ประกาศเช่าฟรี-->
                     <button class="btn btn-block btn-stackoverflow-inversed rounded" style="font-size:19px;">
                       <i class="fa fa-stack-overflow"></i>ลงประกาศเช่าฟรี
@@ -144,60 +149,67 @@
 
 		</div>
 	</div>
+	
+</div>
+	<!--===End Top Buttons ===-->
+	<!--===Start Breadcrumbs ===-->
     <div class="breadcrumbs">
         <div class="container" >
-           
-			 <div class="pull-left" style="margin-bottom: 5px;margin-top: 5px;">
+           	  <div class="row">
+           	  		<!-- button ads start -->
+           	  		
+           	  		<!-- button ads start -->
+           	  </div>
+			 <div class="pull-left" style="margin-bottom: 2px;margin-top: 0px;">
                <ul class="nav navbar-nav">
                   
                     <li >
                         <a href="index.php?page=home">
-                            <i class="fa fa-home"></i>หน้าแรก
+                            <i class="fa fa-home"></i> หน้าแรก
                         </a>
 					</li>     
 					 <li>
                         <a href="index.php?page=sitemap">
-                           <i class="fa fa-cogs"></i>แผนผังเว็บไซต์
+                           <i class="fa fa-cogs"></i> แผนผังเว็บไซต์
+                        </a>
+					</li> 
+					
+					
+					 <li >
+                        <a href="index.php?page=#">
+                           <i class="fa fa-child"></i> แชร์ผ่านเฟสบุ๊ค
                         </a>
 					</li> 
 					 <li >
-                        <a href="index.php?page=contact">
-                           <i class="fa fa-child"></i>ติดต่อเรา
+                        <a href="index.php?page=#">
+                         <i class="fa fa-cog"></i> แชร์ผ่านกูลเกิล
                         </a>
 					</li> 
-					 <li >
-                        <a href="index.php?page=condition">
-                         <i class="fa fa-cog"></i>เงื่อนไขข้อตกลง
-                        </a>
-					</li> 
+					<!-- 
 					 <li >
                         <a href="index.php?page=about">
                           <i class="fa fa-user"></i>เกี่ยวกับเรา
                         </a>
 					</li> 
+					 -->
+					 
 					 <li >
                         <a href="index.php?page=advertise">
-                          <i class="fa fa-rss"></i>ติดต่อโฆษณา
+                          <i class="fa fa-rss"></i> ติดต่อโฆษณาหน้าแรก
                         </a>
 					</li> 
-
-                                  
-                         
-
-               
+					 
                 </ul>
             </div>
 
 			
 			
 			
-			<!--
+			
             <ul class="pull-right breadcrumb">
-                <li><a href="index.html">หน้าแรก</a></li>
-                <li><a href="">ประกาศ</a></li>
-                <li class="active">ประกาศของฉัน</li>
+                <li class="active"><i class="fa fa fa-user"></i>คุณ abc กำลังอยู่ในระบบ</li>
             </ul>
-			-->
+			
         </div>
     </div><!--/breadcrumbs-->
     <!--=== End Breadcrumbs ===-->
@@ -207,7 +219,13 @@
 
                            <!-- main_search_start-->
 							<?php
-								if(($_GET['page']!="sitemap") and ($_GET['page']!="contact")and ($_GET['page']!="advertise")and ($_GET['page']!="about")and ($_GET['page']!="condition")){
+								if(($_GET['page']!="sitemap") 
+								and ($_GET['page']!="contact")
+								and ($_GET['page']!="advertise")
+								and ($_GET['page']!="about")
+								and ($_GET['page']!="condition")
+								and ($_GET['page']!="register")
+								){
 								include("main_search.php");
 								}
 							?>
@@ -231,6 +249,8 @@
 					case"advertise":include("advertise.php"); break;
 					case"about":include("about.php"); break;
 					case"condition":include("condition.php"); break;
+					case"register":include("register.php"); break;
+					
 					default:"home_content.php";
 					}
 			?>
@@ -330,6 +350,7 @@
                         <div class="headline"><h2>การบริการเว็ปไซต์</h2></div>
                         <ul class="list-unstyled link-list">
                             <li><a href="#">เกี่ยวกับเรา</a><i class="fa fa-angle-right"></i></li>
+                            <li><a href="#">ติดต่อเรา</a><i class="fa fa-angle-right"></i></li>
                             <li><a href="#">ฝากลงประกาศฟรี</a><i class="fa fa-angle-right"></i></li>
                             <li><a href="#">สมัครสมาชิกใหม่</a><i class="fa fa-angle-right"></i></li>
                             <li><a href="#">สมัตรสมาชิกผ่านFacebook</a><i class="fa fa-angle-right"></i></li>
