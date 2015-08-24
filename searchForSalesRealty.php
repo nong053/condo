@@ -15,10 +15,11 @@
 										<button type="button" class="btn-u btn-mainmenu ">ขายโรงงาน </button>
 										<button type="button" class="btn-u btn-mainmenu ">ขายอพาร์ทเมนท์ </button>
 										<button type="button" class="btn-u btn-mainmenu">ขายอาคารสำนักงาน </button>
-										<button type="button" class="btn-u btn-mainmenu">อื่นๆ </button>
+										<button type="button" class="btn-u btn-mainmenu">ขายเกสเฮ้าส์</button>
+										<button type="button" class="btn-u btn-mainmenu">อสังหาริมทรัพย์ อื่นๆ </button>
 
 										<div class="headline headline-md">
-											<h2>สำหรับผู้หรับเหมา</h2>
+											<!-- <h2>สำหรับผู้หรับเหมา</h2> -->
 										</div>
 										<button type="button" class="btn-u btn-mainmenu-contractor btn-u-dark-blue ">ขายวัสดถก่อสร้าง</button>
 										<button type="button" class="btn-u btn-mainmenu-contractor btn-u-dark-blue">ขายเครื่องมือก่อสร้าง</button>
@@ -229,16 +230,21 @@
 									<fieldset> 
 										<div class="row">
 													
-													<div class="col-md-12 col-padding-2">
+													<div class="col-md-9 col-padding-2">
 													<!--
 													<label class="input">
 														<input type="text" placeholder="ค้นหา" name="firstname">
 													</label>
 													-->
-													<label class="input">
-														<i class="icon-append fa fa-search-plus"></i>
-														<input type="text" placeholder="ค้นหาทางลัด" name="lname">
-													</label>
+													
+													
+													<div class="input-group">
+					                                    <input type="text" class="form-control" placeholder="ใส่ข้อมูล">
+					                                    <span class="input-group-btn">
+					                                 	
+					                                        <button type="button" class="btn btn-u btn-u-orange"><i class="fa fa-search-plus"></i> คลิ๊กค้นหาทางลัด</button>
+					                                    </span>
+					                                </div>
 
 													</div>
 										</div>

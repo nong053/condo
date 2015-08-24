@@ -20,46 +20,46 @@
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin">
 
     <!-- CSS Global Compulsory -->
-    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="../assets/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
 
     <!-- CSS Header and Footer -->
-    <link rel="stylesheet" href="assets/css/headers/header-default.css">
-    <link rel="stylesheet" href="assets/css/footers/footer-v1.css">
+    <link rel="stylesheet" href="../assets/css/headers/header-default.css">
+    <link rel="stylesheet" href="../assets/css/footers/footer-v1.css">
 
     <!-- CSS Implementing Plugins -->
-    <link rel="stylesheet" href="assets/plugins/animate.css">
-    <link rel="stylesheet" href="assets/plugins/line-icons/line-icons.css">
-    <link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
-    <link rel="stylesheet" href="assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
-	
-    <!--[if lt IE 9]><link rel="stylesheet" href="assets/plugins/sky-forms-pro/skyforms/css/sky-forms-ie8.css"><![endif]-->
+    <link rel="stylesheet" href="../assets/plugins/animate.css">
+    <link rel="stylesheet" href="../assets/plugins/line-icons/line-icons.css">
+    <link rel="stylesheet" href="../assets/plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
+    <link rel="stylesheet" href="../assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
+    <!--[if lt IE 9]><link rel="stylesheet" href="../assets/plugins/sky-forms-pro/skyforms/css/sky-forms-ie8.css"><![endif]-->
 
     <!-- CSS Customization -->
-     <link rel="stylesheet" href="assets/css/custom.css">
-	 <link rel="stylesheet" href="assets/css/custom_kosit.css">
-	 <link rel="stylesheet" href="assets/plugins/brand-buttons/brand-buttons-inversed.css">
-	  
-	  
-	  <!-- JS Global Compulsory -->           
-	<script type="text/javascript" src="assets/plugins/jquery/jquery.min.js"></script>
-	<script type="text/javascript" src="assets/plugins/jquery/jquery-migrate.min.js"></script>
-	<script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../assets/css/custom.css">
+	<link rel="stylesheet" href="../assets/css/custom_member.css">
+
+
+	<!-- JS Global Compulsory -->           
+	<script type="text/javascript" src="../assets/plugins/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="../assets/plugins/jquery/jquery-migrate.min.js"></script>
+	<script type="text/javascript" src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 	<!-- JS Implementing Plugins -->
-	<script type="text/javascript" src="assets/plugins/back-to-top.js"></script>
-	<script type="text/javascript" src="assets/plugins/smoothScroll.js"></script>
-	<script src="assets/plugins/sky-forms-pro/skyforms/js/jquery.maskedinput.min.js"></script>
-	<script src="assets/plugins/sky-forms-pro/skyforms/js/jquery-ui.min.js"></script>
-	<script src="assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="../assets/plugins/back-to-top.js"></script>
+	<script type="text/javascript" src="../assets/plugins/smoothScroll.js"></script>
+	<script src="../assets/plugins/sky-forms-pro/skyforms/js/jquery.maskedinput.min.js"></script>
+	<script src="../assets/plugins/sky-forms-pro/skyforms/js/jquery-ui.min.js"></script>
+	<script src="../assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"></script>
 	<!-- JS Customization -->
-	<script type="text/javascript" src="assets/js/custom.js"></script>
-	<script type="text/javascript" src="Controller/cMain.js"></script>
+	<script type="text/javascript" src="../assets/js/custom.js"></script>
+	<!-- JS Javascript Customization -->
+	<script src="../assets/js/custom/member.js"></script>
+	
 	<!-- JS Page Level -->           
-	<script type="text/javascript" src="assets/js/app.js"></script>
-	<script type="text/javascript" src="assets/js/plugins/masking.js"></script>
-	<script type="text/javascript" src="assets/js/plugins/datepicker.js"></script>
-	<script type="text/javascript" src="assets/js/plugins/validation.js"></script>
+	<script type="text/javascript" src="../assets/js/app.js"></script>
+	<script type="text/javascript" src="../assets/js/plugins/masking.js"></script>
+	<script type="text/javascript" src="../assets/js/plugins/datepicker.js"></script>
+	<script type="text/javascript" src="../assets/js/plugins/validation.js"></script>
 	<script type="text/javascript">
 	    jQuery(document).ready(function() {
 	        App.init();
@@ -68,6 +68,18 @@
 	        Validation.initValidation();
 	        });
 	</script>
+	<!--[if lt IE 9]>
+	    <script src="../assets/plugins/respond.js"></script>
+	    <script src="../assets/plugins/html5shiv.js"></script>
+	    <script src="../assets/plugins/placeholder-IE-fixes.js"></script>
+	    <script src="../assets/plugins/sky-forms-pro/skyforms/js/sky-forms-ie8.js"></script>
+	<![endif]-->
+	<!--[if lt IE 10]>
+	    <script src="../assets/plugins/sky-forms-pro/skyforms/js/jquery.placeholder.min.js"></script>
+	<![endif]-->     
+
+
+	
 </head>
 
 <body>    
@@ -75,243 +87,89 @@
 <div class="wrapper">
     <!--=== Header ===-->    
     <div class="header">
-        <div class="container" style="margin-bottom: 0px;">
+        <div class="container">
             
-			<div class="row">
-					<div class="col-md-2">
-						<!-- Logo -->
-						<a class="logo" href="index.html">
-							<img src="assets/img/logo1-default.png" alt="Logo">
-							
-						</a>
-						 <!-- End Logo -->
-					</div>
-					<div id="adHeader" style=" background:#dddddd; margin-top:2px; height:75px" class="col-md-6 ">
-					Advertising
-					</div>
-					<div class="col-md-4">
-					 <!-- Topbar -->
-						<div class="topbar" style="padding: 2px 0;">
-
-                            <div class="row">
-                                <div class="col-md-6" style=" padding-left:2px;padding-right:1px;">
-                                   
-                                    <button class="btn btn-social btn-block btn-facebook-inversed " style="height:38px;">
-                                      <i class="fa fa-facebook"></i> สมัครสมาชิกผ่านเฟสบุ๊ค
-                                    </button>
-                                   
-                                </div>
-                                
-                                
-
-                                 <div class="col-md-6" style="padding-left:0px;padding-right:0px;" > 
-                                    <button class="btn btn-social  btn-block btn-android-inversed " style="height:38px;">
-                                      <i class="fa fa-globe"></i> เลือกภาษา
-                                    </button>
-                                </div>
-                                
-                                <div class="col-md-6" style="padding-left:2px;padding-right:1px;">
-                                    <button onclick="location.href='index.php?page=register'" class="btn btn-social  btn-block  btn-windows-inversed" style="height:38px;">
-                                      
-                                      <i class="fa fa-rss"></i> สมัครสมาชิกใหม่ฟรี
-                                    </button>
-                                </div>
-
-                                 <div class="col-md-6"style="padding-left:0px;padding-right:0px;" >
-                                     
-	                                    <button onclick="location.href='index.php?page=login'" class="btn btn-social  btn-block btn-xing-inversed " style="height:38px;">
-	                                      <i class="fa fa-dropbox"></i> สมาชิกเข้าสู่ระบบ
-	                                    </button>
-                                   
-                                </div>
-                            </div>
-
-							
-						</div>
-						<!-- End Topbar -->
-					</div>
-			</div>
-			
+            
            
 
-            <!-- Toggle get grouped for better mobile display -->
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="fa fa-bars"></span>
-            </button>
-            <!-- End Toggle -->
+           
         </div><!--/end container-->
 
-
+      
     </div>
     <!--=== End Header ===-->
-	<div class="breadcrumbs">
-    <!--===Start Top Buttons ===-->
-	<div class="container">
-		<div class="col-md-3">
-				 <h1 class="pull-left" style="margin-bottom: 5px;margin-top: 5px;">
-					<!--ประกาศขายฟรี-->
-						<button class="btn btn-block btn-facebook-inversed rounded" style="font-size:19px;">
-						  <i class="fa fa-cloud"></i>คลิ๊กลงประกาศขายฟรี
-						</button>
-				</h1>
-		</div>
-		<div class="col-md-6 ">
-				 <h1  style="margin-bottom: 5px;margin-top: 5px;">
-					<!--ประกาศขายฟรี-->
-						<button class="btn btn-block  btn-info rounded" style="font-size:19px;">
-						  <i class="fa fa-unlink"></i> คลิ๊กลงประกาศโฆษณาพิเศษหน้าแรก
-						</button>
-				</h1>
-		</div>
-		<div class="col-md-3">
-			<h1 class="pull-right" style="margin-bottom: 5px; margin-top: 5px;">
-           <!--     ประกาศเช่าฟรี-->
-                    <button class="btn btn-block btn-stackoverflow-inversed rounded" style="font-size:19px;">
-                      <i class="fa fa-stack-overflow"></i>คลิ๊กลงประกาศเช่าฟรี
-                    </button>
-            </h1>
-		</div>
-		
-
-		</div>
-	</div>
 	
-</div>
-	<!--===End Top Buttons ===-->
-	<!--===Start Breadcrumbs ===-->
-    <div class="breadcrumbs">
-        <div class="container" >
-           	  <div class="row">
-           	  		<!-- button ads start -->
-           	  		
-           	  		<!-- button ads start -->
-           	  </div>
-			 <div class="pull-left" style="margin-bottom: 2px;margin-top: 0px;">
-               <ul class="nav navbar-nav">
-                  
-                    <li >
-                        <a href="index.php?page=home">
-                            <i class="fa fa-home"></i> หน้าแรก
-                        </a>
-					</li>     
-					 <li>
-                        <a href="index.php?page=sitemap">
-                           <i class="fa fa-cogs"></i> แผนผังเว็บไซต์
-                        </a>
-					</li>
-					<li>
-                        <a href="index.php?page=sitemap">
-                           <i class="fa fa-cogs"></i> ประกาศที่บันทึกไว้
-                        </a>
-					</li>  
-					
-					
-					 <li >
-                        <a href="index.php?page=#">
-                           <i class="fa fa-child"></i> แชร์ผ่านเฟสบุ๊ค
-                        </a>
-					</li> 
-					 <li >
-                        <a href="index.php?page=#">
-                         <i class="fa fa-cog"></i> แชร์ผ่านกูลเกิล
-                        </a>
-					</li> 
-					<!-- 
-					 <li >
-                        <a href="index.php?page=about">
-                          <i class="fa fa-user"></i>เกี่ยวกับเรา
-                        </a>
-					</li> 
-					 -->
-					 
-					 <li >
-                        <a href="index.php?page=advertise">
-                          <i class="fa fa-rss"></i> ติดต่อโฆษณาหน้าแรก
-                        </a>
-					</li> 
-					 
-                </ul>
-            </div>
-
-			
-			
-			
-			<?php 
-			if($_SESSION['cus_email']){
-			?>
+    <!--=== Breadcrumbs ===-->
+    <div class="breadcrumbs margin-bottom5">
+        <div class="container">
+            <h1 class="pull-left">ประกาศของฉัน</h1>
             <ul class="pull-right breadcrumb">
-                <li class="active"><i class="fa fa fa-user"></i>คุณ <?=$_SESSION['cus_email']?> กำลังอยู่ในระบบ(
-                	<a href="#" id="logout">
-                	ออกจากระบบ
-                	</a>
-                	)</li>
+                <li><a href="index.html">หน้าแรก</a></li>
+                <li><a href="">ประกาศ</a></li>
+                <li class="active">ประกาศของฉัน</li>
             </ul>
-            <?php }?>
-			
         </div>
     </div><!--/breadcrumbs-->
     <!--=== End Breadcrumbs ===-->
 
     <!--=== Content Part ===-->
+    <div class="container content">
+        <div class="row">
+            <!-- Begin Sidebar Menu -->
+            <div class="col-md-3">
+                <ul class="list-group sidebar-nav-v1" id="sidebar-nav">
+                    <!-- Typography -->
+                    <li class="list-group-item list-toggle active">  
+   
+					<a href="#collapse-typography" data-parent="#sidebar-nav" data-toggle="collapse" class="" aria-expanded="true">ข้อมูลการประกาศ</a>
+                       <ul class="collapse in" id="collapse-typography" aria-expanded="true" style="">
+                            <li><a href="?page=post"><i class="fa fa-sort-alpha-asc"></i> ประกาศของฉัน</a></li>
+                            <li>
+                                
+                                <a href="?page=profile"><i class="fa fa-magic"></i> ข้อมูลส่วนตัว</a>
+                            </li>
+                            <li>
+                                <span class="badge badge-u">New</span>                            
+                                <a href="?page=inbox"><i class="fa fa-ellipsis-h"></i> ข้อความของฉัน</a>
+                            </li>
+                            <li><a href="?page=stats"><i class="fa fa-quote-left"></i> ข้อมูลสถิติ</a></li>
+							<li>
+                                                  
+                                <a href="#"><i class="fa fa-asterisk"></i> ดูหน้าประกาศ</a>
+                            </li>
+                            <li>
+                                                      
+                                <a href="#"><i class="fa fa-asterisk"></i> ออกจากระบบ</a>
+                            </li>
+
+                            
+                        </ul>
+                    </li>
+                    <!-- End Typography -->
 
 
-                           <!-- main_search_start-->
-							<?php
-								if(($_GET['page']!="sitemap") 
-								and ($_GET['page']!="contact")
-								and ($_GET['page']!="advertise")
-								and ($_GET['page']!="about")
-								and ($_GET['page']!="condition")
-								and ($_GET['page']!="register")
-								and ($_GET['page']!="login")
-								){
-								include("main_search.php");
-								}
-							?>
-						   <!-- main_search_start-->
-
-          
-
-    <div class="container content">		
-    	<div class="row blog-page">    
-            <!-- Left Content -->
-        	<div class="col-md-8">
-              
-
-			<?php
-					switch($_GET['page']){
-					case"home":include("home_content.php"); break;
-					case"post_detail":include("post_detail.php"); break;
-					case"post_sub_detail":include("post_sub_detail.php"); break;
-					case"sitemap":include("sitemap.php"); break;
-					case"contact":include("contact.php"); break;
-					case"advertise":include("advertise.php"); break;
-					case"about":include("about.php"); break;
-					case"condition":include("condition.php"); break;
-					case"register":include("register.php"); break;
-					case"login":include("login.php"); break;
-					
-					default:include("home_content.php");
-					}
-			?>
-
-
-
+                </ul>
             </div>
-            <!-- End Left Content -->
+            <!-- End Sidebar Menu -->
 
-            <!-- Start Right Content -->
+            <!-- Begin Content -->
+				<div class="col-md-9">
 			
-			<?php
-				if($_GET['page']!="contact"){
-				include("right_content.php");
-				}
-			?>
+					   <?php
+					   switch($_GET['page']){
+					   case 'post': include"post.php";break;
+					   case 'profile': include"profile.php";break;
+					   case 'inbox': include"inbox.php";break;
+					   case 'stats': include"stats.php";break;
+					   
+					   }
+					   ?>
+				</div>
+            
+			</div> 
+			<!-- End Content -->
 
-			<!-- End Right Content -->
-        </div><!--/row-->        
-    </div> 
+    </div><!--/container-->     
     <!--=== End Content Part ===-->
 
       <!--=== Footer Version 1 ===-->
@@ -322,7 +180,7 @@
                     <!-- About -->
 					<!--
                     <div class="col-md-3 md-margin-bottom-40">
-                        <a href="index.html"><img id="logo-footer" class="footer-logo" src="assets/img/logo2-default.png" alt=""></a>
+                        <a href="index.html"><img id="logo-footer" class="footer-logo" src="../assets/img/logo2-default.png" alt=""></a>
                         <p>About Unify dolor sit amet, consectetur adipiscing elit. Maecenas eget nisl id libero tincidunt sodales.</p>
                         <p>Duis eleifend fermentum ante ut aliquam. Cras mi risus, dignissim sed adipiscing ut, placerat non arcu.</p>    
                     </div>
@@ -333,11 +191,11 @@
                     <div class="col-md-3 md-margin-bottom-40">
                         <div class="posts">
                             <div class="headline"><h2>เมนูหน้าหลักเว็ปไซด์</h2></div>
-							 
-
-                            <ul class="list-unstyled link-list">
-                                <li> <a href="#">ฝากประกาศโครงการใหม่ </a>
-								
+                            <ul class="list-unstyled latest-list">
+                                <li>
+                                    <a href="#">ฝากประกาศโครงการใหม่</a>
+                                 
+                                </li>
                                 <li>
                                     <a href="#">ฝากประกาศอสังหาริมทรพัย์ใกล้แหล่งท่องเที่ยว</a>
                                 
@@ -347,7 +205,7 @@
                                     
                                 </li>
 								<li>
-                                    <a href="#">ฝากประกาศอสังหาริมทรัพย์เพื่อขาย</a>
+                                    <a href="#">ฝากประกาศอสังหาริมทรัพย์เพื่อขาย </a>
                                 </li>
 
 								<li>
@@ -378,7 +236,7 @@
                                 </li>
 
 								<li>
-                                    <a href="#">ฝากประกาศโรงแรมและรีสอร์ท</a></i>
+                                    <a href="#">ฝากประกาศโรงแรมและรีสอร์ท</a>
                                 </li>
 
                             </ul>
@@ -391,7 +249,6 @@
                         <div class="headline"><h2>การบริการเว็ปไซต์</h2></div>
                         <ul class="list-unstyled link-list">
                             <li><a href="#">เกี่ยวกับเรา</a><i class="fa fa-angle-right"></i></li>
-                            <li><a href="#">ติดต่อเรา</a><i class="fa fa-angle-right"></i></li>
                             <li><a href="#">ฝากลงประกาศฟรี</a><i class="fa fa-angle-right"></i></li>
                             <li><a href="#">สมัครสมาชิกใหม่</a><i class="fa fa-angle-right"></i></li>
                             <li><a href="#">สมัตรสมาชิกผ่านFacebook</a><i class="fa fa-angle-right"></i></li>
@@ -540,17 +397,6 @@
     </div>     
     <!--=== End Footer Version 1 ===-->
 </div><!--/End Wrapepr-->
-
-
-<!--[if lt IE 9]>
-    <script src="assets/plugins/respond.js"></script>
-    <script src="assets/plugins/html5shiv.js"></script>
-    <script src="assets/plugins/placeholder-IE-fixes.js"></script>
-    <script src="assets/plugins/sky-forms-pro/skyforms/js/sky-forms-ie8.js"></script>
-<![endif]-->
-<!--[if lt IE 10]>
-    <script src="assets/plugins/sky-forms-pro/skyforms/js/jquery.placeholder.min.js"></script>
-<![endif]-->     
 
 </body>
 </html>	

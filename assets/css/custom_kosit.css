@@ -42,10 +42,51 @@ blockquote {
 	
 }
 .btn-search1{
-	 width: 470px;
+	 width: 515px;
 }
 .breadcrumb{
 	margin-bottom: 0px;
 	top:0px;
 }
+.sky-form header {
+    background: #fff none repeat scroll 0 0;
+    color: inherit;
+    display: block;
+    font-size: 20px;
+    font-weight: 400;
+    padding: 5px;
+}
+.postRL{
+	width:200px;
+}
+.tag-box {
+    background: #fff none repeat scroll 0 0;
+    margin-bottom: 10px;
+    padding: 5px;
+}
+.btn-left-right{
+	float:right
+}
+.box-margin-top5{
+	margin-top:5px;
+}
+.box-margin-bottom5{
+	margin-bottom:5px;
+}
+.box-margin-left5-right5{
+	margin-left:5px;
+	margin-right:5px;
+}
+.couterUserVisit{
+	padding:20px;
+	border-radius:10px;
+	background:#72c02c;
+	color:white;
+}
+.relativeBox{
+	
+	position:relative;
+	top:-40px;
+}
+
 

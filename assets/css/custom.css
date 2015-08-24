@@ -20,7 +20,10 @@ margin-left:5px;
   background: url(../img/patterns/breadcrumbs.png) repeat;
 }
 .btn-mainmenu{
-	width:150px;
+	width:125px;
+	padding:0px;
+	padding-top:5px;
+	padding-bottom:5px;
 }
 
 .btn-u:hover, .btn-u:focus, .btn-u:active{
@@ -52,15 +55,15 @@ padding:2px;
     
     border: medium none;
     display: block;
-    padding: 5px 20px 0;
+    padding: 5px 15px 0;
 }
 .sky-form footer {
     background: #fff none repeat scroll 0 0;
-    padding: 5px 30px;
+    padding: 5px 5px;
 }
 
  .btn-mainmenu-contractor{
- width:150px;
+ width:168px;
  }
 
  .tab-v1 .nav-tabs a {

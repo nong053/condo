@@ -1,4 +1,4 @@
-
+<?php session_start()?>
 <!DOCTYPE html> 
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
@@ -40,7 +40,46 @@
 	<link rel="stylesheet" href="assets/css/custom_member.css">
 
 
+	<!-- JS Global Compulsory -->           
+	<script type="text/javascript" src="assets/plugins/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="assets/plugins/jquery/jquery-migrate.min.js"></script>
+	<script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+	<!-- JS Implementing Plugins -->
+	<script type="text/javascript" src="assets/plugins/back-to-top.js"></script>
+	<script type="text/javascript" src="assets/plugins/smoothScroll.js"></script>
+	<script src="assets/plugins/sky-forms-pro/skyforms/js/jquery.maskedinput.min.js"></script>
+	<script src="assets/plugins/sky-forms-pro/skyforms/js/jquery-ui.min.js"></script>
+	<script src="assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"></script>
+	<!-- JS Customization -->
+	<script type="text/javascript" src="assets/js/custom.js"></script>
+	<!-- JS Javascript Customization -->
+	<script src="assets/js/custom/member.js"></script>
+	
+	<!-- JS Page Level -->           
+	<script type="text/javascript" src="assets/js/app.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/masking.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/datepicker.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/validation.js"></script>
+	<script type="text/javascript">
+	    jQuery(document).ready(function() {
+	        App.init();
+	        Masking.initMasking();
+	        Datepicker.initDatepicker();
+	        Validation.initValidation();
+	        });
+	</script>
+	<!--[if lt IE 9]>
+	    <script src="assets/plugins/respond.js"></script>
+	    <script src="assets/plugins/html5shiv.js"></script>
+	    <script src="assets/plugins/placeholder-IE-fixes.js"></script>
+	    <script src="assets/plugins/sky-forms-pro/skyforms/js/sky-forms-ie8.js"></script>
+	<![endif]-->
+	<!--[if lt IE 10]>
+	    <script src="assets/plugins/sky-forms-pro/skyforms/js/jquery.placeholder.min.js"></script>
+	<![endif]-->     
 
+
+	
 </head>
 
 <body>    
@@ -358,46 +397,6 @@
     </div>     
     <!--=== End Footer Version 1 ===-->
 </div><!--/End Wrapepr-->
-
-<!-- JS Global Compulsory -->           
-<script type="text/javascript" src="assets/plugins/jquery/jquery.min.js"></script>
-<script type="text/javascript" src="assets/plugins/jquery/jquery-migrate.min.js"></script>
-<script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-<!-- JS Implementing Plugins -->
-<script type="text/javascript" src="assets/plugins/back-to-top.js"></script>
-<script type="text/javascript" src="assets/plugins/smoothScroll.js"></script>
-<script src="assets/plugins/sky-forms-pro/skyforms/js/jquery.maskedinput.min.js"></script>
-<script src="assets/plugins/sky-forms-pro/skyforms/js/jquery-ui.min.js"></script>
-<script src="assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"></script>
-<!-- JS Customization -->
-<script type="text/javascript" src="assets/js/custom.js"></script>
-<!-- JS Javascript Customization -->
-<script src="assets/js/custom/member.js"></script>
-
-<!-- JS Page Level -->           
-<script type="text/javascript" src="assets/js/app.js"></script>
-<script type="text/javascript" src="assets/js/plugins/masking.js"></script>
-<script type="text/javascript" src="assets/js/plugins/datepicker.js"></script>
-<script type="text/javascript" src="assets/js/plugins/validation.js"></script>
-<script type="text/javascript">
-    jQuery(document).ready(function() {
-        App.init();
-        Masking.initMasking();
-        Datepicker.initDatepicker();
-        Validation.initValidation();
-        });
-</script>
-<!--[if lt IE 9]>
-    <script src="assets/plugins/respond.js"></script>
-    <script src="assets/plugins/html5shiv.js"></script>
-    <script src="assets/plugins/placeholder-IE-fixes.js"></script>
-    <script src="assets/plugins/sky-forms-pro/skyforms/js/sky-forms-ie8.js"></script>
-<![endif]-->
-<!--[if lt IE 10]>
-    <script src="assets/plugins/sky-forms-pro/skyforms/js/jquery.placeholder.min.js"></script>
-<![endif]-->     
-
-
 
 </body>
 </html>	
