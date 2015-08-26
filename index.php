@@ -39,6 +39,7 @@
     <!-- CSS Customization -->
      <link rel="stylesheet" href="assets/css/custom.css">
 	 <link rel="stylesheet" href="assets/css/custom_kosit.css">
+	 <link rel="stylesheet" href="css/index.css">
 	 <link rel="stylesheet" href="assets/plugins/brand-buttons/brand-buttons-inversed.css">
 	  
 	  
@@ -145,15 +146,149 @@
 
     </div>
     <!--=== End Header ===-->
-	<div class="breadcrumbs">
+	<div class="breadcrumbs1">
     <!--===Start Top Buttons ===-->
 	<div class="container">
 		<div class="col-md-3">
-				 <h1 class="pull-left" style="margin-bottom: 5px;margin-top: 5px;">
+				<!--class pull-left -->
+				 <h1 class="pull-right" style="margin-bottom: 5px;margin-top: 5px;">
+			
 					<!--ประกาศขายฟรี-->
+					<!-- 
 						<button class="btn btn-block btn-facebook-inversed rounded" style="font-size:19px;">
 						  <i class="fa fa-cloud"></i>คลิ๊กลงประกาศขายฟรี
 						</button>
+					 -->	
+						
+					        <div class="dropdown">
+					            <a style="font-size:19px;" id="dLabel" role="button" data-toggle="dropdown" class="btn btn-primary rounded" data-target="#" href="/page.html">
+					                <i class="fa fa-cloud"></i> คลิ๊กลงประกาศขายฟรี <span class="caret"></span>
+					            </a>
+					    		<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+					             
+					              
+					             
+					              <li class="dropdown-submenu">
+					                <a tabindex="-1" href="#">อสังหาริมทรัพย์ทั่วไป</a>
+					                <ul class="dropdown-menu">
+					                  
+					                  <li class="dropdown-submenu">
+					                    <a href="#">ขายขาด</a>
+					                    <ul class="dropdown-menu">
+					                       	 <li><a href="#">โครงการใหม่ </a></li>
+											 <li><a href="#">บ้านเดี่ยว </a></li>
+											 <li><a href="#">บ้านสองชั้น </a></li>
+											 <li><a href="#">บ้านสามชั้น </a></li>
+											 <li><a href="#">บ้านชั้นเดียว </a></li>
+											 <li><a href="#">บ้านแฝด </a></li>
+											 <li><a href="#">คอนโดมิเนียม </a></li>
+											 <li><a href="#">ทาว์นเฮ้าส์/ทาว์นโฮม </a></li>
+											 <li><a href="#"> ที่ดินพร้อมสิ่งปลูกสร้าง </a></li>
+											 <li><a href="#">ที่ดินเปล่า </a></li>
+											 <li><a href="#">อพาร์ตเมนท์ </a></li>
+											 <li><a href="#">อาคารพาณิชย์ </a></li>
+											 <li><a href="#">โฮมออฟฟิศ </a></li>
+											 <li><a href="#">โรงงาน/โกดัง</a></li>
+											 <li><a href="#">หอพักรวม </a></li>
+											 <li><a href="#">หอพักชาย </a></li>
+											 <li><a href="#">หอพักหญิง </a></li>
+											 <li><a href="#">โรงแรม </a></li>
+											 <li><a href="#">รีสอร์ท </a></li>
+											 <li><a href="#">เกส์ตเฮ้าส์ </a></li>
+											 <li><a href="#">อสังหาริมทรัพย์ อื่นๆ</a></li>
+					                    </ul>
+					                  </li>
+					                  
+					                  <li class="dropdown-submenu">
+					                    <a href="#">ขายดาวน์</a>
+					                    <ul class="dropdown-menu">
+					                       	 <li><a href="#">โครงการใหม่ </a></li>
+											 <li><a href="#">บ้านเดี่ยว </a></li>
+											 <li><a href="#">บ้านสองชั้น </a></li>
+											 <li><a href="#">บ้านสามชั้น </a></li>
+											 <li><a href="#">บ้านชั้นเดียว </a></li>
+											 <li><a href="#">บ้านแฝด </a></li>
+											 <li><a href="#">คอนโดมิเนียม </a></li>
+											 <li><a href="#">ทาว์นเฮ้าส์/ทาว์นโฮม </a></li>
+											 <li><a href="#"> ที่ดินพร้อมสิ่งปลูกสร้าง </a></li>
+											 <li><a href="#">ที่ดินเปล่า </a></li>
+											 <li><a href="#">อพาร์ตเมนท์ </a></li>
+											 <li><a href="#">อาคารพาณิชย์ </a></li>
+											 <li><a href="#">โฮมออฟฟิศ </a></li>
+											 <li><a href="#">โรงงาน/โกดัง</a></li>
+											 <li><a href="#">หอพักรวม </a></li>
+											 <li><a href="#">หอพักชาย </a></li>
+											 <li><a href="#">หอพักหญิง </a></li>
+											 <li><a href="#">โรงแรม </a></li>
+											 <li><a href="#">รีสอร์ท </a></li>
+											 <li><a href="#">เกส์ตเฮ้าส์ </a></li>
+											 <li><a href="#">อสังหาริมทรัพย์ อื่นๆ</a></li>
+					                    </ul>
+					                  </li>
+					                  
+					                  <li class="dropdown-submenu">
+					                    <a href="#">ขาย/เช่า</a>
+					                    <ul class="dropdown-menu">
+					                       	 <li><a href="#">โครงการใหม่ </a></li>
+											 <li><a href="#">บ้านเดี่ยว </a></li>
+											 <li><a href="#">บ้านสองชั้น </a></li>
+											 <li><a href="#">บ้านสามชั้น </a></li>
+											 <li><a href="#">บ้านชั้นเดียว </a></li>
+											 <li><a href="#">บ้านแฝด </a></li>
+											 <li><a href="#">คอนโดมิเนียม </a></li>
+											 <li><a href="#">ทาว์นเฮ้าส์/ทาว์นโฮม </a></li>
+											 <li><a href="#"> ที่ดินพร้อมสิ่งปลูกสร้าง </a></li>
+											 <li><a href="#">ที่ดินเปล่า </a></li>
+											 <li><a href="#">อพาร์ตเมนท์ </a></li>
+											 <li><a href="#">อาคารพาณิชย์ </a></li>
+											 <li><a href="#">โฮมออฟฟิศ </a></li>
+											 <li><a href="#">โรงงาน/โกดัง</a></li>
+											 <li><a href="#">หอพักรวม </a></li>
+											 <li><a href="#">หอพักชาย </a></li>
+											 <li><a href="#">หอพักหญิง </a></li>
+											 <li><a href="#">โรงแรม </a></li>
+											 <li><a href="#">รีสอร์ท </a></li>
+											 <li><a href="#">เกส์ตเฮ้าส์ </a></li>
+											 <li><a href="#">อสังหาริมทรัพย์ อื่นๆ</a></li>
+					                    </ul>
+					                  </li>
+					                 
+					                </ul>
+					              </li>
+					              <li class="divider"></li>
+					              <li class="dropdown-submenu">
+					              	
+					                <a tabindex="-1" href="#">สำหรับผู้รับเหมา</a>
+					                <ul class="dropdown-menu">
+					                 
+					                       
+											<li><a href="#">ผู้รับเหมาก่อสร้างทั่วไป</a></li>
+											<li><a href="#">ผู้รับเหมาตกแต่ง</a></li>
+											<li><a href="#">ผู้รับเหมาฐานราก </a></li>
+											<li><a href="#">ผู้รับเหมา</a></li>
+											<li><a href="#">รายการรับเหมาอื่นๆ </a></li>
+				
+					                </ul>
+					              </li>
+					               <li class="divider"></li>
+					              <li class="dropdown-submenu">
+					              	
+					                <a tabindex="-1" href="#">วัสดถก่อสร้าง</a>
+					                <ul class="dropdown-menu">
+					                 
+					                        <li><a href="#">ขายวัสดถก่อสร้าง
+											<li><a href="#">ขายเครื่องมือก่อสร้าง</a></li>
+											<li><a href="#">ขายเฟอร์นิเจอร์ </a></li>
+											
+				
+					                </ul>
+					              </li>
+					               
+					            </ul>
+					        </div>
+					
+				        
+						
 				</h1>
 		</div>
 		<div class="col-md-6 ">
@@ -165,17 +300,117 @@
 				</h1>
 		</div>
 		<div class="col-md-3">
-			<h1 class="pull-right" style="margin-bottom: 5px; margin-top: 5px;">
+			<!--class pull-right -->
+			<h1 class="" style="margin-bottom: 5px; margin-top: 5px;">
            <!--     ประกาศเช่าฟรี-->
+           		<!-- 
                     <button class="btn btn-block btn-stackoverflow-inversed rounded" style="font-size:19px;">
                       <i class="fa fa-stack-overflow"></i>คลิ๊กลงประกาศเช่าฟรี
                     </button>
+                -->     
+                    <div class="dropdown">
+					            <a style="font-size:19px;" id="dLabel" role="button" data-toggle="dropdown" class="btn btn-stackoverflow-inversed rounded" data-target="#" href="/page.html">
+					                <i class="fa fa-cloud"></i>คลิ๊กลงประกาศเช่าฟรี<span class="caret"></span>
+					            </a>
+					    		<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+					             
+					              
+					              <li class="dropdown-submenu">
+					                <a tabindex="-1" href="#">อสังหาริมทรัพย์ทั่วไป</a>
+					                <ul style="left:-158px;" class="dropdown-menu">
+					                  
+					                  <li class="dropdown-submenu">
+					                    <a href="#">เช่า</a>
+					                    <ul  style="left:-160px;" class="dropdown-menu">
+					                       	 <li><a href="#">โครงการใหม่ </a></li>
+											 <li><a href="#">บ้านเดี่ยว </a></li>
+											 <li><a href="#">บ้านสองชั้น </a></li>
+											 <li><a href="#">บ้านสามชั้น </a></li>
+											 <li><a href="#">บ้านชั้นเดียว </a></li>
+											 <li><a href="#">บ้านแฝด </a></li>
+											 <li><a href="#">คอนโดมิเนียม </a></li>
+											 <li><a href="#">ทาว์นเฮ้าส์/ทาว์นโฮม </a></li>
+											 <li><a href="#"> ที่ดินพร้อมสิ่งปลูกสร้าง </a></li>
+											 <li><a href="#">ที่ดินเปล่า </a></li>
+											 <li><a href="#">อพาร์ตเมนท์ </a></li>
+											 <li><a href="#">อาคารพาณิชย์ </a></li>
+											 <li><a href="#">โฮมออฟฟิศ </a></li>
+											 <li><a href="#">โรงงาน/โกดัง</a></li>
+											 <li><a href="#">หอพักรวม </a></li>
+											 <li><a href="#">หอพักชาย </a></li>
+											 <li><a href="#">หอพักหญิง </a></li>
+											 <li><a href="#">โรงแรม </a></li>
+											 <li><a href="#">รีสอร์ท </a></li>
+											 <li><a href="#">เกส์ตเฮ้าส์ </a></li>
+											 <li><a href="#">อสังหาริมทรัพย์ อื่นๆ</a></li>
+					                    </ul>
+					                  </li>
+					                  
+					                 
+					                  
+					                  <li class="dropdown-submenu">
+					                    <a href="#">ขาย/เช่า</a>
+					                    <ul class="dropdown-menu">
+					                       	 <li><a href="#">โครงการใหม่ </a></li>
+											 <li><a href="#">บ้านเดี่ยว </a></li>
+											 <li><a href="#">บ้านสองชั้น </a></li>
+											 <li><a href="#">บ้านสามชั้น </a></li>
+											 <li><a href="#">บ้านชั้นเดียว </a></li>
+											 <li><a href="#">บ้านแฝด </a></li>
+											 <li><a href="#">คอนโดมิเนียม </a></li>
+											 <li><a href="#">ทาว์นเฮ้าส์/ทาว์นโฮม </a></li>
+											 <li><a href="#"> ที่ดินพร้อมสิ่งปลูกสร้าง </a></li>
+											 <li><a href="#">ที่ดินเปล่า </a></li>
+											 <li><a href="#">อพาร์ตเมนท์ </a></li>
+											 <li><a href="#">อาคารพาณิชย์ </a></li>
+											 <li><a href="#">โฮมออฟฟิศ </a></li>
+											 <li><a href="#">โรงงาน/โกดัง</a></li>
+											 <li><a href="#">หอพักรวม </a></li>
+											 <li><a href="#">หอพักชาย </a></li>
+											 <li><a href="#">หอพักหญิง </a></li>
+											 <li><a href="#">โรงแรม </a></li>
+											 <li><a href="#">รีสอร์ท </a></li>
+											 <li><a href="#">เกส์ตเฮ้าส์ </a></li>
+											 <li><a href="#">อสังหาริมทรัพย์ อื่นๆ</a></li>
+					                    </ul>
+					                  </li>
+					                 
+					                </ul>
+					              </li>
+					              <li class="divider"></li>
+					              <li class="dropdown-submenu">
+					              	
+					                <a tabindex="-1" href="#">สำหรับผู้รับเหมา</a>
+					                <ul class="dropdown-menu">
+					                 
+					                        <li><a href="#">วัสดถก่อสร้าง
+											<li><a href="#">ครื่องมือก่อสร้าง</a></li>
+											<li><a href="#">เฟอร์นิเจอร์ </a></li>
+											<li><a href="#">ผู้รับเหมาก่อสร้างทั่วไป</a></li>
+											<li><a href="#">ผู้รับเหมาตกแต่ง</a></li>
+											<li><a href="#">ผู้รับเหมาฐานราก </a></li>
+											<li><a href="#">ผู้รับเหมา</a></li>
+											<li><a href="#">รายการรับเหมาอื่นๆ </a></li>
+				
+					                </ul>
+					              </li>
+					              
+					             
+					            </ul>
+					        </div>
+					        
             </h1>
 		</div>
 		
 
+		<!--  column 6 start -->
+		
+		<!--  column 6 start -->
+		
 		</div>
 	</div>
+	
+	
 	
 </div>
 	<!--===End Top Buttons ===-->
@@ -188,13 +423,16 @@
            	  		<!-- button ads start -->
            	  </div>
 			 <div class="pull-left" style="margin-bottom: 2px;margin-top: 0px;">
+			 
+			 
                <ul class="nav navbar-nav">
                   
                     <li >
                         <a href="index.php?page=home">
                             <i class="fa fa-home"></i> หน้าแรก
                         </a>
-					</li>     
+					</li>    
+					 
 					 <li>
                         <a href="index.php?page=sitemap">
                            <i class="fa fa-cogs"></i> แผนผังเว็บไซต์
@@ -552,5 +790,11 @@
     <script src="assets/plugins/sky-forms-pro/skyforms/js/jquery.placeholder.min.js"></script>
 <![endif]-->     
 
+
+
 </body>
 </html>	
+
+
+
+

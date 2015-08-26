@@ -196,6 +196,8 @@ if($_POST['paramAction']=="realtyDataGeneralSave"){
 	
 	$paramEmbedRdgId=$_POST['paramEmbedRdgId'];
 	
+	$rdg_status='P';
+	
 	
 	/*
 	 rdg_special
@@ -247,8 +249,8 @@ if($_POST['paramAction']=="realtyDataGeneralSave"){
 				rdg_arl='$rdg_arl',
 				rdg_bts='$rdg_bts',
 				rdg_harbor='$rdg_harbor',
-				rdg_bus='$rdg_bus'
-
+				rdg_bus='$rdg_bus',
+				rdg_status='$rdg_status'
 				where rdg_id='$paramEmbedRdgId'
 				";
 		$result=mysql_query($strSQL)or die(mysql_error());
@@ -291,7 +293,9 @@ if($_POST['paramAction']=="realtyDataGeneralSave"){
 				rdg_arl,
 				rdg_bts,
 				rdg_harbor,
-				rdg_bus
+				rdg_bus,
+				rdg_status
+				
 				
 			)VALUES
 			(
@@ -325,7 +329,9 @@ if($_POST['paramAction']=="realtyDataGeneralSave"){
 			'$rdg_arl',
 			'$rdg_bts',
 			'$rdg_harbor',
-			'$rdg_bus'
+			'$rdg_bus',
+			'$rdg_status'
+			
 			
 			
 			
@@ -362,8 +368,6 @@ if($_POST['paramAction']=="realtyDataGeneralSave"){
 				rdg_update='$rdg_datetime'
 				";
 				
-					
-			
 			$resullt=mysql_query($strSQL)or die(mysql_error());
 			*/
 			/*

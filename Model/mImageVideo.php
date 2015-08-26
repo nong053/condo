@@ -283,7 +283,7 @@
 		
 	}
 	
-	if($_POST['action']=="addPicture"){
+if($_POST['action']=="addPicture"){
 		if(!$_FILES['picture_file']['name'][0]){
 			echo '["picture_empty"]';
 			exit();

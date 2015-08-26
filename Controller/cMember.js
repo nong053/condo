@@ -410,6 +410,9 @@
 			});
 		}
 		//end realty unit 
+		
+		
+			
 $(document).ready(function(){
 		
 		//MAIN MEMBER JS
@@ -428,6 +431,6 @@ $(document).ready(function(){
 					}
 				}
 			});
-
-	});
+		});
+		
 });
