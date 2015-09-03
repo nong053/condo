@@ -196,7 +196,7 @@ if($_POST['paramAction']=="realtyDataGeneralSave"){
 	
 	$paramEmbedRdgId=$_POST['paramEmbedRdgId'];
 	
-	$rdg_status='P';
+	$rdg_status='N';
 	
 	
 	/*

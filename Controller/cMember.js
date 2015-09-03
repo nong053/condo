@@ -1,5 +1,5 @@
 //startcall realty for post
-		var callRealtyFor = function(defaultParam){
+		var callRealtyFor = function(defaultParam,setByHome){
 			$.ajax({
 				url:"../Model/mRealtyDataGeneralAction.php",
 				type:"get",
@@ -11,7 +11,7 @@
 					var i=1;
 					$.each(data,function(index,indexEntry){
 						
-						$realtyFor+="<div class=\"optonArea\">";
+						$realtyFor+="<div class=\"optonArea\" id='optonArea"+index+"'>";
 							$realtyFor+="<div class=\"checkbox\">";
 							$realtyFor+="<label>";
 								if(i==defaultParam){
@@ -24,9 +24,19 @@
 						$realtyFor+="</div>";
 						i++;
 					});
+					
+					
+				
 			
 				$("#realtyForArea").html($realtyFor);
-				
+				if(setByHome==1){
+					$("#optonArea1").hide();
+					//alert(setByHome);
+				}else if(setByHome==2){
+					$("#optonArea1").hide();
+					$("#optonArea3").hide();
+					$("#optonArea4").hide();
+				}
 				//price defualt
 				$(".rdg_price_area").show();
 				$(".rdg_price_down_area").hide();

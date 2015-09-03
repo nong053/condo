@@ -1,0 +1,110 @@
+$(document).ready(function(){
+
+	//start provine .
+	var callProvince = function(rdg_address_province_id,rdg_address_district_id,rdg_address_sub_district_id){
+		$.ajax({
+			url:"../Model/mRealtyDataGeneralAction.php",
+			type:"post",
+			dataType:"json",
+			data:{"paramAction":"province"},
+			success:function(data){
+				
+				var provinceHtml="";
+				
+				provinceHtml+="<select name=\"rdg_address_province_id\" id=\"rdg_address_province_id\">";
+					
+					provinceHtml+="<option disabled=\"\" selected=\"\" value=\"\">-- กรุณาเลือกจังหวัด --</option>";
+					
+					$.each(data,function(index,indexEntry){
+						if(rdg_address_province_id==indexEntry[0]){
+							provinceHtml+="<option selected='selected' value=\""+indexEntry[0]+"\">"+indexEntry[1]+"</option> ";
+						}else{
+							provinceHtml+="<option value=\""+indexEntry[0]+"\">"+indexEntry[1]+"</option> ";
+						}
+						
+					});
+					
+				provinceHtml+="</select>";
+			
+				$("#provinceArea").html(provinceHtml);
+				$("#rdg_address_province_id").change(function(){
+					//alert($(this).val());
+					callDistrict($(this).val(),rdg_address_district_id);
+				});
+				
+				
+			}
+		});
+	};
+	callProvince();
+	//end provine.
+	//start district
+	var callDistrict = function(paramProvince,rdg_address_district_id,rdg_address_sub_district_id){
+		$.ajax({
+			url:"../Model/mRealtyDataGeneralAction.php",
+			type:"post",
+			dataType:"json",
+			data:{"paramAction":"district","paramProvince":paramProvince},
+			success:function(data){
+			
+				var districtHtml="";
+				
+				districtHtml+="<select name=\"rdg_address_district_id\" id=\"rdg_address_district_id\">";
+					
+				districtHtml+="<option disabled=\"\" selected=\"\" value=\"\">-- กรุณาเลือกอำเภอ/เขต --</option>";
+					
+					$.each(data,function(index,indexEntry){
+						
+						if(rdg_address_district_id==indexEntry[0]){
+							districtHtml+="<option selected='selected' value=\""+indexEntry[0]+"\">"+indexEntry[1]+"</option> ";
+						}else{
+							districtHtml+="<option value=\""+indexEntry[0]+"\">"+indexEntry[1]+"</option> ";
+						}
+						
+					});
+					
+					districtHtml+="</select>";
+			
+				$("#districtArea").html(districtHtml);
+				$("#rdg_address_district_id").change(function(){
+					//alert($(this).val());
+					callSubDistrict($(this).val(),rdg_address_sub_district_id);
+				});
+				
+				
+			}
+		});
+	};
+	//callDistrict();
+	//end district
+	
+	//start sub district
+	var callSubDistrict = function(paramDistrictId,rdg_address_sub_district_id){
+		$.ajax({
+			url:"../Model/mRealtyDataGeneralAction.php",
+			type:"post",
+			dataType:"json",
+			data:{"paramAction":"sub_district","paramDistrictId":paramDistrictId},
+			success:function(data){
+				
+				var subDistrictHtml="";
+				
+				subDistrictHtml+="<select name=\"rdg_address_sub_district_id\" id=\"rdg_address_sub_district_id\">";
+					
+				subDistrictHtml+="<option disabled=\"\" selected=\"\" value=\"0\">-- กรุณาเลือกตำบล/แขวง --</option>";
+					
+					$.each(data,function(index,indexEntry){
+						if(rdg_address_sub_district_id==indexEntry[0]){
+							subDistrictHtml+="<option selected='selected' value=\""+indexEntry[0]+"\">"+indexEntry[1]+"</option> ";
+						}else{
+							subDistrictHtml+="<option value=\""+indexEntry[0]+"\">"+indexEntry[1]+"</option> ";
+						}
+					});
+					subDistrictHtml+="</select>";
+				$("#subDistrictArea").html(subDistrictHtml);
+				
+			}
+		});
+	};
+	//callSubDistrict();
+});

@@ -1,4 +1,10 @@
-<?php session_start()?>
+<?php 
+session_start();
+include("config.inc.php");
+
+
+
+?>
 <!DOCTYPE html> 
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
@@ -159,23 +165,93 @@
 						  <i class="fa fa-cloud"></i>คลิ๊กลงประกาศขายฟรี
 						</button>
 					 -->	
-						
+<?php 
+$strSQLRT="
+select rt_id,rt_name,rt_contructor_yet from realty_type where rt_contructor_yet='N' 
+";
+$resultRT=mysql_query($strSQLRT);
+
+$strSQLRTM="
+select rt_id,rt_name,rt_contructor_yet,rt_contructor_cate from realty_type where rt_contructor_yet='Y' and rt_contructor_cate='M'
+";
+$resultRTM=mysql_query($strSQLRTM);
+
+$strSQLRTC="
+select rt_id, rt_name,rt_contructor_yet,rt_contructor_cate from realty_type where rt_contructor_yet='Y' and rt_contructor_cate='C'
+";
+$resultRTC=mysql_query($strSQLRTC);
+
+
+
+// separated by cate
+$strSQL1="
+select rt_id, rt_name,rt_contructor_yet,rt_contructor_cate from realty_type where rt_contructor_cate='1'
+";
+$result1=mysql_query($strSQL1);
+
+
+$strSQL2="
+select rt_id, rt_name,rt_contructor_yet,rt_contructor_cate from realty_type where   rt_contructor_cate='2'
+";
+$result2=mysql_query($strSQL2);
+
+$strSQL3="
+select rt_id, rt_name,rt_contructor_yet,rt_contructor_cate from realty_type where   rt_contructor_cate='3'
+";
+$result3=mysql_query($strSQL3);
+
+
+$strSQL4="
+select rt_id, rt_name,rt_contructor_yet,rt_contructor_cate from realty_type where  rt_contructor_cate='4'
+";
+$result4=mysql_query($strSQL4);
+
+$strSQL5="
+select rt_id, rt_name,rt_contructor_yet,rt_contructor_cate from realty_type where  rt_contructor_cate='5'
+";
+$result5=mysql_query($strSQL5);
+
+$strSQL6="
+select rt_id, rt_name,rt_contructor_yet,rt_contructor_cate from realty_type where  rt_contructor_cate='6'
+";
+$result6=mysql_query($strSQL6);
+
+$strSQL7="
+select rt_id, rt_name,rt_contructor_yet,rt_contructor_cate from realty_type where  rt_contructor_cate='7'
+";
+$result7=mysql_query($strSQL7);
+
+$strSQL8="
+select rt_id, rt_name,rt_contructor_yet,rt_contructor_cate from realty_type where  rt_contructor_cate='8'
+";
+$result8=mysql_query($strSQL8);
+
+
+
+$strSQL9="
+select rt_id, rt_name,rt_contructor_yet,rt_contructor_cate from realty_type where  rt_contructor_cate='9'
+";
+$result9=mysql_query($strSQL9);
+
+
+?>
+					
 					        <div class="dropdown">
 					            <a style="font-size:19px;" id="dLabel" role="button" data-toggle="dropdown" class="btn btn-primary rounded" data-target="#" href="/page.html">
 					                <i class="fa fa-cloud"></i> คลิ๊กลงประกาศขายฟรี <span class="caret"></span>
 					            </a>
 					    		<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
-					             
-					              
-					             
 					              <li class="dropdown-submenu">
-					                <a tabindex="-1" href="#">อสังหาริมทรัพย์ทั่วไป</a>
+					                <a tabindex="-1" href="#">อสังหาริมทรัพย์</a>
 					                <ul class="dropdown-menu">
-					                  
-					                  <li class="dropdown-submenu">
-					                    <a href="#">ขายขาด</a>
-					                    <ul class="dropdown-menu">
-					                       	 <li><a href="#">โครงการใหม่ </a></li>
+					                		<?php 
+					                		while($rs1=mysql_fetch_array($result1)){
+					                			?>
+					                			<li><a href="member/index.php?rtID=<?=$rs1['rt_id']?>&rfID=1&specialPost=N&rtContructorYet=<?=$rs1['rt_contructor_yet']?>"><?=$rs1['rt_name']?> </a></li>
+					                			<?php
+					                		}
+					                		?>
+					                       	 <!-- 
 											 <li><a href="#">บ้านเดี่ยว </a></li>
 											 <li><a href="#">บ้านสองชั้น </a></li>
 											 <li><a href="#">บ้านสามชั้น </a></li>
@@ -196,99 +272,114 @@
 											 <li><a href="#">รีสอร์ท </a></li>
 											 <li><a href="#">เกส์ตเฮ้าส์ </a></li>
 											 <li><a href="#">อสังหาริมทรัพย์ อื่นๆ</a></li>
-					                    </ul>
-					                  </li>
+					                   		 -->
 					                  
-					                  <li class="dropdown-submenu">
-					                    <a href="#">ขายดาวน์</a>
-					                    <ul class="dropdown-menu">
-					                       	 <li><a href="#">โครงการใหม่ </a></li>
-											 <li><a href="#">บ้านเดี่ยว </a></li>
-											 <li><a href="#">บ้านสองชั้น </a></li>
-											 <li><a href="#">บ้านสามชั้น </a></li>
-											 <li><a href="#">บ้านชั้นเดียว </a></li>
-											 <li><a href="#">บ้านแฝด </a></li>
-											 <li><a href="#">คอนโดมิเนียม </a></li>
-											 <li><a href="#">ทาว์นเฮ้าส์/ทาว์นโฮม </a></li>
-											 <li><a href="#"> ที่ดินพร้อมสิ่งปลูกสร้าง </a></li>
-											 <li><a href="#">ที่ดินเปล่า </a></li>
-											 <li><a href="#">อพาร์ตเมนท์ </a></li>
-											 <li><a href="#">อาคารพาณิชย์ </a></li>
-											 <li><a href="#">โฮมออฟฟิศ </a></li>
-											 <li><a href="#">โรงงาน/โกดัง</a></li>
-											 <li><a href="#">หอพักรวม </a></li>
-											 <li><a href="#">หอพักชาย </a></li>
-											 <li><a href="#">หอพักหญิง </a></li>
-											 <li><a href="#">โรงแรม </a></li>
-											 <li><a href="#">รีสอร์ท </a></li>
-											 <li><a href="#">เกส์ตเฮ้าส์ </a></li>
-											 <li><a href="#">อสังหาริมทรัพย์ อื่นๆ</a></li>
-					                    </ul>
-					                  </li>
-					                  
-					                  <li class="dropdown-submenu">
-					                    <a href="#">ขาย/เช่า</a>
-					                    <ul class="dropdown-menu">
-					                       	 <li><a href="#">โครงการใหม่ </a></li>
-											 <li><a href="#">บ้านเดี่ยว </a></li>
-											 <li><a href="#">บ้านสองชั้น </a></li>
-											 <li><a href="#">บ้านสามชั้น </a></li>
-											 <li><a href="#">บ้านชั้นเดียว </a></li>
-											 <li><a href="#">บ้านแฝด </a></li>
-											 <li><a href="#">คอนโดมิเนียม </a></li>
-											 <li><a href="#">ทาว์นเฮ้าส์/ทาว์นโฮม </a></li>
-											 <li><a href="#"> ที่ดินพร้อมสิ่งปลูกสร้าง </a></li>
-											 <li><a href="#">ที่ดินเปล่า </a></li>
-											 <li><a href="#">อพาร์ตเมนท์ </a></li>
-											 <li><a href="#">อาคารพาณิชย์ </a></li>
-											 <li><a href="#">โฮมออฟฟิศ </a></li>
-											 <li><a href="#">โรงงาน/โกดัง</a></li>
-											 <li><a href="#">หอพักรวม </a></li>
-											 <li><a href="#">หอพักชาย </a></li>
-											 <li><a href="#">หอพักหญิง </a></li>
-											 <li><a href="#">โรงแรม </a></li>
-											 <li><a href="#">รีสอร์ท </a></li>
-											 <li><a href="#">เกส์ตเฮ้าส์ </a></li>
-											 <li><a href="#">อสังหาริมทรัพย์ อื่นๆ</a></li>
-					                    </ul>
-					                  </li>
 					                 
 					                </ul>
 					              </li>
+					              <li class="divider"></li>
+					              <?php 
+			                		while($rs2=mysql_fetch_array($result2)){
+			                			?>
+			                			<li><a href="member/index.php?rtID=<?=$rs2['rt_id']?>&rfID=1&specialPost=N&rtContructorYet=<?=$rs2['rt_contructor_yet']?>&rtContructorCate=<?=$rs2['rt_contructor_cate']?>"><?=$rs2['rt_name']?> </a></li>
+			                			<?php
+			                		}
+			                		?>
+			                		
+			                		<?php 
+			                		while($rs7=mysql_fetch_array($result7)){
+			                			?>
+			                			<li><a href="member/index.php?rtID=<?=$rs7['rt_id']?>&rfID=1&specialPost=N&rtContructorYet=<?=$rs7['rt_contructor_yet']?>&rtContructorCate=<?=$rs7['rt_contructor_cate']?>"><?=$rs7['rt_name']?> </a></li>
+			                			<?php
+			                		}
+			                		?>
+			                		
+			                		<?php 
+			                		while($rs8=mysql_fetch_array($result8)){
+			                			?>
+			                			<li><a href="member/index.php?rtID=<?=$rs8['rt_id']?>&rfID=1&specialPost=N&rtContructorYet=<?=$rs8['rt_contructor_yet']?>&rtContructorCate=<?=$rs8['rt_contructor_cate']?>"><?=$rs8['rt_name']?> </a></li>
+			                			<?php
+			                		}
+			                		?>
+			                		
+			                		<?php 
+			                		while($rs9=mysql_fetch_array($result9)){
+			                			?>
+			                			<li><a href="member/index.php?rtID=<?=$rs9['rt_id']?>&rfID=1&specialPost=N&rtContructorYet=<?=$rs9['rt_contructor_yet']?>&rtContructorCate=<?=$rs9['rt_contructor_cate']?>"><?=$rs9['rt_name']?> </a></li>
+			                			<?php
+			                		}
+			                		?>
+					             
 					              <li class="divider"></li>
 					              <li class="dropdown-submenu">
 					              	
 					                <a tabindex="-1" href="#">สำหรับผู้รับเหมา</a>
 					                <ul class="dropdown-menu">
-					                 
-					                       
-											<li><a href="#">ผู้รับเหมาก่อสร้างทั่วไป</a></li>
-											<li><a href="#">ผู้รับเหมาตกแต่ง</a></li>
-											<li><a href="#">ผู้รับเหมาฐานราก </a></li>
-											<li><a href="#">ผู้รับเหมา</a></li>
-											<li><a href="#">รายการรับเหมาอื่นๆ </a></li>
-				
+					                	    <?php 
+					                		while($rs3=mysql_fetch_array($result3)){
+					                			?>
+					                			<li><a href="member/index.php?rtID=<?=$rs3['rt_id']?>&rfID=1&specialPost=N&rtContructorYet=<?=$rs3['rt_contructor_yet']?>&rtContructorCate=<?=$rs3['rt_contructor_cate']?>"><?=$rs3['rt_name']?></a></li>
+					                			<?php
+					                		}
+					                		?>
+					                		<!-- 
+					                        <li><a href="#">วัสดถก่อสร้าง
+											<li><a href="#">เครื่องมือก่อสร้าง</a></li>
+											<li><a href="#">เฟอร์นิเจอร์ </a></li>
+											 -->
 					                </ul>
 					              </li>
-					               <li class="divider"></li>
-					              <li class="dropdown-submenu">
+					               <li class="dropdown-submenu">
 					              	
 					                <a tabindex="-1" href="#">วัสดถก่อสร้าง</a>
 					                <ul class="dropdown-menu">
-					                 
-					                        <li><a href="#">ขายวัสดถก่อสร้าง
-											<li><a href="#">ขายเครื่องมือก่อสร้าง</a></li>
-											<li><a href="#">ขายเฟอร์นิเจอร์ </a></li>
-											
+					                 		<?php 
+					                		while($rs4=mysql_fetch_array($result4)){
+					                			?>
+					                			<li><a href="member/index.php?rtID=<?=$rs4['rt_id']?>&rfID=1&specialPost=N&rtContructorYet=<?=$rs4['rt_contructor_yet']?>&rtContructorCate=<?=$rs4['rt_contructor_cate']?>"><?=$rs4['rt_name']?> </a></li>
+					                			<?php
+					                		}
+					                		?>
+					                      
 				
 					                </ul>
 					              </li>
+					              
+					              <li class="dropdown-submenu">
+					                <a tabindex="-1" href="#">เครื่องมือเครื่องจักรก่อสร้าง</a>
+					                <ul class="dropdown-menu">
+					                 		<?php 
+					                		while($rs5=mysql_fetch_array($result5)){
+					                			?>
+					                			<li><a href="member/index.php?rtID=<?=$rs5['rt_id']?>&rfID=1&specialPost=N&rtContructorYet=<?=$rs5['rt_contructor_yet']?>&rtContructorCate=<?=$rs5['rt_contructor_cate']?>"><?=$rs5['rt_name']?> </a></li>
+					                			<?php
+					                		}
+					                		?>
+					                </ul>
+					              </li>
+					              
+					              <li class="dropdown-submenu">
+					              	
+					                <a tabindex="-1" href="#">เฟอร์นิเจอร์</a>
+					                <ul class="dropdown-menu">
+					                 		<?php 
+					                		while($rs6=mysql_fetch_array($result6)){
+					                			?>
+					                			<li><a href="member/index.php?rtID=<?=$rs6['rt_id']?>&rfID=1&specialPost=N&rtContructorYet=<?=$rs6['rt_contructor_yet']?>&rtContructorCate=<?=$rs6['rt_contructor_cate']?>"><?=$rs6['rt_name']?> </a></li>
+					                			<?php
+					                		}
+					                		?>
+					                      
+				
+					                </ul>
+					              </li>
+					              
+					              
+					              
+					           
 					               
 					            </ul>
 					        </div>
-					
-				        
-						
 				</h1>
 		</div>
 		<div class="col-md-6 ">

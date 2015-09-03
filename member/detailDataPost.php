@@ -1,8 +1,7 @@
-<!-- detailData  -->
-	<?php 
-	$paramRealtyID=$_POST['paramRealtyID'];
-
-	?>
+<?php session_start();
+$paramRealtyID=$_POST['paramRealtyID'];
+include("../config.inc.php");
+?>
 	 <script src="../Controller/cDetailDataPost.js"></script> 
 	<div class="tab-pane fade in " id="detailData">
 	
@@ -36,7 +35,19 @@
 			
 			<!-- for  contractor -->
 		<form id="realtyDataDetail" class="form-horizontal" role="form">
-			<div class="headline"><h4>รายละเอียดอสังหาริมทรัพย์</h4></div>
+									<?php 
+									$sqlSQLRT="select * from realty_type where rt_id='".$_SESSION['sesRtID']."'";
+									$resultRT=mysql_query($sqlSQLRT);
+									$rsRT=mysql_fetch_array($resultRT);
+									
+									$sqlSQLRF="select rf.rf_name from realty_data_general rdg
+LEFT JOIN realty_for rf
+ON rdg.rf_id=rf.rf_id
+where rdg_id='$paramRealtyID'";
+									$resultRF=mysql_query($sqlSQLRF);
+									$rsRF=mysql_fetch_array($resultRF);
+									?>
+			<div class="headline" ><h4 id="titleRealty">รายละเอียดอสังหาริมทรัพย์ <?=$rsRT['rt_name']?><?=$rsRF['rf_name']?></h4></div>
 
 				
 				<!--<div id="areaRealtyRooms"></div>-->

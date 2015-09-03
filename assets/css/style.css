@@ -14,8 +14,11 @@
 
 body { 
    color: #333; 
-   font-size: 13px;
+   font-size: 15px;
    line-height: 1.6;
+}
+.sidebar-nav-v1 li ul a{
+	font-size: 15px;
 }
 
 body.header-fixed-space {

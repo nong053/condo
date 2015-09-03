@@ -15,7 +15,7 @@ $dbname="zcarlet_db";
 */
 
 
-mysql_connect($hostname,$username,$password);
+$conn=mysql_connect($hostname,$username,$password);
 mysql_query("SET NAMES utf8");
 mysql_select_db($dbname);
 

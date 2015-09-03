@@ -7,7 +7,7 @@
 				<div class="form-group">
 							
 					
-					<div class="headline"><h4>คุณสมบัติผู้รับเหมา </h4></div>
+					<div class="headline "><h4 class="titleContructor">คุณสมบัติผู้รับเหมา </h4></div>
 					<div id="areaDataPostContructor"></div>
 					
 					

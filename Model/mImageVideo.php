@@ -304,7 +304,7 @@ if($_POST['action']=="addPicture"){
 			$new_images = "Picture".$picture_date."-".$_FILES["picture_file"]["name"];
 			//$new_images700 = "Picture700_".$_FILES["picture_file"]["name"];
 			//copy($_FILES["picture_file"]["tmp_name"],"../MyResize/".$_FILES["picture_file"]["name"]);
-			$width1=200; //*** Fix Width & Heigh (Autu caculate) ***//
+			$width1=300; //*** Fix Width & Heigh (Autu caculate) ***//
 			$size=GetimageSize($images);
 			$height=round($width1*$size[1]/$size[0]);
 			$images_orig = ImageCreateFromJPEG($images);

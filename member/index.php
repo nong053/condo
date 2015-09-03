@@ -1,4 +1,13 @@
 <?php session_start();
+
+/*#### Define  Session Start here. ####*/
+	$_SESSION['sesRtID']=$_GET['rtID'];
+	$_SESSION['sesRfID']=$_GET['rfID'];
+	$_SESSION['sesSpecialPost']=$_GET['specialPost'];
+	$_SESSION['sesRtContructorYet']=$_GET['rtContructorYet'];
+	$_SESSION['sesRtContructorCate']=$_GET['rtContructorCate'];
+	
+	
 	if(!$_SESSION['cus_id']){
 		echo"<script>window.location='../index.php'</script>";
 	}
@@ -83,7 +92,9 @@
 	    <script src="../assets/plugins/sky-forms-pro/skyforms/js/jquery.placeholder.min.js"></script>
 	<![endif]-->     
 
-
+	<link rel="stylesheet" href="../kendoCommercial/styles/kendo.common.min.css" />
+	<link rel="stylesheet" href="../kendoCommercial/styles/kendo.default.min.css" />
+	<script src="../kendoCommercial/js/kendo.all.min.js"></script>
 	
 </head>
 

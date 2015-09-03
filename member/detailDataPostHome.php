@@ -31,7 +31,7 @@
 			
 			<!-- for  contractor -->
 			<form class="form-horizontal" role="form">
-			<div class="headline"><h4>รายละเอียดอสังหาริมทรัพย์</h4></div>
+			<div class="headline"><h4>รายละเอียดอสังหาริมทรัพย์1</h4></div>
 
 
 				<div class="form-group">

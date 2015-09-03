@@ -1,8 +1,26 @@
+<?php 
+if($conn){
+	$sqlSQLCN="select * from realty_type where rt_contructor_yet='N'";
+	$resultCN=mysql_query($sqlSQLCN);
+
+	$sqlSQLCY="select * from realty_type where rt_contructor_yet='Y'";
+	$resultCY=mysql_query($sqlSQLCY);
+
+}
+?>
 <form class="sky-form" id="sky-form4" action="#" novalidate="novalidate">
 									<header>
 										<div class="headline headline-md">
 											<h2><i class="fa fa-search-plus"></i> เมนูค้นหาประกาศเช่าฟรี</h2>
 										</div>
+										<?php 
+										while($rsCN=mysql_fetch_array($resultCN)){
+											?>
+											<button type="button"  id="<?=$rsCN['rt_id']?>" class="btn-u btn-mainmenu ">เช่า<?=$rsCN['rt_name']?></button>
+											<?php
+										}
+										?>
+										<!-- 
 										<button type="button" class="btn-u btn-mainmenu ">เช่าบ้าน</button>
 										<button type="button" class="btn-u btn-mainmenu">เช่าคอนโดมิเนียม</button>
 										<button type="button" class="btn-u btn-mainmenu ">เช่าทาว์นเฮาส์ </button>
@@ -17,20 +35,32 @@
 										<button type="button" class="btn-u btn-mainmenu">เช่าอาคารสำนักงาน </button>
 										<button type="button" class="btn-u btn-mainmenu">เช่าเกสเฮ้าส์ </button>
 										<button type="button" class="btn-u btn-mainmenu">อสังหาริมทรัพย์ อื่นๆ </button>
-									
+									 -->
 
 										<div class="headline headline-md">
 											<!-- <h2>สำหรับผู้หรับเหมา</h2> -->
 										</div>
+										<?php 
+										while($rsCY=mysql_fetch_array($resultCY)){
+											if($rsCY['rt_id']=="36" ||$rsCY['rt_id']=="33" ){
+											?>
+											<button type="button" id="<?=$rsCY['rt_id']?>" class="btn-u btn-mainmenu-contractor btn-u-dark-blue"><?=$rsCY['rt_name']?></button>
+											<?php
+											}else{
+											?>
+											<button type="button" id="<?=$rsCY['rt_id']?>" class="btn-u btn-mainmenu-contractor btn-u-dark-blue">เช่า<?=$rsCY['rt_name']?></button>
+											<?php
+											}
+										}
+										?>
 										
-										
-										<button type="button" class="btn-u btn-mainmenu-contractor btn-u-dark-blue">เช่าวัสดถก่อสร้าง</button>
+										<!-- 
 										<button type="button" class="btn-u btn-mainmenu-contractor btn-u-dark-blue">เช่าเครื่องมือก่อสร้าง</button>
 										<button type="button" class="btn-u btn-mainmenu-contractor btn-u-dark-blue">เช่าเฟอร์นิเจอร์ </button>
 										<button type="button" class="btn-u btn-mainmenu-contractor btn-u-dark-blue "> ผู้รับเหมาก่อสร้างทั่วไป</button>
 										<button type="button" class="btn-u btn-mainmenu-contractor btn-u-dark-blue">ผู้รับเหมาตกแต่ง</button>
 										<button type="button" class="btn-u btn-mainmenu-contractor  btn-u-dark-blue">ผู้รับเหมาฐานราก </button>
-
+										 -->
 
 									</header>
 

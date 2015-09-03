@@ -1,16 +1,7 @@
-<!-- Tabs -->
-<?php 
+<?php session_start();
 include("../config.inc.php");
-$rdg_id=$_POST['rdg_id'];
-
-
-$sqlSQLRT="select rdg.*,rt.rt_name from realty_data_general rdg
-LEFT JOIN realty_type rt
-ON rdg.rt_id=rt.rt_id
-where rdg_id='$rdg_id'";
-$resultRT=mysql_query($sqlSQLRT);
-$rsRT=mysql_fetch_array($resultRT);
 ?>
+<!-- Tabs -->
 <div class="tab-v1">
 	<ul class="nav nav-tabs">
 		<li class="active"><a href="#mainData" data-toggle="tab">ข้อมูลทั่วไป</a></li>
@@ -23,57 +14,62 @@ $rsRT=mysql_fetch_array($resultRT);
 		<div class="tab-pane fade in active" id="mainData">
 					 <!-- start content mainData-->
 					 <form role="form" id="formRealtyDataGe" name="formRealtyDataGe" class="form-horizontal" action="#">
-						<div class="headline"><h4>แก้ไขข้อมูล<?=$rsRT['rt_name']?></h4></div>
+						<div class="headline"><h4>ข้อมูลอสังหาริมทรัพย์</h4></div>
 							<div class="form-group">
 								<label class="col-lg-3 control-label" > ประกาศสำหรับ</label>
 								<div id="realtyForArea"></div>
 							</div>
-							<div class="form-group" style="display:none;">
-								<label class="col-lg-3 control-label"> ประกาศพิเศษหน้าแรก</label>
-								<div id="realtySpecialArea">
-									<div class="optonArea">
-										<div class="checkbox">
-											<label>
-											<input type="radio" checked='checked' name="rdg_special" class="rdg_special"  value="N" checked="checked"> ประกาศฟรี 
-											</label>
-											<label>
-											<input type="radio" name="rdg_special" class="rdg_special" value="Y"> ประกาศพิเศษหน้าแรก
-											</label>
-										</div>
-									</div>
+							
+							<div class="form-group">
+								<label class="col-lg-3 control-label"> ประเภทประกาศ</label>
+								<div class="col-lg-9 control-label-l">
+									<?php 
+								
+									if($_SESSION['sesSpecialPost']=="N"){
+										?>
+										<div class="rdg_special_text">ประกาศฟรี</div>
+										<?php
+									}else{
+										?>
+										<div class="rdg_special_text">ประกาศพิเศษ</div>
+										<?php
+									}
+									?>
 								</div>
 							</div>
 							
-							<div class="form-group" style="display:none;">
+							<div class="form-group">
 							
 								<label class="col-lg-3 control-label"> ประเภทประกาศ</label>
+								
+								<?php 
+								
+								$sqlSQLRT="select * from realty_type where rt_id='".$_SESSION['sesRtID']."'";
+								$resultRT=mysql_query($sqlSQLRT);
+								$rsRT=mysql_fetch_array($resultRT);
+								?>
+								<div class="control-label-l">	<?=$rsRT['rt_name']?>	</div>
+								<!-- 
 								<div id="realtyForArea">
 									<div class="optonArea">
 										<div class="checkbox">
-											
+											<label>
 											<div id="realtyType1Area" class="disPlaInline">
-											<label>
+											
 											<input type="radio" name="realtyType1" class="realtyType1"  id="realtyType1Realty" value="N" checked="checked"> อสังหาริมทรัพย์ทั่วไป 
-											</label>
-											<label>
-											<input type="radio" name="realtyType1" class="realtyType1" value="Y"> สำหรับผู้รับเหมา/วัสดุก่อสร้าง/ฟอร์นิเจอร์ 
-											</label>
+											<input type="radio" name="realtyType1" class="realtyType1" value="Y"> สำหรับผู้รับเหมา 
+											
 											</div>
-											
-											
+											<label class="select" id="realtyTypeArea"> 
+											</label>
 											
 										</div>
 									</div>
 								</div>
+								 -->
+								
 							</div>
 							
-							
-							<div class="form-group">
-								<label for="rdg_title" class="col-lg-3 control-label">รายการประกาศ </label>
-								<div class="col-lg-9">
-									<div class="select" id="realtyTypeArea"> </div>
-								</div>
-							</div>
 							
 							
 							

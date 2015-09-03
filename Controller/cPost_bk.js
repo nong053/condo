@@ -236,7 +236,6 @@
 						success:function(data){
 							//alert(data);
 							$("#detailDataPost").html(data);
-							
 							//call cDetailDataPost.js
 							detailDataPostFn(paramRealtyID);
 							
@@ -254,46 +253,6 @@
 				
 				
 			};
-			
-			var createSpecialFn=function(rdg_special){
-
-				//####rdg_special####
-				var realtySpecialHTML="";
-				realtySpecialHTML+="<div class=\"optonArea\">";
-					realtySpecialHTML+="<div class=\"checkbox\">";
-					realtySpecialHTML+="<label>";
-						if(rdg_special=="N"){
-						realtySpecialHTML+="<input type=\"radio\" checked=\"checked\" value=\"N\" class=\"rdg_special\" name=\"rdg_special\"> ประกาศฟรี ";
-						realtySpecialHTML+="<input type=\"radio\" value=\"Y\" class=\"rdg_special\" name=\"rdg_special\"> ประกาศพิเศษหน้าแรก";
-						}else{
-							realtySpecialHTML+="<input type=\"radio\"  value=\"N\" class=\"rdg_special\" name=\"rdg_special\"> ประกาศฟรี ";
-							realtySpecialHTML+="<input type=\"radio\" checked=\"checked\" value=\"Y\" class=\"rdg_special\" name=\"rdg_special\"> ประกาศพิเศษหน้าแรก";	
-						}
-					realtySpecialHTML+="</label></div>";
-				realtySpecialHTML+="</div>";
-				$("#realtySpecialArea").html(realtySpecialHTML);
-			}
-			var crateRealtyFn=function(rt_contructor_yet){
-				//######realtyType1Realty#########
-				var realtyType1RealtyHTML="";
-				if(rt_contructor_yet=="N"){
-					realtyType1RealtyHTML+="<label>";
-					realtyType1RealtyHTML+="<input type=\"radio\" name=\"realtyType1\" class=\"realtyType1\"  id=\"realtyType1Realty\" value=\"N\" checked=\"checked\"> อสังหาริมทรัพย์ทั่วไป"; 
-					realtyType1RealtyHTML+="</label>";
-					realtyType1RealtyHTML+="<label>";
-					realtyType1RealtyHTML+="<input type=\"radio\" name=\"realtyType1\" class=\"realtyType1\" value=\"Y\"> สำหรับผู้รับเหมา/วัสดุก่อสร้าง/ฟอร์นิเจอร์  ";
-					realtyType1RealtyHTML+="</label>";
-				}else{
-					realtyType1RealtyHTML+="<label>";
-					realtyType1RealtyHTML+="<input type=\"radio\" name=\"realtyType1\" class=\"realtyType1\"  id=\"realtyType1Realty\" value=\"N\" > อสังหาริมทรัพย์ทั่วไป"; 
-					realtyType1RealtyHTML+="</label>";
-					realtyType1RealtyHTML+="<label>";
-					realtyType1RealtyHTML+="<input type=\"radio\" name=\"realtyType1\" class=\"realtyType1\" value=\"Y\" checked=\"checked\"> สำหรับผู้รับเหมา/วัสดุก่อสร้าง/ฟอร์นิเจอร์  ";
-					realtyType1RealtyHTML+="</label>";
-				}
-				$("#realtyType1Area").html(realtyType1RealtyHTML);
-			}
-			
 			
 			var callDataMainPostAgainFn=function(){
 				
@@ -316,16 +275,38 @@
 						//console.log(data['rf_id']);
 						callRealtyFor(data['rf_id']);
 						
-						
 						//####rdg_special####
-						createSpecialFn(data['rdg_special']);
-						//####rdg_special####
+					
+						var realtySpecialHTML="";
+						realtySpecialHTML+="<div class=\"optonArea\">";
+							realtySpecialHTML+="<div class=\"checkbox\">";
+							realtySpecialHTML+="<label>";
+								if(data['rdg_special']=="N"){
+								realtySpecialHTML+="<input type=\"radio\" checked=\"checked\" value=\"N\" class=\"rdg_special\" name=\"rdg_special\"> ประกาศฟรี ";
+								realtySpecialHTML+="<input type=\"radio\" value=\"Y\" class=\"rdg_special\" name=\"rdg_special\"> ประกาศพิเศษหน้าแรก";
+								}else{
+									realtySpecialHTML+="<input type=\"radio\"  value=\"N\" class=\"rdg_special\" name=\"rdg_special\"> ประกาศฟรี ";
+									realtySpecialHTML+="<input type=\"radio\" checked=\"checked\" value=\"Y\" class=\"rdg_special\" name=\"rdg_special\"> ประกาศพิเศษหน้าแรก";	
+								}
+							realtySpecialHTML+="</label></div>";
+						realtySpecialHTML+="</div>";
+					
+					
+						$("#realtySpecialArea").html(realtySpecialHTML);
 						
 						//######realtyType1Realty#########
-						crateRealtyFn(data['rt_contructor_yet']);
+						var realtyType1RealtyHTML="";
+						if(data['rt_contructor_yet']=="N"){
+							realtyType1RealtyHTML+="<input type=\"radio\" name=\"realtyType1\" class=\"realtyType1\"  id=\"realtyType1Realty\" value=\"N\" checked=\"checked\"> อสังหาริมทรัพย์ทั่วไป"; 
+							realtyType1RealtyHTML+="<input type=\"radio\" name=\"realtyType1\" class=\"realtyType1\" value=\"Y\"> สำหรับผู้รับเหมา ";
+						}else{
+							realtyType1RealtyHTML+="<input type=\"radio\" name=\"realtyType1\" class=\"realtyType1\"  id=\"realtyType1Realty\" value=\"N\" > อสังหาริมทรัพย์ทั่วไป"; 
+							realtyType1RealtyHTML+="<input type=\"radio\" name=\"realtyType1\" class=\"realtyType1\" value=\"Y\" checked=\"checked\"> สำหรับผู้รับเหมา ";
+						}
+						$("#realtyType1Area").html(realtyType1RealtyHTML);
+						
 						callRealtyType(data['rt_contructor_yet'],data['rt_id']);
 						paramRealtyAndContractorType=data['rt_contructor_yet'];
-						
 						
 						//Start realType Radio
 						$(".realtyType1").click(function(){
@@ -501,40 +482,18 @@
 					}
 				});
 			};
-			var disableOrAblePostFn= function(id,status){
-				var status2;
-				if(status=="Y"){
-					status2="N";
-				}else if(status=="N"){
-					status2="Y";
-				}
-				//alert(status);
-				//alert(status2);
-				$.ajax({
-					url:"../Model/mCurrentPost.php",
-					type:"post",
-					dataType:"html",
-					data:{"paramAction":"disableOrAblePost","rdg_id":id,"status":status2},
-					success:function(data){
-						//alert(data);
-					
-					}
-				});
-			};
-			
-			
-			var showPostFn=function(idArea,status){
+			var showPostFn=function(){
 				$.ajax({
 					url:"../Model/mCurrentPost.php",
 					type:"post",
 					dataType:"html",
 					async:false,
-					data:{"paramAction":"showCurrentPost","idArea":idArea,"status":status},
+					data:{"paramAction":"showCurrentPost"},
 					success:function(data){
-						$("#"+idArea).html(data);
+						$("#currentPostArea").html(data);
 						
 						//set grid start
-						 $("#gridCurentPost"+idArea).kendoGrid({
+						 $("#gridCurentPost").kendoGrid({
 				             //height: 550,
 				             sortable: true,
 				             dataSource: {
@@ -549,48 +508,20 @@
 						//set grid end
 						 
 						//Start del Post
-						$(".btnDelPost"+idArea).click(function(){
+						$(".btnDelPost").click(function(){
 							var id=this.id;
 							id=id.split("-");
 							id=id[1];
 							//command delete
 							if(confirm("ยืนยันการลบประกาศนี้")){
 								delPostFn(id);
-								showPostFn(idArea,status);
+								showPostFn();
 							}
 							
 						});
 						//End del Post
-						//Start SET DisablePost Post
-						$(".btnDisablePost"+idArea).click(function(){
-							var id=this.id;
-							id=id.split("-");
-							id=id[1];
-							//command delete
-							if(confirm("ยืนยันไม่แสดงประกาศนี้")){
-								disableOrAblePostFn(id,status);
-								showPostFn(idArea,status);
-							}
-						});
-						//End SET DisablePost 
-						
-						//Start SET AblePost 
-						$(".btnAblePost"+idArea).click(function(){
-							var id=this.id;
-							id=id.split("-");
-							id=id[1];
-							//command delete
-							if(confirm("ยืนยันไม่แสดงประกาศนี้")){
-								disableOrAblePostFn(id,status);
-								showPostFn(idArea,status);
-							}
-						});
-						//End SET AblePost 
-						
-						
-						
 						//Start Edit Post
-						$(".btnEditPost"+idArea).click(function(){
+						$(".btnEditPost").click(function(){
 							var id=this.id;
 							id=id.split("-");
 							id=id[1];
@@ -601,16 +532,23 @@
 								type:"post",
 								dataType:"html",
 								async:false,
-								data:{"paramAction":"showCurrentPost","rdg_id":id},
+								data:{"paramAction":"showCurrentPost"},
 								success:function(data){
 									$(".postRealty").empty();
 									$("#formPostArea").html(data);
+									
 									//embed paramEmbedRdgId
 									$("#paramEmbedRdgId").remove();
 									$("#paramEmbedRdgIdArea").append("<input type='hidden' name='paramEmbedRdgId' id='paramEmbedRdgId' value="+id+" >");
+									
+
+									
+							
 									//Start call Data again
 									callDataMainPostAgainFn();
 									//End call Data again
+								
+									
 									//#### start call function bindingPostManageFn ####
 									bindingPostManageFn();
 									//#### end call function bindingPostManageFn ####
@@ -622,7 +560,11 @@
 					}
 				});
 			}
-
+			
+			
+	
+	
+			
 	var initailPostFn=function(){
 
 		//Start Call callRealtyFor
@@ -682,38 +624,40 @@
 		//end list status project
 	}
 	
-	var sendByHomeToPostFn=function(rt_id,rf_id,rt_contructor_yet,sesSpecialPost){
+	var sendByHomeToPostFn=function(rt_id,rf_id,rt_contructor_yet){
 
 		//Start Call callRealtyFor
-		//send rf_id2 for check type realty and hiden or show raido
-		callRealtyFor(rf_id,rf_id);
+		callRealtyFor(rf_id);
 		
-	
-		//####rdg_special####
-		createSpecialFn(sesSpecialPost);
-		//####rdg_special####
-		
-		//######realtyType1Realty#########
-		crateRealtyFn(rt_contructor_yet);
-		callRealtyType(rt_contructor_yet,rt_id);
-		paramRealtyAndContractorType=rt_contructor_yet;
 
-		
-		
 		//setupMap();
-		setTimeout(function(){
-			getLocation(false);
-			$("#btnCreateMarker").click(function(){
-				getLocation(true);
-				return false;
-			});
-		},2000);
+		getLocation(false);
+		$("#btnCreateMarker").click(function(){
+			getLocation(true);
+			return false;
+		});
 		//end map
 		
 		//start provine .
 		callProvince();
 		//end provine 
+		//Start Call callRealtyFor
+		
+		
+		//End Call callRealtyFor
 
+		//Start realType Radio
+	
+			
+			callRealtyType(rt_contructor_yet);
+			paramRealtyAndContractorType=rt_contructor_yet;
+			//alert(paramRealtyAndContractor);
+			
+	
+		
+		//End realType Raido
+		
+		
 		//start realty unit 
 		callRealtyUnit();
 		//end realty unit 
@@ -735,7 +679,19 @@
 		//end travel by HARBOR
 
 		//start list status project
-		callRealtyProjectStatus();
+			if(rt_id==1){
+				callRealtyProjectStatus();
+				$(".newProjectRealty").show();
+				$(".showForRealty").hide();
+				
+			}else{
+				$(".newProjectRealty").hide();
+				$(".showForRealty").show();
+			}
+			
+			//CHECK FOR Contructor Type
+				paramRealtyID=rt_id;
+			//check for contructor type
 		//end list status project
 	}
 	
@@ -891,7 +847,7 @@
 						//sesRfID
 						//sesSpecialPost
 						//#### start call function initail ####
-						sendByHomeToPostFn(data["sesRtID"],data["sesRfID"],data["sesRtContructorYet"],data["sesSpecialPost"]);
+						sendByHomeToPostFn(data["sesRtID"],data["sesRfID"],data["sesRtContructorYet"]);
 						//#### end call function initail ####
 					}
 				});
@@ -907,22 +863,10 @@
 	
 	//Start currentPost 
 	$("[href|='#currentPost']").click(function(){
-			showPostFn("currentPostArea","Y");
+			showPostFn();
 		 
 	});
 	//end currentPost 
-	
-	//Start nonePost 
-	$("[href|='#nonePost']").click(function(){
-			showPostFn("nonePostArea","N");
-		 
-	});
-	//end nonePost 
-	//Start nonePost 
-	$("[href|='#expirePost']").click(function(){
-			showPostFn("expirePostArea","E");
-	});
-	//end nonePost 
 	
 
 			

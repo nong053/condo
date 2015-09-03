@@ -4,11 +4,11 @@ var detailDataPosContructortFn = function(paramRealtyID){
 	
 		
 		//contructor select type
-		var cst_type="";
+		//var cst_type="";
 		
 		//START Call Contructor Radio 
 		
-		var callRadioContructor = function(){
+		var callRadioContructor = function(cst_type){
 			$.ajax({
 				url:"../Model/mDetailDataPostContructor.php",
 				type:"post",
@@ -58,7 +58,33 @@ var detailDataPosContructortFn = function(paramRealtyID){
 				}
 			});
 		}
-		callCSTType();
+		
+		//callCSTType();
+		
+		
+		
+		var callCSTCate=function(){
+			$.ajax({
+				url:"../Model/mDetailDataPostContructor.php",
+				type:"post",
+				dataType:"json",
+				data:{"paramAction":"getRealtyTypeCate","paramRealtyID":paramRealtyID},
+				success:function(data){
+				
+					callRadioContructor(data[0][0]);
+					console.log(data[1]);
+					if(data[0][0]=="3"){
+						
+						$(".titleContructor").html("คุณสมบัติสำหรับ"+data[1]);
+					}else{
+						$(".titleContructor").html("คุณสมบัติสำหรับ"+data[1]);
+					}
+				//map data
+				}
+			});
+		}
+		
+		callCSTCate();
 		
 		//materials
 

@@ -1,7 +1,10 @@
 <?php session_start();
 $cus_id=$_SESSION['cus_id'];
 include("../config.inc.php");
+
 $rdg_id=$_POST['rdg_id'];
+$idArea=$_POST['idArea'];
+$status=$_POST['status'];
 
 if($_POST['paramAction']=="showCurrentPost"){
 	
@@ -10,11 +13,11 @@ if($_POST['paramAction']=="showCurrentPost"){
 	from realty_data_general rdg
 	INNER JOIN realty_type rt
 	ON rdg.rt_id=rt.rt_id
-	where cus_id='$cus_id'
+	where cus_id='$cus_id' and rdg_status='$status'
 ";
 	$result=mysql_query($strSQL);
 	?>
-	<table id="gridCurentPost">
+	<table id="gridCurentPost<?=$idArea?>">
                 <colgroup>
                 	<col />
                     <col />
@@ -28,7 +31,7 @@ if($_POST['paramAction']=="showCurrentPost"){
                         <th data-field="fileld1">#รหัส</th>
                         <th data-field="fileld2">รายการ</th>
                         <th data-field="fileld3">ราคา</th>
-                        <th data-field="fileld4">วันที่หมดอายุ</th>
+                        <th data-field="fileld4">วันที่ประกาศ</th>
                         <th data-field="fileld5">สถานะ</th>
                         <th data-field="fileld6">จัดการ</th>
                        
@@ -41,13 +44,25 @@ if($_POST['paramAction']=="showCurrentPost"){
 		<tr>
 			<td>#<?=$rs[rdg_id]?></td>
 			<td><?=$rs[rt_name]?></td>
-			<td><?=$rs[rdg_price]?></td>
+			<!-- <td><?=$rs[rdg_price]?></td> -->
+			<td>1250,000</td>
 			<td><?=$rs[rdg_create]?></td>
 			<td><?=$rs[rdg_status]?></td>
 			<td>
-			<button class="btn btn-danger btn-xs btnDelPost" id='delPostId-<?=$rs[rdg_id]?>'><i class="fa fa-trash-o"></i> ลบ </button>
-			<button class="btn btn-warning btn-xs btnEditPost" id='editPostId-<?=$rs[rdg_id]?>'><i class="fa fa-pencil"></i> แก้ไข</button>
-			<button class="btn btn-success btn-xs btnDisablePost" id='disablePostId-<?=$rs[rdg_id]?>'><i class="fa fa-share"></i> ไม่แสดง</button>
+			<button class="btn btn-danger btn-xs btnDelPost<?=$idArea?>" id='delPostId-<?=$rs[rdg_id]?>'><i class="fa fa-trash-o"></i> ลบ </button>
+			<button class="btn btn-warning btn-xs btnEditPost<?=$idArea?>" id='editPostId-<?=$rs[rdg_id]?>'><i class="fa fa-pencil"></i> แก้ไข</button>
+			<?php 
+			if($status=="Y"){
+				?>
+				<button class="btn btn-success btn-xs btnDisablePost<?=$idArea?>" id='disablePostId-<?=$rs[rdg_id]?>'><i class="fa fa-share"></i> ไม่แสดง</button>
+				<?php
+			}else{
+				?>
+				<button class="btn btn-success btn-xs btnAblePost<?=$idArea?>" id='ablePostId-<?=$rs[rdg_id]?>'><i class="fa fa-share"></i> แสดง</button>
+				<?php
+			}
+			?>
+			
 			</td>
 		</tr>						
 		<?php
@@ -85,6 +100,15 @@ function delePictureFn($rdg_id,$ri_id){
 		rmdir("$path_big_picture");
 	}
 	
+}
+
+if($_POST['paramAction']=="disableOrAblePost"){
+		$strSQL="update realty_data_general set rdg_status='$status'  where rdg_id='$rdg_id'";
+		$result=mysql_query($strSQL);
+		if($result){
+			echo'["success"]';
+		}
+		
 }
 
 if($_POST['paramAction']=="delCurrentPost"){

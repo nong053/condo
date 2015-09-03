@@ -1,12 +1,4 @@
-		
 
-
-
-
-                    
-                
-  				
-                
 				 <!--Blog Post-->        
                 <div class="blog margin-bottom-5">
                     <?php
