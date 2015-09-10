@@ -31,7 +31,7 @@ include("../config.inc.php");
 								<label class="col-lg-3 control-label" > ประกาศสำหรับ</label>
 								<div id="realtyForArea"></div>
 							</div>
-							<div class="form-group">
+							<div class="form-group formHidden" >
 								<label class="col-lg-3 control-label"> ประเภทประกาศ</label>
 								<div id="realtySpecialArea " class="col-lg-9 control-label-l">
 								

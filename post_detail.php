@@ -1,6 +1,96 @@
 
- 
- <!--Blog Post0-->        
+<?php 
+include_once 'config.inc.php';
+$embed_rt_id=$_POST['embed_rt_id'];
+$rdg_address_province_id=$_POST['rdg_address_province_id'];
+$rdg_address_district_id=$_POST['rdg_address_district_id'];
+$rdg_address_sub_district_id=$_POST['rdg_address_sub_district_id'];
+$rdg_bts=$_POST['rdg_bts'];
+$rdg_bus=$_POST['rdg_bus'];
+$rdg_harbor=$_POST['rdg_harbor'];
+$rdg_id=$_POST['rdg_id'];
+$rdg_mrt=$_POST['rdg_mrt'];
+$rdg_road=$_POST['rdg_road'];
+
+/*
+embed_rt_id
+rdg_address_district_id
+rdg_address_province_id
+rdg_address_sub_district_id
+rdg_bts
+rdg_bus
+rdg_harbor
+rdg_id
+rdg_mrt
+rdg_road
+*/
+
+	
+	$strSQLPostDetail="
+			
+	select rdg.*,rt_name,rf_name,rps_name from realty_data_general rdg
+	LEFT JOIN realty_type rt 
+	ON rdg.rt_id=rt.rt_id
+	LEFT JOIN realty_for rf
+	ON rdg.rf_id=rf.rf_id
+	LEFT JOIN realty_project_status rps
+	ON rdg.rps_id=rps.rps_id
+	WHERE (rdg.rt_id='1' or 'All'='All')
+	AND (rdg.rdg_address_province_id='1' or 'All'='All')
+	AND (rdg.rdg_address_district_id='1' or 'All'='All')
+	AND (rdg.rdg_address_sub_district_id='1' or 'All'='All')
+	AND (rdg.rdg_address_road='1' or 'All'='All')
+	AND (rdg.rdg_bts='1' or 'All'='All')
+	AND (rdg.rdg_mrt='1' or 'All'='All')
+	AND (rdg.rdg_arl='1' or 'All'='All')
+	AND (rdg.rdg_harbor='1' or 'All'='All')
+			
+			";
+	$resultPostDetail=mysql_query($strSQLPostDetail);
+	
+	
+	function numResultFn($rt_id){
+		$strSQLnum="select count(*) as allPage from realty_data_general  where rt_id='".$rt_id."'";
+		$result=mysql_query($strSQLnum);
+		$rs=mysql_fetch_array($result);
+		return $rs['allPage'];
+	}
+
+	
+	function resultUnit(){
+		$strSQL="select * from realty_unit order by ru_sort";
+		$result=mysql_query($strSQL);
+		return $result;
+	}
+	
+	
+	
+	
+	$sqlSQLBTS="SELECT * FROM public_transport where pt_type='BTS'";
+	$resultBTS=mysql_query($sqlSQLBTS);
+	
+	$sqlSQLMRT="SELECT * FROM public_transport where pt_type='MRT'";
+	$resultMRT=mysql_query($sqlSQLMRT);
+	
+	$sqlSQLARL="SELECT * FROM public_transport where pt_type='ARL'";
+	$resultARL=mysql_query($sqlSQLARL);
+	
+	$sqlSQLHARBOR="SELECT * FROM public_transport where pt_type='HARBOR'";
+	$resultHARBOR=mysql_query($sqlSQLHARBOR);
+	
+	$sqlSQLRoadNo="select rdg_address_road from realty_data_general where rdg_address_road !=NULL";
+	$resultRoadNo=mysql_query($sqlSQLRoadNo);
+	
+	$sqlSQLBusNo="select rdg_bus from realty_data_general where rdg_bus !=NULL";
+	$resultBusNo=mysql_query($sqlSQLBusNo);
+	$sqlSQLSoi="select rdg_address_soi from realty_data_general where rdg_address_soi !=NULL";
+	$resultSoi=mysql_query($sqlSQLSoi);
+	
+
+?>
+ <!--Blog Post0--> 
+ 		<script src="Controller/page/cPostDetail.js"></script>    
+ 		   
 		<div class="blog margin-bottom-5">
 		 <div class="row">
 								<div class="panel  panel-red" style="margin-bottom: 5px;">
@@ -11,15 +101,13 @@
 										
 											<div class="row">
 
-											 <form class="sky-form" id="sky-form4" action="#" novalidate="novalidate">
+				<form id="formSubPost" name="formSubPost" class="sky-form" id="sky-form4" action="#" novalidate="novalidate">
 									<header>
 										<div class="headline headline-md">
 											<h2>ค้นหาประกาศขายอสังหาริมทรัพย์</h2>
 										</div>
-										<button type="button" class="btn-u btn-mainmenu ">ขายดาวน์</button>
-										<button type="button" class="btn-u btn-mainmenu">ขายขาด</button>
-										
-									
+										<input type="radio" name="rdg_tf" value="5"> ขายดาวน์
+										<input type="radio" name="rdg_tf" value="1"> ขายขาด
 									</header>
 
 
@@ -32,14 +120,24 @@
 													<div class="col-md-4 col-padding-2">
 														 <section>
 																<label class="select">
-																	<select name="gender">
-																	
-																		<option value="0" selected="" disabled=""> ราคาขายเริ่มต้น </option>
-																		<option value="1">100,000</option>
-																		<option value="1">200,000 </option>
-																		<option value="1"> 300,000 </option>
-																		<option value="1"> 400,000 </option>
+																	<select name="rdg_price_start">
 																		
+																		<option value="0" selected="" > ราคาขายเริ่มต้น </option>
+																		<?php 
+																		for($i=0;$i<=100;$i++){
+																			if($i==0){
+																				?>
+																				<option value="<?=$i?>"><?=$i?></option>
+																				<?php
+																			}else{
+																				$number=$i*100000;
+																				$numCommas=number_format($number);
+																				?>
+																				<option value="<?=$i?>0000"><?=$numCommas?></option>
+																				<?php
+																			}
+																		}
+																		?>
 																	</select>
 																	<i></i>
 																</label>
@@ -49,14 +147,26 @@
 													<div class="col-md-4 col-padding-2">
 														 <section>
 																<label class="select">
-																	<select name="gender">
+																	<select name="rdg_price_end">
 																	
-																		<option value="0" selected="" disabled=""> ราคาขายสูงสุด</option>
-																		<option value="1">100,000</option>
-																		<option value="1">200,000 </option>
-																		<option value="1"> 300,000 </option>
-																		<option value="1"> 400,000 </option>
-																		
+																		<option value="0" selected="" > ราคาขายสูงสุด</option>
+																		<?php 
+																		for($i=0;$i<=100;$i++){
+																			if($i==0){
+																				?>
+																				<option value="<?=$i?>"><?=$i?></option>
+																				<?php
+																			}else{
+																				$number=$i*200000;
+																				$numCommas=number_format($number);
+																				?>
+																				<option value="<?=$i*2?>0000"><?=$numCommas?></option>
+																				<?php
+																			}
+																			
+																		}
+																		?>
+																		<option value=">2000000" selected="" > 2,000,000 ขึ้นไป</option>
 																	</select>
 																	<i></i>
 																</label>
@@ -66,23 +176,24 @@
 													<div class="col-md-4 col-padding-2">
 														 <section>
 																<label class="select">
-																	<select class="AreaSelect" tabindex="2" name="Area">
+																	<select class="AreaSelect" tabindex="2" name="rdg_area_number">
 																		<option value="">ขนาดพื้นที่</option>
-																		<option value="1-10">1-10</option>
-																		<option value="11-20">11-20</option>
-																		<option value="21-30">21-40</option>
-																		<option value="31-40">31-40 </option>
-																		<option value="41-50">41-50</option>
-																		<option value="51-60">51-60</option>
-																		<option value="61-70">61-70</option>
-																		<option value="71-80">71-80</option>
-																		<option value="81-90">81-90</option>
-																		<option value="91-100">91-100</option>
-																		<option value="101-150">101-150</option>
-																		<option value="151-200">151-200</option>
-																		<option value="201-300">201-300</option>
-																		<option value="301-400">301-400</option>
-																		<option value="401">401 ขึ้นไป</option>
+																		<?php 
+																		for($i=0;$i<=100;$i++){
+																			if($i==0){
+																				?>
+																				<option value="<?=$i?>"><?=$i?></option>
+																				<?php
+																			}else{
+																				?>
+																				<option value="<?=$i*5?>"><?=$i*5?></option>
+																				<?php
+																			}
+																			
+																		}
+																		?>
+																		<option value=">500">500  ขึ้นไป</option>
+																		
 																		</select>
 																	<i></i>
 																</label>
@@ -92,11 +203,16 @@
 													<div class="col-md-4 col-padding-2">
 														 <section>
 																<label class="select">
-																	<select class="UnitSelect" tabindex="3" name="Unit">
-																		<option value="">หน่วย</option>
-																		<option value="1">ตร.ม</option>
-																		<option value="2">ตร.ว</option>
-																		<option value="3">ไร่</option>
+																	<select class="UnitSelect" tabindex="3" name="rdg_area_unit">
+																	<?php 
+																	$result=resultUnit();
+																	while($rs=mysql_fetch_array($result)){
+																	?>
+																	<option value="<?=$rs['ru_id']?>"><?=$rs['ru_name']?></option>
+																	<?php
+																	}
+																	?>
+																		
 																		</select>
 																	<i></i>
 																</label>
@@ -107,29 +223,16 @@
 												<div class="col-md-4 col-padding-2">
 														 <section>
 																<label class="select">
-																	<select class="Room1Select" tabindex="4" name="Room1">
+																	<select class="Room1Select" tabindex="4" name="rdr_bedroom">
 																		<option value="">ห้องนอน</option>
-																		<option value="100">สตูดิโอ</option>
-																		<option value="1">1</option>
-																		<option value="2">2</option>
-																		<option value="3">3</option>
-																		<option value="4">4</option>
-																		<option value="5">5</option>
-																		<option value="6">6</option>
-																		<option value="7">7</option>
-																		<option value="8">8</option>
-																		<option value="9">9</option>
-																		<option value="10">10</option>
-																		<option value="11">11</option>
-																		<option value="12">12</option>
-																		<option value="13">13</option>
-																		<option value="14">14</option>
-																		<option value="15">15</option>
-																		<option value="16">16</option>
-																		<option value="17">17</option>
-																		<option value="18">18</option>
-																		<option value="19">19</option>
-																		<option value="20">20</option>
+																		<?php 
+																		for($i=0;$i<=300;$i++){
+																			?>
+																			<option value="<?=$i?>"><?=$i?></option>
+																			<?php
+																		}
+																		?>
+																		
 																	</select>
 																	<i></i>
 																</label>
@@ -138,48 +241,39 @@
 													<br style="clear:both">
 												</blockquote>
 											</div>
-											</div>
-											 
+											</div>											 
 										</div>
-										<div class="row">
-													
-													<div class="col-md-12 col-padding-2">
-													<label class="input">
-														<input type="text" placeholder="ค้นหา" name="firstname">
-													</label>
-													</div>
+										<div class="row">													
+											<div class="col-md-12 col-padding-2">
+											<label class="input">
+												<input type="text" placeholder="ค้นหา" name="searchTxt">
+											</label>
+											</div>											
 										</div>
 									</fieldset> 
-									
-
-									<fieldset>  
-  
+									<fieldset>   
 										<div class="row">
-
-
-													
-
-													
-
-													
-
-
 													<div class="col-md-4 col-padding-2">
 														 <section>
-																<label class="select">
-																	<select name="gender">
+														 
+																<label class="select" id="provinceArea2" >
 																	
-																		<option value="0" selected="" disabled="">เลือกจังหวัด </option>
-																		<option value="1">กรุงเทพ</option>
-																		<option value="1">นครนายก </option>
-																		<option value="1"> ปราจีนบุรี </option>
-																		<option value="1"> สระแก้ว </option>
-																		<option value="1"> ฉะเชิงเทรา </option>
-																		<option value="1"> ชลบุรี </option>
-																		<option value="1"> ระยอง </option>
-																		<option value="1"> จันทบุรี </option>
-																		<option value="1"> ตราด </option>
-																	</select>
+																	<i></i>
+																</label>
+																
+															</section>
+													</div>
+													<div class="col-md-4 col-padding-2">
+														 <section>
+																<label class="select">
+																	<label class="select" id="districtArea2">
+																					<select name="rdg_address_district_id" id="rdg_address_district_id">
+																						<option selected="" value="0">-- เลือกอำเภอ/เขต --</option>
+	
+																					</select>
+																	
+																		<i></i>
+																	</label>
 																	<i></i>
 																</label>
 															</section>
@@ -187,62 +281,12 @@
 													<div class="col-md-4 col-padding-2">
 														 <section>
 																<label class="select">
-																	<select name="gender">
-																		<option disabled="" selected="" value="0">เลือกเขต/อำเภอ</option>
-																		<option value="1">เขตพระนคร </option>
-																		<option value="1">เขตดุสิต </option>
-																		<option value="1">เขตหนองจอก </option>
-																		<option value="1">เขตบางรัก </option>
-																		<option value="1"> เขตบางเขน </option>
-																		<option value="1">เขตบางกะปิ </option>
-																		<option value="1">เขตปทุมวัน </option>
-																		<option value="1">เขตป้อมปราบศัตรูพ่าย </option>
-																		<option value="1"> เขตพระโขนง </option>
-																		<option value="1">เขตมีนบุรี </option>
-																		<option value="1"> เขตลาดกระบัง </option>
-																		<option value="1"> เขตยานนาวา </option>
-																		<option value="1"> เขตสัมพันธวงศ์ </option>
-																		<option value="1"> เขตพญาไท </option>
-																		<option value="1"> เขตธนบุรี </option>
-																		<option value="1">เขตบางกอกใหญ่ </option>
-																		<option value="1"> เขตห้วยขวาง </option>
-																		<option value="1"> เขตคลองสาน </option>
-																		<option value="1"> เขตตลิ่งชัน </option>
-																		<option value="1"> เขตบางกอกน้อย </option>
-																		<option value="1"> เขตบางขุนเทียน </option>
-																		<option value="1"> เขตภาษีเจริญ </option>
-																		<option value="1"> เขตหนองแขม</option>
-																		<option value="1"> เขตราษฎร์บูรณะ </option>
-																	</select>
-																	<i></i>
-																</label>
-															</section>
-													</div>
-													<div class="col-md-4 col-padding-2">
-														 <section>
-																<label class="select">
-																	<select name="gender">
-																		<option disabled="" selected="" value="0">เลือกตำบล</option>
-																		<option value="1">เมืองจันทบุร</option>
-ี
-																			<option value="1">แก่งหางแมว</option>
-																			<option value="1">ขลุง</option>
-																			<option value="1">ท่าใหม</option>
-																			<option value="1"> นายายอาม</option>
-																			<option value="1"> โป่งน้ำร้อน </option>
-																			<option value="1">มะขาม</option>
-																			<option value="1"> สอยดาว</option>
-																			<option value="1"> แหลมสิงห</option>
-																			<option value="1"> เขาคิชฌกูฏ </option>
-																			<option value="1"> เมืองฉะเชิงเทรา</option>
-																			<option value="1"> บางคล้า </option>
-																			<option value="1"> บางน้ำเปรี้ยว </option>
-																			<option value="1"> บางปะกง </option>
-																			<option value="1"> บ้านโพธิ์ </option>
-																			<option value="1"> แปลงยาว </option>
-																			<option value="1"> พนมสารคาม </option>
-
-																	</select>
+																	<label class="select" id="subDistrictArea2">
+																		<select name="rdg_address_sub_district_id" id="rdg_address_sub_district_id">
+																			<option  selected="" value="All">-- เลือกตำบล/แขวง --</option>
+																		</select>
+																		<i></i>
+																	</label>
 																	<i></i>
 																</label>
 															</section>
@@ -253,14 +297,15 @@
 													<div class="col-md-4 col-padding-2">
 														 <section>
 																<label class="select">
-																	<select name="gender">
-																		<option disabled="" selected="" value="0">เลือกถนน</option>
-																		<option value="1">ท่าเรือเทเวศร์</option>
-																		<option value="2">แยกเตาปูน</option>
-																		<option value="3">แยกตากสิน</option>
-																		<option value="3">คลองรางใหญ่ </option>
-																		<option value="3">เข้าเขตกรุงเทพมหานคร</option>
-																		<option value="3">ถนนนครสวรรค์</option>
+																	<select name="rdg_address_road">
+																		<option  selected="" value="0">เลือกถนน</option>
+																		<?php 
+																			while($rsRoadNo=mysql_fetch_array($resultRoadNo)){
+																				?>
+																				<option value="<?=$rsRoadNo['rdg_address_road']?>"><?=$rsRoadNo['rdg_address_road']?></option>
+																				<?php
+																			}
+																		?>
 																		
 																	</select>
 																	<i></i>
@@ -270,28 +315,15 @@
 													<div class="col-md-4 col-padding-2">
 														 <section>
 																<label class="select">
-																	<select class="Room1Select" tabindex="4" name="Room1">
-																		<option value="">ซอย</option>
-																		<option value="1">1</option>
-																		<option value="2">2</option>
-																		<option value="3">3</option>
-																		<option value="4">4</option>
-																		<option value="5">5</option>
-																		<option value="6">6</option>
-																		<option value="7">7</option>
-																		<option value="8">8</option>
-																		<option value="9">9</option>
-																		<option value="10">10</option>
-																		<option value="11">11</option>
-																		<option value="12">12</option>
-																		<option value="13">13</option>
-																		<option value="14">14</option>
-																		<option value="15">15</option>
-																		<option value="16">16</option>
-																		<option value="17">17</option>
-																		<option value="18">18</option>
-																		<option value="19">19</option>
-																		<option value="20">20</option>
+																	<select class="Room1Select" tabindex="4" name="rdg_address_soi">
+																		<option value="">เลือกซอย</option>
+																			<?php 
+																				while($rsSoi=mysql_fetch_array($resultSoi)){
+																					?>
+																					<option value="<?=$rsSoi['rdg_address_soi ']?>"><?=$rsSoi['rdg_address_soi ']?></option>
+																					<?php
+																				}
+																			?>
 																	</select>
 																	<i></i>
 																</label>
@@ -302,12 +334,15 @@
 													<div class="col-md-4 col-padding-2">
 														 <section>
 																<label class="select">
-																	<select name="gender">
-																		<option disabled="" selected="" value="0">เลือกรภไฟฟ้าบีทีเอส</option>
-																		<option value="1">หมอชิต	</option>
-																		<option value="2">สะพานควาย</option>
-																		<option value="3">อารีย์</option>
-																		<option value="3">สนามเป้า</option>
+																	<select name="rdg_bts">
+																		<option  selected="" value="0">เลือกรถไฟฟ้าบีทีเอส</option>
+																			<?php 
+																			while($rsBTS=mysql_fetch_array($resultBTS)){
+																				?>
+																				<option value="<?=$rsBTS['pt_id']?>"><?=$rsBTS['pt_detail']?></option>
+																				<?php
+																			}
+																			?>
 																	</select>
 																	<i></i>
 																</label>
@@ -316,31 +351,15 @@
 													<div class="col-md-4 col-padding-2">
 														 <section>
 																<label class="select">
-																	<select name="gender">
-																		<option disabled="" selected="" value="0">ใกล้รถไฟฟ้าใต้ดิน</option>
-																		<option value="1">สถานีหัวลำโพง	</option>
-																		<option value="2">สถานีสามย่าน</option>
-																		<option value="3">สถานีสีลม</option>
-																		<option value="3">สถานีลุมพิน</option>
-																		<option value="3">สถานีคลองเตย</option>
-																		<option value="3">สถานีสุขุมวิที</option>
-																		 	
-																			
-																			 	
-																	</select>
-																	<i></i>
-																</label>
-															</section>
-													</div>
-
-													<div class="col-md-4 col-padding-2">
-														 <section>
-																<label class="select">
-																	<select name="gender">
-																		<option disabled="" selected="" value="0">ใกล้สายรถเมย์ ก.ท.ม.</option>
-																		<option value="1">สาย1 </option>
-																		<option value="2">สาย2</option>
-																		<option value="3">สาย3</option>
+																	<select name="rdg_mrt">
+																		<option  selected="" value="0">ใกล้รถไฟฟ้าใต้ดิน</option>
+																		<?php 
+																			while($rsMRT=mysql_fetch_array($resultMRT)){
+																				?>
+																				<option value="<?=$rsMRT['pt_id']?>"><?=$rsMRT['pt_detail']?></option>
+																				<?php
+																			}
+																			?> 	
 																	</select>
 																	<i></i>
 																</label>
@@ -350,11 +369,33 @@
 													<div class="col-md-4 col-padding-2">
 														 <section>
 																<label class="select">
-																	<select name="gender">
-																		<option disabled="" selected="" value="0">ใกล้ท่าเรือ</option>
-																		<option value="1">สายสีสม </option>
-																		<option value="2">สายสีเขียว </option>
-																		<option value="3">สายสีเหลือง</option>
+																	<select name="rdg_bts">
+																		<option  selected="" value="0">ใกล้สายรถเมย์ ก.ท.ม.</option>
+																		<?php 
+																		while($rsBusNo=mysql_fetch_array($resultBusNo)){
+																			?>
+																			<option value="<?=$rsBusNo['rdg_bus']?>"><?=$rsBusNo['rdg_bus']?></option>
+																			<?php
+																		}
+																		?>
+																	</select>
+																	<i></i>
+																</label>
+															</section>
+													</div>
+
+													<div class="col-md-4 col-padding-2">
+														 <section>
+																<label class="select">
+																	<select name="rdg_harbor">
+																		<option  selected="" value="0">ใกล้ท่าเรือ</option>
+																		<?php 
+																			while($rsHARBOR=mysql_fetch_array($resultHARBOR)){
+																				?>
+																				<option value="<?=$rsHARBOR['pt_id']?>"><?=$rsHARBOR['pt_detail']?></option>
+																				<?php
+																			}
+																		?>
 																	</select>
 																	<i></i>
 																</label>
@@ -370,6 +411,8 @@
 										<button class="btn-u btn-u-dark-blue" type="submit">แจ้งเตือนทางอีเมลล์</button>
 										<button class="btn-u btn-u-orange" type="submit ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ค้นหาประกาศ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
 									</footer>
+									
+									
 								</form>
 
 
@@ -424,7 +467,7 @@
 													</div>
 
 
-													ค้นหาพบ 777 รายการ
+													ค้นหาพบ <?=numResultFn($embed_rt_id)?> รายการ
 
 														<!--<div class="easy-bg-v2 rgba-default">ใหม่</div>
 														<img src="assets/img/main/img9.jpg" alt="">       
@@ -438,18 +481,64 @@
 															<button type="button" class="btn-u btn-u-default" style="height:80px; width:100px;">img6</button>
 														</ul>    
 															-->
+															
+															
+															<?php 
+															while($rsPostDetail=mysql_fetch_array($resultPostDetail)){															
+															?>
+															
 															<!-- start list realty -->
 															<div class="col-md-12 shadow-wrapper">
 																<div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
-																	<h2>ขาย บ้านขนาดใหญ่ ลดราคา เดินทางสะดวก พื้นที่ 600 ตารางวา เจ้าของรีบขายครับ</h2>
+																	<h2><?=$rsPostDetail['rdg_title']?></h2>
 																	<div class="row">
 																		<div class="col-md-3">
-																			<img class="img-responsive" src="assets/img/main/img1.jpg" alt="">
+																		
+																		<?php 
+																			$strSQL="select * from realty_images where rdg_id='".$rsPostDetail['rdg_id']."' and  ri_set_first='0'  ORDER BY ri_set_first ";
+																			$result=mysql_query($strSQL);
+																			$i=1;
+																			$rs=mysql_fetch_array($result);
+																				//จัดการกับรูปภาพ
+																				$thumbnailsPath="realtyPicture/".$rsPostDetail['rdg_id']."/".$rs[ri_id]."/thumbnail/";
+																				if(!is_dir($thumbnailsPath)){
+																					
+																				}else{ //else
+																			
+																					if($handle= opendir($thumbnailsPath)){
+																						$imagesFiles = array();
+																						while(false!=($file=readdir($handle))){
+																							if($file!="." && $file!=".."){
+																								$thumbnailsFile = $thumbnailsPath."/".$file;
+																								$fileType = pathinfo($thumbnaisFile);//แสดงpath
+																								$fileType = strtolower($fileType['extension']);//แสดงpathพร้อม แสดงนามสกุล
+																								$allowedtypes=array("png","jpeg","jpd","gif");
+																			
+																								if(is_file($thumbnailsFile)&& in_array($fileType,$allowedtypes))
+																								{
+																									$imagesFiles[]=$thumbnailsFile;
+																								}
+																			
+																							}
+																						}
+																						closedir($handle);
+																					}
+																					sort($imagesFiles);
+																					if(count($imagesFiles)>0){
+																						$thumbnailsFile = $imagesFiles[0];
+																					}
+																				}//else
+																				//ปิดจัดการรูปภาพ
+																				
+																				?>
+																				<img alt="" src="<?=$thumbnailsFile?>" width="300" class="img-responsive">
+																				<?php 
+																			
+																		?>
+
 																		</div>
 																		<div class="col-md-9">
-																		ขายบ้าน ธัญบุรี, ปทุมธานี <br>
-																		5 ห้องนอน  7 ห้องน้ำ พื้นที่ 600 ตารางวา<br>
-																		ลดราคาขายเหลือ  			16,500,000  			บาท<br>
+																		<?=$rsPostDetail['rdg_detail']?><br>
 
 																		<p>
 																			<button type="button" class="btn-u btn-u-green"><i class="fa fa-child "></i> ติดต่อผู้ลงประกาศ</button>
@@ -464,124 +553,10 @@
 																</div>
 															</div>
 															<!-- end list realty -->
-
-															<!-- start list realty -->
-															<div class="col-md-12 shadow-wrapper">
-																<div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
-																	<h2>ขาย บ้านขนาดใหญ่ ลดราคา เดินทางสะดวก พื้นที่ 600 ตารางวา เจ้าของรีบขายครับ</h2>
-																	<div class="row">
-																		<div class="col-md-3">
-																			<img class="img-responsive" src="assets/img/main/img1.jpg" alt="">
-																		</div>
-																		<div class="col-md-9">
-																		ขายบ้าน ธัญบุรี, ปทุมธานี <br>
-																		5 ห้องนอน  7 ห้องน้ำ พื้นที่ 600 ตารางวา<br>
-																		ลดราคาขายเหลือ  			16,500,000  			บาท<br>
-
-																		<p>
-																			<button type="button" class="btn-u btn-u-green"><i class="fa fa-child "></i> ติดต่อผู้ลงประกาศ</button>
-																		<button type="button" class="btn-u btn-u-green"><i class="fa  fa-car"></i> แผนที่</button>
-																		<button type="button" class="btn-u btn-u-green"><i class="fa fa-download"></i> เก็บไว้ดูภายหลัง</button>
-																		<button type="button" class="btn-u btn-u-red"><i class="fa fa-building "></i> ดูรายละเอียด</button>
-																		
-																		</p>
-																		</div>
-
-																	</div>
-																</div>
-															</div>
-															<!-- end list realty -->
-															<!-- start list realty -->
-															<div class="col-md-12 shadow-wrapper">
-																<div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
-																	<h2>ขาย บ้านขนาดใหญ่ ลดราคา เดินทางสะดวก พื้นที่ 600 ตารางวา เจ้าของรีบขายครับ</h2>
-																	<div class="row">
-																		<div class="col-md-3">
-																			<img class="img-responsive" src="assets/img/main/img1.jpg" alt="">
-																		</div>
-																		<div class="col-md-9">
-																		ขายบ้าน ธัญบุรี, ปทุมธานี <br>
-																		5 ห้องนอน  7 ห้องน้ำ พื้นที่ 600 ตารางวา<br>
-																		ลดราคาขายเหลือ  			16,500,000  			บาท<br>
-
-																		<p>
-																			<button type="button" class="btn-u btn-u-green"><i class="fa fa-child "></i> ติดต่อผู้ลงประกาศ</button>
-																		<button type="button" class="btn-u btn-u-green"><i class="fa  fa-car"></i> แผนที่</button>
-																		<button type="button" class="btn-u btn-u-green"><i class="fa fa-download"></i> เก็บไว้ดูภายหลัง</button>
-																		<button type="button" class="btn-u btn-u-red"><i class="fa fa-building "></i> ดูรายละเอียด</button>
-																		
-																		</p>
-																		</div>
-
-																	</div>
-																</div>
-															</div>
-															<!-- end list realty -->
-															<!-- start list realty -->
-															<div class="col-md-12 shadow-wrapper">
-																<div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
-																	<h2>ขาย บ้านขนาดใหญ่ ลดราคา เดินทางสะดวก พื้นที่ 600 ตารางวา เจ้าของรีบขายครับ</h2>
-																	<div class="row">
-																		<div class="col-md-3">
-																			<img class="img-responsive" src="assets/img/main/img1.jpg" alt="">
-																		</div>
-																		<div class="col-md-9">
-																		ขายบ้าน ธัญบุรี, ปทุมธานี <br>
-																		5 ห้องนอน  7 ห้องน้ำ พื้นที่ 600 ตารางวา<br>
-																		ลดราคาขายเหลือ  			16,500,000  			บาท<br>
-
-																		<p>
-																				<button type="button" class="btn-u btn-u-green"><i class="fa fa-child "></i> ติดต่อผู้ลงประกาศ</button>
-																		<button type="button" class="btn-u btn-u-green"><i class="fa  fa-car"></i> แผนที่</button>
-																		<button type="button" class="btn-u btn-u-green"><i class="fa fa-download"></i> เก็บไว้ดูภายหลัง</button>
-																		<button type="button" class="btn-u btn-u-red"><i class="fa fa-building "></i> ดูรายละเอียด</button>
-																		
-																		</p>
-																		</div>
-
-																	</div>
-																</div>
-															</div>
-															<!-- end list realty -->
-															<!-- start list realty -->
-															<div class="col-md-12 shadow-wrapper">
-																<div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
+															<?php
+															}
+															?>
 															
-																	<h2>ขาย บ้านขนาดใหญ่ ลดราคา เดินทางสะดวก พื้นที่ 600 ตารางวา เจ้าของรีบขายครับ</h2>
-																	<div class="row">
-																		<div class="col-md-3">
-																			<img class="img-responsive" src="assets/img/main/img1.jpg" alt="">
-																		</div>
-																		<div class="col-md-9">
-																	
-
-																			
-																			ขายบ้าน ธัญบุรี, ปทุมธานี <br>
-																			5 ห้องนอน  7 ห้องน้ำ พื้นที่ 600 ตารางวา<br>
-																			ลดราคาขายเหลือ  			16,500,000  			บาท<br>
-																			
-																		
-
-																	
-
-																		
-
-																		<p>
-																			<button type="button" class="btn-u btn-u-green"><i class="fa fa-child "></i> ติดต่อผู้ลงประกาศ</button>
-																		<button type="button" class="btn-u btn-u-green"><i class="fa  fa-car"></i> แผนที่</button>
-																		<button type="button" class="btn-u btn-u-green"><i class="fa fa-download"></i> เก็บไว้ดูภายหลัง</button>
-																		<button type="button" class="btn-u btn-u-red"><i class="fa fa-building "></i> ดูรายละเอียด</button>
-																		
-																		</p>
-																		</div>
-
-																	</div>
-																</div>
-															</div>
-															<!-- end list realty -->
-															
-
-
 													</div> 
 
 												</div>

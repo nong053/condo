@@ -6,8 +6,8 @@ $rdg_id=$_POST['rdg_id'];
 
 if($_POST['paramAction']=="getMap"){
 	$strSQL="select * from realty_data_general 
-	where cus_id='$cus_id'
-	and rdg_id='$rdg_id'";
+	where 
+	 rdg_id='$rdg_id'";
 	
 	$result=mysql_query($strSQL);
 	$rs=mysql_fetch_array($result);

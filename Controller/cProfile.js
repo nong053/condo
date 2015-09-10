@@ -36,7 +36,23 @@ $(document).ready(function(){
 			}
 		});
 	};
-	callProvince();
+	//callProvince();
+	
+	
+	$.ajax({
+		url:"../Model/mProfile.php",
+		type:"post",
+		dataType:"json",
+		data:{"paramAction":"selectIDPDSD"},
+		success:function(data){
+			console.log(data['cus_province']);
+			console.log(data['cus_district']);
+			console.log(data['cus_sub_district']);
+			callProvince(data['cus_province'],data['cus_district'],data['cus_sub_district']);
+			callDistrict(data['cus_province'],data['cus_district'],data['cus_sub_district']);
+			callSubDistrict(data['cus_district'],data['cus_sub_district']);
+		}
+	});
 	//end provine.
 	//start district
 	var callDistrict = function(paramProvince,rdg_address_district_id,rdg_address_sub_district_id){
@@ -107,4 +123,39 @@ $(document).ready(function(){
 		});
 	};
 	//callSubDistrict();
+	
+	//submit cus start
+	
+	$("#formCus").submit(function(){
+		$.ajax({
+			url:"../Model/mProfile.php",
+			type:"post",
+			dataType:"json",
+			data:$(this).serialize(),
+			success:function(data){
+				alert(data);
+			}
+		});
+		return false;
+	});
+	//submit cus end
+//submit cus start
+	$("#formChangePass").submit(function(){
+		
+		if($("#cus_new_pass").val()!=$("#cus_confirm_new_pass").val()){
+			alert("รหัสไม่ตรงกัน");
+		}else{
+			$.ajax({
+				url:"../Model/mProfile.php",
+				type:"post",
+				dataType:"html",
+				data:$(this).serialize(),
+				success:function(data){
+					alert(data);
+				}
+			});
+		}
+		return false;
+	});
+	//submit cus end
 });

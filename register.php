@@ -108,6 +108,7 @@
                             </label>                        
                         </div>
                         <div class="col-lg-6 text-right">
+                        	<input type="hidden" name="admin_id" id=""admin_id"" value='1'>
                             <button type="button" name="btnRegis" id="btnRegis" onclick="check_cus(<?=$confrim?>)" class="btn-u">สมัครสมาชิก</button>                        
                         </div>
                     </div>

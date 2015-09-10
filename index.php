@@ -75,6 +75,7 @@ include("config.inc.php");
 	        Validation.initValidation();
 	        });
 	</script>
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script> 
 </head>
 
 <body>    
@@ -94,7 +95,12 @@ include("config.inc.php");
 						 <!-- End Logo -->
 					</div>
 					<div id="adHeader" style=" background:#dddddd; margin-top:2px; height:75px" class="col-md-6 ">
-					Advertising
+					<?php 
+					$strSLQBanner7="select * from banner_sum where pic_position='7'";
+					$resultBanner7=mysql_query($strSLQBanner7);
+					$rsBanner7=mysql_fetch_array($resultBanner7);
+					?>
+					 <img src="control-panel/mypicture/1/<?=$rsBanner7['pic_name']?>" width="100%" height="100%" />
 					</div>
 					<div class="col-md-4">
 					 <!-- Topbar -->
@@ -233,9 +239,7 @@ select rt_id, rt_name,rt_contructor_yet,rt_contructor_cate from realty_type wher
 ";
 $result9=mysql_query($strSQL9);
 
-
 ?>
-					
 					        <div class="dropdown">
 					            <a style="font-size:19px;" id="dLabel" role="button" data-toggle="dropdown" class="btn btn-primary rounded" data-target="#" href="/page.html">
 					                <i class="fa fa-cloud"></i> คลิ๊กลงประกาศขายฟรี <span class="caret"></span>
@@ -606,12 +610,12 @@ $result9=mysql_query($strSQL9);
     	<div class="row blog-page">    
             <!-- Left Content -->
         	<div class="col-md-8">
-              
+              <div id="mainContrainArea"></div>
 
 			<?php
 					switch($_GET['page']){
 					case"home":include("home_content.php"); break;
-					case"post_detail":include("post_detail.php"); break;
+					//case"post_detail":include("post_detail.php"); break;
 					case"post_sub_detail":include("post_sub_detail.php"); break;
 					case"sitemap":include("sitemap.php"); break;
 					case"contact":include("contact.php"); break;

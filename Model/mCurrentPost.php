@@ -6,6 +6,7 @@ $rdg_id=$_POST['rdg_id'];
 $idArea=$_POST['idArea'];
 $status=$_POST['status'];
 
+
 if($_POST['paramAction']=="showCurrentPost"){
 	
 	$strSQL="

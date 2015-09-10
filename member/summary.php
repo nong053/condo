@@ -5,7 +5,7 @@ include("../config.inc.php");
 $cus_id=$_SESSION['cus_id'];
 $rdg_id=$_POST['rdg_id'];
 $strSQL1="
-select rdg.*,rf_name,rt_name,rps_name,p.PROVINCE_NAME,d.DISTRICT_NAME,a.AMPHUR_NAME from realty_data_general rdg
+select rdg.*,rf_name,rt_name,rps_name,p.PROVINCE_NAME,d.DISTRICT_NAME,a.AMPHUR_NAME,ru.ru_name from realty_data_general rdg
 LEFT JOIN realty_for rf 
 ON rf.rf_id=rdg.rf_id
 LEFT JOIN realty_type rt
@@ -18,6 +18,8 @@ LEFT JOIN district d
 on d.DISTRICT_ID=rdg_address_district_id
 LEFT JOIN amphur a 
 on a.AMPHUR_ID=rdg_address_sub_district_id
+LEFT JOIN realty_unit ru
+on ru.ru_id=rdg.rdg_area_unit
 
 where cus_id='$cus_id'
 and rdg_id='$rdg_id'
@@ -232,7 +234,6 @@ $result3=mysql_query($strSQL3);
 		
 		<div style="clear:both"></div>
 	<!-- -ข้อมูลทั่วไป-->
-
 	<div class="headline"><h4>ข้อมูลราคา </h4></div>
 	<!-- -ข้อมูลราคา-->
 		<div class="row">
