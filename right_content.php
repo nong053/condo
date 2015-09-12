@@ -74,30 +74,7 @@ if($conn){
                         </div>
                     </div> 
 
-                    <!-- banking -->
-                    <div class="row "> 
-                        <div class="col-md-12 shadow-wrapper">
-	                        <div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
-	                           <div class="headline"><h2>รวมสินเชื่อธนาคาร</h2></div>
-		                        <ul class="">
-		                            <li><a href="#">กรุงศรีอยุธยา</a> <i class="fa fa-angle-right"></i></li>
-		                            <li><a href="#">ไทยพาณิชย์</a> <i class="fa fa-angle-right"></i></li>
-		                            <li><a href="#">อาคารสงเคราะห์</a> <i class="fa fa-angle-right"></i></li>
-		                            <li><a href="#">แสตนด์ดาดชาเตอร์</a> <i class="fa fa-angle-right"></i></li>
-		                            <li><a href="#">ทหารไทย</a> <i class="fa fa-angle-right"></i></li>
-		                            <li><a href="#">กรุงไทย</a> <i class="fa fa-angle-right"></i></li>
-		                            <li><a href="#">กสิกรไทย</a> <i class="fa fa-angle-right"></i></li>
-		                            <li><a href="#">ธนชาติยูโอบี</a> <i class="fa fa-angle-right"></i></li>
-		                            <li><a href="#">ออมสิน </a> <i class="fa fa-angle-right"></i></li>
-		                            <li><a href="#">กรุงเทพ</a> <i class="fa fa-angle-right"></i></li>
-		                            <li><a href="#">สินเชื่อที่อยู่อาศัยสำหรับเชาวต่างประเทศ</a> <i class="fa fa-angle-right"></i></li>
-		
-		
-		                        </ul> 
-	                        </div>
-	                    </div>                          
-                 	</div>
-                 	<!-- banking -->
+                   
                  
                  
 
@@ -286,9 +263,33 @@ if($conn){
 						?>
 
 
+					 <!-- banking -->
+                    <div class="row "> 
+                        <div class="col-md-12 shadow-wrapper">
+	                        <div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
+	                           <div class="headline"><h2>รวมสินเชื่อธนาคาร</h2></div>
+		                        <ul class="">
+		                            <li><a href="#">กรุงศรีอยุธยา</a> <i class="fa fa-angle-right"></i></li>
+		                            <li><a href="#">ไทยพาณิชย์</a> <i class="fa fa-angle-right"></i></li>
+		                            <li><a href="#">อาคารสงเคราะห์</a> <i class="fa fa-angle-right"></i></li>
+		                            <li><a href="#">แสตนด์ดาดชาเตอร์</a> <i class="fa fa-angle-right"></i></li>
+		                            <li><a href="#">ทหารไทย</a> <i class="fa fa-angle-right"></i></li>
+		                            <li><a href="#">กรุงไทย</a> <i class="fa fa-angle-right"></i></li>
+		                            <li><a href="#">กสิกรไทย</a> <i class="fa fa-angle-right"></i></li>
+		                            <li><a href="#">ธนชาติยูโอบี</a> <i class="fa fa-angle-right"></i></li>
+		                            <li><a href="#">ออมสิน </a> <i class="fa fa-angle-right"></i></li>
+		                            <li><a href="#">กรุงเทพ</a> <i class="fa fa-angle-right"></i></li>
+		                            <li><a href="#">สินเชื่อที่อยู่อาศัยสำหรับเชาวต่างประเทศ</a> <i class="fa fa-angle-right"></i></li>
+		
+		
+		                        </ul> 
+	                        </div>
+	                    </div>                          
+                 	</div>
+                 	<!-- banking -->
 
-
-					</div>    
+					</div> 
+					   
 				
 					<?php
 						if($_GET["page"]=="post_sub_detail"){

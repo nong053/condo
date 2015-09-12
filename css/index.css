@@ -63,3 +63,12 @@ label {
 
     margin-bottom: 0px;
 }
+
+.modal-dialog-login{
+	width:400px;
+	margin: 30px auto;
+}
+.modal-dialog-register{
+	width:500px;
+	margin: 30px auto;
+}

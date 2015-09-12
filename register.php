@@ -46,9 +46,9 @@
 
 </script>
 
-<br style="clear:both">
+
 <div class="row">
-            <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            <div class="col-md-12  col-sm-8">
                 <form class="reg-page" id='form_regis' name='form_regis' method=post action="action/register_process.php">
                     <div class="reg-header">
                         <div class="headline headline-md">

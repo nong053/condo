@@ -1,8 +1,8 @@
 <link rel="stylesheet" href="assets/css/pages/page_log_reg_v1.css">
 <script src="Controller/cLogin.js"></script>
-<br style="clear:both">
+
 <div class="row">
-            <div class="col-md-5 col-md-offset-4 col-sm-6 col-sm-offset-3">
+            <div class="col-md-12  col-sm-6">
                 <form class="reg-page" name="frmLogin" id="frmLogin">
                     <div class="reg-header">            
                         <h2>ลงชื่อเข้าใช้งาน</h2>

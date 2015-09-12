@@ -45,10 +45,14 @@ on rdnp.rdnp_id=rd.rdnp_id
 where rdg_id='$rdg_id'
 ";
 $result3=mysql_query($strSQL3);
+$result4=mysql_query($strSQL3);
+$result5=mysql_query($strSQL3);
+$result6=mysql_query($strSQL3);
 
 
 ?>
 <script src="Controller/cPost_sub_detail.js"></script>
+<link rel="stylesheet" href="css/post_sub_detail.css">
 <script>
 $(document).ready(function(){
 	callMapSummary(<?=$rs1['rdg_id']?>);
@@ -486,9 +490,9 @@ $(document).ready(function(){
 																	<h2>ประเภท: <?=$rs1['rf_name']?><?=$rs1['rt_name']?></h2>
 																	<p><?=$rs1['rdg_title']?> </p>
 																	<p><?=$rs1['rdg_detail']?></p>
-																	<p><h3 style="color:red;">ราคา <?=$rs1['rdg_price']?> บาท</h3></p>
+																	<p><h3 style="color:red;">ราคา <?=number_format($rs1['rdg_price'])?> บาท</h3></p>
 																	<p>พื้นที่ 120 ตารางเมตร</p>
-																	<p>ราคา  <?=$rs1['rdg_area_number']?> ต่อ ตารางเมตร</p>
+																	<p>ราคา  <?=number_format($rs1['rdg_area_number'])?> ต่อ ตารางเมตร</p>
 																	<em>ลงประกาศเมือ: <?=$rs1['rdg_update']?> </em>
 																</div>
 
@@ -752,7 +756,7 @@ $(document).ready(function(){
 		<div class="row">
 			<label class="col-md-3 control-label titleGroup" > สำหรับ<?=$rs1['rf_name']?> :</label>
 			
-			<div class="col-md-9"><?=$rs1['rdg_price']?> บาท</div>
+			<div class="col-md-9"><?=number_format($rs1['rdg_price'])?> บาท</div>
 		</div>
 	<!-- -ข้อมูลราคา-->
 	<div class="headline"><h4>ข้อมูลที่ตั้ง </h4></div>
@@ -824,37 +828,41 @@ $(document).ready(function(){
 	<div class="headline"><h4>ข้อมูลเพิ่มเติม </h4></div>
 	<!-- -ข้อมูลเพิ่มเติม-->
 	<div class="row">
-		<label class="col-md-3 control-label titleGroup" > ลักษณะพิเศษ  :</label>
-		<div class="col-md-9">
-			<ul>
-			<?php 
-			while($rs3=mysql_fetch_array($result3)){
-				
-				if($rs3['rdc_id']){
-					?>
-						<li>
-							<?=$rs3['rdc_detail'];?>
-						</li>
-					<?php 
-				}
-			};
-			?>
-			</ul>
+		<div class="alert alert-warning fade in">
+			<label class="col-md-3 control-label titleGroup" > ลักษณะพิเศษ  :</label>
+			<div class="col-md-9">
+				<ul class="list_realty_detail">
+				<?php 
+				while($rs3=mysql_fetch_array($result3)){
+					
+					if($rs3['rdc_id']){
+						?>
+							<li>
+								<?=$rs3['rdc_detail'];?>
+							</li>
+						<?php 
+					}
+				};
+				?>
+				</ul>
+			</div>
+			<br style="clear:both">
 		</div>
-</div>
+	</div>
 	    
 
 		  <div class="row">
-				<label class="col-md-3 control-label titleGroup" > รายละเอียดเพิ่มเติมภายใน  :</label>
+		  	<div class="alert alert-danger fade in">
+				<label class="col-md-3 control-label titleGroup" > รายละเอียดเพิ่มเติมภายใน :</label>
 				<div class="col-md-9">
-					<ul>
+					<ul class="list_realty_detail">
 						<?php 
-						while($rs3=mysql_fetch_array($result3)){
+						while($rs4=mysql_fetch_array($result4)){
 							
-							if($rs3['rdi_id']){
+							if($rs4['rdi_id']){
 								?>
 									<li>
-										<?=$rs3['rdi_detail'];?>
+										<?=$rs4['rdi_detail'];?>
 									</li>
 								<?php 
 							}
@@ -862,19 +870,22 @@ $(document).ready(function(){
 						?>
 					</ul>
 				</div>
+				<br style="clear:both">
+			</div>
 		</div>
 
 		 <div class="row">
+		 	<div class="alert alert-success fade in">
 				<label class="col-md-3 control-label titleGroup" > สิ่งอำนวยความสะดวก  :</label>
 				<div class="col-md-9">
-					<ul>
+					<ul class="list_realty_detail">
 						<?php 
-						while($rs3=mysql_fetch_array($result3)){
+						while($rs5=mysql_fetch_array($result5)){
 							
-							if($rs3['rdf_id']){
+							if($rs5['rdf_id']){
 								?>
 									<li>
-										<?=$rs3['rdf_detail'];?>
+										<?=$rs5['rdf_detail'];?>
 									</li>
 								<?php 
 							}
@@ -882,19 +893,22 @@ $(document).ready(function(){
 						?>
 					</ul>
 				</div>
+			<br style="clear:both">
+			</div>
 		</div>
 
 		 <div class="row">
+		 	<div class="alert alert-info fade in">
 				<label class="col-md-3 control-label titleGroup" > สถานที่ใกล้เคียง  :</label>
 				<div class="col-md-9">
-					<ul>
+					<ul class="list_realty_detail">
 						<?php 
-						while($rs3=mysql_fetch_array($result3)){
+						while($rs6=mysql_fetch_array($result6)){
 							
-							if($rs3['rdnp_id']){
+							if($rs6['rdnp_id']){
 								?>
 									<li>
-										<?=$rs3['rdnp_detail'];?>
+										<?=$rs6['rdnp_detail'];?>
 									</li>
 								<?php 
 							}
@@ -902,6 +916,8 @@ $(document).ready(function(){
 						?>
 					</ul>
 				</div>
+				<br style="clear:both">
+			</div>
 		</div>
 	<!-- -ข้อมูลเพิ่มเติม-->
 	</div>

@@ -124,7 +124,7 @@ include("config.inc.php");
                                 </div>
                                 
                                 <div class="col-md-6" style="padding-left:2px;padding-right:1px;">
-                                    <button onclick="location.href='index.php?page=register'" class="btn btn-social  btn-block  btn-windows-inversed" style="height:38px;">
+                                    <button data-target="#registerFormModal" data-toggle="modal"   class="btn btn-social  btn-block  btn-windows-inversed" style="height:38px;">
                                       
                                       <i class="fa fa-rss"></i> สมัครสมาชิกใหม่ฟรี
                                     </button>
@@ -132,7 +132,7 @@ include("config.inc.php");
 
                                  <div class="col-md-6"style="padding-left:0px;padding-right:0px;" >
                                      
-	                                    <button onclick="location.href='index.php?page=login'" class="btn btn-social  btn-block btn-xing-inversed " style="height:38px;">
+	                                    <button data-target="#loginFormModal" data-toggle="modal" class="btn btn-social  btn-block btn-xing-inversed " style="height:38px;">
 	                                      <i class="fa fa-dropbox"></i> สมาชิกเข้าสู่ระบบ
 	                                    </button>
                                    
@@ -534,8 +534,13 @@ $result9=mysql_query($strSQL9);
                         </a>
 					</li>
 					<li>
-                        <a href="index.php?page=sitemap">
+                        <a href="index.php?page=postSaved">
                            <i class="fa fa-cogs"></i> ประกาศที่บันทึกไว้
+                        </a>
+					</li> 
+					<li>
+                        <a href="index.php?page=sitemap">
+                           <i class="fa fa-cogs"></i> การค้นหาที่บันทึกไว้
                         </a>
 					</li>  
 					
@@ -622,8 +627,10 @@ $result9=mysql_query($strSQL9);
 					case"advertise":include("advertise.php"); break;
 					case"about":include("about.php"); break;
 					case"condition":include("condition.php"); break;
-					case"register":include("register.php"); break;
-					case"login":include("login.php"); break;
+					//case"register":include("register.php"); break;
+					//case"login":include("login.php"); break;
+					case"postSaved":include("postSaved.php"); break;
+					
 					
 					default:include("home_content.php");
 					}
@@ -887,8 +894,63 @@ $result9=mysql_query($strSQL9);
 
 
 
+<!--  Start Module Login -->
+<div aria-labelledby="loginFormModal" role="dialog" tabindex="-1" class="modal fade" id="loginFormModal" style="display: none;">
+    <div role="document" class="modal-dialog-login">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button aria-label="Close" data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span></button>
+          <h4 id="gridModalLabel" class="modal-title">เข้าสู่ระบบ</h4>
+        </div>
+        <div class="modal-body">
+        
+          	 <!-- from login area start -->
+	        <?php  include("login.php");?>
+	      	 <!-- from login area end --> 
+	        
+        </div>
+        <!-- 
+        <div class="modal-footer">
+          <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+          <button class="btn btn-primary" type="button">Save changes</button>
+        </div>
+         -->
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div>
+  <!--  End Module Login -->
+  
+  <!--  Start Module Register -->
+<div aria-labelledby="registerFormModal" role="dialog" tabindex="-1" class="modal fade" id="registerFormModal" style="display: none;">
+    <div role="document" class="modal-dialog-register">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button aria-label="Close" data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span></button>
+          <h4 id="gridModalLabel" class="modal-title">สมัครสมาชิก</h4>
+        </div>
+        <div class="modal-body">
+        
+          	 <!-- from login area start -->
+	        <?php  include("register.php");?>
+	      	 <!-- from login area end --> 
+	        
+        </div>
+        <!-- 
+        <div class="modal-footer">
+          <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+          <button class="btn btn-primary" type="button">Save changes</button>
+        </div>
+         -->
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div>
+  <!--  End Module Register -->
+  
+  
 </body>
 </html>	
+
+
 
 
 

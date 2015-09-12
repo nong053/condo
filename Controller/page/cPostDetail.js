@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	callProvince("","","","2");
+	//callProvince("","","","2");
 	
 	$("form#formSubPost").submit(function(){
 	

@@ -21,7 +21,6 @@ $(document).ready(function(){
 			data:$(this).serialize(),
 			success:function(data){
 				$("#mainContrainArea").html(data);
-				
 			}
 		});
 		return false;
