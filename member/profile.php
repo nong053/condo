@@ -1,8 +1,10 @@
+<?php session_start();?>
 <script src="../Controller/cProfile.js"></script>
 <?php 
 include("../config.inc.php");
-//echo $cus_id;
-$strSQLCus="select * from customer where cus_id='$cus_id'";
+//echo $ses_cus_id;
+$ses_cus_id=$_SESSION['ses_cus_id'];
+$strSQLCus="select * from customer where cus_id='$ses_cus_id'";
 $resultCus=mysql_query($strSQLCus);
 $rsCus=mysql_fetch_array($resultCus);
 ?>

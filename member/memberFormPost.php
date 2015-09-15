@@ -31,8 +31,8 @@ include("../config.inc.php");
 								<label class="col-lg-3 control-label" > ประกาศสำหรับ</label>
 								<div id="realtyForArea"></div>
 							</div>
-							<div class="form-group formHidden" >
-								<label class="col-lg-3 control-label"> ประเภทประกาศ</label>
+							<div class="form-group " >
+								<label class="col-lg-3 control-label"> ประเภท</label>
 								<div id="realtySpecialArea " class="col-lg-9 control-label-l">
 								
 									<?php 
@@ -43,7 +43,7 @@ include("../config.inc.php");
 										<?php
 									}else{
 										?>
-										<div class="rdg_special_text">ประกาศพิเศษ</div>
+										<div class="rdg_special_text" style='color:red'>ประกาศพิเศษหน้าแรก</div>
 										<?php
 									}
 									?>

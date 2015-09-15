@@ -1,5 +1,6 @@
 
 <?php 
+include("realty_split.php");
 include_once 'config.inc.php';
 $embed_rt_id=$_POST['embed_rt_id'];
 $rdg_address_province_id=$_POST['rdg_address_province_id'];
@@ -47,6 +48,9 @@ rdg_road
 			
 			";
 	$resultPostDetail=mysql_query($strSQLPostDetail);
+	//$resultPostDetail=pu_query($dbname,$strSQLPostDetail);
+	
+	
 	$resultPostDetail2=mysql_query($strSQLPostDetail);
 	$rsPostDetail2=mysql_fetch_array($resultPostDetail2);
 	
@@ -54,6 +58,7 @@ rdg_road
 	
 	
 ?>
+<script src="Controller/page/cPostDetail.js"></script>    	
 <div class="blog margin-bottom-5">
 		 <!--  include searshSubPostRealty Start -->
 		 <?php include_once 'searchSubPostRealty.php';?>
@@ -78,7 +83,7 @@ rdg_road
 													<p>
 														<button type="button" class="btn-u btn-u-green"><i class="fa fa-cloud"></i> แชร์ไปที่เฟสบุ๊ค/กูเกิล</button>
 														<button type="button" class="btn-u btn-u-green"><i class="fa fa-bell-o"></i>ส่งหน้านี้ให้เพิ่อน</button>
-														<button type="button" class="btn-u btn-u-green"><i class="fa fa-envelope-o"></i> เก็บหน้านี้ไว้ดูครั้งหน้า</button>
+														<!-- <button type="button" class="btn-u btn-u-green"><i class="fa fa-envelope-o"></i> เก็บหน้านี้ไว้ดูครั้งหน้า</button> -->
 														<button type="button" class="btn-u btn-u-green"><i class="fa fa-download"></i>คลิ๊กดูหน้าที่จัดเก็บไว้</button>
 														<button type="button" class="btn-u btn-u-green"><i class="fa fa-download"></i>ปริ้น</button>
 													
@@ -111,7 +116,7 @@ rdg_road
 													</div>
 
 
-													ค้นหาพบ <?=numResultFn($embed_rt_id)?> รายการ
+												
 
 														<!--<div class="easy-bg-v2 rgba-default">ใหม่</div>
 														<img src="assets/img/main/img9.jpg" alt="">       
@@ -126,11 +131,29 @@ rdg_road
 														</ul>    
 															-->
 															
-															
+													<table id="gridPostDedail">
+										                <colgroup>
+										                    <col />
+										                   
+										                </colgroup>
+										                <thead>
+										                    <tr>
+										                        <th data-field="make">	ค้นหาพบ <?=numResultFn($embed_rt_id)?> รายการ</th>
+										                       
+										                    </tr>
+										                </thead>
+										                <tbody>
 															<?php 
 															while($rsPostDetail=mysql_fetch_array($resultPostDetail)){															
 															?>
 															
+										                    <tr>
+										                        <td>
+												                       
+												                   
+												                  
+												              
+												              
 															<!-- start list realty -->
 															<div class="col-md-12 shadow-wrapper">
 																<div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
@@ -187,7 +210,7 @@ rdg_road
 																		<p>
 																			<button type="button" class="btn-u  btn-u-xs btn-u-green"><i class="fa fa-child "></i> ติดต่อผู้ลงประกาศ</button>
 																		<button type="button" class="btn-u  btn-u-xs btn-u-green"><i class="fa  fa-car"></i> แผนที่</button>
-																		<button type="button" class="btn-u  btn-u-xs btn-u-green"><i class="fa fa-download"></i> เก็บไว้ดูภายหลัง</button>
+																		<button type="button" id="<?=$rsPostDetail['rdg_id']?>" class="btn-u  btn-u-xs btn-u-green btnSavePost"><i class="fa fa-download"></i> เก็บไว้ดูภายหลัง</button>
 																		<button type="button" class="btn-u  btn-u-xs btn-u-red"  onclick="window.location.href='index.php?page=post_sub_detail'"  type="button"><i class="fa fa-building "></i> ดูรายละเอียด</button>
 																		
 																		</p>
@@ -197,10 +220,17 @@ rdg_road
 																</div>
 															</div>
 															<!-- end list realty -->
+															</td>
+															</tr>
+															
 															<?php
 															}
+															pu_pageloop();
 															?>
-															
+															</tbody>
+												          </table>
+												          
+												          
 													</div> 
 
 												</div>

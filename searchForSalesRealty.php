@@ -36,7 +36,7 @@ if($conn){
 <script src="Controller/cSearchForSalesRealty.js"></script>
 <!-- action="index.php?page=post_detail"  -->
 <form id="formSearchForSales" name="formSearchForSales"  class="sky-form" id="sky-form4" method='post' novalidate="novalidate">
-	<header>
+	<header class=''>
 		<div class="headline headline-md">
 			<h2><i class="fa fa-search-plus"></i> เมนูค้นหาประกาศขายฟรี</h2>
 		</div>
@@ -244,17 +244,16 @@ if($conn){
 			</button>
 	
 	</footer>
-	</form>
-	
-<form  class="sky-form" id="sky-form4" action="#" novalidate="novalidate">	
-	
-	
+
 	<footer>
-		<button class="btn-u  btn-u-xs btn-u-light-green" type="submit"><i class=" fa fa-folder-open "></i> บันทึกการค้นหา</button>
-		<button class="btn-u  btn-u-xs btn-u-dark-blue" type="submit"><i class="fa fa-envelope-o"></i> แจ้งเตือนทางอีเมลล์</button>
+		<input type="hidden" name="search_type" value='1' >
+		<button class="btn-u  btn-u-xs btn-u-light-green" id="btnSaveSearch" ><i class=" fa fa-folder-open "></i> บันทึกการค้นหา</button>
+		<button class="btn-u  btn-u-xs btn-u-dark-blue" ><i class="fa fa-envelope-o"></i> แจ้งเตือนทางอีเมลล์</button>
 		
 	</footer>
 	
+</form>	
+<form  class="sky-form" id="sky-form4" action="#" novalidate="novalidate">		
 	<fieldset> 
 		<div class="row">
 					

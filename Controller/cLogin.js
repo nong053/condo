@@ -46,7 +46,12 @@ $("document").ready(function(){
 					success:function(data){
 						if(data=="success"){
 							alert("เข้าสู่ระบบเรียบร้อย");
-							window.location="member/index.php";
+							if($("#loginType").val()=="loginForManage"){
+							window.location="member/index.php?loginType=loginForManage";
+							
+							}else{
+							window.location="index.php";
+							}
 						}else{
 							alert("อีเมลล์ หรือ รหัสผ่านไม่ถูกต้อง");
 						}

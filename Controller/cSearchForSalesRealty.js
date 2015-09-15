@@ -25,4 +25,23 @@ $(document).ready(function(){
 		});
 		return false;
 	});
+	
+	$("#btnSaveSearch").click(function(){
+		
+		console.log($("form#formSearchForSales").serialize());
+		
+		//alert("hello");
+		$.ajax({
+			url:"Model/mSaveSearch.php",
+			type:"post",
+			dataType:"html",
+			data:$("form#formSearchForSales").serialize(),
+			success:function(data){
+				console.log(data);
+			}
+		});
+		
+		
+		return false;
+	});
 });

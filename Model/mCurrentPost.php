@@ -1,5 +1,5 @@
 <?php session_start();
-$cus_id=$_SESSION['cus_id'];
+$ses_cus_id=$_SESSION['ses_cus_id'];
 include("../config.inc.php");
 
 $rdg_id=$_POST['rdg_id'];
@@ -14,7 +14,7 @@ if($_POST['paramAction']=="showCurrentPost"){
 	from realty_data_general rdg
 	INNER JOIN realty_type rt
 	ON rdg.rt_id=rt.rt_id
-	where cus_id='$cus_id' and rdg_status='$status'
+	where cus_id='$ses_cus_id' and rdg_status='$status'
 ";
 	$result=mysql_query($strSQL);
 	?>

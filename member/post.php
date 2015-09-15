@@ -1,7 +1,14 @@
+ <?php session_start();?>
  <!-- Tabs -->
 
     
  <script src="../Controller/cPost.js"></script>
+ <script>
+		$(document).ready(function(){
+		 postFn("<?=$_SESSION['sesLoginType']?>");
+		});
+ </script>
+
  <link rel="stylesheet" href="../assets/css/post.css">
   <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script> 
  <!--<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>-->
@@ -16,7 +23,14 @@
                         <li ><a href="#currentPost" data-toggle="tab">ประกาศปัจจุบัน</a></li>
                         <li><a href="#nonePost" data-toggle="tab">ประกาศที่ไม่แสดง</a></li>
 						<li><a href="#expirePost" data-toggle="tab">ประกาศหมดอายุ</a></li>
-						<li class=""><a href="#memberNewPost" data-toggle="tab">ลงประกาศใหม่</a></li>
+						<?php 
+						if($_SESSION['sesRtID']!=""){
+							?>
+							<li class=""><a href="#memberNewPost" data-toggle="tab">ลงประกาศใหม่</a></li>
+							<?php
+						}
+						?>
+						
 						<!-- 
 						<li class=""><a href="#newPostContructor" data-toggle="tab">Constractor</a></li>
 						<li class="active"><a href="#newPost" data-toggle="tab">ลงประกาศใหม่</a></li>

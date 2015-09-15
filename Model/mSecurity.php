@@ -8,9 +8,9 @@ if($_POST['paramAction']=="loginAction"){
 	$rsNum=mysql_num_rows($result);
 	if($rsNum!=0){
 		$rs=mysql_fetch_array($result);
-		$_SESSION['cus_id']=$rs["cus_id"];
-		$_SESSION['cus_email']=$cus_email;
-		$_SESSION['cus_password']=$cus_password;
+		$_SESSION['ses_cus_id']=$rs["cus_id"];
+		$_SESSION['ses_cus_email']=$cus_email;
+		$_SESSION['ses_cus_password']=$cus_password;
 		
 		echo'["success"]';
 	}else{
@@ -31,9 +31,9 @@ if($_POST['paramAction']=="checkEmailAction"){
 	}
 }
 if($_POST['paramAction']=="logoutAction"){
-	session_unset( $_SESSION['cus_id'] );
-	session_unset( $_SESSION['cus_email'] );
-	session_unset( $_SESSION['cus_password'] );
+	session_unset( $_SESSION['ses_cus_id'] );
+	session_unset( $_SESSION['ses_cus_email'] );
+	session_unset( $_SESSION['ses_cus_password'] );
 	
 	echo'["success"]';
 }

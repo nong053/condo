@@ -1,4 +1,6 @@
-	$(document).ready(function(){
+	var postFn=function(loginType){
+
+			
 		
 		//varible galbal
 		var paramRealtyAndContractorType="";
@@ -904,6 +906,17 @@
 			}
 		});
 	});
+	//Check Data For Initail of Tab Start
+	if(loginType=="loginForManage"){
+		
+		setTimeout(function(){
+			$("[href|='#currentPost']").click();
+		},1000);
+		
+	}else{
+		$("[href|='#memberNewPost']").click();
+	}
+	//Check Data For Initail of Tab End
 	
 	//Start currentPost 
 	$("[href|='#currentPost']").click(function(){
@@ -925,6 +938,6 @@
 	//end nonePost 
 	
 
-			
+		
 
-});
+};

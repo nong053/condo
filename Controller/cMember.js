@@ -33,9 +33,9 @@
 					$("#optonArea1").hide();
 					//alert(setByHome);
 				}else if(setByHome==2){
-					$("#optonArea1").hide();
+					//$("#optonArea1").hide();
+					$("#optonArea0").hide();
 					$("#optonArea3").hide();
-					$("#optonArea4").hide();
 				}
 				//price defualt
 				$(".rdg_price_area").show();

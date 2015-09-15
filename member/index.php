@@ -1,16 +1,34 @@
 <?php session_start();
 
 /*#### Define  Session Start here. ####*/
-	$_SESSION['sesRtID']=$_GET['rtID'];
-	$_SESSION['sesRfID']=$_GET['rfID'];
-	$_SESSION['sesSpecialPost']=$_GET['specialPost'];
-	$_SESSION['sesRtContructorYet']=$_GET['rtContructorYet'];
-	$_SESSION['sesRtContructorCate']=$_GET['rtContructorCate'];
+	if($_SESSION['sesRtID']=="" or $_SESSION['sesRfID']==""){
+		
+		$_SESSION['sesRtID']=$_GET['rtID'];
+		$_SESSION['sesRfID']=$_GET['rfID'];
+		$_SESSION['sesSpecialPost']=$_GET['specialPost'];
+		$_SESSION['sesRtContructorYet']=$_GET['rtContructorYet'];
+		$_SESSION['sesRtContructorCate']=$_GET['rtContructorCate'];
 	
 	
-	if(!$_SESSION['cus_id']){
-		echo"<script>window.location='../index.php'</script>";
+	}else if($_GET['newPost']=="Y"){
+		
+		$_SESSION['sesRtID']=$_GET['rtID'];
+		$_SESSION['sesRfID']=$_GET['rfID'];
+		$_SESSION['sesSpecialPost']=$_GET['specialPost'];
+		$_SESSION['sesRtContructorYet']=$_GET['rtContructorYet'];
+		$_SESSION['sesRtContructorCate']=$_GET['rtContructorCate'];
+		
 	}
+	//echo $_SESSION['cus_id'];
+	if($_SESSION['ses_cus_id']==""){
+		
+		echo"<script>window.location='../index.php?modal=login'</script>";
+		
+	}
+	if($_SESSION['sesLoginType']==""){
+	$_SESSION['sesLoginType']=$_GET['loginType'];
+	}
+	
 ?>
 
 <!DOCTYPE html> 
@@ -118,7 +136,7 @@
     <!--=== Breadcrumbs ===-->
     <div class="breadcrumbs margin-bottom5">
         <div class="container">
-            <h1 class="pull-left">ประกาศของฉัน(<?=$_SESSION['cus_email']?>)</h1>
+            <h1 class="pull-left">ประกาศของฉัน(<?=$_SESSION['ses_cus_email']?>)</h1>
             <ul class="pull-right breadcrumb">
                 <li><a href="index.html">หน้าแรก</a></li>
                 <li><a href="">ประกาศ</a></li>
@@ -151,7 +169,7 @@
                             <li><a href="?page=stats"><i class="fa fa-quote-left"></i> ข้อมูลสถิติ</a></li>
 							<li>
                                                   
-                                <a href="#"><i class="fa fa-asterisk"></i> ดูหน้าประกาศ</a>
+                                <a href="../index.php"><i class="fa fa-asterisk"></i> ดูหน้าประกาศ</a>
                             </li>
                             <li>
                                                       

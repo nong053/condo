@@ -60,7 +60,7 @@ blockquote {
 	width:200px;
 }
 .tag-box {
-    background: #fff none repeat scroll 0 0;
+    background: #fafafa none repeat scroll 0 0;
     margin-bottom: 10px;
     padding: 5px;
 }
@@ -88,5 +88,9 @@ blockquote {
 	position:relative;
 	top:-40px;
 }
+header.one-green {
+    background: #c7ffca none repeat scroll 0 0;
+}
+
 
 

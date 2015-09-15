@@ -22,6 +22,7 @@
                             <label><input type="checkbox"> จำรหัสผ่าน</label>                        
                         </div>
                         <div class="col-md-6">
+                        	<input type='hidden' name='loginType' id='loginType' value='loginForManage'><!-- loginForPost,loginForManage -->
                             <button type="button" name="btnLogin" id="btnLogin" class="btn-u pull-right">เข้าสู่ระบบ</button>                        
                         </div>
                     </div>
