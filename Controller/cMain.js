@@ -20,21 +20,23 @@
 	
 	//start provine .
 	var callProvince = function(rdg_address_province_id,rdg_address_district_id,rdg_address_sub_district_id,areaID){
+		
 		if(areaID==undefined){
 			areaID="";
 		}
+		
 		$.ajax({
 			url:"Model/mRealtyDataGeneralAction.php",
 			type:"post",
 			dataType:"json",
 			data:{"paramAction":"province"},
 			success:function(data){
-				
+			
 				var provinceHtml="";
 				
 				provinceHtml+="<select name=\"rdg_address_province_id"+areaID+"\" id=\"rdg_address_province_id"+areaID+"\">";
 					
-					provinceHtml+="<option disabled=\"\" selected=\"\" value=\"\">-- เลือกจังหวัด --</option>";
+					provinceHtml+="<option  selected=\"\" value=\"All\">-- เลือกจังหวัด --</option>";
 					
 					$.each(data,function(index,indexEntry){
 						if(rdg_address_province_id==indexEntry[0]){
@@ -50,6 +52,7 @@
 				$("#provinceArea"+areaID).html(provinceHtml);
 				$("#rdg_address_province_id"+areaID).change(function(){
 					//alert($(this).val());
+					
 					callDistrict($(this).val(),rdg_address_district_id,"",areaID);
 				});
 				
@@ -75,7 +78,7 @@
 				
 				districtHtml+="<select name=\"rdg_address_district_id"+areaID+"\" id=\"rdg_address_district_id"+areaID+"\">";
 					
-				districtHtml+="<option disabled=\"\" selected=\"\" value=\"\">-- เลือกอำเภอ/เขต --</option>";
+				districtHtml+="<option  selected=\"\" value=\"All\">-- เลือกอำเภอ/เขต --</option>";
 					
 					$.each(data,function(index,indexEntry){
 						
@@ -117,7 +120,7 @@
 				
 				subDistrictHtml+="<select name=\"rdg_address_sub_district_id"+areaID+"\" id=\"rdg_address_sub_district_id"+areaID+"\">";
 					
-				subDistrictHtml+="<option selected=\"\" value=\"0\">-- เลือกตำบล/แขวง --</option>";
+				subDistrictHtml+="<option selected=\"\" value=\"All\">-- เลือกตำบล/แขวง --</option>";
 					
 					$.each(data,function(index,indexEntry){
 						if(rdg_address_sub_district_id==indexEntry[0]){
@@ -181,75 +184,6 @@ $(document).ready(function(){
 		
 		//List bottom data start
 		
-		//click contract from start
-		$("[data-target=\"#contactFormModal\"]").click(function(){
-		
-			
-			$.ajax({
-				url:"Member/contactForm.php",
-				type:"post",
-				dataType:"html",
-				data:{"paramAdminID":this.id},
-				success:function(data){
-					$("#contracFormtArea").html(data);
-					
-					$("form#contactUsForm").submit(function(){
-						$.ajax({
-							url:"./Model/mContact.php",
-							type:"post",
-							dataType:"html",
-							data:$(this).serialize(),
-							success:function(data){
-								if(data['data']=="success"){
-									alert("ส่ง Email เรียบร้อย");
-								}
-							}
-						
-						});
-						return false;
-					});
-					
-				}
-			});
-			
-			
-		});
-		//click contract from end
-		
-		//click map start
-		$("[data-target=\"#mapContactModal\"]").click(function(){
-					//setupMap();
-					$.ajax({
-						url:"Model/mMap.php",
-						type:"post",
-						dataType:"html",
-						data:{"paramRdgID":this.id},
-						success:function(data){
-							var latLong=data;
-							latLong=latLong.split(",");
-							setTimeout(function(){
-								setupMap(true,latLong[0],latLong[1],"mapArea");
-							},1000);
-						}
-					});
-					
-		});
-		//click map end
-		
-		//click gallery realty start
-		$("[data-target=\"#imageSlideModal\"]").click(function(){
-			$.ajax({
-				url:"galleryRealty.php",
-				type:"post",
-				dataType:"html",
-				data:{"paramRdgID":this.id},
-				success:function(data){
-					$("#galleryRealtyArea").html(data);
-				}
-			});
-			//
-		});
-		//click gallery realty end
 
 
 });

@@ -1,4 +1,5 @@
 <?php session_start();
+
 include("../config.inc.php");
 ?>
 <!-- Tabs -->
@@ -378,37 +379,34 @@ include("../config.inc.php");
 																<div class="headline"><h4>พื้นที่อสังหาริมทรัพย์ </h4></div>
 
 																	<div class="form-group">
-																		<label class="col-lg-3 control-label" for="rdg_area_number"> </label>
+																		<label class="col-lg-3 control-label" for="rdg_area_number">พื้นที่ </label>
 																		<div class="col-lg-2">
 																			<input type="text" placeholder="ใส่ตัวเลขเท่านั้น" id="rdg_area_number" name="rdg_area_number" class="form-control">
 																			
 																		</div>
 
 																		<div class=" col-lg-2">
-
-
 																			<label class="select" id="realtyUnitArea">
-																				<!-- 
-												<select name="rdg_area_unit">
-													<option value="0" selected="" disabled="">-- กรุณาเลือกหน่วย --</option>
-													
-
-														 <option value="1">ตารางเมตร</option> ี
-														 <option value="2">ตารางเมตร</option> 
-														 <option value="3">ไร่</option> 
-														 <option value="4">งาน </option>
-														 <option>ห้อง </option> ่
-														<option value="5"> หลัง</option> 
-														<option value="6"> แพ </option> 
-														
-												</select>
-													 -->
-												<i></i>
-											</label>
-										</div>
+																				<i></i>
+																			</label>
+																		</div>
 										
-									</div>
-								</div>
+																	</div>
+																	<div class="form-group">
+																		<label class="col-lg-3 control-label" for="rdg_estate_num">ที่ดิน </label>
+																		<div class="col-lg-2">
+																			<input type="text" placeholder="ใส่ตัวเลขเท่านั้น" id="rdg_estate_num" name="rdg_estate_num" class="form-control">
+																			
+																		</div>
+
+																		<div class=" col-lg-2">
+																			<label class="select" id="rdgEstateUnitArea">
+																				<i></i>
+																			</label>
+																		</div>
+										
+																	</div>
+																</div>
 
 								
 

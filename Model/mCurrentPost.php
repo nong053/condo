@@ -1,5 +1,6 @@
 <?php session_start();
 $ses_cus_id=$_SESSION['ses_cus_id'];
+
 include("../config.inc.php");
 
 $rdg_id=$_POST['rdg_id'];
@@ -14,14 +15,14 @@ if($_POST['paramAction']=="showCurrentPost"){
 	from realty_data_general rdg
 	INNER JOIN realty_type rt
 	ON rdg.rt_id=rt.rt_id
-	where cus_id='$ses_cus_id' and rdg_status='$status'
+	where cus_id='$ses_cus_id' and rdg_status='$status' order by rdg_id 
 ";
 	$result=mysql_query($strSQL);
 	?>
 	<table id="gridCurentPost<?=$idArea?>">
                 <colgroup>
                 	<col />
-                    <col />
+                    <col style="width:230px" />
                     <col />
                     <col style="width:110px" />
                     <col style="width:120px" />
@@ -45,8 +46,8 @@ if($_POST['paramAction']=="showCurrentPost"){
 		<tr>
 			<td>#<?=$rs[rdg_id]?></td>
 			<td><?=$rs[rt_name]?></td>
-			<!-- <td><?=$rs[rdg_price]?></td> -->
-			<td>1250,000</td>
+			<td><?=number_format($rs[rdg_price]);?></td>
+			<!-- <td>1250,000</td> -->
 			<td><?=$rs[rdg_create]?></td>
 			<td><?=$rs[rdg_status]?></td>
 			<td>

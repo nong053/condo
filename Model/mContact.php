@@ -1,5 +1,5 @@
 <?php session_start();
-$cus_id=$_SESSION['cus_id'];
+$cus_id=$_SESSION['ses_cus_id'];
 include("../config.inc.php");
 $contact_detail=$_POST['contact_detail'];
 $contact_fullname=$_POST['contact_fullname'];

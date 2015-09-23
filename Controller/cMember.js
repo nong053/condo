@@ -163,6 +163,7 @@
 		
 		//start provine .
 		var callProvince = function(rdg_address_province_id,rdg_address_district_id,rdg_address_sub_district_id){
+		
 			$.ajax({
 				url:"../Model/mRealtyDataGeneralAction.php",
 				type:"post",
@@ -420,6 +421,34 @@
 			});
 		}
 		//end realty unit 
+		//start estate unit 
+		var callEstateUnit = function(defaultParam){
+			
+			$.ajax({
+				url:"../Model/mRealtyDataGeneralAction.php",
+				type:"get",
+				dataType:"json",
+				data:{"paramAction":"realtyUnit"},
+				success:function(data){	
+					$realtyFor="";
+					$realtyFor+="<select name=\"rdg_estate_unit\" id=\"rdg_estate_unit\">";
+					$.each(data,function(index,indexEntry){
+						if(index==0){
+							$realtyFor+="<option value=\"\">-- เลือกหน่วย  --</option> ";
+						}
+						if(defaultParam==indexEntry[0]){
+							$realtyFor+="<option selected='selected' value=\""+indexEntry[0]+"\">"+indexEntry[1]+"</option> ";
+						}else{
+							$realtyFor+="<option value=\""+indexEntry[0]+"\">"+indexEntry[1]+"</option> ";
+						}
+						
+					});
+					$realtyFor+="</select>";
+					$("#rdgEstateUnitArea").html($realtyFor);
+				}
+			});
+		}
+		//end estate unit 
 		
 		
 			

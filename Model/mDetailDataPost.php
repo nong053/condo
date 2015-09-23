@@ -407,7 +407,7 @@ rdr_parking
 		}
 	// checkbox management end
 	
-	if($result1  or $result2 or $result3 or $result4 ){
+	if($sucess or $result1  or $result2 or $result3 or $result4 ){
 		echo '["seccess"]';
 	}else{
 		echo '["not_seccess"]';

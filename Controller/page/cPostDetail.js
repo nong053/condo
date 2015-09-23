@@ -13,6 +13,7 @@ $(document).ready(function(){
 	});
 	
 	$("form#formSubPost").submit(function(){
+		
 		$.ajax({
 			url:"post_detail.php",
 			type:"post",

@@ -1,8 +1,13 @@
 
-				 <!--Blog Post-->        
+				 <!--Blog Post-->
+				 <?php 
+				   include("specialPostSale.php");    
+				  ?>
+				 <!--End Blog Post--> 
+				 <!--Blog Post--> 
                 <div class="blog margin-bottom-5">
                     <?php
-                    include("specialPostSale.php");
+                    //include("specialPostSale.php");
                     ?>   
                 </div>
                 <!--End Blog Post-->  
@@ -10,7 +15,7 @@
                  <!--Blog Post-->        
                 <div class="blog margin-bottom-5">
                     <?php
-                    include("specialPostRent.php");
+                   //include("specialPostRent.php");
                     ?>   
                 </div>
                 <!--End Blog Post-->  
@@ -18,7 +23,7 @@
                   <!--Blog Post-->        
                 <div class="blog margin-bottom-5">
                     <?php
-                    include("specialPostContructor.php");
+                   // include("specialPostContructor.php");
                     ?>   
                 </div>
                 <!--End Blog Post-->  
@@ -27,7 +32,7 @@
                   <!--Blog Post-->        
                 <div class="blog margin-bottom-5">
                     <?php
-                    include("specialPostHotel.php");
+                   // include("specialPostHotel.php");
                     ?>   
                 </div>
                 <!--End Blog Post-->  
@@ -35,7 +40,7 @@
                      <!--Blog Post-->        
                 <div class="blog margin-bottom-5">
                     <?php
-                    include("specialPostResorts.php");
+                   // include("specialPostResorts.php");
                     ?>   
                 </div>
                 <!--End Blog Post-->  
@@ -43,7 +48,7 @@
                    <!--Blog Post-->        
                 <div class="blog margin-bottom-5">
                     <?php
-                    include("specialPostNewProject.php");
+                   // include("specialPostNewProject.php");
                     ?>   
                 </div>
                 <!--End Blog Post-->  
@@ -51,7 +56,7 @@
                     <!--Blog Post-->        
                 <div class="blog margin-bottom-5">
                     <?php
-                    include("specialPostToolContructor.php");
+                   // include("specialPostToolContructor.php");
                     ?>   
                 </div>
                 <!--End Blog Post-->  
@@ -59,7 +64,7 @@
                  <!--Blog Post-->        
                 <div class="blog margin-bottom-5">
                     <?php
-                    include("specialPostSaleFurniture.php");
+                   // include("specialPostSaleFurniture.php");
                     ?>   
                 </div>
                 <!--End Blog Post-->  
@@ -67,7 +72,7 @@
                  <!--Blog Post-->        
                 <div class="blog margin-bottom-5">
                     <?php
-                    include("specialPostContructorDesign.php");
+                    //include("specialPostContructorDesign.php");
                     ?>   
                 </div>
                 <!--End Blog Post-->  
@@ -75,7 +80,7 @@
                  <!--Blog Post-->        
                 <div class="blog margin-bottom-5">
                     <?php
-                    include("specialPostContructorBase.php");
+                   // include("specialPostContructorBase.php");
                     ?>   
                 </div>
                 <!--End Blog Post-->  

@@ -55,13 +55,14 @@ where rdg_id='$paramRealtyID'";
 				<!--start realty room start  -->	
 				
 				 <div class="form-group">
-					<label class="col-lg-3 control-label"> จำนวนห้องนอน</label>
+					<label class="col-lg-3 control-label"> จำนวนห้องนอน </label>
 					<div class="col-lg-2">
 						<select name="rdr_bedroom" id="rdr_bedroom" class="realtyRoom">
 								<option value="">-- เลือก --</option>
 								<?php 
 								for($i=1;$i<=300;$i++){
 									?>
+									
 									<option value="<?=$i?>"><?=$i?> ห้อง </option>
 									<?php
 								}

@@ -29,9 +29,7 @@ if($conn){
 }
 ?>
 <script>
-	$(document).ready(function(){
-		
-	});								
+						
 </script>	
 <script src="Controller/cSearchForSalesRealty.js"></script>
 <!-- action="index.php?page=post_detail"  -->
@@ -107,7 +105,7 @@ if($conn){
 															 <section>
 																	<label class="select" id="districtArea">
 																					<select name="rdg_address_district_id" id="rdg_address_district_id">
-																						<option selected="" value="0">-- เลือกอำเภอ/เขต --</option>
+																						<option selected="" value="All">-- เลือกอำเภอ/เขต --</option>
 	
 																					</select>
 																	
@@ -253,7 +251,7 @@ if($conn){
 	</footer>
 	
 </form>	
-<form  class="sky-form" id="sky-form4" action="#" novalidate="novalidate">		
+<form id='fromSearchQuick' class="sky-form" id="sky-form4" action="#" novalidate="novalidate">		
 	<fieldset> 
 		<div class="row">
 					
@@ -266,10 +264,11 @@ if($conn){
 								
 								
 								<div class="input-group">
-                                    <input type="text" class="form-control" placeholder="ใส่ข้อมูล">
+                                    <input type="text" name="searchQuick" class="form-control" placeholder="ใส่ข้อมูล">
+                                     <input type="hidden" name="paramAction" value="searchQuick">
                                     <span class="input-group-btn">
                                  	
-                                        <button type="button" class="btn btn-u btn-u-orange"><i class="fa fa-search-plus"></i> คลิ๊กค้นหาทางลัด</button>
+                                        <button type="submit" class="btn btn-u btn-u-orange"><i class="fa fa-search-plus"></i> คลิ๊กค้นหาทางลัด</button>
                                     </span>
                                 </div>
 

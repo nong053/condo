@@ -158,10 +158,25 @@ include("config.inc.php");
                                 </div>
 
                                  <div class="col-md-6"style="padding-left:0px;padding-right:0px;" >
+                                     	
+                                     	<?php 
                                      
-	                                    <button  data-target="#loginFormModal" data-toggle="modal" class="btn btn-social  btn-block btn-xing-inversed loginFormModal" style="height:38px;">
-	                                      <i class="fa fa-dropbox"></i> สมาชิกเข้าสู่ระบบ
-	                                    </button>
+                                     	if($_SESSION['ses_cus_email']!=""){
+                                     		?>
+                                     	
+                                     		<button onclick="location.href='member/index.php?loginType=loginForManage'" class="btn btn-social  btn-block btn-xing-inversed loginFormModal" style="height:38px;">
+		                                      <i class="fa fa-dropbox"></i> สมาชิกเข้าสู่ระบบ
+		                                    </button>
+                                     		<?php
+                                     	}else{
+                                     		?>
+                                     		<button  data-target="#loginFormModal" data-toggle="modal" class="btn btn-social  btn-block btn-xing-inversed loginFormModal" style="height:38px;">
+		                                      <i class="fa fa-dropbox"></i> สมาชิกเข้าสู่ระบบ
+		                                    </button>
+                                     		<?php
+                                     	}
+                                     	?>
+	                                   
                                    
                                 </div>
                             </div>
@@ -528,7 +543,7 @@ include_once 'queryMenuIndex.php';
 									                		$result1=realtyCateMenuFn(1);
 									                		while($rs1=mysql_fetch_array($result1)){
 									                			?>
-									                			<li><a href="member/index.php?newPost=Y&rtID=<?=$rs1['rt_id']?>&rfID=1&specialPost=Y&rtContructorYet=<?=$rs1['rt_contructor_yet']?>">เช่า<?=$rs1['rt_name']?> </a></li>
+									                			<li><a href="member/index.php?newPost=Y&rtID=<?=$rs1['rt_id']?>&rfID=2&specialPost=Y&rtContructorYet=<?=$rs1['rt_contructor_yet']?>">เช่า<?=$rs1['rt_name']?> </a></li>
 									                			<?php
 									                		}
 									                		?>
@@ -541,7 +556,7 @@ include_once 'queryMenuIndex.php';
 								              $result2=realtyCateMenuFn(2);
 						                		while($rs2=mysql_fetch_array($result2)){
 						                			?>
-						                			<li><a href="member/index.php?newPost=Y&rtID=<?=$rs2['rt_id']?>&rfID=1&specialPost=Y&rtContructorYet=<?=$rs2['rt_contructor_yet']?>&rtContructorCate=<?=$rs2['rt_contructor_cate']?>"><?=$rs2['rt_name']?> </a></li>
+						                			<li><a href="member/index.php?newPost=Y&rtID=<?=$rs2['rt_id']?>&rfID=2&specialPost=Y&rtContructorYet=<?=$rs2['rt_contructor_yet']?>&rtContructorCate=<?=$rs2['rt_contructor_cate']?>"><?=$rs2['rt_name']?> </a></li>
 						                			<?php
 						                		}
 						                		?>
@@ -550,7 +565,7 @@ include_once 'queryMenuIndex.php';
 						                		$result7=realtyCateMenuFn(7);
 						                		while($rs7=mysql_fetch_array($result7)){
 						                			?>
-						                			<li><a href="member/index.php?newPost=Y&rtID=<?=$rs7['rt_id']?>&rfID=1&specialPost=Y&rtContructorYet=<?=$rs7['rt_contructor_yet']?>&rtContructorCate=<?=$rs7['rt_contructor_cate']?>"><?=$rs7['rt_name']?> </a></li>
+						                			<li><a href="member/index.php?newPost=Y&rtID=<?=$rs7['rt_id']?>&rfID=2&specialPost=Y&rtContructorYet=<?=$rs7['rt_contructor_yet']?>&rtContructorCate=<?=$rs7['rt_contructor_cate']?>"><?=$rs7['rt_name']?> </a></li>
 						                			<?php
 						                		}
 						                		?>
@@ -559,7 +574,7 @@ include_once 'queryMenuIndex.php';
 						                		$result8=realtyCateMenuFn(8);
 						                		while($rs8=mysql_fetch_array($result8)){
 						                			?>
-						                			<li><a href="member/index.php?newPost=Y&rtID=<?=$rs8['rt_id']?>&rfID=1&specialPost=Y&rtContructorYet=<?=$rs8['rt_contructor_yet']?>&rtContructorCate=<?=$rs8['rt_contructor_cate']?>"><?=$rs8['rt_name']?> </a></li>
+						                			<li><a href="member/index.php?newPost=Y&rtID=<?=$rs8['rt_id']?>&rfID=2&specialPost=Y&rtContructorYet=<?=$rs8['rt_contructor_yet']?>&rtContructorCate=<?=$rs8['rt_contructor_cate']?>"><?=$rs8['rt_name']?> </a></li>
 						                			<?php
 						                		}
 						                		?>
@@ -568,7 +583,7 @@ include_once 'queryMenuIndex.php';
 						                		$result9=realtyCateMenuFn(9);
 						                		while($rs9=mysql_fetch_array($result9)){
 						                			?>
-						                			<li><a href="member/index.php?newPost=Y&rtID=<?=$rs9['rt_id']?>&rfID=1&specialPost=Y&rtContructorYet=<?=$rs9['rt_contructor_yet']?>&rtContructorCate=<?=$rs9['rt_contructor_cate']?>"><?=$rs9['rt_name']?> </a></li>
+						                			<li><a href="member/index.php?newPost=Y&rtID=<?=$rs9['rt_id']?>&rfID=2&specialPost=Y&rtContructorYet=<?=$rs9['rt_contructor_yet']?>&rtContructorCate=<?=$rs9['rt_contructor_cate']?>"><?=$rs9['rt_name']?> </a></li>
 						                			<?php
 						                		}
 						                		?>
@@ -582,7 +597,7 @@ include_once 'queryMenuIndex.php';
 								                	    $result3=realtyCateMenuFn(3);
 								                		while($rs3=mysql_fetch_array($result3)){
 								                			?>
-								                			<li><a href="member/index.php?newPost=Y&rtID=<?=$rs3['rt_id']?>&rfID=1&specialPost=Y&rtContructorYet=<?=$rs3['rt_contructor_yet']?>&rtContructorCate=<?=$rs3['rt_contructor_cate']?>"><?=$rs3['rt_name']?></a></li>
+								                			<li><a href="member/index.php?newPost=Y&rtID=<?=$rs3['rt_id']?>&rfID=2&specialPost=Y&rtContructorYet=<?=$rs3['rt_contructor_yet']?>&rtContructorCate=<?=$rs3['rt_contructor_cate']?>"><?=$rs3['rt_name']?></a></li>
 								                			<?php
 								                		}
 								                		?>
@@ -601,7 +616,7 @@ include_once 'queryMenuIndex.php';
 								                 		$result4=realtyCateMenuFn(4);
 								                		while($rs4=mysql_fetch_array($result4)){
 								                			?>
-								                			<li><a href="member/index.php?newPost=Y&rtID=<?=$rs4['rt_id']?>&rfID=1&specialPost=Y&rtContructorYet=<?=$rs4['rt_contructor_yet']?>&rtContructorCate=<?=$rs4['rt_contructor_cate']?>"><?=$rs4['rt_name']?> </a></li>
+								                			<li><a href="member/index.php?newPost=Y&rtID=<?=$rs4['rt_id']?>&rfID=2&specialPost=Y&rtContructorYet=<?=$rs4['rt_contructor_yet']?>&rtContructorCate=<?=$rs4['rt_contructor_cate']?>"><?=$rs4['rt_name']?> </a></li>
 								                			<?php
 								                		}
 								                		?>
@@ -617,7 +632,7 @@ include_once 'queryMenuIndex.php';
 								                 		$result5=realtyCateMenuFn(5);
 								                		while($rs5=mysql_fetch_array($result5)){
 								                			?>
-								                			<li><a href="member/index.php?newPost=Y&rtID=<?=$rs5['rt_id']?>&rfID=1&specialPost=Y&rtContructorYet=<?=$rs5['rt_contructor_yet']?>&rtContructorCate=<?=$rs5['rt_contructor_cate']?>"><?=$rs5['rt_name']?> </a></li>
+								                			<li><a href="member/index.php?newPost=Y&rtID=<?=$rs5['rt_id']?>&rfID=2&specialPost=Y&rtContructorYet=<?=$rs5['rt_contructor_yet']?>&rtContructorCate=<?=$rs5['rt_contructor_cate']?>"><?=$rs5['rt_name']?> </a></li>
 								                			<?php
 								                		}
 								                		?>
@@ -632,7 +647,7 @@ include_once 'queryMenuIndex.php';
 								                 		$result6=realtyCateMenuFn(6);
 								                		while($rs6=mysql_fetch_array($result6)){
 								                			?>
-								                			<li><a href="member/index.php?newPost=Y&rtID=<?=$rs6['rt_id']?>&rfID=1&specialPost=Y&rtContructorYet=<?=$rs6['rt_contructor_yet']?>&rtContructorCate=<?=$rs6['rt_contructor_cate']?>"><?=$rs6['rt_name']?> </a></li>
+								                			<li><a href="member/index.php?newPost=Y&rtID=<?=$rs6['rt_id']?>&rfID=2&specialPost=Y&rtContructorYet=<?=$rs6['rt_contructor_yet']?>&rtContructorCate=<?=$rs6['rt_contructor_cate']?>"><?=$rs6['rt_name']?> </a></li>
 								                			<?php
 								                		}
 								                		?>
@@ -904,7 +919,7 @@ include_once 'queryMenuIndex.php';
     	<div class="row blog-page">    
             <!-- Left Content -->
         	<div class="col-md-8">
-              <div id="mainContrainArea"></div>
+              <div id="mainContrainArea">
 
 			<?php
 					switch($_GET['page']){
@@ -926,7 +941,7 @@ include_once 'queryMenuIndex.php';
 					default:include("home_content.php");
 					}
 			?>
-
+			</div>
 
 
             </div>

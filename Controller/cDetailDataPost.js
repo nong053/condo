@@ -1,7 +1,6 @@
 var detailDataPostFn = function(paramRealtyID){
+	//alert(paramRealtyID);
 	$(document).ready(function(){
-	
-		
 		
 		//start call realty Room 
 		var callRealtyRoom = function(){
@@ -11,7 +10,7 @@ var detailDataPostFn = function(paramRealtyID){
 				dataType:"html",
 				data:{"paramAction":"realtyDetailRoom"},
 				success:function(data){
-					
+					alert(data);
 					$("#areaRealtyRooms").html(data);
 				}
 			});
@@ -21,6 +20,7 @@ var detailDataPostFn = function(paramRealtyID){
 		
 		//start call Characteristic 
 		var callRealtyCharacteristic = function(dataRDCID){
+			//alert(dataRDCID);
 			$.ajax({
 				url:"../Model/mDetailDataPost.php",
 				type:"post",
@@ -100,7 +100,7 @@ var detailDataPostFn = function(paramRealtyID){
 			$.ajax({
 				url:"../Model/mDetailDataPost.php",
 				type:"post",
-				dataType:"html",
+				dataType:"json",
 				data:{"paramAction":"realtySentData","paramCharacteristic":paramCharacteristic,
 					"paramInterior":paramInterior,"paramFacility":paramFacility,"paramNearPlace":paramNearPlace,
 					
@@ -124,7 +124,12 @@ var detailDataPostFn = function(paramRealtyID){
 				
 				},
 				success:function(data){
-					alert(data);
+					//alert(data);
+					if(data=="success"){
+						alert("บันทึกข้อมูลเรียบร้อยแล้ว");
+					}else if(data=="updata-success"){
+						alert("แก้ไขข้อมูลเรียบร้อยแล้ว");
+					}
 					$("#saveDetailDataAlready").remove();
 					$("body").append("<input type='hidden' name='saveDetailDataAlready' id='saveDetailDataAlready' value='Y'>");
 					
@@ -160,7 +165,9 @@ var detailDataPostFn = function(paramRealtyID){
 
 	
 	//Start call Data again
+	
 	if($("#saveDetailDataAlready").val()=="Y"){
+		
 		//alert("call data again");
 		
 		//REALTY ROOM START

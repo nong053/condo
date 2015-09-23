@@ -2,16 +2,119 @@
 <?php 
 include("realty_split.php");
 include_once 'config.inc.php';
+//realty main start
 $embed_rt_id=$_POST['embed_rt_id'];
+if($embed_rt_id==""){
+	$embed_rt_id="All";
+}
 $rdg_address_province_id=$_POST['rdg_address_province_id'];
+if($rdg_address_province_id==""){
+	$rdg_address_province_id="All";
+}
 $rdg_address_district_id=$_POST['rdg_address_district_id'];
+if($rdg_address_district_id==""){
+	$rdg_address_district_id="All";
+}
 $rdg_address_sub_district_id=$_POST['rdg_address_sub_district_id'];
+if($rdg_address_sub_district_id==""){
+	$rdg_address_sub_district_id="All";
+}
 $rdg_bts=$_POST['rdg_bts'];
+if($rdg_bts==""){
+	$rdg_bts="All";
+}
 $rdg_bus=$_POST['rdg_bus'];
+if($rdg_bus==""){
+	$rdg_bus="All";
+}
 $rdg_harbor=$_POST['rdg_harbor'];
+if($rdg_harbor==""){
+	$rdg_harbor="All";
+}
 $rdg_id=$_POST['rdg_id'];
+if($rdg_id==""){
+	$rdg_id="All";
+}
 $rdg_mrt=$_POST['rdg_mrt'];
+if($rdg_mrt==""){
+	$rdg_mrt="All";
+}
 $rdg_road=$_POST['rdg_road'];
+if($rdg_road==""){
+	$rdg_road="All";
+}
+//realty main start
+//realty sub post start
+$rdg_price_start=$_POST['rdg_price_start'];
+$rdg_price_end=$_POST['rdg_price_end'];
+$rdg_area_number=$_POST['rdg_area_number'];
+$rdg_area_unit=$_POST['rdg_area_unit'];
+$rdr_bedroom=$_POST['rdr_bedroom'];
+
+//realty sub post end
+if($_POST['paramAction']=="searchQuick"){
+	$searchQuick=$_POST['searchQuick'];
+	
+	$strSQLPostDetail="
+	select rdg.*,rt_name,rf_name,rps_name from realty_data_general rdg
+	LEFT JOIN realty_type rt
+	ON rdg.rt_id=rt.rt_id
+	LEFT JOIN realty_for rf
+	ON rdg.rf_id=rf.rf_id
+	LEFT JOIN realty_project_status rps
+	ON rdg.rps_id=rps.rps_id
+	WHERE (rt_name like '%$searchQuick%')
+	or (rf_name like '%$searchQuick%')
+	or (rps_name like '%$searchQuick%')
+	or (rdg_name_project like '%$searchQuick%')
+	or (rdg_detail like '%$searchQuick%')
+	or (rdg_title like '%$searchQuick%')";
+	
+	
+}else if($_POST['paramAction']=="searchSubPost"){
+//realty sub port start	
+
+	
+	$strSQLPostDetail="
+	
+	
+	select rdg.*,rt_name,rf_name,rps_name,ru_name,rdr_bedroom from realty_data_general rdg
+	LEFT JOIN realty_type rt
+	ON rdg.rt_id=rt.rt_id
+	LEFT JOIN realty_for rf
+	ON rdg.rf_id=rf.rf_id
+	LEFT JOIN realty_project_status rps
+	ON rdg.rps_id=rps.rps_id
+	
+	LEFT JOIN realty_unit ru 
+	ON ru.ru_id=rdg_area_unit
+	LEFT JOIN realty_detail_room rdr
+	ON rdr.rdg_id=rdg.rdg_id
+	
+	WHERE (rdg.rt_id='$embed_rt_id' or 'All'='$embed_rt_id')
+	AND (rdg.rdg_address_province_id='$rdg_address_province_id' or 'All'='$rdg_address_province_id')
+	AND (rdg.rdg_address_district_id='$rdg_address_district_id' or 'All'='$rdg_address_district_id')
+	AND (rdg.rdg_address_sub_district_id='$rdg_address_sub_district_id' or 'All'='$rdg_address_sub_district_id')
+	AND (rdg.rdg_address_road='$rdg_road' or 'All'='$rdg_road')
+	AND (rdg.rdg_bts='$rdg_bts' or 'All'='$rdg_bts')
+	AND (rdg.rdg_mrt='$rdg_mrt' or 'All'='$rdg_mrt')
+	AND (rdg.rdg_arl='' or 'All'='All')
+	AND (rdg.rdg_harbor='$rdg_harbor' or 'All'='$rdg_harbor')
+	
+	
+	AND (rdg_price BETWEEN '$rdg_price_start' AND '$rdg_price_end'  or 'All'='$rdg_price_start' or 'All'='$rdg_price_end')
+	AND (rdg_area_number<='$rdg_area_number' or 'All'='$rdg_area_number')
+	AND (rdg_area_unit='$rdg_area_unit'  or 'All'='$rdg_area_unit')
+	AND (rdr_bedroom='$rdr_bedroom'   or 'All'='$rdr_bedroom')
+	
+		
+	
+	
+	";
+
+	
+//realty sub port end
+}else{
 
 /*
 embed_rt_id
@@ -28,7 +131,8 @@ rdg_road
 
 	
 	$strSQLPostDetail="
-			
+
+	
 	select rdg.*,rt_name,rf_name,rps_name from realty_data_general rdg
 	LEFT JOIN realty_type rt 
 	ON rdg.rt_id=rt.rt_id
@@ -36,17 +140,20 @@ rdg_road
 	ON rdg.rf_id=rf.rf_id
 	LEFT JOIN realty_project_status rps
 	ON rdg.rps_id=rps.rps_id
-	WHERE (rdg.rt_id='1' or 'All'='All')
-	AND (rdg.rdg_address_province_id='1' or 'All'='All')
-	AND (rdg.rdg_address_district_id='1' or 'All'='All')
-	AND (rdg.rdg_address_sub_district_id='1' or 'All'='All')
-	AND (rdg.rdg_address_road='1' or 'All'='All')
-	AND (rdg.rdg_bts='1' or 'All'='All')
-	AND (rdg.rdg_mrt='1' or 'All'='All')
-	AND (rdg.rdg_arl='1' or 'All'='All')
-	AND (rdg.rdg_harbor='1' or 'All'='All')
+	WHERE (rdg.rt_id='$embed_rt_id' or 'All'='$embed_rt_id')
+	AND (rdg.rdg_address_province_id='$rdg_address_province_id' or 'All'='$rdg_address_province_id')
+	AND (rdg.rdg_address_district_id='$rdg_address_district_id' or 'All'='$rdg_address_district_id')
+	AND (rdg.rdg_address_sub_district_id='$rdg_address_sub_district_id' or 'All'='$rdg_address_sub_district_id')
+	AND (rdg.rdg_address_road='$rdg_road' or 'All'='$rdg_road')
+	AND (rdg.rdg_bts='$rdg_bts' or 'All'='$rdg_bts')
+	AND (rdg.rdg_mrt='$rdg_mrt' or 'All'='$rdg_mrt')
+	AND (rdg.rdg_arl='' or 'All'='All')
+	AND (rdg.rdg_harbor='$rdg_harbor' or 'All'='$rdg_harbor')
 			
+	
+	
 			";
+}
 	$resultPostDetail=mysql_query($strSQLPostDetail);
 	//$resultPostDetail=pu_query($dbname,$strSQLPostDetail);
 	
@@ -81,11 +188,11 @@ rdg_road
 
 													<!-- start button link -->
 													<p>
-														<button type="button" class="btn-u btn-u-green"><i class="fa fa-cloud"></i> แชร์ไปที่เฟสบุ๊ค/กูเกิล</button>
-														<button type="button" class="btn-u btn-u-green"><i class="fa fa-bell-o"></i>ส่งหน้านี้ให้เพิ่อน</button>
-														<!-- <button type="button" class="btn-u btn-u-green"><i class="fa fa-envelope-o"></i> เก็บหน้านี้ไว้ดูครั้งหน้า</button> -->
-														<button type="button" class="btn-u btn-u-green"><i class="fa fa-download"></i>คลิ๊กดูหน้าที่จัดเก็บไว้</button>
-														<button type="button" class="btn-u btn-u-green"><i class="fa fa-download"></i>ปริ้น</button>
+														<button type="button" class="btn-u  btn-u-xs  btn-u-green"><i class="fa fa-cloud"></i> แชร์ไปที่เฟสบุ๊ค/กูเกิล</button>
+														<button type="button" class="btn-u  btn-u-xs  btn-u-green"><i class="fa fa-bell-o"></i>ส่งหน้านี้ให้เพิ่อน</button>
+														<!-- <button type="button" class="btn-u  btn-u-xs  btn-u-green"><i class="fa fa-envelope-o"></i> เก็บหน้านี้ไว้ดูครั้งหน้า</button> -->
+														<button type="button" class="btn-u  btn-u-xs  btn-u-green"><i class="fa fa-download"></i>คลิ๊กดูหน้าที่จัดเก็บไว้</button>
+														<button type="button" class="btn-u  btn-u-xs  btn-u-green"><i class="fa fa-download"></i>ปริ้น</button>
 													
 													</p>
 													<!--end  button link -->
@@ -211,7 +318,7 @@ rdg_road
 																			<button type="button" class="btn-u  btn-u-xs btn-u-green"><i class="fa fa-child "></i> ติดต่อผู้ลงประกาศ</button>
 																		<button type="button" class="btn-u  btn-u-xs btn-u-green"><i class="fa  fa-car"></i> แผนที่</button>
 																		<button type="button" id="<?=$rsPostDetail['rdg_id']?>" class="btn-u  btn-u-xs btn-u-green btnSavePost"><i class="fa fa-download"></i> เก็บไว้ดูภายหลัง</button>
-																		<button type="button" class="btn-u  btn-u-xs btn-u-red"  onclick="window.location.href='index.php?page=post_sub_detail'"  type="button"><i class="fa fa-building "></i> ดูรายละเอียด</button>
+																		<button type="button" class="btn-u  btn-u-xs btn-u-red"  onclick="window.location.href='index.php?page=post_sub_detail&rdg_id=<?=$rsPostDetail['rdg_id']?>'"  type="button"><i class="fa fa-building "></i> ดูรายละเอียด</button>
 																		
 																		</p>
 																		</div>

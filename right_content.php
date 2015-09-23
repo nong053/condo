@@ -287,6 +287,21 @@ if($conn){
 	                    </div>                          
                  	</div>
                  	<!-- banking -->
+                 	 <!-- banking -->
+                    <div class="row " style="display:none;"> 
+                        <div class="col-md-12 shadow-wrapper">
+	                        <div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
+	                           <div class="headline"><h2>นับจำนวนผู้เข้าชม</h2></div>
+		                        <?php 
+		                      	 include("useronline/count_user_over_all.php");
+		                        ?>
+	                        </div>
+	                    </div>                          
+                 	</div>
+                 	<!-- banking -->
+                 	
+                 	
+                 	
 
 					</div> 
 					   

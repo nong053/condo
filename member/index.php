@@ -18,6 +18,7 @@
 		$_SESSION['sesRtContructorYet']=$_GET['rtContructorYet'];
 		$_SESSION['sesRtContructorCate']=$_GET['rtContructorCate'];
 		
+		
 	}
 	//echo $_SESSION['cus_id'];
 	if($_SESSION['ses_cus_id']==""){
@@ -25,8 +26,10 @@
 		echo"<script>window.location='../index.php?modal=login'</script>";
 		
 	}
-	if($_SESSION['sesLoginType']==""){
-	$_SESSION['sesLoginType']=$_GET['loginType'];
+	if($_GET['loginType']=="loginForManage"){
+		$_SESSION['sesLoginType']="loginForManage";
+	}else{
+		$_SESSION['sesLoginType']="loginForNewPost";
 	}
 	
 ?>

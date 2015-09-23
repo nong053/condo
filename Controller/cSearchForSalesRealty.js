@@ -26,6 +26,20 @@ $(document).ready(function(){
 		return false;
 	});
 	
+	$("#fromSearchQuick").submit(function(){
+		
+		$.ajax({
+			url:"post_detail.php",
+			type:"post",
+			dataType:"html",
+			data:$(this).serialize(),
+			success:function(data){
+				$("#mainContrainArea").html(data);
+			}
+		});
+		return false;
+	});
+	
 	$("#btnSaveSearch").click(function(){
 		
 		console.log($("form#formSearchForSales").serialize());

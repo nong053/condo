@@ -1,4 +1,5 @@
-	var postFn=function(loginType){
+	
+var postFn=function(loginType){
 
 			
 		
@@ -315,6 +316,7 @@
 					data:{"paramAction":"realtyDataGeneralById","RdgId":$("#paramEmbedRdgId").val()},
 					success:function(data){
 						console.log(data);
+						//alert(data);
 						//console.log(data['rf_id']);
 						callRealtyFor(data['rf_id']);
 						
@@ -362,8 +364,10 @@
 						$("#rdg_price_project").val(data['rdg_price_project']);
 						
 						//####rdg_address_province_id####
-						callProvince(data['rdg_address_province_id'],data['rdg_address_district_id'],data['rdg_address_sub_district_id']);
 						
+						callProvince(data['rdg_address_province_id'],data['rdg_address_district_id'],data['rdg_address_sub_district_id']);
+						callDistrict(data['rdg_address_province_id'],data['rdg_address_district_id'],data['rdg_address_sub_district_id'])
+						callSubDistrict(data['rdg_address_district_id'],data['rdg_address_sub_district_id']);
 						//####rdg_address_no####
 						$("#rdg_address_no").val(data['rdg_address_no']);
 						
@@ -411,6 +415,12 @@
 						
 						///####rdg_area_unit####
 						callRealtyUnit(data['rdg_area_unit']);
+						
+						///####rdg_estate number####
+						
+						$("#rdg_estate_num").val(data['rdg_estate_num']);
+						///####rdg_estate_unit####
+						callEstateUnit(data['rdg_estate_unit']);
 					
 						
 						
@@ -540,7 +550,7 @@
 				             //height: 550,
 				             sortable: true,
 				             dataSource: {
-				                 pageSize: 5
+				                 pageSize: 100
 				             },
 				             pageable: {
 				                 refresh: true,
@@ -593,6 +603,10 @@
 						
 						//Start Edit Post
 						$(".btnEditPost"+idArea).click(function(){
+							//Ebeded data for check that get olda data for display.
+							$("#saveDetailDataAlready").remove();
+							$("body").append("<input type='hidden' name='saveDetailDataAlready' id='saveDetailDataAlready' value='Y'>");
+							
 							var id=this.id;
 							id=id.split("-");
 							id=id[1];
@@ -663,6 +677,10 @@
 		callRealtyUnit();
 		//end realty unit 
 		
+		///rdg_area_unit
+		callEstateUnit();
+		
+		
 		//start travel by bts 
 		callTavelByBTS();
 		//end travel by bts 
@@ -719,6 +737,8 @@
 		//start realty unit 
 		callRealtyUnit();
 		//end realty unit 
+		///rdg_area_unit
+		callEstateUnit();
 		
 		//start travel by bts 
 		callTavelByBTS();
@@ -912,9 +932,11 @@
 		setTimeout(function(){
 			$("[href|='#currentPost']").click();
 		},1000);
+		$("[href|='#memberNewPost']").hide();
 		
 	}else{
 		$("[href|='#memberNewPost']").click();
+		$("[href|='#memberNewPost']").show();
 	}
 	//Check Data For Initail of Tab End
 	

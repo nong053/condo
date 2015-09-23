@@ -33,8 +33,8 @@ if($_POST['paramAction']=="realtyDataGeneralById"){
 				,\"rf_id\":\"".$rs['rf_id']."\"
 				,\"rt_id\":\"".$rs['rt_id']."\"
 				,\"cus_id\":\"".$rs['cus_id']."\"
-				,\"rdg_title\":\"".$rs['rdg_title']."\"
-				,\"rdg_detail\":\"".$rs['rdg_detail']."\"
+				,\"rdg_title\":\"".trim($rs['rdg_title'])."\"
+				,\"rdg_detail\":\"".nl2br($rs['rdg_detail'])."\"
 				,\"rdg_owner_project\":\"".$rs['rdg_owner_project']."\"
 				,\"rdg_price\":\"".$rs['rdg_price']."\"
 				,\"rdg_price_rent\":\"".$rs['rdg_price_rent']."\"
@@ -51,6 +51,8 @@ if($_POST['paramAction']=="realtyDataGeneralById"){
 				,\"rdg_map\":\"".$rs['rdg_map']."\"
 				,\"rdg_area_number\":\"".$rs['rdg_area_number']."\"
 				,\"rdg_area_unit\":\"".$rs['rdg_area_unit']."\"
+				,\"rdg_estate_num\":\"".$rs['rdg_estate_num']."\"
+				,\"rdg_estate_unit\":\"".$rs['rdg_estate_unit']."\"
 				,\"rdg_special\":\"".$rs['rdg_special']."\"
 				,\"rdg_mrt\":\"".$rs['rdg_mrt']."\"
 				,\"rdg_arl\":\"".$rs['rdg_arl']."\"
@@ -165,7 +167,7 @@ if($_POST['paramAction']=="realtyDataGeneralSave"){
 	$rdg_address_road=$_POST['rdg_address_road'];
 	$rdg_address_sub_district_id=$_POST['rdg_address_sub_district_id'];
 	$rdg_area_number=$_POST['rdg_area_number'];
-	$rdg_detail=$_POST['rdg_detail'];
+	$rdg_detail=nl2br($_POST['rdg_detail']);
 	$rdg_name_project=$_POST['rdg_name_project'];
 	$rdg_owner_project=$_POST['rdg_owner_project'];
 	$rdg_price=$_POST['rdg_price'];
@@ -173,7 +175,9 @@ if($_POST['paramAction']=="realtyDataGeneralSave"){
 	$realtyFor=$_POST['realtyFor'];
 	$realtyType=$_POST['realtyType'];
 	$realtyUnit=$_POST['realtyUnit'];
-	$cus_id=$_SESSION['cus_id'];
+	$rdg_estate_num=$_POST['rdg_estate_num'];
+	$rdg_estate_unit=$_POST['rdg_estate_unit'];
+	$cus_id=$_SESSION['ses_cus_id'];
 	$rdg_datetime=date("y-m-d:h:i:s");
 	$paramLat=$_POST['paramLat'];
 	$paramLong=$_POST['paramLong'];
@@ -196,9 +200,13 @@ if($_POST['paramAction']=="realtyDataGeneralSave"){
 	
 	$paramEmbedRdgId=$_POST['paramEmbedRdgId'];
 	
-	$rdg_status='N';
+	$rdg_status=$_POST['rdg_status'];
 	
-	
+	if($rdg_status==""){
+		$rdg_status='N';
+	}else{
+		$rdg_status=$rdg_status;
+	}
 	/*
 	 rdg_special
 	 rdg_price_project
@@ -238,6 +246,8 @@ if($_POST['paramAction']=="realtyDataGeneralSave"){
 				rdg_map='$rdg_map',
 				rdg_area_number='$rdg_area_number',
 				rdg_area_unit='$realtyUnit',
+				rdg_estate_num='$rdg_estate_num',
+				rdg_estate_unit='$rdg_estate_unit',
 				rdg_update='$rdg_datetime',
 				
 				rdg_special='$rdg_special',
@@ -280,6 +290,8 @@ if($_POST['paramAction']=="realtyDataGeneralSave"){
 				rdg_map,
 				rdg_area_number,
 				rdg_area_unit,
+				rdg_estate_num,
+				rdg_estate_unit,
 				cus_id,
 				rdg_create,
 				rdg_update,
@@ -316,6 +328,8 @@ if($_POST['paramAction']=="realtyDataGeneralSave"){
 			'$rdg_map',
 			'$rdg_area_number',
 			'$realtyUnit',
+			'$rdg_estate_num',
+			'$rdg_estate_unit',
 			'$cus_id',
 			'$rdg_datetime',
 			'$rdg_datetime',
