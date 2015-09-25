@@ -11,7 +11,7 @@ $status=$_POST['status'];
 if($_POST['paramAction']=="showCurrentPost"){
 	
 	$strSQL="
-	select rdg_id,rt.rt_name,rdg_price,rdg_create,rdg_status,rdg_update 
+	select *
 	from realty_data_general rdg
 	INNER JOIN realty_type rt
 	ON rdg.rt_id=rt.rt_id
@@ -46,7 +46,31 @@ if($_POST['paramAction']=="showCurrentPost"){
 		<tr>
 			<td>#<?=$rs[rdg_id]?></td>
 			<td><?=$rs[rt_name]?></td>
-			<td><?=number_format($rs[rdg_price]);?></td>
+			<td>
+		
+			<?php
+			if($rs['rt_id']=="1"){
+				
+				echo number_format($rs['rdg_price_project']);
+			}else if($rs['rf_id']=="1"){//เพื่อขาย
+
+				echo number_format($rs['rdg_price']);
+			}else if($rs['rf_id']=="2"){//เพื่อเช่า
+				echo  number_format($rs['rdg_price_rent']);
+			}else if($rsRDG['rf_id']=="3"){//เพื่อขายและเช่า
+				echo  number_format($rs['rdg_price'])." บาท<br>";
+				echo  number_format($rs['rdg_price_rent']);
+			}else if($rsRDG['rf_id']=="5"){//เพื่อขายดาว์น
+				echo  number_format($rs['rdg_price_down']);
+			}
+			
+			
+			//number_format($rs[rdg_price]);
+			
+			
+			?>
+			
+			</td>
 			<!-- <td>1250,000</td> -->
 			<td><?=$rs[rdg_create]?></td>
 			<td><?=$rs[rdg_status]?></td>

@@ -242,7 +242,7 @@ if($_POST['paramAction']=="realtyDataGeneralSave"){
 				rdg_address_district_id='$rdg_address_district_id',
 				rdg_address_sub_district_id='$rdg_address_sub_district_id',
 				rdg_address_road='$rdg_address_road',
-				rdg_post_code='$rdg_post_code',
+				rdg_post_code='$rdg_address_post_code',
 				rdg_map='$rdg_map',
 				rdg_area_number='$rdg_area_number',
 				rdg_area_unit='$realtyUnit',

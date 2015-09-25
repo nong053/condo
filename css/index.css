@@ -72,4 +72,19 @@ label {
 	width:500px;
 	margin: 30px auto;
 }
+.testimonials .testimonial-info{
+	margin-top: 15px;
+}
+.useronlineSpecialPage{
+	position: absolute;
+    right: 0;
+    top: 45px;
+}
+.testimonials.testimonials-v2 p {
+ 
+    padding: 5px;
+}
+.testimonials.testimonials-v2 .testimonial-info {
+    padding: 0;
+}
 

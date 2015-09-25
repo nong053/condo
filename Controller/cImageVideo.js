@@ -115,6 +115,10 @@ var imageVideoFn=function(rdg_id){
 			success:function(data){
 				if(data=="success"){
 					alert("บันทึกข้อมูลเรียบร้อย");
+					setTimeout(function(){
+					$("[href|='#summary']").click();
+					$("#topcontrol").click();
+					},1000);
 					//showPictureFn();
 				}
 			}
@@ -135,4 +139,13 @@ var imageVideoFn=function(rdg_id){
 		});
 	}
 	showEmbedCodeFn();
+	
+	//back button
+	$("#btn-back-step2").click(function(){
+		//alert("hello");
+		$("[href|='#detailData']").click();
+		//return false;
+		$("#topcontrol").click();
+	});
+
 

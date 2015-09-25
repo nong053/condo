@@ -55,8 +55,6 @@ var postFn=function(loginType){
 		var lat="";
 		var long="";
 		
-		
-	
 		var showMarker="";
 		function getLocation(paramShowMarker) {
 			showMarker=paramShowMarker;
@@ -227,6 +225,14 @@ var postFn=function(loginType){
 							//call cDetailDataPostContructor.js
 							//alert(paramRealtyID);
 							detailDataPosContructortFn(paramRealtyID);
+							
+							//button back
+							$("#btn-back-step1").click(function(){
+								//alert("hello");
+								$("[href|='#mainData']").click();
+								$("#topcontrol").click();
+								//return false;
+							});
 						}
 					});
 				}else{
@@ -299,7 +305,7 @@ var postFn=function(loginType){
 			
 			
 			var callDataMainPostAgainFn=function(){
-				
+			
 				//setupMap();
 				//getLocation(false);
 				$("#btnCreateMarker").click(function(){
@@ -315,10 +321,12 @@ var postFn=function(loginType){
 					dataType:"json",
 					data:{"paramAction":"realtyDataGeneralById","RdgId":$("#paramEmbedRdgId").val()},
 					success:function(data){
-						console.log(data);
+						
+						
 						//alert(data);
 						//console.log(data['rf_id']);
 						callRealtyFor(data['rf_id']);
+						
 						
 						
 						//####rdg_special####
@@ -342,6 +350,7 @@ var postFn=function(loginType){
 						
 						
 						//####rdg_title####
+						
 						$("#rdg_title").val(data['rdg_title']);
 						
 						//####rdg_detail####
@@ -398,7 +407,7 @@ var postFn=function(loginType){
 						
 						//####callTavelByBTS####
 						callTavelByBTS(data['rdg_bts']);
-						
+						//alert(data['rdg_bts']);
 						//####start travel by MRT ####
 						callTavelByMRT(data['rdg_mrt']);
 						
@@ -421,7 +430,8 @@ var postFn=function(loginType){
 						$("#rdg_estate_num").val(data['rdg_estate_num']);
 						///####rdg_estate_unit####
 						callEstateUnit(data['rdg_estate_unit']);
-					
+						///####rdg_rdg_bus####
+						$("#rdg_bus").val(data['rdg_bus']);
 						
 						
 					}
@@ -435,7 +445,7 @@ var postFn=function(loginType){
 				//alert("#mainData");
 				if($("#paramEmbedRdgId").val()==undefined || $("#paramEmbedRdgId").val()=="" || $("#paramEmbedRdgId").val()=="undefined"){
 					
-					alert("not RdgId");
+					//alert("not RdgId");
 					
 				}else{
 					
@@ -461,23 +471,17 @@ var postFn=function(loginType){
 			
 			
 
-			$("#btn-back-step2").click(function(){
-					//alert("hello");
-					$("[href|='#detailData']").click();
-					//return false;
-					$("#topcontrol").click();
-			});
+			
 
-
-			/*
+			
 			$("#btn-back-step1").click(function(){
 					//alert("hello");
 					$("[href|='#mainData']").click();
 					$("#topcontrol").click();
 					//return false;
 			});
-
-
+			
+			/*
 			$("#btn-next-step3").click(function(){
 					//alert("hello");
 					$("[href|='#imageVideo']").click();
@@ -485,7 +489,7 @@ var postFn=function(loginType){
 					//return false;
 			});
 			*/
-
+			
 			$("#btn-back-step3").click(function(){
 					//alert("hello");
 					$("[href|='#imageVideo']").click();
@@ -536,6 +540,7 @@ var postFn=function(loginType){
 			
 			
 			var showPostFn=function(idArea,status){
+				
 				$.ajax({
 					url:"../Model/mCurrentPost.php",
 					type:"post",
@@ -546,6 +551,7 @@ var postFn=function(loginType){
 						$("#"+idArea).html(data);
 						
 						//set grid start
+						
 						 $("#gridCurentPost"+idArea).kendoGrid({
 				             //height: 550,
 				             sortable: true,
@@ -603,6 +609,7 @@ var postFn=function(loginType){
 						
 						//Start Edit Post
 						$(".btnEditPost"+idArea).click(function(){
+							
 							//Ebeded data for check that get olda data for display.
 							$("#saveDetailDataAlready").remove();
 							$("body").append("<input type='hidden' name='saveDetailDataAlready' id='saveDetailDataAlready' value='Y'>");
@@ -619,10 +626,11 @@ var postFn=function(loginType){
 								async:false,
 								data:{"paramAction":"showCurrentPost","rdg_id":id},
 								success:function(data){
-									$(".postRealty").empty();
-									$("#formPostArea").html(data);
+								
+									$("#postForm-"+idArea).html(data);
 									//embed paramEmbedRdgId
 									$("#paramEmbedRdgId").remove();
+									
 									$("#paramEmbedRdgIdArea").append("<input type='hidden' name='paramEmbedRdgId' id='paramEmbedRdgId' value="+id+" >");
 									//Start call Data again
 									callDataMainPostAgainFn();
@@ -657,7 +665,7 @@ var postFn=function(loginType){
 		callProvince();
 		//end provine 
 		//Start Call callRealtyFor
-		callRealtyFor(1);
+		//callRealtyFor(1);
 		
 		//End Call callRealtyFor
 
@@ -767,7 +775,9 @@ var postFn=function(loginType){
 		//Start DetailData
 		$("[href|='#detailData']").click(function(){
 			if($("#paramEmbedRdgId").val()==undefined || $("#paramEmbedRdgId").val()=="" || $("#paramEmbedRdgId").val()=="undefined"){
-				alert("not RdgId");
+				
+				//alert("not RdgId");
+				
 			}else{
 				postDeatilFn(paramRealtyAndContractorType,$("#paramEmbedRdgId").val());
 			}
@@ -777,7 +787,7 @@ var postFn=function(loginType){
 		//Start ImageVideo
 		$("[href|='#imageVideo']").click(function(){
 			if($("#paramEmbedRdgId").val()==undefined || $("#paramEmbedRdgId").val()=="" || $("#paramEmbedRdgId").val()=="undefined"){
-				alert("not RdgId");
+				//alert("not RdgId");
 			}else{
 				$.ajax({
 					url:"../member/imageVideo.php",
@@ -798,7 +808,7 @@ var postFn=function(loginType){
 		//Start Summary
 		$("[href|='#summary']").click(function(){
 			if($("#paramEmbedRdgId").val()==undefined || $("#paramEmbedRdgId").val()=="" || $("#paramEmbedRdgId").val()=="undefined"){
-				alert("not RdgId");
+				//alert("not RdgId");
 			}else{
 				$.ajax({
 					url:"../member/summary.php",
@@ -854,11 +864,19 @@ var postFn=function(loginType){
 						//alert(rdg_id);
 						if(data[0]=="seccess"){
 							alert("บันทึกข้อมูลเรียบร้อย");
+							setTimeout(function(){
+								$("[href|='#detailData']").click();
+								$("#topcontrol").click();
+							},1000);
+							
 							$("#paramEmbedRdgId").remove();
 							$("#paramEmbedRdgIdArea").append("<input type='hidden' name='paramEmbedRdgId' id='paramEmbedRdgId' value="+rdg_id+" >");
 						}else if(data[0]=="udate_success"){
 							alert("แก้ไขข้อมูลเรียบร้อย");
+							$("[href|='#detailData']").click();
+							$("#topcontrol").click();
 						}
+						
 					}
 				});
 			}
@@ -869,6 +887,7 @@ var postFn=function(loginType){
 	}
 	
 	$("[href|='#newPost']").click(function(){
+		$(".postRealty").empty();
 		$.ajax({
 			url:"../Member/form_post.php",
 			type:"post",
@@ -876,7 +895,7 @@ var postFn=function(loginType){
 			async:false,
 			//data:{"paramAction":"showCurrentPost"},
 			success:function(data){
-				$(".postRealty").empty();
+				
 				$("#newPostArea").html(data);
 				//#### start call function initail ####
 				initailPostFn();
@@ -890,6 +909,7 @@ var postFn=function(loginType){
 	});
 	
 	$("[href|='#memberNewPost']").click(function(){
+		
 		$.ajax({
 			url:"../Member/memberFormPost.php",
 			type:"post",
@@ -901,7 +921,7 @@ var postFn=function(loginType){
 				$("body").append("<input type='text' name='memberNewPost' id='memberNewPost' class='memberNewPost' value=Y>");
 				*/
 				$(".postRealty").empty();
-				$("#memberPostRealtyArea").html(data);
+				$("#postForm-memberNewPost").html(data);
 				$.ajax({
 					url:"../Model/mMemberFormPost.php",
 					type:"post",
@@ -942,6 +962,7 @@ var postFn=function(loginType){
 	
 	//Start currentPost 
 	$("[href|='#currentPost']").click(function(){
+		$(".postRealty").empty();
 			showPostFn("currentPostArea","Y");
 		 
 	});
@@ -949,17 +970,19 @@ var postFn=function(loginType){
 	
 	//Start nonePost 
 	$("[href|='#nonePost']").click(function(){
+		$(".postRealty").empty();
 			showPostFn("nonePostArea","N");
 		 
 	});
 	//end nonePost 
 	//Start nonePost 
 	$("[href|='#expirePost']").click(function(){
+			$(".postRealty").empty();
 			showPostFn("expirePostArea","E");
 	});
 	//end nonePost 
 	
 
 		
-
+	
 };

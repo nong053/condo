@@ -24,7 +24,7 @@ $rsRT=mysql_fetch_array($resultRT);
 		<div class="tab-pane fade in active" id="mainData">
 					 <!-- start content mainData-->
 					 <form role="form" id="formRealtyDataGe" name="formRealtyDataGe" class="form-horizontal" action="#">
-						<div class="headline"><h4>แก้ไขข้อมูล<?=$rsRT['rt_name']?></h4></div>
+						<div class="headline"><h4>แก้ไขข้อมูล<?=$rsRT['rt_name']?>(#<?=$rsRT['rdg_id']?>)</h4></div>
 							<div class="form-group">
 								<label class="col-lg-3 control-label" > ประกาศสำหรับ</label>
 								<div id="realtyForArea"></div>

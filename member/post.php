@@ -41,7 +41,7 @@
                         <div class="tab-pane fade in active " id="newPost">	  
 								<!-- newPost-->
 								<!-- Start Tabs-->
-								<div id="newPostArea" class="postRealty"></div>
+								<div id="newPostForm"  class="postRealty"></div>
 								<!-- End Tabs-->
 
                         </div>
@@ -50,7 +50,7 @@
                         <div class="tab-pane fade in " id="memberNewPost">	  
 								<!-- newPost-->
 								<!-- Start Tabs-->
-								<div id="memberPostRealtyArea" class="postRealty">Test</div>
+								<div id="postForm-memberNewPost" class="postRealty">Test</div>
 								<!-- End Tabs-->
                         </div>
                         <!-- End newPost member -->
@@ -59,7 +59,7 @@
                         <div class="tab-pane fade in " id="newPostContructor">	  
 								<!-- newPost-->
 								<!-- Start Tabs-->
-								<div id="newPostConstructorArea" class="postRealty">Test2</div>
+								<div id="postForm-newPostContructor"  class="postRealty">Test2</div>
 								<!-- End Tabs-->
                         </div>
                         <!-- End newPost Constructor -->
@@ -82,7 +82,7 @@
 							</div>
 							
 							
-							<div id="formPostArea" class="postRealty"></div> 
+							<div id="postForm-currentPostArea" class="postRealty"></div> 
 							<!-- รายการประกาศปัจจุบัน -->
 
                         </div>
@@ -143,6 +143,7 @@
 										 -->
 									</div>                  
 								</div>
+								<div id="postForm-nonePostArea" class="postRealty"></div> 
 							<!-- รายการประกาศปัจจุบัน -->
 
                         </div>
@@ -161,6 +162,7 @@
 										
 									</div>                  
 								</div>
+								<div id="postForm-expirePostArea" class="postRealty"></div> 
 							<!-- รายการประกาศที่หมดอายุ -->
 
                         </div>

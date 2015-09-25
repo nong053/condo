@@ -14,15 +14,17 @@ while($rsSCCate=mysql_fetch_array($resultSCCate)){
 	
 
 		$strSLQPsale="
-		select rdg.rt_id,rt.rt_name,rdg.cus_id,
+		select rdg.rt_id,rt.rt_name,rdg.cus_id,rf_id,
 		rdg.rdg_id,rdg_title,rdg.rdg_address_no,
 		rdg.rdg_address_province_id,p.PROVINCE_NAME,
 		rdg_address_district_id,am.AMPHUR_NAME,
 		rdg_address_sub_district_id,d.DISTRICT_NAME,
-		rdg_address_road,rdg_post_code
+		rdg_address_road,rdg_post_code,
 		rdg_price,rdg_price_down,rdg_price_rent,rdg_price_project,
-		rdg_area_number,rdg_area_unit,ru.ru_name,rtc.rtc_detail
-		rdg_update
+		rdg_area_number,rdg_area_unit,ru.ru_name,rtc.rtc_detail,
+		rdg_update,
+		rdg.rdg_estate_num,
+		(select ru2.ru_name  from realty_unit ru2 where ru2.ru_id= rdg.rdg_estate_unit) as rdg_estate_unit_name
 		
 		from realty_data_general rdg
 		LEFT JOIN province p
@@ -37,7 +39,7 @@ while($rsSCCate=mysql_fetch_array($resultSCCate)){
 		on ru.ru_id=rdg.rdg_area_unit
 		LEFT JOIN realty_type_cate rtc
 		ON rtc.rtc_id=rt.rt_contructor_cate
-		where rf_id=1 and rt.rt_contructor_cate=".$rsSCCate['rtc_id']." order by rdg_id  
+		where  rt.rt_contructor_cate=".$rsSCCate['rtc_id']." order by rdg_id  
 				
 		";
 ?>
@@ -94,14 +96,35 @@ while($rsSCCate=mysql_fetch_array($resultSCCate)){
 															<h2>ประกาศขายพิเศษ รหัส <?=$rsPsale['rdg_id']?></h2>
 															</div>
 															<div class="col-md-4 ">
-															<button onclick="window.location.href='index.php?page=post_sub_detail&rdg_id=<?=$rsPsale['rdg_id']?>'" class="box-margin-top5 btn-u btn-u-red btn-left-right" type="button"><i class="fa fa-building "></i> คลิ๊กรายละเอียด</button>
+															<button onclick="window.location.href='index.php?page=post_sub_detail&rdg_id=<?=$rsPsale['rdg_id']?>&rtc_id=<?=$rsSCCate['rtc_id']?>'" class="box-margin-top5 btn-u btn-u-red btn-left-right" type="button"><i class="fa fa-building "></i> คลิ๊กรายละเอียด</button>
+															
+																	<div class="col-md-7  useronlineSpecialPage">
+																	<div id="testimonials-9" class="carousel slide testimonials testimonials-v2 testimonials-bg-default">
+																		<div class="">
+																			<div class="item active">
+																			<?php 
+																			$strSQLCountHit="SELECT * FROM counter1_realty where  rdg_id='".$rsPsale['rdg_id']."'";
+																			$resultCountHit=mysql_query($strSQLCountHit);
+																			$num=mysql_num_rows($resultCountHit);
+																			?>																
+																				<p><?=number_format($num)?> ครั้ง</p>
+																				<div class="testimonial-info">
+																					<span class="testimonial-author">
+																						นับจำนวจผู้เข้าชม
+																						<em>ประกาศเลขที่ <?=$rsPsale['rdg_id']?></em>
+																					</span>
+																				</div>
+																			</div>
+																			
+																		</div>
+																	</div>
+																	</div>
+															
+															
 															</div>
 														</div>
 														<div class="row">
-															<div class="col-md-5">
-													
-																
-															
+															<div class="col-md-4">
 															<?php 
 															$strSQL="select * from realty_images where rdg_id='".$rsPsale['rdg_id']."' and  ri_set_first='0'  ORDER BY ri_set_first ";
 															$result=mysql_query($strSQL);
@@ -147,16 +170,58 @@ while($rsSCCate=mysql_fetch_array($resultSCCate)){
 																
 															</div>
 															<div class="col-md-6">
-															<b>ขาย</b> <?=$rsPsale['rt_name']?> ราคา <?=$rsPsale['rdg_price']?>  			บาท<br>
+															<?if($rsPsale['rdg_title'])echo "<p>".$rsPsale['rdg_title']."</p>";?>
+															<b>ขาย</b> <?=$rsPsale['rt_name']?>  <?
+															if($rsPsale['rf_id']=="1"){//เพื่อขาย
+																echo "ราคาขาย ".number_format($rsPsale['rdg_price'])." บาท";
+															}else if($rsPsale['rf_id']=="2"){//เพื่อเช่า
+																echo  "ราคาเช่า ".number_format($rsPsale['rdg_price_rent'])." บาท";
+															}else if($rsPsale['rf_id']=="3"){//เพื่อขายและเช่า
+																echo  "ราคาขาย ".number_format($rsPsale['rdg_price'])." บาท<br>";
+																echo  "ราคาเช่า ".number_format($rsPsale['rdg_price_rent'])." บาท";
+															}else if($rsPsale['rf_id']=="5"){//เพื่อขายดาว์น
+																echo  "ราคาขายดาว์น ".number_format($rsPsale['rdg_price_down'])." บาท";
+															}
+															
+															?> 
+															<br>
 															<b>ที่อยู่ </b>  <?if($rsPsale['PROVINCE_NAME'])echo"จังหวัด" .$rsPsale['PROVINCE_NAME'];?>
 															 <?if($rsPsale['AMPHUR_NAME'])echo"อำเภอ/เขต:" .$rsPsale['AMPHUR_NAME']; ?>
 															<?if($rsPsale['DISTRICT_NAME'])echo"ตำบล/แขวง:" .$rsPsale['DISTRICT_NAME'];?>
 															<?if($rsPsale['rdg_address_no'])echo"เลขที่: ". $rsPsale['rdg_address_no'];?>
-															<?if($rsPsale['rdg_post_code'])echo"รหัสไปษณีย์:". $rsPsale['rdg_post_code'];?><br>
+															<?if($rsPsale['rdg_post_code'])echo"รหัสไปษณีย์:". $rsPsale['rdg_post_code'];?>
+															
+															<br>
+															
 															 
-															<b>ที่ดิน</b> .............. ตารางวา<br>
-															<b>พื้นที่</b> <?=$rsPsale['rdg_area_number'];?> <?=$rsPsale['ru_name'];?><br>
-															<b>แก้ไขล่าสุด</b> <?=$rsPsale['rdg_update'];?><br>
+															<?php 
+															if($rsSCCate['rtc_id']=='3' or $rsSCCate['rtc_id']=='4'){
+															
+															}else{
+																if($rsPsale['rdg_estate_num']){
+																	?>
+																	<b>ที่ดิน</b> <?=number_format($rsPsale['rdg_estate_num']);?>  <?=$rsPsale['rdg_estate_unit_name'];?><br>
+																	<?php
+																}
+																if($rsPsale['rdg_area_number']){
+																	?>
+																	<b>พื้นที่</b> <?=number_format($rsPsale['rdg_area_number']);?> <?=$rsPsale['ru_name'];?><br>
+																	<?php	
+																
+																}
+															
+															}
+															?> 
+															
+															
+															<b>แก้ไขล่าสุด</b> 
+															<p style='font-size: 11px;'>
+															<?
+															
+															$eng_date=strtotime($rsPsale['rdg_update']);
+															echo thai_date($eng_date);
+															?>
+															</p>
 		
 															</div>
 							

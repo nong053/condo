@@ -374,10 +374,16 @@ include("../config.inc.php");
 																	</div>
 																	
 																
-																
+															<?php 
+															if($_SESSION['sesRtContructorYet']=="N"){
+															?>
 																<div class="">	
 																<div class="headline"><h4>พื้นที่อสังหาริมทรัพย์ </h4></div>
-
+																	<?php 
+																	if($_SESSION['sesRtID']==10){
+																		
+																	}else{
+																	?>
 																	<div class="form-group">
 																		<label class="col-lg-3 control-label" for="rdg_area_number">พื้นที่ </label>
 																		<div class="col-lg-2">
@@ -392,6 +398,7 @@ include("../config.inc.php");
 																		</div>
 										
 																	</div>
+																	<?php }?>
 																	<div class="form-group">
 																		<label class="col-lg-3 control-label" for="rdg_estate_num">ที่ดิน </label>
 																		<div class="col-lg-2">
@@ -408,7 +415,7 @@ include("../config.inc.php");
 																	</div>
 																</div>
 
-								
+															<?php } ?>
 
 							<div class="form-group">
 								<div class="col-lg-offset-3 col-lg-9">

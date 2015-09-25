@@ -2,6 +2,8 @@
 include("config.inc.php");
 $cus_id=$_SESSION['cus_id'];
 $rdg_id=$_GET['rdg_id'];
+$rtc_id=$_GET['rtc_id'];
+
 
 $strSQL1="
 select rdg.*,rf_name,rt_name,rps_name,p.PROVINCE_NAME,d.DISTRICT_NAME,a.AMPHUR_NAME from realty_data_general rdg
@@ -44,10 +46,35 @@ LEFT JOIN realty_detail_near_place rdnp
 on rdnp.rdnp_id=rd.rdnp_id
 where rdg_id='$rdg_id'
 ";
+if($rtc_id==3 || $rtc_id==4){
+	$cst_type="";
+	if($rtc_id==3){
+		$cst_type='C';
+	}else if($rtc_id==4){
+		$cst_type='M';
+	}
+	$strSQLC="
+	select rd.*,rdf_detail,rdc_detail,rdi_detail,rdnp_detail,cst.cst_detail from realty_detail rd
+	LEFT JOIN realty_detail_facility rdf
+	ON rdf.rdf_id=rd.rdf_id
+	LEFT JOIN realty_detail_characteristic rdc
+	on rdc.rdc_id=rd.rdc_id
+	LEFT JOIN realty_detail_interior rdi
+	on rdi.rdi_id=rd.rdi_id
+	LEFT JOIN realty_detail_near_place rdnp
+	on rdnp.rdnp_id=rd.rdnp_id
+	LEFT JOIN contructor_select_type cst 
+	ON cst.cst_id=rd.cst_id
+	WHERE cst.cst_type='$cst_type' AND rdg_id='$rdg_id'
+	";
+	$resultC=mysql_query($strSQLC);
+}
+
 $result3=mysql_query($strSQL3);
 $result4=mysql_query($strSQL3);
 $result5=mysql_query($strSQL3);
 $result6=mysql_query($strSQL3);
+
 
 
 ?>
@@ -142,8 +169,15 @@ $rdg_id=$rs1['rdg_id'];
 																	<p><?=$rs1['rdg_title']?> </p>
 																	<p><?=$rs1['rdg_detail']?></p>
 																	<p><h3 style="color:red;">ราคา <?=number_format($rs1['rdg_price'])?> บาท</h3></p>
-																	<p>พื้นที่ 120 ตารางเมตร</p>
-																	<p>ราคา  <?=number_format($rs1['rdg_area_number'])?> ต่อ ตารางเมตร</p>
+																	
+																	<?php 
+																	if($rtc_id!=3 and $rtc_id!=4){
+																	?>
+																	<p>พื้นที่  <?=$rs1['rdg_estate_num']?> <?=$rs1['rdg_estate_unit']?></p>
+																	<p>ราคา  <?=number_format($rs1['rdg_area_number'])?> ต่อ  <?=number_format($rs1['rdg_area_unit'])?></p>
+																	<?php 
+																	}
+																	?>
 																	<em>ลงประกาศเมือ: <?=$rs1['rdg_update']?> </em>
 																</div>
 
@@ -483,30 +517,66 @@ $rdg_id=$rs1['rdg_id'];
 		</div>
 	<!-- -ข้อมูลที่ตั้ง-->
 	<div class="headline"><h4>ข้อมูลเพิ่มเติม </h4></div>
-	<!-- -ข้อมูลเพิ่มเติม-->
-	<div class="row">
-		<div class="alert alert-warning fade in">
-			<label class="col-md-3 control-label titleGroup" > ลักษณะพิเศษ  :</label>
-			<div class="col-md-9">
-				<ul class="list_realty_detail">
-				<?php 
-				while($rs3=mysql_fetch_array($result3)){
-					
-					if($rs3['rdc_id']){
-						?>
-							<li>
-								<?=$rs3['rdc_detail'];?>
-							</li>
-						<?php 
-					}
-				};
-				?>
-				</ul>
+	<?php 
+	if($rtc_id=="3" || $rtc_id=="4"){
+		?>
+		<!-- -ข้อมูลเพิ่มเติม-->
+		<div class="row">
+			<div class="alert alert-warning fade in">
+				<label class="col-md-3 control-label titleGroup" > ลักษณะพิเศษ  :</label>
+				<div class="col-md-9">
+					<ul class="list_realty_detail">
+					<?php 
+					while($rsC=mysql_fetch_array($resultC)){
+						
+						if($rsC['cst_detail']){
+							?>
+								<li>
+									<?=$rsC['cst_detail'];?>
+								</li>
+							<?php 
+						}
+					};
+					?>
+					</ul>
+				</div>
+				<br style="clear:both">
 			</div>
-			<br style="clear:both">
 		</div>
-	</div>
-	    
+		<?php
+	}else{
+		?>
+		<!-- -ข้อมูลเพิ่มเติม-->
+		<div class="row">
+			<div class="alert alert-warning fade in">
+				<label class="col-md-3 control-label titleGroup" > ลักษณะพิเศษ  :</label>
+				<div class="col-md-9">
+					<ul class="list_realty_detail">
+					<?php 
+					while($rs3=mysql_fetch_array($result3)){
+						
+						if($rs3['rdc_id']){
+							?>
+								<li>
+									<?=$rs3['rdc_detail'];?>
+								</li>
+							<?php 
+						}
+					};
+					?>
+					</ul>
+				</div>
+				<br style="clear:both">
+			</div>
+		</div>
+		<?php
+	}
+	?>
+	
+	    <?php 
+	    if($rtc_id!="3" AND $rtc_id!="4"){
+	    	
+	   ?>
 
 		  <div class="row">
 		  	<div class="alert alert-danger fade in">
@@ -577,6 +647,10 @@ $rdg_id=$rs1['rdg_id'];
 			</div>
 		</div>
 	<!-- -ข้อมูลเพิ่มเติม-->
+	<?php 
+	}
+	//if contractor and mantiaral
+	?>
 	</div>
 													
 														

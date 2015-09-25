@@ -1,11 +1,13 @@
 //startcall realty for post
 		var callRealtyFor = function(defaultParam,setByHome){
+			
 			$.ajax({
 				url:"../Model/mRealtyDataGeneralAction.php",
 				type:"get",
 				dataType:"json",
 				data:{"paramAction":"realtyFor"},
 				success:function(data){
+					
 					var $realtyFor="";
 					
 					var i=1;
@@ -26,9 +28,9 @@
 					});
 					
 					
-				
 			
 				$("#realtyForArea").html($realtyFor);
+				
 				if(setByHome==1){
 					$("#optonArea1").hide();
 					//alert(setByHome);
