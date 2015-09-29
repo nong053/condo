@@ -70,6 +70,9 @@ if($rtc_id==3 || $rtc_id==4){
 	$resultC=mysql_query($strSQLC);
 }
 
+
+
+
 $result3=mysql_query($strSQL3);
 $result4=mysql_query($strSQL3);
 $result5=mysql_query($strSQL3);

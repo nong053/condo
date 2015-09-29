@@ -3,7 +3,12 @@ include("../config.inc.php");
 if($_POST['paramAction']=="contructor_select_type"){
 	
 	$dataCSTID=$_POST['dataCSTID'];
-	$cst_type=$_POST['cst_type'];
+	
+	if($_POST['cst_type']=="F"){
+		$cst_type="M";
+	}else{
+		$cst_type=$_POST['cst_type'];
+	}
 	$paramRealtyID=$_POST['paramRealtyID'];
 	
 	$cst_id2="";

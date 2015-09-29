@@ -4,13 +4,16 @@ callProvince();
 		
 $(document).ready(function(){
 
-	$(".mainMenuSalePost").click(function(){
+	$(".mainMenuPost").click(function(){
 		
-		$(".mainMenuSalePost").removeClass("btn-stackoverflow-inversed").css({"background":""});;
+		$(".mainMenuPost").removeClass("btn-stackoverflow-inversed").css({"background":""});;
 		$(this).addClass("btn-stackoverflow-inversed").css({"background":"orange"});
-		$("#embed_rt_id").remove();
-		var paramEmbedPostId="<input type='hidden' value='"+this.id+"' name='embed_rt_id' id=embed_rt_id class='paramEmbed'>";
-		$("#parameterEmbedArea").html(paramEmbedPostId);
+		$(".paramrtEmbed").remove();
+		var paramEmbedPostId="<input type='hidden' value='"+this.id+"' name='embed_rt_id' id='embed_rt_id' class='paramrtEmbed'>";
+		var paramEmbedPostName="<input type='hidden' value='"+$(this).text()+"' name='embed_rt_name' id='embed_rt_name' class='paramrtEmbed'>";
+		$("#parameterEmbedAreaSale").html(paramEmbedPostId+""+paramEmbedPostName);
+		
+		
 	});
 	
 	$("form#formSearchForSales").submit(function(){

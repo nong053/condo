@@ -292,6 +292,13 @@ include("../config.inc.php");
 																			<input type="text" placeholder="ถนน" name="rdg_address_road" id="rdg_address_road" class="form-control">
 																		</div>
 																	</div>
+																	
+																	<div class="form-group">
+																		<label class="col-lg-3 control-label" for="rdg_address_soi"> ซอย</label>
+																		<div class="col-lg-3">
+																			<input type="text" placeholder="ซอย" name="rdg_address_soi" id="rdg_address_soi" class="form-control">
+																		</div>
+																	</div>
 
 																	<div class="form-group">
 																		<label class="col-lg-3 control-label" for="rdg_address_post_code"> รหัสไปรษณีย์</label>

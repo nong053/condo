@@ -4,13 +4,39 @@ include("realty_split.php");
 include_once 'config.inc.php';
 //realty main start
 $embed_rt_id=$_POST['embed_rt_id'];
+
+$search_type=$_POST['search_type'];
+if($_POST['rdg_address_province_id']){
+	$rdg_address_province_id=$_POST['rdg_address_province_id'];
+}else if($_POST['rdg_address_province_id_rent']){
+	$rdg_address_province_id=$_POST['rdg_address_province_id_rent'];	
+}else{
+	$rdg_address_province_id="All";
+}
+if($_POST['rdg_address_district_id']){
+	$rdg_address_district_id=$_POST['rdg_address_district_id'];
+}else if($_POST['rdg_address_district_id_rent']){
+	$rdg_address_district_id=$_POST['rdg_address_district_id_rent'];	
+}else{
+	$rdg_address_district_id="All";
+}
+if($_POST['rdg_address_sub_district_id']){
+	$rdg_address_sub_district_id=$_POST['rdg_address_sub_district_id'];
+}else if($_POST['rdg_address_sub_district_id_rent']){
+	$rdg_address_sub_district_id=$_POST['rdg_address_sub_district_id_rent'];	
+}else{
+	$rdg_address_sub_district_id="All";
+}
+
 if($embed_rt_id==""){
 	$embed_rt_id="All";
 }
+/*
 $rdg_address_province_id=$_POST['rdg_address_province_id'];
 if($rdg_address_province_id==""){
 	$rdg_address_province_id="All";
 }
+
 $rdg_address_district_id=$_POST['rdg_address_district_id'];
 if($rdg_address_district_id==""){
 	$rdg_address_district_id="All";
@@ -19,6 +45,7 @@ $rdg_address_sub_district_id=$_POST['rdg_address_sub_district_id'];
 if($rdg_address_sub_district_id==""){
 	$rdg_address_sub_district_id="All";
 }
+*/
 $rdg_bts=$_POST['rdg_bts'];
 if($rdg_bts==""){
 	$rdg_bts="All";
@@ -39,9 +66,9 @@ $rdg_mrt=$_POST['rdg_mrt'];
 if($rdg_mrt==""){
 	$rdg_mrt="All";
 }
-$rdg_road=$_POST['rdg_road'];
-if($rdg_road==""){
-	$rdg_road="All";
+$rdg_address_road=$_POST['rdg_address_road'];
+if($rdg_address_road==""){
+	$rdg_address_road="All";
 }
 //realty main start
 //realty sub post start
@@ -54,6 +81,7 @@ $rdr_bedroom=$_POST['rdr_bedroom'];
 //realty sub post end
 if($_POST['paramAction']=="searchQuick"){
 	$searchQuick=$_POST['searchQuick'];
+	$rdg_rf=$_POST['rdg_rf'];
 	
 	$strSQLPostDetail="
 	select rdg.*,rt_name,rf_name,rps_name from realty_data_general rdg
@@ -63,18 +91,29 @@ if($_POST['paramAction']=="searchQuick"){
 	ON rdg.rf_id=rf.rf_id
 	LEFT JOIN realty_project_status rps
 	ON rdg.rps_id=rps.rps_id
-	WHERE (rt_name like '%$searchQuick%')
-	or (rf_name like '%$searchQuick%')
-	or (rps_name like '%$searchQuick%')
-	or (rdg_name_project like '%$searchQuick%')
-	or (rdg_detail like '%$searchQuick%')
-	or (rdg_title like '%$searchQuick%')";
+	WHERE  (rdg_title like '%$searchQuick%')
+	and (rdg.rf_id='$rdg_rf')
+	";
 	
+	/*
+	 or (rt_name like '%$searchQuick%')
+	 or (rdg_title like '%$searchQuick%')
+	 or (rf_name like '%$searchQuick%')
+	 or (rps_name like '%$searchQuick%')
+	 or (rdg_name_project like '%$searchQuick%')
+	 or (rdg_detail like '%$searchQuick%')
+	*/
+
 	
 }else if($_POST['paramAction']=="searchSubPost"){
 //realty sub port start	
 
 	
+	if($_POST['rdg_rf']!=""){
+		$rdg_rf=$_POST['rdg_rf'];
+	}else{
+		$rdg_rf="All";
+	}
 	$strSQLPostDetail="
 	
 	
@@ -95,7 +134,7 @@ if($_POST['paramAction']=="searchQuick"){
 	AND (rdg.rdg_address_province_id='$rdg_address_province_id' or 'All'='$rdg_address_province_id')
 	AND (rdg.rdg_address_district_id='$rdg_address_district_id' or 'All'='$rdg_address_district_id')
 	AND (rdg.rdg_address_sub_district_id='$rdg_address_sub_district_id' or 'All'='$rdg_address_sub_district_id')
-	AND (rdg.rdg_address_road='$rdg_road' or 'All'='$rdg_road')
+	AND (rdg.rdg_address_road='$rdg_address_road' or 'All'='$rdg_address_road')
 	AND (rdg.rdg_bts='$rdg_bts' or 'All'='$rdg_bts')
 	AND (rdg.rdg_mrt='$rdg_mrt' or 'All'='$rdg_mrt')
 	AND (rdg.rdg_arl='' or 'All'='All')
@@ -106,6 +145,8 @@ if($_POST['paramAction']=="searchQuick"){
 	AND (rdg_area_number<='$rdg_area_number' or 'All'='$rdg_area_number')
 	AND (rdg_area_unit='$rdg_area_unit'  or 'All'='$rdg_area_unit')
 	AND (rdr_bedroom='$rdr_bedroom'   or 'All'='$rdr_bedroom')
+	AND (rdg.rf_id='$rdg_rf'   or 'All'='$rdg_rf' or $rdg_rf=3)
+	
 	
 		
 	
@@ -144,7 +185,7 @@ rdg_road
 	AND (rdg.rdg_address_province_id='$rdg_address_province_id' or 'All'='$rdg_address_province_id')
 	AND (rdg.rdg_address_district_id='$rdg_address_district_id' or 'All'='$rdg_address_district_id')
 	AND (rdg.rdg_address_sub_district_id='$rdg_address_sub_district_id' or 'All'='$rdg_address_sub_district_id')
-	AND (rdg.rdg_address_road='$rdg_road' or 'All'='$rdg_road')
+	AND (rdg.rdg_address_road='$rdg_address_road' or 'All'='$rdg_address_road')
 	AND (rdg.rdg_bts='$rdg_bts' or 'All'='$rdg_bts')
 	AND (rdg.rdg_mrt='$rdg_mrt' or 'All'='$rdg_mrt')
 	AND (rdg.rdg_arl='' or 'All'='All')
@@ -162,6 +203,9 @@ rdg_road
 	$rsPostDetail2=mysql_fetch_array($resultPostDetail2);
 	
 	
+	$strSQLRT2="select * from realty_type where rt_id='".$_POST['embed_rt_id']."'";
+	$resultRT2=mysql_query($strSQLRT2);
+	$rsRT2=mysql_fetch_array($resultRT2);
 	
 	
 ?>
@@ -173,7 +217,7 @@ rdg_road
 		 <div class="row">
 					<div class="panel  panel-red" style="margin-bottom: 5px;">
 						<div class="panel-heading">
-							<h3 class="panel-title"><i class="fa fa-tasks"></i> ผลการคค้นหา<?=$rsPostDetail2['rt_name']?></h3>
+							<h3 class="panel-title"><i class="fa fa-tasks"></i> ผลการคค้นหา<?=$_POST['embed_rt_name']?></h3>
 						</div>
 						<div class="panel-body">
 
@@ -202,7 +246,28 @@ rdg_road
 													<div class="alert alert-success fade in ">
 														<div class="row">
 																<div class="col-md-6">
-																	<h3 style="margin:0px;">ประกาศอสังหาริมทรัพย์</h3>
+																	<h3 style="margin:0px;">
+																	<?php 
+																	if($rsRT2['cst_type']=="C"){
+																		?>
+																		ประกาศสำหรับผู้รับเหมา
+																		<?php
+																	}else if($rsRT2['cst_type']=="M"){
+																		?>
+																		ประกาศสำหรับวัสดุก่อสร้าง
+																		<?php
+																	}else if($rsRT2['cst_type']=="F"){
+																		?>
+																		ประกาศสำหรับฟอร์นิเจอร์
+																		<?php
+																	}else{
+																		?>
+																		ประกาศอสังหาริมทรัพย์
+																		<?php
+																	}
+																	
+																	?>
+																	</h3>
 																</div>
 																<div class="col-md-6" style="text-align:right; padding:2px;">
 																	<h3 style="margin:0px;"><?=$rsPostDetail2['rt_name']?></h3>
@@ -217,7 +282,28 @@ rdg_road
 																</div>
 																<div class="col-md-6" style="text-align:right; padding:2px;">
 																	<h3 style="margin:0px;"></h3>
-																	<button type="button" class="btn-u btn-u-red"  style="padding: 3px;"><i class="fa fa-bell-o"></i>ขายดาวน์</button>
+																	<?php 
+																	
+																	if($_POST['rdg_rf']=="1"){
+																		?>
+																		<button type="button" class="btn-u btn-u-red"  style="padding: 3px;"><i class="fa fa-bell-o"></i>ประกาศขายขาด</button>
+																		<?php
+																	}else if($_POST['rdg_rf']=="2"){
+																		?>
+																		<button type="button" class="btn-u btn-u-red"  style="padding: 3px;"><i class="fa fa-bell-o"></i>ประกาศเช่า</button>
+																		<?php
+																	}else if($_POST['rdg_rf']=="3"){
+																		?>
+																		<button type="button" class="btn-u btn-u-red"  style="padding: 3px;"><i class="fa fa-bell-o"></i>ประกาศขายและเข่า</button>
+																		<?php
+																	}else if($_POST['rdg_rf']=="5"){
+																		?>
+																		<button type="button" class="btn-u btn-u-red"  style="padding: 3px;"><i class="fa fa-bell-o"></i>ประกาศขายดาวน์</button>
+																		<?php
+																	}
+																	?>
+																	
+																	
 																</div>
 														</div>
 													</div>

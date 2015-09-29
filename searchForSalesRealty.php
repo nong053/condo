@@ -6,23 +6,7 @@ if($conn){
 	$sqlSQLCY="select * from realty_type where rt_contructor_yet='Y'";
 	$resultCY=mysql_query($sqlSQLCY);
 	
-	$sqlSQLBTS="SELECT * FROM public_transport where pt_type='BTS'";
-	$resultBTS=mysql_query($sqlSQLBTS);
-	
-	$sqlSQLMRT="SELECT * FROM public_transport where pt_type='MRT'";
-	$resultMRT=mysql_query($sqlSQLMRT);
-	
-	$sqlSQLARL="SELECT * FROM public_transport where pt_type='ARL'";
-	$resultARL=mysql_query($sqlSQLARL);
-	
-	$sqlSQLHARBOR="SELECT * FROM public_transport where pt_type='HARBOR'";
-	$resultHARBOR=mysql_query($sqlSQLHARBOR);
-	
-	$sqlSQLRoadNo="select rdg_address_road from realty_data_general where rdg_address_road !=NULL";
-	$resultRoadNo=mysql_query($sqlSQLRoadNo);
-	
-	$sqlSQLBusNo="select rdg_bus from realty_data_general where rdg_bus !=NULL";
-	$resultBusNo=mysql_query($sqlSQLBusNo);
+	include'query_public_transport.php';
 	
 
 	
@@ -41,26 +25,11 @@ if($conn){
 		<?php 
 		while($rsCN=mysql_fetch_array($resultCN)){
 			?>
-			<button type="button"  id="<?=$rsCN['rt_id']?>" class="btn-u btn-mainmenu mainMenuSalePost">ขาย<?=$rsCN['rt_name']?></button>
+			<button type="button"  id="<?=$rsCN['rt_id']?>" class="btn-u btn-mainmenu mainMenuPost">ขาย<?=$rsCN['rt_name']?></button>
 			<?php
 		}
 		?>
-		<!-- 
-											<button type="button" class="btn-u btn-mainmenu ">ขายบ้าน</button>
-											<button type="button" class="btn-u btn-mainmenu">ขายคอนโดมิเนียม</button>
-											<button type="button" class="btn-u btn-mainmenu ">ขายทาว์นเฮาส์ </button>
-											<button type="button" class="btn-u btn-mainmenu "> ขายทาว์นโฮม</button>
-											<button type="button" class="btn-u btn-mainmenu">ขายที่ดิน</button>
-											<button type="button" class="btn-u btn-mainmenu ">ขายโรงแรม </button>
-											<button type="button" class="btn-u btn-mainmenu">ขายรีสอร์ท </button>
-											<button type="button" class="btn-u btn-mainmenu">ขายหอพัก </button>
-											<button type="button" class="btn-u btn-mainmenu">ขายอาคารพาณิชย์ </button>
-											<button type="button" class="btn-u btn-mainmenu ">ขายโรงงาน </button>
-											<button type="button" class="btn-u btn-mainmenu ">ขายอพาร์ทเมนท์ </button>
-											<button type="button" class="btn-u btn-mainmenu">ขายอาคารสำนักงาน </button>
-											<button type="button" class="btn-u btn-mainmenu">ขายเกสเฮ้าส์</button>
-											<button type="button" class="btn-u btn-mainmenu">อสังหาริมทรัพย์ อื่นๆ </button>
-	 										-->
+	
 		<div class="headline headline-md">
 			<!-- <h2>สำหรับผู้หรับเหมา</h2> -->
 		</div>
@@ -68,11 +37,11 @@ if($conn){
 		while($rsCY=mysql_fetch_array($resultCY)){
 			if($rsCY['rt_id']=="36" ||$rsCY['rt_id']=="33" ){
 			?>
-			<button type="button" id="<?=$rsCY['rt_id']?>" class="btn-u mainMenuSalePost btn-mainmenu-contractor btn-u-dark-blue"><?=$rsCY['rt_name']?></button>
+			<button type="button" id="<?=$rsCY['rt_id']?>" class="btn-u mainMenuPost btn-mainmenu-contractor btn-u-dark-blue"><?=$rsCY['rt_name']?></button>
 			<?php
 			}else{
 			?>
-			<button type="button" id="<?=$rsCY['rt_id']?>" class="btn-u mainMenuSalePost btn-mainmenu-contractor btn-u-dark-blue">ขาย<?=$rsCY['rt_name']?></button>
+			<button type="button" id="<?=$rsCY['rt_id']?>" class="btn-u mainMenuPost btn-mainmenu-contractor btn-u-dark-blue">ขาย<?=$rsCY['rt_name']?></button>
 			<?php
 			}
 		}
@@ -129,7 +98,7 @@ if($conn){
 														<div class="col-md-4 col-padding-2">
 															 <section>
 																	<label class="select">
-																		<select name="rdg_road" id="rdg_road">
+																		<select name="rdg_address_road" id="rdg_address_road">
 																			<option  selected="" value="All">เลือกถนน</option>
 																			<?php 
 																			while($rsRoadNo=mysql_fetch_array($resultRoadNo)){
@@ -158,9 +127,7 @@ if($conn){
 																				<?php
 																			}
 																			?>
-										
-										
-									</select>
+																		</select>
 									<i></i>
 								</label>
 							</section>
@@ -234,9 +201,7 @@ if($conn){
 	</fieldset>
 	<footer>
 	
-			<div id="parameterEmbedArea">
-			
-			</div>
+			<div id="parameterEmbedAreaSale"></div>
 			<button type="submit"  class="btn-u btn-u-orange btn-search1">
 			<i class="fa fa-search-plus"></i> ค้นหา
 			</button>
@@ -245,13 +210,14 @@ if($conn){
 
 	<footer>
 		<input type="hidden" name="search_type" value='1' >
+		<input type="hidden" name="rdg_rf" value="1">
 		<button class="btn-u  btn-u-xs btn-u-light-green" id="btnSaveSearch" ><i class=" fa fa-folder-open "></i> บันทึกการค้นหา</button>
 		<button class="btn-u  btn-u-xs btn-u-dark-blue" ><i class="fa fa-envelope-o"></i> แจ้งเตือนทางอีเมลล์</button>
 		
 	</footer>
 	
 </form>	
-<form id='fromSearchQuick' class="sky-form" id="sky-form4" action="#" novalidate="novalidate">		
+<form id='fromSearchQuick' >		
 	<fieldset> 
 		<div class="row">
 					
@@ -266,6 +232,7 @@ if($conn){
 								<div class="input-group">
                                     <input type="text" name="searchQuick" class="form-control" placeholder="ใส่ข้อมูล">
                                      <input type="hidden" name="paramAction" value="searchQuick">
+                                      <input type="hidden" name="rdg_rf" value="1">
                                     <span class="input-group-btn">
                                  	
                                         <button type="submit" class="btn btn-u btn-u-orange"><i class="fa fa-search-plus"></i> คลิ๊กค้นหาทางลัด</button>

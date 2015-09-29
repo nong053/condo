@@ -433,6 +433,10 @@ var postFn=function(loginType){
 						///####rdg_rdg_bus####
 						$("#rdg_bus").val(data['rdg_bus']);
 						
+						///####rdg_address_soi####
+						$("#rdg_address_soi").val(data['rdg_address_soi']);
+						
+						
 						
 					}
 				});

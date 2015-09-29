@@ -23,7 +23,7 @@ if($_POST['paramAction']=="realtyDataGeneralById"){
 			select rdg.*,rt.rt_contructor_yet  from realty_data_general  rdg
 			LEFT JOIN  realty_type rt
 			on rdg.rt_id=rt.rt_id
-			WHERE rdg.rdg_id='$RdgId'
+			WHERE rdg.rdg_id='$RdgId' 
 	";
 	$result=mysql_query($strSQL);
 	if($result){
@@ -165,6 +165,8 @@ if($_POST['paramAction']=="realtyDataGeneralSave"){
 	$rdg_address_post_code=$_POST['rdg_address_post_code'];
 	$rdg_address_province_id=$_POST['rdg_address_province_id'];
 	$rdg_address_road=$_POST['rdg_address_road'];
+	$rdg_address_soi=$_POST['rdg_address_soi'];
+	
 	$rdg_address_sub_district_id=$_POST['rdg_address_sub_district_id'];
 	$rdg_area_number=$_POST['rdg_area_number'];
 	$rdg_detail=nl2br($_POST['rdg_detail']);
@@ -242,6 +244,7 @@ if($_POST['paramAction']=="realtyDataGeneralSave"){
 				rdg_address_district_id='$rdg_address_district_id',
 				rdg_address_sub_district_id='$rdg_address_sub_district_id',
 				rdg_address_road='$rdg_address_road',
+				rdg_address_soi='$rdg_address_soi',
 				rdg_post_code='$rdg_address_post_code',
 				rdg_map='$rdg_map',
 				rdg_area_number='$rdg_area_number',
@@ -286,6 +289,7 @@ if($_POST['paramAction']=="realtyDataGeneralSave"){
 				rdg_address_district_id,
 				rdg_address_sub_district_id,
 				rdg_address_road,
+				rdg_address_soi,
 				rdg_post_code,
 				rdg_map,
 				rdg_area_number,
@@ -324,6 +328,7 @@ if($_POST['paramAction']=="realtyDataGeneralSave"){
 			'$rdg_address_district_id',
 			'$rdg_address_sub_district_id',
 			'$rdg_address_road',
+			'$rdg_address_soi',
 			'$rdg_address_post_code',
 			'$rdg_map',
 			'$rdg_area_number',
@@ -345,11 +350,7 @@ if($_POST['paramAction']=="realtyDataGeneralSave"){
 			'$rdg_harbor',
 			'$rdg_bus',
 			'$rdg_status'
-			
-			
-			
-			
-			
+
 	)";
 		$sucess=mysql_query($strSQL)or die(mysql_error());
 		$rdg_id=mysql_insert_id();
@@ -357,44 +358,6 @@ if($_POST['paramAction']=="realtyDataGeneralSave"){
 			echo mysql_error();
 		}else{
 			echo "[[\"seccess\"],[".$rdg_id."]]";
-			/*
-			$strSQL="select rdg_id from realty_data_general where
-			
-				rps_id='$rps_id' and
-				rf_id='$realtyFor' and
-				rt_id='$realtyType' and
-				rdg_title='$rdg_title' and
-				rdg_detail='$rdg_detail' and
-				rdg_owner_project='$rdg_owner_project' and
-				rdg_price='$rdg_price' and
-				rdg_name_project='$rdg_name_project' and
-				rdg_address_no='$rdg_address_no' and
-				rdg_address_province_id='$rdg_address_province_id' and
-				rdg_address_district_id='$rdg_address_district_id' and
-				rdg_address_sub_district_id='$rdg_address_sub_district_id' and
-				rdg_address_road='$rdg_address_road' and
-				rdg_post_code='$rdg_address_post_code' and
-				rdg_map='$rdg_map' and
-				rdg_area_number='$rdg_area_number' and
-				rdg_area_unit='$realtyUnit' and
-				cus_id='$cus_id' and
-				rdg_create='$rdg_datetime' and
-				rdg_update='$rdg_datetime'
-				";
-				
-			$resullt=mysql_query($strSQL)or die(mysql_error());
-			*/
-			/*
-			if($resullt){
-				$rs=mysql_fetch_array($resullt);
-				//echo $rs['rdg_id'];
-				//$rdg_id=$rs['rdg_id'];
-				echo "[[\"success\"],[".$rdg_id."]]";
-			}else{
-				echo "error".mysql_error();
-			}
-			*/
-			
 		}
 	}
 	
@@ -419,7 +382,7 @@ if($_POST['paramAction']=="realtyDataGeneralSave"){
 }
 if($_POST['paramAction']=="province"){
 	
-	$strSQL="select p.PROVINCE_ID,p.PROVINCE_CODE,p.PROVINCE_NAME from province p";
+	$strSQL="select p.PROVINCE_ID,p.PROVINCE_CODE,p.PROVINCE_NAME from province p order by p.PROVINCE_NAME";
 	$result=mysql_query($strSQL);
 	while ($rs=mysql_fetch_array($result)){
 		if($i==0){

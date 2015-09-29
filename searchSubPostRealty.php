@@ -12,30 +12,10 @@ function resultUnit(){
 	$result=mysql_query($strSQL);
 	return $result;
 }
+include'query_public_transport.php';
 
 
 
-
-$sqlSQLBTS="SELECT * FROM public_transport where pt_type='BTS'";
-$resultBTS=mysql_query($sqlSQLBTS);
-
-$sqlSQLMRT="SELECT * FROM public_transport where pt_type='MRT'";
-$resultMRT=mysql_query($sqlSQLMRT);
-
-$sqlSQLARL="SELECT * FROM public_transport where pt_type='ARL'";
-$resultARL=mysql_query($sqlSQLARL);
-
-$sqlSQLHARBOR="SELECT * FROM public_transport where pt_type='HARBOR'";
-$resultHARBOR=mysql_query($sqlSQLHARBOR);
-
-$sqlSQLRoadNo="select rdg_address_road from realty_data_general where rdg_address_road !=NULL";
-$resultRoadNo=mysql_query($sqlSQLRoadNo);
-
-$sqlSQLBusNo="select rdg_bus from realty_data_general where rdg_bus !=NULL";
-$resultBusNo=mysql_query($sqlSQLBusNo);
-
-$sqlSQLSoi="select rdg_address_soi from realty_data_general where rdg_address_soi !=NULL";
-$resultSoi=mysql_query($sqlSQLSoi);
 
 ?>
  <!--Blog Post0--> 
@@ -56,7 +36,15 @@ $resultSoi=mysql_query($sqlSQLSoi);
  		callSubDistrict("<?=$_POST['rdg_address_district_id']?>","<?=$_POST['rdg_address_sub_district_id']?>","2");
  		</script>
  		<?php	
- 		}else{
+ 		}else if($_POST['rdg_address_province_id_rent']!="" or $_POST['rdg_address_district_id_rent']!="" or $_POST['rdg_address_sub_district_id_rent']){
+		?>
+ 		<script>
+ 		callProvince("<?=$_POST['rdg_address_province_id_rent']?>","<?=$_POST['rdg_address_district_id_rent']?>","<?=$_POST['rdg_address_sub_district_id_rent']?>","2");
+ 		callDistrict("<?=$_POST['rdg_address_province_id_rent']?>","<?=$_POST['rdg_address_district_id_rent']?>","","2");
+ 		callSubDistrict("<?=$_POST['rdg_address_district_id_rent']?>","<?=$_POST['rdg_address_sub_district_id_rent']?>","2");
+ 		</script>
+ 		<?php
+		}else{
  		?>
  		<script>
  		callProvince("","","","2");
@@ -64,30 +52,68 @@ $resultSoi=mysql_query($sqlSQLSoi);
  		<?php
  		}
  		?>
-									
+	
+	
+<?php 
+
+if($rsRT2['rt_contructor_yet']=="Y"){
+
+}else{
+	
+
+?>									
 <div class="row">						
 	<form id="formSubPost" name="formSubPost" class="sky-form" id="sky-form4" action="#" novalidate="novalidate">
 						<header>
 							<div class="headline headline-md">
-								<h2>ค้นหาประกาศขายอสังหาริมทรัพย์</h2>
+								
+								<h2>ค้นหาประกาศ <span id='realtyName'><?=$_POST['embed_rt_name']?> </span></h2>
 							</div>
 							<?php 
-			if($_POST['rdg_tf']=="5"){
-				?>
-				<input type="radio" name="rdg_tf"  value="1"> ขายขาด
-				<input type="radio" name="rdg_tf" checked='checked' value="5"> ขายดาวน์
-				<?php
-			}else if($_POST['rdg_tf']=="1"){
-				?>
-				<input type="radio" name="rdg_tf" checked='checked' value="1"> ขายขาด
-				<input type="radio" name="rdg_tf" value="5"> ขายดาวน์
-				<?php
-				
-			}else{
-				?>
-				<input type="radio" name="rdg_tf"  value="1"> ขายขาด
-				<input type="radio" name="rdg_tf" value="5"> ขายดาวน์
-				<?php
+
+			if($_POST['search_type']=="1"){
+				if($_POST['rdg_rf']=="5"){
+					?>
+					<input type="radio" name="rdg_rf"  value="1"> ขายขาด
+					<input type="radio" name="rdg_rf" checked='checked' value="5"> ขายดาวน์
+					<input type="radio" name="rdg_rf"  value="3"> ขายและเช่า
+					<?php
+				}else if($_POST['rdg_rf']=="1"){
+					?>
+					<input type="radio" name="rdg_rf" checked='checked' value="1"> ขายขาด
+					<input type="radio" name="rdg_rf" value="5"> ขายดาวน์
+					<input type="radio" name="rdg_rf" value="3"> ขายและเช่า
+					<?php
+					
+				}else if($_POST['rdg_rf']=="3"){
+					?>
+					<input type="radio" name="rdg_rf" value="1"> ขายขาด
+					<input type="radio" name="rdg_rf" value="5"> ขายดาวน์
+					<input type="radio" name="rdg_rf"  checked='checked' value="3"> ขายและเช่า
+					<?php
+					
+				}else{
+					?>
+					<input type="radio" name="rdg_rf"  value="1"> ขายขาด
+					<input type="radio" name="rdg_rf" value="5"> ขายดาวน์
+					<input type="radio" name="rdg_rf"  value="3"> ขายและเช่า
+					<?php
+				}
+			}
+			if($_POST['search_type']=="2"){	
+
+				 if($_POST['rdg_rf']=="2"){
+						?>
+						<input type="radio" name="rdg_rf" checked='checked' value="2"> เช่า
+						<input type="radio" name="rdg_rf"   value="3"> ขายและเช่า
+						<?php
+						
+					}else if($_POST['rdg_rf']=="3"){
+						?>
+						<input type="radio" name="rdg_rf"  value="2"> เช่า
+						<input type="radio" name="rdg_rf" checked='checked'  value="3"> ขายและเช่า
+						<?php
+					}
 			}
 			?>
 			
@@ -319,7 +345,7 @@ $resultSoi=mysql_query($sqlSQLSoi);
 							 <section>
 									<label class="select">
 										<select name="rdg_address_road">
-											<option  selected="" value="All">เลือกถนน</option>
+											<option   value="All">เลือกถนน</option>
 											<?php 
 												while($rsRoadNo=mysql_fetch_array($resultRoadNo)){
 													if($rsRoadNo['rdg_address_road']==$_POST['rdg_address_road'])	{
@@ -343,16 +369,16 @@ $resultSoi=mysql_query($sqlSQLSoi);
 							 <section>
 									<label class="select">
 										<select class="Room1Select" tabindex="4" name="rdg_address_soi">
-											<option value="">เลือกซอย</option>
+											<option value="All">เลือกซอย</option>
 												<?php 
 													while($rsSoi=mysql_fetch_array($resultSoi)){
 														if($rsSoi['rdg_address_soi']==$_POST['rdg_address_soi']){
 														?>
-														<option selected='selected' value="<?=$rsSoi['rdg_address_soi ']?>"><?=$rsSoi['rdg_address_soi ']?></option>
+														<option selected='selected' value="<?=$rsSoi['rdg_address_soi']?>"><?=$rsSoi['rdg_address_soi']?></option>
 														<?php
 														}else{
 														?>
-														<option value="<?=$rsSoi['rdg_address_soi ']?>"><?=$rsSoi['rdg_address_soi ']?></option>
+														<option value="<?=$rsSoi['rdg_address_soi']?>"><?=$rsSoi['rdg_address_soi']?></option>
 														<?php
 														}
 													}
@@ -415,12 +441,13 @@ $resultSoi=mysql_query($sqlSQLSoi);
 							 <section>
 									<label class="select">
 										<select name="rdg_bus">
-											<option  selected="" value="All">ใกล้สายรถเมย์ ก.ท.ม.</option>
+											<option  value="All">ใกล้สายรถเมย์ ก.ท.ม.</option>
 											<?php 
 											while($rsBusNo=mysql_fetch_array($resultBusNo)){
+												
 												if($rsBusNo['rdg_bus']==$_POST['rdg_bus']){
 												?>
-												<option selectd='selected' value="<?=$rsBusNo['rdg_bus']?>"><?=$rsBusNo['rdg_bus']?></option>
+												<option selected='selected' value="<?=$rsBusNo['rdg_bus']?>"><?=$rsBusNo['rdg_bus']?></option>
 												<?php
 												}else{
 												?>
@@ -466,6 +493,14 @@ $resultSoi=mysql_query($sqlSQLSoi);
 		<footer>
 			<!-- <button class="btn-u btn-u-light-green" type="submit">บันทึกการค้นหา</button> -->
 			<input type='hidden' name='paramAction' value='searchSubPost'>
+			<div class="parameterEmbedArea">
+			
+			<input type='hidden' name='search_type' value='<?=$_POST['search_type']?>'>
+			<input type='hidden' name='embed_rt_id' value='<?=$embed_rt_id?>'>
+			<input type='hidden' name='embed_rt_name' value='<?=$_POST['embed_rt_name']?>'>
+			
+			
+			</div>
 			<button class="btn-u btn-u-dark-blue" type="submit">แจ้งเตือนทางอีเมลล์</button>
 			<button class="btn-u btn-u-orange" type="submit ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ค้นหาประกาศ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
 		</footer>
@@ -473,3 +508,4 @@ $resultSoi=mysql_query($sqlSQLSoi);
 		
 	</form>
 </div>
+<?php }?>
