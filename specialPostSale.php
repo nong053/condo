@@ -24,8 +24,8 @@ while($rsSCCate=mysql_fetch_array($resultSCCate)){
 		rdg_area_number,rdg_area_unit,ru.ru_name,rtc.rtc_detail,
 		rdg_update,
 		rdg.rdg_estate_num,
-		(select ru2.ru_name  from realty_unit ru2 where ru2.ru_id= rdg.rdg_estate_unit) as rdg_estate_unit_name
-		
+		(select ru2.ru_name  from realty_unit ru2 where ru2.ru_id= rdg.rdg_estate_unit) as rdg_estate_unit_name,
+		c.*
 		from realty_data_general rdg
 		LEFT JOIN province p
 		ON p.PROVINCE_ID=rdg.rdg_address_province_id
@@ -39,6 +39,8 @@ while($rsSCCate=mysql_fetch_array($resultSCCate)){
 		on ru.ru_id=rdg.rdg_area_unit
 		LEFT JOIN realty_type_cate rtc
 		ON rtc.rtc_id=rt.rt_contructor_cate
+		LEFT JOIN customer c
+		ON c.cus_id= rdg.cus_id
 		where  rt.rt_contructor_cate=".$rsSCCate['rtc_id']." order by rdg_id  
 				
 		";
@@ -46,7 +48,7 @@ while($rsSCCate=mysql_fetch_array($resultSCCate)){
  
 <!--Blog Post-->        
 <div class="blog margin-bottom-5">
-<div class="row">
+<div class="row" >
 	<div class="panel panel-u" style="margin-bottom: 5px;">
                             <div class="panel-heading">
                                 <h3 class="panel-title"><i class="fa fa-tasks"></i> ประกาศ<?=$rsSCCate['rtc_detail'];?>พิเศษหน้าแรก</h3>
@@ -70,11 +72,11 @@ while($rsSCCate=mysql_fetch_array($resultSCCate)){
                                 while($rsPsale=mysql_fetch_array($resultPsale)){
                                 ?>	
                                 
-                                		<tr>
+                                		<tr >
 					                		<td>
 					                		<!--start  post  -->
-												<div class="col-md-12 shadow-wrapper">
-													<div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
+												<div class="col-md-12 shadow-wrapper" >
+													<div class="tag-box tag-box-v1 box-shadow shadow-effect-2" style="background: <?=$rsSCCate['rtc_bg_color'];?>">
 														
 														<!--start button top post -->
 														<div class="row">
@@ -117,11 +119,24 @@ while($rsSCCate=mysql_fetch_array($resultSCCate)){
 																			</div>
 																			
 																		</div>
+																		
 																	</div>
+																	
+																	<!-- profile start -->
+																	<div>	
+																		<img width="80" border="0" src="control-panel/member_img/<?=$rsPsale['cus_pic']?>" class="rounded-x">
+																		<a href="index.php?page=profile_post&cus_id=<?=$rsPsale['cus_id']?>">
+																		<em>โปรไฟล์ผู้ประกาศ</em>
+																		</a>
 																	</div>
+																	<!-- profile end -->
+																		
+																	</div>
+																	
 															
 															
 															</div>
+															<brstyle='clear:both'>
 														</div>
 														<div class="row">
 															<div class="col-md-4">
@@ -173,7 +188,7 @@ while($rsSCCate=mysql_fetch_array($resultSCCate)){
 															<?if($rsPsale['rdg_title'])echo "<p>".$rsPsale['rdg_title']."</p>";?>
 															<b>ขาย</b> <?=$rsPsale['rt_name']?>  <?
 															if($rsPsale['rf_id']=="1"){//เพื่อขาย
-																echo "ราคาขาย ".number_format($rsPsale['rdg_price'])." บาท";
+																echo "ราคาขาย <span style='color:red;font-weight:bold;'>".number_format($rsPsale['rdg_price'])."</span> บาท";
 															}else if($rsPsale['rf_id']=="2"){//เพื่อเช่า
 																echo  "ราคาเช่า ".number_format($rsPsale['rdg_price_rent'])." บาท";
 															}else if($rsPsale['rf_id']=="3"){//เพื่อขายและเช่า

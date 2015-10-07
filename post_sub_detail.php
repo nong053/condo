@@ -6,7 +6,9 @@ $rtc_id=$_GET['rtc_id'];
 
 
 $strSQL1="
-select rdg.*,rf_name,rt_name,rps_name,p.PROVINCE_NAME,d.DISTRICT_NAME,a.AMPHUR_NAME from realty_data_general rdg
+select rdg.*,rf_name,rt_name,rps_name,p.PROVINCE_NAME,d.DISTRICT_NAME,a.AMPHUR_NAME,ru.ru_name,
+(select ru2.ru_name  from realty_unit ru2 where ru2.ru_id= rdg.rdg_estate_unit) as rdg_estate_unit_name
+from realty_data_general rdg
 LEFT JOIN realty_for rf
 ON rf.rf_id=rdg.rf_id
 LEFT JOIN realty_type rt
@@ -16,9 +18,11 @@ ON rps.rps_id=rdg.rps_id
 LEFT JOIN province p
 ON p.PROVINCE_ID=rdg.rdg_address_province_id
 LEFT JOIN district d
-on d.DISTRICT_ID=rdg_address_district_id
+on d.DISTRICT_ID=rdg_address_sub_district_id
 LEFT JOIN amphur a
-on a.AMPHUR_ID=rdg_address_sub_district_id
+on a.AMPHUR_ID=rdg_address_district_id
+LEFT JOIN realty_unit ru 
+on ru.ru_id=rdg.rdg_area_unit
 where rdg_id='$rdg_id'
 ";
 $result1=mysql_query($strSQL1);
@@ -165,7 +169,7 @@ $rdg_id=$rs1['rdg_id'];
 
 														<!--start content  basic-->
 														<div class="row">
-																<div class="col-md-8">
+																<div class="col-md-10">
 																	
 																<div class="tag-box tag-box-v1 box-shadow shadow-effect-2" style="margin-bottom:5px;">
 																	<h2>ประเภท: <?=$rs1['rf_name']?><?=$rs1['rt_name']?></h2>
@@ -176,8 +180,8 @@ $rdg_id=$rs1['rdg_id'];
 																	<?php 
 																	if($rtc_id!=3 and $rtc_id!=4){
 																	?>
-																	<p>พื้นที่  <?=$rs1['rdg_estate_num']?> <?=$rs1['rdg_estate_unit']?></p>
-																	<p>ราคา  <?=number_format($rs1['rdg_area_number'])?> ต่อ  <?=number_format($rs1['rdg_area_unit'])?></p>
+																	<p>พื้นที่  <?=$rs1['rdg_estate_num']?> <?=$rs1['rdg_estate_unit_name']?></p>
+																	<p>ราคา  <?=number_format($rs1['rdg_area_number'])?> ต่อ  <?=$rs1['ru_name']?></p>
 																	<?php 
 																	}
 																	?>
@@ -189,7 +193,7 @@ $rdg_id=$rs1['rdg_id'];
 																
 
 																</div>
-																<div class="col-md-4">
+																<div class="col-md-2">
 
 																	<div class="carousel slide testimonials testimonials-v2 testimonials-bg-default" id="testimonials-9">
 																		<div class="">
@@ -219,12 +223,19 @@ $rdg_id=$rs1['rdg_id'];
 
 														<!-- start button link -->
 													<p>
-														<button type="button" class="btn-u  btn-u-xs btn-u-green"><i class="fa fa-cloud"></i> แชร์ไปที่เฟสบุ๊ค/กูเกิล</button>
-														<button type="button" class="btn-u  btn-u-xs btn-u-green"><i class="fa fa-bell-o"></i>ส่งหน้านี้ให้เพิ่อน</button>
+													
+<!-- 
+<a href="http://www.facebook.com/sharer.php?u= ลิงค์" target="_blank"><img src="img/facebook-variation.png" alt="Facebook" /></a>
+<a href="http://twitter.com/share?url= ลิงค์" target="_blank"><img src="img/twitter-variation.png" alt="Twitter" /></a>
+<a href="https://plus.google.com/share?url= ลิงค์" target="_blank"><img src="img/gplus-variation2.png" alt="Google" /></a>
+-->
+													
+														<button type="button"  onClick="window.open('http://www.facebook.com/sharer.php?u=www.realthairealty.com/<?=$_SERVER['REQUEST_URI']?>')"; class=" btn-u-xs btn btn-facebook-inversed"><i class="fa fa-facebook"></i> แชร์ไปที่เฟสบุ๊ค</button>
+														<button type="button" onClick="window.open('https://plus.google.com/share?url=www.realthairealty.com/<?=$_SERVER['REQUEST_URI']?>')"; class="btn-u  btn-u-xs btn-googleplus-inversed"><i class="fa fa-google-plus"></i> แชร์ไปที่กูเกิล</button>
+														<button type="button" data-target="#sendToMyFriendsFormModal" data-toggle="modal"   class="btn-u  btn-u-xs btn-u-green"><i class="fa fa-bell-o"></i>ส่งหน้านี้ให้เพิ่อน</button>
 														<button type="button" class="btn-u  btn-u-xs btn-u-green"><i class="fa fa-envelope-o"></i> เก็บหน้านี้ไว้ดูครั้งหน้า</button>
 														<button type="button" class="btn-u  btn-u-xs btn-u-green"><i class="fa fa-download"></i>คลิ๊กดูหน้าที่จัดเก็บไว้</button>
-														<button type="button" class="btn-u  btn-u-xs btn-u-green"><i class="fa fa-download"></i>ปริ้น</button>
-													
+														<button type="button"  class=" print btn-u  btn-u-xs btn-u-green"><i class="fa fa-download"></i>ปริ้น</button>
 													</p>
 													<!--end  button link -->
 													
@@ -514,7 +525,7 @@ $rdg_id=$rs1['rdg_id'];
 		<div class="row">
 				<label class="col-md-3 control-label titleGroup" > แผนที่  :</label>
 				<div class="col-md-9">
-					<div id="map-canvas-summary" class="map-canvas-summary" style='width: 550px;height:400px;' ></div>
+					<div id="map-canvas-summary" class="map-canvas-summary" style='width: 490px;height:400px;' ></div>
 					
 				</div>
 		</div>
@@ -682,77 +693,150 @@ $rdg_id=$rs1['rdg_id'];
 
 												<!-- start main box4 -->
 														<div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
-															<h2>ฝากขอความไว้กับประกาศรายนี้</h2>
+															<h2>ฝากขอความไว้กับประกาศนี้</h2>
 															<p>
-															<form class="sky-form" action="#">
-																<fieldset>                  
-																			
-																			<section>
-																				<label class="label">พิมพ์ข้อความ</label>
-																				<label class="textarea textarea-resizable">
-																					<textarea rows="3"></textarea>
-																				</label>
-																			</section>
-																			
-																			<section>
-																				<label class="label">ชื่อ</label>
-																				<label class="input">
-																					<input type="text">
-																				</label>
-																			</section>
-																			<section>
-																				<label class="label">อีเมลล์</label>
-																				<label class="input">
-																					<input type="text">
-																				</label>
-																			</section>
-																</fieldset>
-																<footer>
-																<button class="btn-u" type="submit">คลิ๊กเพื่อฝากข้อความ</button>
-																
-																</footer>
-																</form>
+															<!-- comment start -->
+															<div id="commentArea"></div>
+															
+															
+									                        <!-- comment end -->
 															</p>
-														</div>
-												<!-- end main box4 -->
-												<!-- start main box5 -->
-														<div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
-															<h2>ติดต่อเจ้าของไปทางประกาศ</h2>
 															<p>
-															<form class="sky-form" action="#">
+															<!--  form contact email start -->
+															<form name="commentForm" id="commentForm" action="#" class="sky-form">
 																<fieldset>                  
 																			
 																			<section>
 																				<label class="label">พิมพ์ข้อความ</label>
 																				<label class="textarea textarea-resizable">
-																					<textarea rows="3"></textarea>
+																					<textarea name="contact_detail2" id="contact_detail2" rows="3"></textarea>
 																				</label>
 																			</section>
 																			
 																			<section>
 																				<label class="label">ชื่อ</label>
 																				<label class="input">
-																					<input type="text">
+																					<input type="text" name="contact_fullname2" id="contact_fullname2">
 																				</label>
 																			</section>
 																			<section>
 																				<label class="label">เบอร์โทร</label>
 																				<label class="input">
-																					<input type="text">
+																					<input type="text" name="contact_tel2" id="contact_tel2">
 																				</label>
 																			</section>
 																			<section>
 																				<label class="label">อีเมลล์</label>
 																				<label class="input">
-																					<input type="text">
+																					<input type="text" name="contact_email2" id="contact_email2">
 																				</label>
 																			</section>
+																			
+																			<section>
+																				<label class="label"><?
+																				$rand1=rand(1,10);
+																				$rand2=rand(1,10);
+																				$confrim=$rand1+$rand2;
+																				$_SESSION['sesConfrim2']=$confrim;
+																				?>
+																				<b><? echo "$rand1 + $rand2 =?"; ?></b>
+																				<span class="color-red">*</span>
+																				</label>
+																				<label class="input" style='wdith:100px;'>
+																					<input type="text" name="cus_confrim2" id="cus_confrim2" class="form-control margin-bottom-20">
+																				</label>
+																				
+																			</section>
+																			
+																			
+																			
+																			
 																</fieldset>
 																<footer>
-																<button class="btn-u" type="submit">คลิ๊กเพื่อส่งอีเมลล์</button>
+																
+																<input type="hidden" name="admin_id2" value="<?=$rs1['cus_id']?>">
+																<input type="hidden" name="robot_gen2" id="robot_gen2" value="<?=$confrim?>">
+																<input type="hidden" name="rdg_id2" id="rdg_id2" value="<?=$rs1['rdg_id']?>">
+																<input type="hidden" name="paramAction" value="saveContract">
+																<button type="submit" id="btnContactUsForm" class="btn-u">คลิ๊กเพื่อฝากข้อความ</button>
 																
 																</footer>
-																</form>
+															</form>
+															<!--  form contact email end -->
+															
+															</p>
+														</div>
+														<script>
+														$(document).ready(function(){
+															commentFn(<?=$rs1['rdg_id']?>);
+														});
+														</script>
+												<!-- end main box4 -->
+												<!-- start main box5 -->
+														<div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
+															<h2>ติดต่อเจ้าของไปทางประกาศ</h2>
+															<p>
+															<!--  form contact email start -->
+															<form name="contactUsForm" id="contactUsForm" action="#" class="sky-form">
+																<fieldset>                  
+																			
+																			<section>
+																				<label class="label">พิมพ์ข้อความ</label>
+																				<label class="textarea textarea-resizable">
+																					<textarea name="contact_detail" id="contact_detail" rows="3"></textarea>
+																				</label>
+																			</section>
+																			
+																			<section>
+																				<label class="label">ชื่อ</label>
+																				<label class="input">
+																					<input type="text" name="contact_fullname" id="contact_fullname">
+																				</label>
+																			</section>
+																			<section>
+																				<label class="label">เบอร์โทร</label>
+																				<label class="input">
+																					<input type="text" name="contact_tel" id="contact_tel">
+																				</label>
+																			</section>
+																			<section>
+																				<label class="label">อีเมลล์</label>
+																				<label class="input">
+																					<input type="text" name="contact_email" id="contact_email">
+																				</label>
+																			</section>
+																			
+																			<section>
+																				<label class="label"><?
+																				$rand1=rand(1,10);
+																				$rand2=rand(1,10);
+																				$confrim=$rand1+$rand2;
+																				$_SESSION['sesConfrim2']=$confrim;
+																				?>
+																				<b><? echo "$rand1 + $rand2 =?"; ?></b>
+																				<span class="color-red">*</span>
+																				</label>
+																				<label class="input" style='wdith:100px;'>
+																					<input type="text" name="cus_confrim" id="cus_confrim" class="form-control margin-bottom-20">
+																				</label>
+																				
+																			</section>
+																			
+																			
+																			
+																			
+																</fieldset>
+																<footer>
+																
+																<input type="hidden" name="admin_id" value="<?=$rs1['cus_id']?>">
+																<input type="hidden" name="robot_gen" id="robot_gen" value="<?=$confrim?>">
+																<input type="hidden" name="rdg_id" id="rdg_id" value="<?=$rs1['rdg_id']?>">
+																<input type="hidden" name="paramAction" value="sendEmail">
+																<button type="submit" id="btnContactUsForm" class="btn-u">คลิ๊กเพื่อส่งอีเมลล์</button>
+																
+																</footer>
+															</form>
+															<!--  form contact email end -->
 															</p>
 														</div>
 												<!-- end main box5 -->

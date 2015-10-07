@@ -1,4 +1,5 @@
 <? ob_start();
+require("class_mysql.php");
 $db=new database();
 ?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -18,8 +19,20 @@ $db=new database();
 
 	 
 }
+.title{
+float:left;
+width:80px;
+font-weight:bold;
+text-align:right;
+}
+.detail{
+float:right;
+width:300px;
+}
 </style>
-
+<div id="dev_text" style="font-size:13px; font-weight:bold; color:#FFF; padding:5px; background-color:#333;">
+	       จัดการโลโก้
+	</div>
 <div id="box_style">
 <div id="box_style_l" style="float:left">
 <?php 
@@ -63,7 +76,7 @@ $obj_manage_data->insert_data($table,$field,$values);
 
 $values = $rs_admin_id['admin_id'];
 if($_SESSION['admin_status']=="3"){
-echo"admin here";
+
 $values=1;
 }
 //Check User and Management by User End
@@ -105,8 +118,10 @@ $header_banner_width=$rs_header_banner[object_width];
 $header_banner_height=$rs_header_banner[object_height];
 
 ?>
+
 <form method="post" action="style_header_process.php" name="tcp_test" enctype="multipart/form-data">
-<table>
+<table >
+	<!-- 
 	<tr>
     	<td>
         พื้นหลัง	Top  Title
@@ -170,25 +185,51 @@ $header_banner_height=$rs_header_banner[object_height];
        <a href="javascript:TCP.popup(document.forms['tcp_test'].elements['header_bg_color'])"><img width="15" height="13" src="../images_system/App_Store.png"></a>
         </td>
     </tr>
-    <tr>
-    	<td>
-        LOGO
-        </td>
-        <td>
+     -->
+    <tr bgcolor="#f8f8f8">
+    	<td >
+    	<div class="title">
+        		รูปภาพ:
+        </div></td><td>
+        <div class='detail'>
         <input type="file"  name="file_header_logo"/>
-         <a href="preview_style_object.php?want=preview&object_position=header_logo&admin_id=<?=$rs_admin_id['admin_id']?>&TB_iframe=true&height=350&width=500" rel="sexylightbox">
-        preview
+        <a href="preview_style_object.php?want=preview&object_position=header_logo&admin_id=<?=$rs_admin_id['admin_id']?>&TB_iframe=true&height=350&width=500" rel="sexylightbox">
+        		ดูตัวอย่าง
         </a>
-        </td>
-         <td>
-        width:<input type="text" name="header_logo_width" style="width:30px;" value="<?=$header_logo_width?>"/>
-        height:<input type="text" name="header_logo_height" style="width:30px;" value="<?=$header_logo_height?>"/>
-        </td>
-         <td>
-       color:<input type="Text" name="header_logo_color" value="<?=$header_logo_color?>">
-       <a href="javascript:TCP.popup(document.forms['tcp_test'].elements['header_logo_color'])"><img width="15" height="13" src="../images_system/App_Store.png"></a>
+        </div>
+        
+        
+        
+      
+         
         </td>
     </tr>
+    <tr  bgcolor="#f8f8f8">
+         <td >
+         <div class="title">ขนาด</div></td><td>
+         <div class="detail">
+        ความกว้าง:
+        <input type="text" name="header_logo_width" style="width:30px;" value="<?=$header_logo_width?>"/>
+        ความสูง:<input type="text" name="header_logo_height" style="width:30px;" value="<?=$header_logo_height?>"/>
+        </div>
+        
+        
+        </td>
+    </tr>
+    <tr  bgcolor="#f8f8f8">
+         <td >
+          <div class="title">กำหนดสี</div></td><td>
+          <div class="detail">
+    		   สีพื้นหลังโลโก้:<input type="Text" name="header_logo_color" value="<?=$header_logo_color?>">
+       		<a href="javascript:TCP.popup(document.forms['tcp_test'].elements['header_logo_color'])"><img width="15" height="13" src="../images_system/color3.png"></a>
+        	</div>
+        
+        </td>
+    </tr>
+    
+    
+    
+    <!-- 
     <tr>
     	<td>
         Banner
@@ -209,20 +250,23 @@ $header_banner_height=$rs_header_banner[object_height];
         </td>
     </tr>
     
-    
+     -->
     
 </table>
+<br>
 <input type="hidden" name="admin_id" id="admin_id" value="<?= $rs_admin_id['admin_id']?>">
-<input type="submit"  value="Submit"/>
+<input type="submit"  value="ตกลง"/>
 </form>
 
 
 </div>
+<!-- 
 <div id="box_style_r" style="float:left;">
 	<div id="detail_style" style="width:510px; padding:5px; border:#CCC 1px solid; background-color:#FFC">
 Detail ...
     </div>
 </div>
+ -->
 <br style="clear:both" />
 </div>
 

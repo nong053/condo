@@ -76,27 +76,27 @@ if($rsRT2['rt_contructor_yet']=="Y"){
 					?>
 					<input type="radio" name="rdg_rf"  value="1"> ขายขาด
 					<input type="radio" name="rdg_rf" checked='checked' value="5"> ขายดาวน์
-					<input type="radio" name="rdg_rf"  value="3"> ขายและเช่า
+					<!-- <input type="radio" name="rdg_rf"  value="3"> ขายและเช่า -->
 					<?php
 				}else if($_POST['rdg_rf']=="1"){
 					?>
 					<input type="radio" name="rdg_rf" checked='checked' value="1"> ขายขาด
 					<input type="radio" name="rdg_rf" value="5"> ขายดาวน์
-					<input type="radio" name="rdg_rf" value="3"> ขายและเช่า
+					<!-- <input type="radio" name="rdg_rf" value="3"> ขายและเช่า -->
 					<?php
 					
 				}else if($_POST['rdg_rf']=="3"){
 					?>
 					<input type="radio" name="rdg_rf" value="1"> ขายขาด
 					<input type="radio" name="rdg_rf" value="5"> ขายดาวน์
-					<input type="radio" name="rdg_rf"  checked='checked' value="3"> ขายและเช่า
+					<!-- <input type="radio" name="rdg_rf"  checked='checked' value="3"> ขายและเช่า -->
 					<?php
 					
 				}else{
 					?>
 					<input type="radio" name="rdg_rf"  value="1"> ขายขาด
 					<input type="radio" name="rdg_rf" value="5"> ขายดาวน์
-					<input type="radio" name="rdg_rf"  value="3"> ขายและเช่า
+					<!-- <input type="radio" name="rdg_rf"  value="3"> ขายและเช่า -->
 					<?php
 				}
 			}
@@ -105,13 +105,13 @@ if($rsRT2['rt_contructor_yet']=="Y"){
 				 if($_POST['rdg_rf']=="2"){
 						?>
 						<input type="radio" name="rdg_rf" checked='checked' value="2"> เช่า
-						<input type="radio" name="rdg_rf"   value="3"> ขายและเช่า
+						<!-- <input type="radio" name="rdg_rf"   value="3"> ขายและเช่า -->
 						<?php
 						
 					}else if($_POST['rdg_rf']=="3"){
 						?>
 						<input type="radio" name="rdg_rf"  value="2"> เช่า
-						<input type="radio" name="rdg_rf" checked='checked'  value="3"> ขายและเช่า
+						<!-- <input type="radio" name="rdg_rf" checked='checked'  value="3"> ขายและเช่า -->
 						<?php
 					}
 			}

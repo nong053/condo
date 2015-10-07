@@ -6,8 +6,8 @@
 }
 .navbar-nav > li > a {
     margin-top: 2px;
-    padding-bottom: 8px;
-    padding-top: 8px;
+    padding-bottom: 3px;
+    padding-top: 3px;
 }
 .navbar-nav {
     float: left;
@@ -41,9 +41,48 @@ blockquote {
 	color:white;
 	
 }
-.btn-search1{
-	 width: 515px;
+.sky-form .select i {
+    height: 6px;
+    right: 0;
+    top: 10px;
+    width: 9px;
 }
+.bgMainMenu{
+	background: #f18436 none repeat scroll 0 0;
+	 border-radius: 0px;
+}
+.btn-search1{
+	 width: 480px;
+}
+.linkMainMenu{
+   
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+}
+.nav > li > a {
+	 padding-left: 10px;
+	  padding-right: 10px;
+	  border-right:1px dotted orange;
+	  
+}
+.sky-form .select i::after, .sky-form .select i::before{
+	 right: 5px;
+}
+
+.input-group-addon {
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #555;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    padding: 3px 10px;
+    text-align: center;
+}
+
+
 .breadcrumb{
 	margin-bottom: 0px;
 	top:0px;

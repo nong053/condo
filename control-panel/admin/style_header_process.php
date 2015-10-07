@@ -492,6 +492,7 @@ if($file_header_banner){
 				$query=mysql_query($strSQL);
 				if(!$query){echo"Error".mysql_error();}
 }
-echo"<script>window.location=\"index.php?page=style_system&select_page=picture_style&page_style=header\"</script>";
+//echo"<script>window.location=\"index.php?page=style_system&select_page=picture_style&page_style=header\"</script>";
+echo"<script>window.location=\"index.php?page=style_header\"</script>";
 
 ?>

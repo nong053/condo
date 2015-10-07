@@ -54,6 +54,7 @@ else
 
       <h3>Your User Object (/me)</h3>
       <pre><?php print_r($user_profile); ?></pre>
+      <?php echo "ses_cus_id=".$_SESSION['ses_cus_id'];?>
     <?php else: ?>
       <strong><em>You are not Connected.</em></strong>
     <?php endif ?>

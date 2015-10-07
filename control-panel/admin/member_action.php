@@ -96,18 +96,27 @@ $file_name=$file_member;//--ต้องแก้ไข
 			if(is_dir($path_object))
 			{
 			$object_picture=$file_1;
-			
 			copy($_FILES["cus_pic"]["tmp_name"],"../member_img/".$object_picture);//--ต้องแก้ไข
-				
-				
+			
+				$strSQLs="select * from customer where cus_id='$cus_id'";
+				$results=mysql_query($strSQLs);
+				$rss=mysql_fetch_array($results);
 				//delete
-				/*$unlink="../object_system/$object_name_edit";
+				$unlink="../member_img/".$rss['cus_pic'];
 				if($unlink){
-				@unlink($unlink);*///@ไม่ต้องการให้มันฟอ้งถ้าไม่มีไฟลล์ให้ลบ
-				//file_exists();ใช้ function นี้ตรวจสอบก่อนว่ามีไฟลล์ใหลบมั้ย
-				
-				
+				@unlink($unlink); //@ไม่ต้องการให้มันฟอ้งถ้าไม่มีไฟลล์ให้ลบ
 				}
+				
+				$strSQL="update customer set cus_pic='$object_picture' where cus_id='$cus_id'";
+				$result=mysql_query($strSQL);
+				if($result){
+					if($_POST['actionProfile']=="reback_profile"){
+						echo"<script>window.location=\"../../member/index.php?page=profile\"</script>";
+					}
+				}
+			}
+				
+				
 }
 
 

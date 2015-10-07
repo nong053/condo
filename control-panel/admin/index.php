@@ -325,12 +325,13 @@ p{
                 <!-- <li><a href="index.php?page=picturecat"><img src="images/Maps_alt.png" border="0" align="absbottom" /> อัลบั้ลรูปภาพ</a></li> -->
                 <li><a href="index.php?page=member_system"><img src="images/BeejiveIM_Dalt2.png" border="0" align="absbottom" /> ระบบสมาชิก</a></li>
                 <li><a href="index.php?page=seo_system"><img src="images/pic_small/Things.png" border="0" align="absbottom" /> ระบบโปรโมทเว็บ(SEO)</a></li>
-                <!-- <li><a href="index.php?page=job_system"><img src="images/pic_small/Settings.png" border="0" align="absbottom" /> สมัครงาน</a></li> -->
+                 <li><a href="index.php?page=job_system"><img src="images/pic_small/Settings.png" border="0" align="absbottom" /> จัดการประกาศพิเศษ</a></li> 
 				  
 				<li><a href="index.php?page=menu_system"><img src="images/pic_small/Macristocracy.png" border="0" align="absbottom" /> จัดการเมนู</a></li>
                 <li><a href="index.php?page=article_system"><img src="images/pic_small/BeejiveIM_alt2.png" border="0" align="absbottom" /> บทความ</a></li>
+				<li><a href="index.php?page=style_header"><img src="../images_system/color3.png" width="16" height="16"  border="0" align="absbottom" /> จัดการโลโก้</a></li>
 				
-
+				
 <?php }?>
 
 			</ul>
@@ -376,6 +377,11 @@ p{
 			case 'answer':
 				include("answer.php");
 				break;
+				
+			case 'style_header':
+				include("style_header.php");
+				break;
+				
 				
 				
 			case 'order_checker':
@@ -469,7 +475,10 @@ p{
 			case 'article_system_by_menu':
 				include("article_system_by_menu.php");
 				break;
-				
+			
+			case 'special_post':
+				include("special_post.php");
+				break;
 				
 			default:
 				include("$default_page");

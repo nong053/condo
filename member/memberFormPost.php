@@ -3,6 +3,9 @@
 include("../config.inc.php");
 ?>
 <!-- Tabs -->
+<!-- CKE-->
+<script type="text/javascript" src="../ckeditor/ckeditor.js"></script>
+<!-- CKE-->
 <link rel="stylesheet" href="../css/cssMemberFormPost.css">
 <div class="tab-v1">
 	<ul class="nav nav-tabs">
@@ -154,8 +157,22 @@ include("../config.inc.php");
 
 							<div class="form-group">
 								<label class="col-lg-3 control-label" for="rdg_detail"> รายละเอียดประกาศ </label>
-								<div class="col-lg-9">
+								<div class="col-lg-12">
+								<!--CKEditor-->
+								    <textarea cols="80" id="rdg_detail" name="rdg_detail" rows="5" ></textarea>
+								    <script type="text/javascript">
+								        //<![CDATA[
+								            CKEDITOR.replace( 'rdg_detail',{
+								            	enterMode: CKEDITOR.ENTER_BR,
+								                shiftEnterMode: CKEDITOR.ENTER_BR
+								     
+								            } );
+								        //]]>
+								    </script>
+								    <!--CKEditor-->
+								<!--  
 									<textarea placeholder="รายละเอียดประกาศ" rows="6" id="rdg_detail" name="rdg_detail" class="form-control"></textarea>
+								-->
 								</div>
 							</div>
 							

@@ -314,6 +314,21 @@ var postFn=function(loginType){
 				});
 				//end map
 				
+				//call Data rdg_detail start
+				$.ajax({
+					url:"../Model/mRealtyDataGeneralAction.php",
+					type:"post",
+					dataType:"html",
+					data:{"paramAction":"realtyDataGeneralDetailById","RdgId":$("#paramEmbedRdgId").val()},
+					success:function(data){
+					//	alert(data);
+						//####rdg_detail####
+						$("#rdg_detail").val(data);
+					}
+				});
+				
+				//call Data rdg_detail end
+				
 				//Start call Data again
 				$.ajax({
 					url:"../Model/mRealtyDataGeneralAction.php",
@@ -353,8 +368,7 @@ var postFn=function(loginType){
 						
 						$("#rdg_title").val(data['rdg_title']);
 						
-						//####rdg_detail####
-						$("#rdg_detail").val(data['rdg_detail']);
+						
 						
 						//####realtyProjectStatus####
 						callRealtyProjectStatus(data['rps_id']);
@@ -855,8 +869,13 @@ var postFn=function(loginType){
 		});
 		//End Summary
 		
+		function CKupdate(){
+		    for ( instance in CKEDITOR.instances )
+		        CKEDITOR.instances[instance].updateElement();
+		}
 		//start save first step
 		$("#saveStep1").click(function(){
+			CKupdate();
 				if(validation()){
 				$.ajax({
 					url:"../Model/mRealtyDataGeneralAction.php",
@@ -985,6 +1004,8 @@ var postFn=function(loginType){
 			showPostFn("expirePostArea","E");
 	});
 	//end nonePost 
+	
+	
 	
 
 		

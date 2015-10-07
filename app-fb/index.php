@@ -28,16 +28,22 @@ if ($user) {
 if ($user) {
 	if($_GET["code"] != "")
 	{
-				$objConnect = mysql_connect("localhost","root","010535546") or die(mysql_error());
-				$objDB = mysql_select_db("mydb");
+	
+				$objConnect = mysql_connect("localhost","realthairealty","010535546") or die(mysql_error());
+				$objDB = mysql_select_db("realthai_db");
 				mysql_query("SET NAMES UTF8");
-				$strSQL ="  INSERT INTO  tb_facebook (FACEBOOK_ID,NAME,LINK,CREATE_DATE) 
+				$strSQL ="  INSERT INTO  customer (cus_id,cus_first_name,admin_id,cus_update) 
 					VALUES
 					('".trim($user_profile["id"])."',
 					'".trim($user_profile["name"])."',
-					'".trim($user_profile["link"])."',
+					'1',
 					'".trim(date("Y-m-d H:i:s"))."')";
+				
 				$objQuery  = mysql_query($strSQL);
+				
+				$_SESSION['ses_cus_id']=$user_profile["id"];
+				$_SESSION['ses_cus_first_name']=$user_profile["name"];
+				
 				mysql_close();
 				header("location:index.php");
 				exit();

@@ -3,11 +3,29 @@
 
     
  <script src="../Controller/cPost.js"></script>
- <script>
+ 
+ 
+ <?php 
+    if($_GET['loginType']=="loginForManage" ){
+    	?>
+    	<script>
+		$(document).ready(function(){
+		 
+		 postFn("loginForManage");
+		});
+ 		</script>
+    	<?php
+    }else{
+    	?>
+    	<script>
 		$(document).ready(function(){
 		 postFn("<?=$_SESSION['sesLoginType']?>");
 		});
- </script>
+		 </script>
+		 
+    	<?php
+    }
+    ?>
 
  <link rel="stylesheet" href="../assets/css/post.css">
   <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script> 

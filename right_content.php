@@ -22,7 +22,7 @@ if($conn){
 	
 }
 ?>
-
+<script src="Controller/page/cRight_content.js"></script>
 <!--Start Right Content -->
         	<div class="col-md-4 magazine-page"> 
                 <!-- Blog Posts -->
@@ -315,13 +315,25 @@ if($conn){
                                 <h3 class="panel-title"><i class="fa fa-tasks"></i>ประกาศใกล้เคียง</h3>
                             </div>
                             <div class="panel-body">
-							
+							 <!--  grid special start here -->
+					        <table class="gridRelate">
+								 <colgroup>
+									<col />
+								 </colgroup>
+								 <thead>
+								 <tr>
+									<th data-field="make">	</th>
+								 </tr>
+								 </thead>
+								 <tbody>
 							<?php 
 							$strSQLSimilar="select * from realty_data_general";
 							$resultSimilar=mysql_query($strSQLSimilar);
 							while($rsSimilar=mysql_fetch_array($resultSimilar)){
 								?>
 								<!--start sub box near realty -->
+								<tr>
+								<td>
 	                               <div class="row">
 											<div class="col-md-4">
 												<div class="magazine-posts-img">
@@ -372,34 +384,32 @@ if($conn){
 												</div>
 											</div>
 											<div class="col-md-8">
-											<b style="color:#1abc9c;"><?=$rsSimilar['rdg_title']?></b>
-											<?//$rsSimilar['rdg_detail']?><br>
+											<b style="color:#1abc9c;">
+											<a href="index.php?page=post_sub_detail&rdg_id=<?=$rsSimilar['rdg_id']?>&rtc_id=<?=$_GET['rtc_id']?>">
+											
+											<?php if(strlen($rsSimilar[rdg_title])>55){
+											$rdg_title=mb_substr($rsSimilar[rdg_title],0,55,"UTF-8")."...";
+											echo"$rdg_title";
+											}else{
+											?>
+											<?=$rsSimilar['rdg_title']?></b>
+											<?php }?>
+											</a>
+											
 											<font color="red"><?=number_format($rsSimilar['rdg_price']);?>  บาท</font>
 											</div>
 								   </div>
 								    <hr>
+								    </td>
+								    </tr>
 								  <!--end box near realty -->
 								<?php
 							}
 							
 							?>
 							
-							<!--start sub box near realty -->
-							<!-- 
-                               <div class="row">
-										<div class="col-md-4">
-											<div class="magazine-posts-img">
-												<a href="#"><img alt="" src="assets/img/main/img1.jpg" class="img-responsive"></a>						
-											</div>
-										</div>
-										<div class="col-md-8">
-										<b style="color:#1abc9c;">ขาย บ้านเดี่ยว 2 ชั้น เนื้อที่ 2 ไร่ สวนสวย...</b>
-										49/4 เชียงใหม่, 57000 สันกำแพง, เชียงใหม่
-										ขาย - ฿ 45,000,000 
-										</div>
-							   </div>
-							    -->
-							  <!--end box near realty -->
+							</tbody>
+							</table>
 							   
                                 
                             </div>

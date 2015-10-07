@@ -179,7 +179,7 @@
                 		<div id="<?=$select1?>">
               		 		<a href="index.php?page=job_system&select_page=job_company">
                             <div id="devmagin" style="margin:5px;">
-              			 	งานที่เปิดรับสมัคร
+              			 	รายการอสังหาริมทรัพย์
                      		</div>
               			 	</a>
                     	 </div>
@@ -190,7 +190,7 @@
                 		<div id="<?=$select2?>">
               		 		<a href="index.php?page=job_system&select_page=job_company_edit_del">
                             <div id="devmagin" style="margin:5px;">
-              			 	ลบ/แก้ไข งาน
+              			 	ลบ/แก้ไข 
                      		</div>
               			 	</a>
                     	 </div>
@@ -198,16 +198,7 @@
                		 </li>
                     
                     	
-                     <li>
-                		<div id="<?=$select3?>">
-              		 		<a href="index.php?page=job_system&select_page=job_seeker">
-                            <div id="devmagin" style="margin:5px;">
-              			 	ผู้สมัครงาน
-                     		</div>
-              			 	</a>
-                    	 </div>
-                 
-               		 </li>
+                    
                      
                      
                      

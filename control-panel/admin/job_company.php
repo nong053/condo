@@ -31,7 +31,7 @@ function postResult(txt){
 	xmlReq.onreadystatechange = callBackpost;
 	xmlReq.open("POST",txt,true);
 	xmlReq.setRequestHeader("content-Type","application/x-www-form-urlencoded");/*?????*/
-	xmlReq.send("jobcat_position="+document.form1.jobcat_position.value+"&jobcat_title="+document.form1.jobcat_title.value+"&jobcat_detail="+document.form1.jobcat_detail.value+"&action="+document.form1.action.value);	
+	xmlReq.send("jobcat_title="+document.form1.jobcat_title.value+"&jobcat_detail="+document.form1.jobcat_detail.value+"&jobcat_bgcolor="+document.form1.jobcat_bgcolor.value+"&action="+document.form1.action.value);	
 }
 function callBackpost(){
 	if(xmlReq.readyState!=4){
@@ -39,7 +39,7 @@ function callBackpost(){
 	
 	}else if(xmlReq.status==200){
 	/*document.form1.test.value="";*/
-	document.form1.jobcat_position.value="";
+	document.form1.jobcat_bgcolor.value="";
 	document.form1.jobcat_title.value="";
 	document.form1.jobcat_detail.value="";
 	document.getElementById("Result").innerHTML=xmlReq.responseText;
@@ -49,7 +49,7 @@ function callBackpost(){
 }
 
 </script>
-
+<script language=JavaScript src="javascript/picker.js"></script>
 
 <style>
 #devtext_name{
@@ -91,23 +91,25 @@ border-right:#dedede solid 1px;
         </td>
         <td>
         <div id="devtext_name">
-        ตำแหน่งงาน
+       หมวดอสังหาริมทรัพย์
         </div>
         </td>
-        <td>
-        <div id="devtext_name">
-        เกี่ยวกับงาน
-        </div>
-        </td>
+       
         <td>
         <div id="devtext_name">
         รายละเอียด
         </div>
         </td>
+         <td>
+        <div id="devtext_name">
+        สีพื้นหลัง
+        </div>
+        </td>
+      
         
     </tr>
     <?php
-    $strSQL="select * from jobcat";
+    $strSQL="select * from realty_type_cate";
 	$result=mysql_query($strSQL);
 	$i=1;
 	while($rs=mysql_fetch_array($result)){
@@ -119,14 +121,19 @@ border-right:#dedede solid 1px;
         </center>
         </td>
         <td>
-        <?=$rs[jobcat_position]?>
+        <?=$rs[rtc_name]?>
         </td>
         <td>
-        <?=$rs[jobcat_title]?>
+        <?=$rs[rtc_detail]?>
         </td>
+       
         <td>
-        <?=$rs[jobcat_detail]?>
+        <div style="width:50px; height:15px; background:<?=$rs[rtc_bg_color]?>">
+        
+        </div>
         </td>
+        <td></td>
+       
     </tr>
     <?
 	$i++;
@@ -139,27 +146,29 @@ border-right:#dedede solid 1px;
 <form name="form1" method="post">
 <table>
 	<tr>
-    	<td>
-        ตำแหน่งงาน
-        </td>
-        <td>
-        <input type="txt"  name="jobcat_position"/>
-        </td>
-    </tr>
-    <tr>
-    	<td>
-        เกี่ยวกับงาน
+    	<td style='font-weight: bold; text-align:right;'>
+      อสังหาริมทรัพย์
         </td>
         <td>
         <input type="txt"  name="jobcat_title"/>
         </td>
     </tr>
+   
     <tr>
-    	<td>
+    	<td style='font-weight: bold; text-align:right; vertical-align: top; '>
         รายละเอียด
         </td>
         <td>
         <textarea name="jobcat_detail"></textarea>
+        </td>
+    </tr>
+     <tr>
+    	<td style='font-weight: bold; text-align:right;'>
+        พื้นหลัง
+        </td>
+        <td>
+        <input type='text' name="jobcat_bgcolor" >
+        <a href="javascript:TCP.popup(document.forms['form1'].elements['jobcat_bgcolor'])"><img width="15" height="13" src="../images_system/color3.png"></a>
         </td>
     </tr>
    
@@ -168,7 +177,7 @@ border-right:#dedede solid 1px;
 	<tr>
     	<td>
         <input name="action" value="add" type="hidden">
-        <input type="button" onclick="postResult('action_job_company.php')" value="Submit Now" />
+        <input type="button" onclick="postResult('action_job_company.php')" value="ตกลง" />
         </td>
     </tr>
 </table>

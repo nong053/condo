@@ -17,6 +17,12 @@ $(document).ready(function(){
 	});
 	
 	$("form#formSearchForSales").submit(function(){
+		//alert($("#embed_rt_name").val());
+		
+		$(".realty_path_home").html("<a href='index.php?page=home'>หน้าแรก</a> ");
+		$(".realty_path_type").text("/ "+"เช่า"+" /");
+		$(".realty_path_name").text($("#embed_rt_name").val());
+		
 		$.ajax({
 			url:"post_detail.php",
 			type:"post",

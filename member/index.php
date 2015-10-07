@@ -142,8 +142,15 @@
             <h1 class="pull-left">ประกาศของฉัน(<?=$_SESSION['ses_cus_email']?>)</h1>
             <ul class="pull-right breadcrumb">
                 <li><a href="index.html">หน้าแรก</a></li>
-                <li><a href="">ประกาศ</a></li>
-                <li class="active">ประกาศของฉัน</li>
+                 	<?php
+					   switch($_GET['page']){
+					   case 'post': echo"<li class='active'>ประกาศของฉัน</li>"; break;
+					   case 'profile': echo"<li class='active'>ข้อมูลส่วนตัว</li>";break;
+					   case 'inbox': echo"<li class='active'>ข้อความ</li>";break;
+					   case 'stats': echo"<li class='active'>สถิติ</li>";break;
+					   }
+					   ?>
+                
             </ul>
         </div>
     </div><!--/breadcrumbs-->
@@ -160,7 +167,7 @@
    
 					<a href="#collapse-typography" data-parent="#sidebar-nav" data-toggle="collapse" class="" aria-expanded="true">ข้อมูลการประกาศ</a>
                        <ul class="collapse in" id="collapse-typography" aria-expanded="true" style="">
-                            <li><a href="?page=post"><i class="fa fa-sort-alpha-asc"></i> ประกาศของฉัน</a></li>
+                            <li><a href="?page=post&loginType=loginForManage"><i class="fa fa-sort-alpha-asc"></i> ประกาศของฉัน</a></li>
                             <li>
                                 
                                 <a href="?page=profile"><i class="fa fa-magic"></i> ข้อมูลส่วนตัว</a>

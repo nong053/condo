@@ -12,7 +12,7 @@ if($conn){
 ?>
 <script src="Controller/cSearchForRentRealty.js"></script>
 <form id="formSearchForRent" class="sky-form" id="sky-form4" action="#" novalidate="novalidate">
-									<header>
+									<header class=''>
 										<div class="headline headline-md">
 											<h2><i class="fa fa-search-plus"></i> เมนูค้นหาประกาศเช่าฟรี</h2>
 										</div>
@@ -42,7 +42,7 @@ if($conn){
 											}
 										}
 										?>
-										
+										<br style='clear: both'>
 										<!-- 
 										<button type="button" class="btn-u btn-mainmenu-contractor btn-u-dark-blue">เช่าเครื่องมือก่อสร้าง</button>
 										<button type="button" class="btn-u btn-mainmenu-contractor btn-u-dark-blue">เช่าเฟอร์นิเจอร์ </button>

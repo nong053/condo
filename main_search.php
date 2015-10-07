@@ -1,12 +1,13 @@
 
 
         <div class="container" style="margin-top:5px;">
+        	<div class='row'>
                     <div class="col-md-12 shadow-wrapper">
                         <div class="tag-box tag-box-v2 box-shadow shadow-effect-1">
                             
                            
  <!-- search start here-->
-                                <div class="col-md-6" style="padding-right:16px;">
+                                <div class="col-md-6" style="padding-right:5px;">
             
                                     <!-- tab1-->
                                    <div class="tab-v1">
@@ -56,7 +57,7 @@
 
 
                                    </div>
-                                   <div class="col-md-6" style="padding-left:16px;">
+                                   <div class="col-md-6" style="padding-left:5px;">
                                    <!-- tab1-->
                                    <div class="tab-v1">
                                             <ul class="nav nav-tabs">
@@ -113,4 +114,5 @@
 
                         </div>
                     </div>
+                    
         </div>

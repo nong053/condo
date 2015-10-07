@@ -1,4 +1,65 @@
-<?php session_start();
+<?php
+require 'sdk/facebook.php';
+
+$facebook = new Facebook(array(
+  'appId'  => '124891997861326',
+  'secret' => 'e6d78af44e5eea39be1812c4078b577f',
+));
+
+// Get User ID
+$user = $facebook->getUser();
+
+if ($user) {
+  try {
+    $user_profile = $facebook->api('/me');
+  } catch (FacebookApiException $e) {
+    error_log($e);
+    $user = null;
+  }
+}
+
+if ($user) {
+  $logoutUrl = $facebook->getLogoutUrl();
+} else {
+  $loginUrl = $facebook->getLoginUrl();
+}
+
+// Save to mysql
+if ($user) {
+	if($_GET["code"] != "")
+	{
+	
+				$objConnect = mysql_connect("localhost","realthairealty","010535546") or die(mysql_error());
+				$objDB = mysql_select_db("realthai_db");
+				mysql_query("SET NAMES UTF8");
+				$strSQL ="  INSERT INTO  customer (cus_id,cus_first_name,admin_id,cus_update) 
+					VALUES
+					('".trim($user_profile["id"])."',
+					'".trim($user_profile["name"])."',
+					'1',
+					'".trim(date("Y-m-d H:i:s"))."')";
+				
+				$objQuery  = mysql_query($strSQL);
+				
+				$_SESSION['ses_cus_id']=$user_profile["id"];
+				$_SESSION['ses_cus_first_name']=$user_profile["name"];
+				
+				mysql_close();
+				header("location:index.php");
+				exit();
+	}
+}
+
+// Logout
+if($_GET["Action"] == "Logout")
+{
+	$facebook->destroySession();
+	header("location:index.php");
+	exit();
+}
+?>
+ 
+<?php
 include("config.inc.php");
 
 $thai_day_arr=array("อาทิตย์","จันทร์","อังคาร","พุธ","พฤหัสบดี","ศุกร์","เสาร์");
@@ -27,6 +88,9 @@ function thai_date($time){
 	return $thai_date_return;
 }
 ?>
+
+
+
 
 
 <!DOCTYPE html> 
@@ -110,12 +174,33 @@ function thai_date($time){
 	<style>
 	.container{
   max-width: none !important;
-  width: 1170px;
+  width: 1000px;
 }
 	</style>
 </head>
 
-<body>    
+<body> 
+<?php 
+
+$strSLQBannerLR="select * from banner_sum where pic_position='8'";
+$resultBannerLR=mysql_query($strSLQBannerLR);
+$rsLR=mysql_fetch_array($resultBannerLR);
+
+	
+	
+	  
+
+if($rsLR['pic_name']){
+?>
+<div class='adLeft'>
+	 <img src="control-panel/mypicture/1/<?=$rsLR['pic_name']?>" width="100%" height="100%" />
+</div>
+<div class='adRight'>
+	 <img src="control-panel/mypicture/1/<?=$rsLR['pic_name']?>" width="100%" height="100%" />
+</div>
+<?php 
+}
+?>
 <?php 
 	if($_GET['modal']=="login"){
 		
@@ -137,7 +222,7 @@ function thai_date($time){
     <div class="header">
         <div class="container " style="margin-bottom: 0px;">
             
-			<div class="row">
+			
 					<div class="col-md-2">
 						<!-- Logo -->
 						<a class="logo" href="index.html">
@@ -146,7 +231,7 @@ function thai_date($time){
 						</a>
 						 <!-- End Logo -->
 					</div>
-					<div id="adHeader" style=" background:#dddddd; margin-top:2px; height:75px" class="col-md-6 ">
+					<div id="adHeader" style=" background:#dddddd; margin-top:2px; height:100%" class="col-md-6 ">
 					<?php 
 					$strSLQBanner7="select * from banner_sum where pic_position='7'";
 					$resultBanner7=mysql_query($strSLQBanner7);
@@ -161,8 +246,11 @@ function thai_date($time){
                             <div class="row">
                                 <div class="col-md-6" style=" padding-left:2px;padding-right:1px;">
                                    
-                                    <button class="btn btn-social btn-block btn-facebook-inversed " style="height:38px;">
-                                      <i class="fa fa-facebook"></i> สมัครสมาชิกผ่านเฟสบุ๊ค
+                                    <button class="btn btn-social btn-block btn-facebook-inversed " style="height:50px;">
+                                      <i class="fa fa-facebook"></i> 
+                                      	 <a  href="<?=$loginUrl?>">
+                                      	สมัครสมาชิกผ่านเฟสบุ๊ค
+                                      	</a>
                                     </button>
                                    
                                 </div>
@@ -170,9 +258,20 @@ function thai_date($time){
                                 
 
                                  <div class="col-md-6" style="padding-left:0px;padding-right:0px;" > 
-                                    <button class="btn btn-social  btn-block btn-android-inversed " style="height:38px;">
+                                   <!-- 
+                                    <button id="google_translate_element" class="btn btn-social  btn-block btn-android-inversed " style="height:38px;">
                                       <i class="fa fa-globe"></i> เลือกภาษา
                                     </button>
+                                     -->
+                                    <div id="google_translate_element" class="btn-block btn-android-inversed" style="height:50px;"></div>
+									<script>
+									function googleTranslateElementInit() {
+									  new google.translate.TranslateElement({
+									    pageLanguage: 'th'
+									  }, 'google_translate_element');
+									}
+									</script>
+									<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
                                 </div>
                                 
                                 <div class="col-md-6" style="padding-left:2px;padding-right:1px;">
@@ -210,7 +309,7 @@ function thai_date($time){
 						</div>
 						<!-- End Topbar -->
 					</div>
-			</div>
+		
 			
            
 
@@ -228,9 +327,9 @@ function thai_date($time){
 	<div class="breadcrumbs1">
     <!--===Start Top Buttons ===-->
 	<div class="container">
-		<div class="col-md-3">
+		<div class="col-md-3 postBtnTopArea">
 				<!--class pull-left -->
-				 <h1 class="pull-right" style="margin-bottom: 5px;margin-top: 5px;">
+				 <h1 class="" style="margin-bottom: 2px;margin-top: 2px;">
 			
 					<!--ประกาศขายฟรี-->
 					<!-- 
@@ -262,7 +361,7 @@ include_once 'queryMenuIndex.php';
 //menu for realty rent end
 ?>
 					        <div class="dropdown">
-					            <a style="font-size:19px;" id="dLabel" role="button" data-toggle="dropdown" class="btn btn-primary rounded" data-target="#" href="/page.html">
+					            <a style="font-size:19px;" id="dLabel" role="button" data-toggle="dropdown" class="btn btn-primary postBtnTop" data-target="#" href="/page.html">
 					                <i class="fa fa-cloud"></i> คลิ๊กลงประกาศขายฟรี <span class="caret"></span>
 					            </a>
 					    		<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
@@ -416,16 +515,16 @@ include_once 'queryMenuIndex.php';
 					        </div>
 				</h1>
 		</div>
-		<div class="col-md-6 ">
-				 <h1  style="margin-bottom: 5px;margin-top: 5px;">
+		<div class="col-md-6 postBtnTopArea">
+				 <h1  style="margin-bottom: 2px;margin-top: 2px;">
 					<!--ประกาศพิเศษ
 						<button class="btn btn-block  btn-info rounded" style="font-size:19px;">
 						  <i class="fa fa-unlink"></i> คลิ๊กลงประกาศโฆษณาพิเศษหน้าแรก
 						</button>
 						-->
 						<div class="dropdown">
-					            <a style="font-size:19px;" id="dLabel" role="button" data-toggle="dropdown" class="btn btn-block  btn-info rounded" data-target="#" href="#">
-					                <i class="fa fa-cloud"></i>คลิ๊กลงประกาศโฆษณาพิเศษหน้าแรก<span class="caret"></span>
+					            <a style="font-size:19px;" id="dLabel" role="button" data-toggle="dropdown" class="btn btn-block  btn-info postBtnTop" data-target="#" href="#">
+					                <i class="fa fa-cloud"></i>คลิ๊กลงประกาศโฆษณาพิเศษหน้าแรก <span class="caret"></span>
 					            </a>
 					    		<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
 					              <li class="dropdown-submenu">
@@ -688,9 +787,9 @@ include_once 'queryMenuIndex.php';
 				</h1>
 		</div>
 		
-		<div class="col-md-3">
+		<div class="col-md-3 postBtnTopArea">
 			<!--class pull-right -->
-			<h1 class="" style="margin-bottom: 5px; margin-top: 5px;">
+			<h1 class="" style="margin-bottom: 2px; margin-top: 2px;">
            <!--     ประกาศเช่าฟรี-->
            		<!-- 
                     <button class="btn btn-block btn-stackoverflow-inversed rounded" style="font-size:19px;">
@@ -698,7 +797,7 @@ include_once 'queryMenuIndex.php';
                     </button>
                 -->     
                     <div class="dropdown">
-					            <a style="font-size:19px;" id="dLabel" role="button" data-toggle="dropdown" class="btn btn-stackoverflow-inversed rounded" data-target="#" href="/page.html">
+					            <a style="font-size:19px;" id="dLabel" role="button" data-toggle="dropdown" class="btn btn-stackoverflow-inversed postBtnTop" data-target="#" href="/page.html">
 					                <i class="fa fa-cloud"></i>คลิ๊กลงประกาศเช่าฟรี<span class="caret"></span>
 					            </a>
 					    		<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
@@ -839,7 +938,7 @@ include_once 'queryMenuIndex.php';
 	<!--===End Top Buttons ===-->
 	<!--===Start Breadcrumbs ===-->
     <div class="breadcrumbs">
-        <div class="container" >
+        <div class="container bgMainMenu" >
            	  <div class="row">
            	  		<!-- button ads start -->
            	  		
@@ -851,35 +950,36 @@ include_once 'queryMenuIndex.php';
                <ul class="nav navbar-nav">
                   
                     <li >
-                        <a href="index.php?page=home">
+                        <a class='linkMainMenu' href="index.php?page=home">
                             <i class="fa fa-home"></i> หน้าแรก
                         </a>
 					</li>    
 					 
 					 <li>
-                        <a href="index.php?page=sitemap">
+                        <a class='linkMainMenu' href="index.php?page=sitemap">
                            <i class="fa fa-cogs"></i> แผนผังเว็บไซต์
                         </a>
 					</li>
 					<li>
-                        <a href="index.php?page=postSaved">
+                        <a class='linkMainMenu' href="index.php?page=postSaved">
                            <i class="fa fa-cogs"></i> ประกาศที่บันทึกไว้
                         </a>
 					</li> 
+					<!-- 
 					<li>
                         <a href="index.php?page=showSearch">
                            <i class="fa fa-cogs"></i> การค้นหาที่บันทึกไว้
                         </a>
 					</li>  
-					
+					 -->
 					
 					 <li >
-                        <a href="index.php?page=#">
+                        <a class='linkMainMenu' href="index.php?page=#">
                            <i class="fa fa-child"></i> แชร์ผ่านเฟสบุ๊ค
                         </a>
 					</li> 
 					 <li >
-                        <a href="index.php?page=#">
+                        <a class='linkMainMenu' href="index.php?page=#">
                          <i class="fa fa-cog"></i> แชร์ผ่านกูลเกิล
                         </a>
 					</li> 
@@ -892,11 +992,21 @@ include_once 'queryMenuIndex.php';
 					 -->
 					 
 					 <li >
-                        <a href="index.php?page=advertise">
+                        <a class='linkMainMenu' href="index.php?page=advertise">
                           <i class="fa fa-rss"></i> ติดต่อโฆษณาหน้าแรก
                         </a>
 					</li> 
-					 
+					<?php 
+					if($_SESSION['ses_cus_email']){
+					?>
+					<li >
+                        <a id="logout" class='linkMainMenu' href="#">
+                          <i class="fa fa-rss"></i> ออกจากระบบ
+                        </a>
+					</li> 
+					 <?php 
+					 }
+					 ?>
                 </ul>
             </div>
 
@@ -906,17 +1016,40 @@ include_once 'queryMenuIndex.php';
 			<?php 
 			if($_SESSION['ses_cus_email']){
 			?>
+			<!-- 
             <ul class="pull-right breadcrumb">
-                <li class="active"><i class="fa fa fa-user"></i>คุณ <?=$_SESSION['ses_cus_email']?> กำลังอยู่ในระบบ(
+                <li class="active"><i class="fa fa fa-user"></i>คุณ <?=$_SESSION['ses_cus_first_name']?> กำลังอยู่ในระบบ(
                 	<a href="#" id="logout">
                 	ออกจากระบบ
                 	</a>
                 	)</li>
             </ul>
+             -->
             <?php }?>
 			
         </div>
+        
     </div><!--/breadcrumbs-->
+   
+     <div class="container linkNav" > 
+     	<span class='realty_path_home'></span> 
+     	<span class='realty_path_type'></span> 
+     	<a href="#"><span class='realty_path_name'></span></a> 
+     	<?php 
+     	switch($_GET['page']){
+     		case"sitemap":echo("<a href='index.php?page=home'>หน้าแรก</a> / <a href='#'>แผนผังเว็บไซต์ </a>"); break;
+     		case"contact":echo("<a href='index.php?page=home'>หน้าแรก</a> / <a href='#'>ติดต่อเรา</a>"); break;
+     		case"advertise":echo("<a href='index.php?page=home'>หน้าแรก</a> / <a href='#'>ติดต่อโฆษณาหน้าแรก</a>"); break;
+     		case"about":echo("<a href='index.php?page=home'>หน้าแรก</a> / <a href='#'>เกี่ยวกับเรา</a>"); break;
+     		case"condition":echo("<a href='index.php?page=home'>หน้าแรก</a> / <a href='#'>งื่อนไข</a>"); break;
+     		case"postSaved":echo("<a href='index.php?page=home'>หน้าแรก</a> / <a href='#'>ประกาศที่บันทึกไว้</a>"); break;
+     		
+     		
+     		}
+     	
+     	?>
+     </div>
+  
     <!--=== End Breadcrumbs ===-->
 
     <!--=== Content Part ===-->
@@ -960,6 +1093,8 @@ include_once 'queryMenuIndex.php';
 					//case"login":include("login.php"); break;
 					case"postSaved":include("postSaved.php"); break;
 					case"showSearch":include("showSearch.php"); break;
+					case"profile_post":include("profile_post.php"); break;
+					
 					
 					
 					
@@ -1264,6 +1399,33 @@ include_once 'queryMenuIndex.php';
           	 <!-- from login area start -->
 	        <?php  include("register.php");?>
 	      	 <!-- from login area end --> 
+	        
+        </div>
+        <!-- 
+        <div class="modal-footer">
+          <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+          <button class="btn btn-primary" type="button">Save changes</button>
+        </div>
+         -->
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div>
+  <!--  End Module Register -->
+  
+  
+  <!--  Start Module Register -->
+<div aria-labelledby="sendToMyFriendsFormModal" role="dialog" tabindex="-1" class="modal fade" id="sendToMyFriendsFormModal" style="display: none;">
+    <div role="document" class="modal-dialog-register">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button aria-label="Close" data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span></button>
+          <h4 id="gridModalLabel" class="modal-title">ส่งประกาศนี้ให้เพื่อน</h4>
+        </div>
+        <div class="modal-body">
+        
+          	 <!-- from send mail to my friends area start -->
+	       			<?php  include("form_send_friend.php");?>
+	      	 <!-- from send mail to my friends area end --> 
 	        
         </div>
         <!-- 

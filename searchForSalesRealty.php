@@ -25,11 +25,12 @@ if($conn){
 		<?php 
 		while($rsCN=mysql_fetch_array($resultCN)){
 			?>
-			<button type="button"  id="<?=$rsCN['rt_id']?>" class="btn-u btn-mainmenu mainMenuPost">ขาย<?=$rsCN['rt_name']?></button>
+			<button type="button"  id="<?=$rsCN['rt_id']?>" class="btn-u btn-mainmenu mainMenuPost">ขาย<?=$rsCN['rt_name']?></button> 
+	
 			<?php
 		}
 		?>
-	
+		
 		<div class="headline headline-md">
 			<!-- <h2>สำหรับผู้หรับเหมา</h2> -->
 		</div>
@@ -46,6 +47,7 @@ if($conn){
 			}
 		}
 		?>
+		<br style='clear: both'>
 		<!-- 
 		<button type="button" class="btn-u btn-mainmenu-contractor btn-u-dark-blue ">ขายวัสดถก่อสร้าง</button>
 		<button type="button" class="btn-u btn-mainmenu-contractor btn-u-dark-blue">ขายเครื่องมือก่อสร้าง</button>
@@ -60,21 +62,23 @@ if($conn){
 										
 	
 										<fieldset>  
+										
 	  
 											<div class="row">
 														<div class="col-md-4 col-padding-2">
 															 <section>
 																	<label class="select" id="provinceArea" >
 																	
-																		<i></i>
+																		
 																	</label>
+																	<i></i>
 																</section>
 														</div>
 														<div class="col-md-4 col-padding-2">
 															 <section>
 																	<label class="select" id="districtArea">
 																					<select name="rdg_address_district_id" id="rdg_address_district_id">
-																						<option selected="" value="All">-- เลือกอำเภอ/เขต --</option>
+																						<option selected="" value="All">เลือกอำเภอ/เขต </option>
 	
 																					</select>
 																	
@@ -86,7 +90,7 @@ if($conn){
 															 <section>
 																	<label class="select" id="subDistrictArea">
 																		<select name="rdg_address_sub_district_id" id="rdg_address_sub_district_id">
-																			<option  selected="" value="All">-- เลือกตำบล/แขวง --</option>
+																			<option  selected="" value="All">เลือกตำบล/แขวง </option>
 																		</select>
 																		<i></i>
 																	</label>
@@ -118,7 +122,7 @@ if($conn){
 															 <section>
 																	<label class="select">
 																		<select name="rdg_bts">
-																			<option  selected="" value="All">เลือกใกล้รถไฟฟ้าบีทีเอส</option>
+																			<option  selected="" value="All">เลือกใกล้รถไฟฟ้าบีทีเอส </option>
 																			
 																			<?php 
 																			while($rsBTS=mysql_fetch_array($resultBTS)){
@@ -215,31 +219,32 @@ if($conn){
 		<button class="btn-u  btn-u-xs btn-u-dark-blue" ><i class="fa fa-envelope-o"></i> แจ้งเตือนทางอีเมลล์</button>
 		
 	</footer>
+	</form>	
+	<form id='fromSearchQuick' >		
+		<fieldset> 
+			<div class="row">
+						
+		<div class="col-md-9 col-padding-2">
+		<!--
+		<label class="input">
+			<input type="text" placeholder="ค้นหา" name="firstname">
+		</label>
+		-->
+									
+									
+									<div class="input-group">
+	                                    <input type="text" name="searchQuick" class="form-control" placeholder="ใส่ข้อมูล">
+	                                     <input type="hidden" name="paramAction" value="searchQuick">
+	                                      <input type="hidden" name="rdg_rf" value="1">
+	                                    <span class="input-group-btn">
+	                                 	
+	                                        <button type="submit" class="btn btn-u btn-u-orange"><i class="fa fa-search-plus"></i> คลิ๊กค้นหาทางลัด</button>
+	                                    </span>
+	                                </div>
 	
-</form>	
-<form id='fromSearchQuick' >		
-	<fieldset> 
-		<div class="row">
-					
-	<div class="col-md-9 col-padding-2">
-	<!--
-	<label class="input">
-		<input type="text" placeholder="ค้นหา" name="firstname">
-	</label>
-	-->
-								
-								
-								<div class="input-group">
-                                    <input type="text" name="searchQuick" class="form-control" placeholder="ใส่ข้อมูล">
-                                     <input type="hidden" name="paramAction" value="searchQuick">
-                                      <input type="hidden" name="rdg_rf" value="1">
-                                    <span class="input-group-btn">
-                                 	
-                                        <button type="submit" class="btn btn-u btn-u-orange"><i class="fa fa-search-plus"></i> คลิ๊กค้นหาทางลัด</button>
-                                    </span>
-                                </div>
+									</div>
+						</div>
+					</fieldset> 
+	</form>
+	
 
-								</div>
-					</div>
-				</fieldset> 
-</form>

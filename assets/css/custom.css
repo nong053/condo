@@ -21,12 +21,36 @@ margin-left:5px;
   background: url(../img/patterns/breadcrumbs.png) repeat;
 }
 .btn-mainmenu{
-	width:125px;
-	padding:0px;
-	padding-top:5px;
-	padding-bottom:5px;
+	
+	float: left;
+    margin: 1px;
+  
+    width: 158px;
+    padding-bottom: 3px;
+    padding-top: 3px;
+      padding-left: 0;
+    
 }
-
+.sky-form .input input, .sky-form .select select, .sky-form .textarea textarea {
+    border-width: 1px;
+    color: #404040;
+    font-size: 13px;
+}
+ .btn-mainmenu-contractor{
+ 	float: left;
+    margin: 1px;
+    width: 158px;
+    padding-bottom: 3px;
+    padding-top: 3px;
+      padding-left: 0;
+ }
+ .form-control {
+ font-size: 13px;
+ height: 25px;
+ }
+.btn-u{
+	padding: 3px;
+}
 .btn-u:hover, .btn-u:focus, .btn-u:active{
 background:#f1c40f;
 }
@@ -63,9 +87,7 @@ padding:2px;
     padding: 5px 5px;
 }
 
- .btn-mainmenu-contractor{
- width:168px;
- }
+
 
  .tab-v1 .nav-tabs a {
     font-size: 14px;

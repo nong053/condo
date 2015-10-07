@@ -10,6 +10,7 @@ if($_POST['paramAction']=="loginAction"){
 		$rs=mysql_fetch_array($result);
 		$_SESSION['ses_cus_id']=$rs["cus_id"];
 		$_SESSION['ses_cus_email']=$cus_email;
+		$_SESSION['ses_cus_first_name']=$rs["cus_first_name"];
 		$_SESSION['ses_cus_password']=$cus_password;
 		
 		echo'["success"]';

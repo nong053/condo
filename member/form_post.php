@@ -12,6 +12,8 @@ where rdg_id='$rdg_id'";
 $resultRT=mysql_query($sqlSQLRT);
 $rsRT=mysql_fetch_array($resultRT);
 ?>
+<script type="text/javascript" src="../ckeditor/ckeditor.js"></script>
+	
 <div class="tab-v1">
 	<ul class="nav nav-tabs">
 		<li class="active"><a href="#mainData" data-toggle="tab">ข้อมูลทั่วไป</a></li>
@@ -159,8 +161,24 @@ $rsRT=mysql_fetch_array($resultRT);
 
 							<div class="form-group">
 								<label class="col-lg-3 control-label" for="rdg_detail"> รายละเอียดประกาศ </label>
-								<div class="col-lg-9">
+								<div class="col-lg-12">
+								
+								  <!--CKEditor-->
+								    <textarea cols="80" id="rdg_detail" name="rdg_detail" rows="5" ></textarea>
+								    <script type="text/javascript">
+								        //<![CDATA[
+								            CKEDITOR.replace( 'rdg_detail',{
+								            	enterMode: CKEDITOR.ENTER_BR,
+								                shiftEnterMode: CKEDITOR.ENTER_BR
+								     
+								            } );
+								        //]]>
+								    </script>
+								    <!--CKEditor-->
+								
+    							<!-- 
 									<textarea placeholder="รายละเอียดประกาศ" rows="6" id="rdg_detail" name="rdg_detail" class="form-control"></textarea>
+								 -->
 								</div>
 							</div>
 							

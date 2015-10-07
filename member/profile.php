@@ -1,4 +1,5 @@
 <?php session_start();?>
+<script type="text/javascript" src="../ckeditor/ckeditor.js"></script>
 <script src="../Controller/cProfile.js"></script>
 <?php 
 include("../config.inc.php");
@@ -10,8 +11,62 @@ $rsCus=mysql_fetch_array($resultCus);
 ?>
 
 <div class="tag-box tag-box-v2 box-shadow shadow-effect-2">
+
+
+<form method="post"  action="../control-panel/admin/member_action.php" role="form" class="form-horizontal" enctype="multipart/form-data">
+	<div class="headline"><h4>ข้อมูลรูปภาพ</h4></div>
+	
+	<div class="form-group">
+		<div class='col-lg-3'> 
+			
+		 </div>
+		<label class="col-lg-3 control-label "  for="cus_first_name" style='text-align: left;'>
+			<img class='rounded-x' src="../control-panel/member_img/<?=$rsCus[cus_pic]?>"  border="0" width="100"/><br> 
+		</label>
+		<div class="col-lg-5">
+			
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<div class='col-lg-3'> 
+			
+		 </div>
+		<label class="col-lg-3 control-label titleGroup"  for="cus_first_name">
+			<input type="file" name="cus_pic" /> 
+		</label>
+		<div class="col-lg-5">
+		
+			<input type='hidden' name='actionProfile' value='reback_profile'>
+			<input type='hidden' name='cus_id' value='<?=$rsCus[cus_id]?>'>
+			<input type='submit' class='btn-u btn-u-green' value='อัปโหลดรูปภาพ'>
+		</div>
+	</div>
+	
+</form>
 <form role="form" id="formCus" name="formCus" class="form-horizontal">
+
+	<div class="headline"><h4>รายละเอียดเพิ่มเติม</h4></div>
+	<div class="form-group">
+		
+		<div class="col-lg-12">
+			<!--CKEditor-->
+		    <textarea cols="80" id="cus_other" name="cus_other" rows="2" ><?=$rsCus['cus_other']?></textarea>
+		    <script type="text/javascript">
+		        //<![CDATA[
+		            CKEDITOR.replace( 'cus_other',{
+		            	enterMode: CKEDITOR.ENTER_BR,
+		                shiftEnterMode: CKEDITOR.ENTER_BR
+		     
+		            } );
+		        //]]>
+		    </script>
+		    <!--CKEditor-->
+		</div>
+	</div>
 	<div class="headline"><h4>ข้อมูลส่วนตัว</h4></div>
+	
+	
 
 	<div class="form-group">												
 		<label for="inputEmail1" class="col-lg-3 control-label"> คำนำหน้า</label>
@@ -279,6 +334,7 @@ $rsCus=mysql_fetch_array($resultCus);
  
 	<div class="form-group">
 		<div class="col-lg-offset-3 col-lg-9">
+			<input type="hidden"  name="cus_id" value="<?=$rsCus['cus_id']?>">
 			<input type="hidden"  name="paramAction" value="updateProfile">
 			<button type="submit" class="btn-u btn-u-green" id="btnCusSubmit">  บันทึกข้อมูล  </button>
 		</div>
@@ -307,6 +363,7 @@ $rsCus=mysql_fetch_array($resultCus);
 	<div class="form-group">
 		<div class="col-lg-offset-3 col-lg-9">
 			<input type="hidden"  name="paramAction" value="updatePass">
+			<input type="hidden"  name="cus_id" value="<?=$rsCus['cus_id']?>">
 			<button type="submit" class="btn-u btn-u-green" id="btnChangePass">  เปลี่ยนรหัสผ่าน  </button>
 		</div>
 	</div>

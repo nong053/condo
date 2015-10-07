@@ -1,4 +1,5 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script language=JavaScript src="javascript/picker.js"></script>
 <script>
 /*get ajax*/
 var xmlReq;
@@ -33,7 +34,8 @@ function postResult(txt){
 	xmlReq.onreadystatechange = callBackpost;
 	xmlReq.open("POST",txt,true);
 	xmlReq.setRequestHeader("content-Type","application/x-www-form-urlencoded");/*?????*/
-	xmlReq.send("jobcat_position="+document.form1.jobcat_position.value+"&jobcat_title="+document.form1.jobcat_title.value+"&jobcat_detail="+document.form1.jobcat_detail.value+"&action="+document.form1.action.value+"&jobcat_id="+document.form1.jobcat_id.value);	
+	xmlReq.send("jobcat_title="+document.form1.jobcat_title.value+"&jobcat_detail="+document.form1.jobcat_detail.value+"&jobcat_bgcolor="+document.form1.jobcat_bgcolor.value+"&action="+document.form1.action.value+"&jobcat_id="+document.form1.jobcat_id.value);	
+	
 }
 function callBackpost(){
 	if(xmlReq.readyState!=4){
@@ -41,7 +43,7 @@ function callBackpost(){
 	
 	}else if(xmlReq.status==200){
 	/*document.form1.test.value="";*/
-	document.form1.jobcat_position.value="";
+
 	document.form1.jobcat_title.value="";
 	document.form1.jobcat_detail.value="";
 	document.getElementById("Result").innerHTML=xmlReq.responseText;
@@ -94,19 +96,20 @@ border-right:#dedede solid 1px;
         </td>
         <td>
         <div id="devtext_name">
-        ตำแหน่งงาน
+   หมวดอสังหาริมทรัพย์
         </div>
         </td>
         <td>
         <div id="devtext_name">
-        เกี่ยวกับงาน
+  รายละเอียด
         </div>
         </td>
         <td>
         <div id="devtext_name">
-        รายละเอียด
+  สีพื้นหลัง
         </div>
         </td>
+        
         <td>
         <div id="devtext_name">
         จัดการ
@@ -115,7 +118,7 @@ border-right:#dedede solid 1px;
         
     </tr>
     <?php
-    $strSQL="select * from jobcat";
+    $strSQL="select * from realty_type_cate";
 	$result=mysql_query($strSQL);
 	$i=1;
 	while($rs=mysql_fetch_array($result)){
@@ -127,20 +130,25 @@ border-right:#dedede solid 1px;
         </center>
         </td>
         <td>
-        <?=$rs[jobcat_position]?>
+        <?=$rs[rtc_name]?>
         </td>
         <td>
-        <?=$rs[jobcat_title]?>
+        <?=$rs[rtc_detail]?>
         </td>
+       
+       <td>
+       <div style="width:50px; height:15px; background:<?=$rs[rtc_bg_color]?>">
+        
+        </div>
+       </td>
         <td>
-        <?=$rs[jobcat_detail]?>
-        </td>
-        <td>
-        <a href="#" onclick="getResult('action_job_company.php?action=del&jobcat_id=<?=$rs[jobcat_id]?>&')">
-        ลบ
+        <!-- 
+        <a href="#" onclick="getResult('action_job_company.php?action=del&jobcat_id=<?=$rs[rtc_id]?>&')">
+       <img border="0" src="../images_system/b_drop.png">
         </a>&nbsp;
-        <a href="index.php?page=job_system&select_page=job_company_edit_del&action=edit&jobcat_id=<?=$rs[jobcat_id]?>">
-        แก้ไข
+         -->
+        <a href="index.php?page=job_system&select_page=job_company_edit_del&action=edit&jobcat_id=<?=$rs[rtc_id]?>">
+       <img border="0" src="../images_system/b_edit.png">
         </a>
         </td>
     </tr>
@@ -163,7 +171,7 @@ if($action=="edit"){
 	$jobcat_detail=$_GET['jobcat_detail'];*/
 	
 	
-	$strSQL="select * from jobcat where jobcat_id='$jobcat_id'";
+	$strSQL="select * from realty_type_cate where rtc_id='$jobcat_id'";
 	$result=mysql_query($strSQL);
 	$rs2=mysql_fetch_array($result);
 	
@@ -177,26 +185,28 @@ if($action=="edit"){
 <table>
 	<tr>
     	<td>
-        ตำแหน่งงาน
+        หมวดอสังหาริมทรัพย์
         </td>
         <td>
-        <input type="txt"  name="jobcat_position" value="<?=$rs2[jobcat_position]?>"/>
+        <input type="txt" disabled  name="jobcat_title" value="<?=$rs2[rtc_name]?>"/>
         </td>
     </tr>
-    <tr>
-    	<td>
-        เกี่ยวกับงาน
-        </td>
-        <td>
-        <input type="txt"  name="jobcat_title" value="<?=$rs2[jobcat_title]?>"/>
-        </td>
-    </tr>
+   
     <tr>
     	<td>
         รายละเอียด
         </td>
         <td>
-        <textarea name="jobcat_detail"><?=$rs2[jobcat_detail]?></textarea>
+        <textarea name="jobcat_detail"><?=$rs2[rtc_detail]?></textarea>
+        </td>
+    </tr>
+    <tr>
+    	<td>
+        พื้นหลัง
+        </td>
+        <td>
+        <input type='text' name="jobcat_bgcolor" value='<?=$rs2[rtc_bg_color]?>'>
+        <a href="javascript:TCP.popup(document.forms['form1'].elements['jobcat_bgcolor'])"><img width="15" height="13" src="../images_system/color3.png"></a>
         </td>
     </tr>
    
@@ -205,8 +215,8 @@ if($action=="edit"){
 	<tr>
     	<td>
         <input name="action" value="edit" type="hidden">
-        <input name="jobcat_id" value="<?=$rs2[jobcat_id]?>" type="hidden">
-        <input type="button" onclick="postResult('action_job_company.php')" value="click here" />
+        <input name="jobcat_id" value="<?=$rs2[rtc_id]?>" type="hidden">
+        <input type="button" onclick="postResult('action_job_company.php')" value="ตกลง" />
         </td>
     </tr>
 </table>

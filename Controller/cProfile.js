@@ -125,8 +125,14 @@ $(document).ready(function(){
 	//callSubDistrict();
 	
 	//submit cus start
-	
+	function CKupdate(){
+	    for ( instance in CKEDITOR.instances )
+	        CKEDITOR.instances[instance].updateElement();
+	}
 	$("#formCus").submit(function(){
+		
+		CKupdate();
+		
 		$.ajax({
 			url:"../Model/mProfile.php",
 			type:"post",

@@ -292,10 +292,12 @@ rdg_road
 																		?>
 																		<button type="button" class="btn-u btn-u-red"  style="padding: 3px;"><i class="fa fa-bell-o"></i>ประกาศเช่า</button>
 																		<?php
+																		/*
 																	}else if($_POST['rdg_rf']=="3"){
 																		?>
 																		<button type="button" class="btn-u btn-u-red"  style="padding: 3px;"><i class="fa fa-bell-o"></i>ประกาศขายและเข่า</button>
 																		<?php
+																		*/
 																	}else if($_POST['rdg_rf']=="5"){
 																		?>
 																		<button type="button" class="btn-u btn-u-red"  style="padding: 3px;"><i class="fa fa-bell-o"></i>ประกาศขายดาวน์</button>

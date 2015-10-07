@@ -17,6 +17,72 @@
 		}
 	}
 	
+	//click contract from start
+	
+	function check_contact_form(robot_gen){
+		//alert("confrim"+confrim);
+		//cus_confrim
+		//contact_fullname
+		//contact_tel
+		//cus_confrim
+		var check="";
+		
+		if($("#contact_detail").val()==""){
+			check+="กรอกรายละเอียดด้วยครับ\n";
+		}
+		if($("#contact_fullname").val()==""){
+			check+="กรอกชื่อด้วยครับ\n";
+		}
+		if($("#contact_tel").val()==""){
+			check+="กรอกเบอร์โทรด้วยครับ\n";
+		}
+		if(robot_gen != $("#cus_confrim").val()){
+			check+="บวกเลขไม่ถูกต้องครับ\n";
+		}
+		
+		
+		if(check!=""){
+			return check;
+			//return false;
+		}else{
+			return "ok";
+		}
+	}
+	
+	
+	var contactFormModalFn=function(){
+	$(".contactFormModal").click(function(){
+		$.ajax({
+			url:"Member/contactForm.php",
+			type:"post",
+			dataType:"html",
+			data:{"paramAdminID":this.id},
+			success:function(data){
+			
+				$("#contracFormtArea").html(data);
+				
+				$("form#contactUsForm").submit(function(){
+					$.ajax({
+						url:"./Model/mContact.php",
+						type:"post",
+						dataType:"html",
+						data:$(this).serialize(),
+						success:function(data){
+							if(data['data']=="success"){
+								alert("ส่ง Email เรียบร้อย");
+							}
+						}
+					
+					});
+					return false;
+				});
+				
+			}
+		});
+	});
+	};
+	//click contract from end
+	
 	
 	//start provine .
 	var callProvince = function(rdg_address_province_id,rdg_address_district_id,rdg_address_sub_district_id,areaID){

@@ -119,12 +119,12 @@ $rs_customer = mysql_fetch_array($result_customer);
         ชื่อ-นามสกุล:
         </div>
         <div id="dev_picturetext2" style="width:350px;">
-       <!--  <img src="../member_img/<?=$rs_customer[cus_pic]?>"  border="0" width="100"/><br> -->
+        <img src="../member_img/<?=$rs[cus_pic]?>"  border="0" width="100"/><br> 
         <? 
 		if($_GET['action2']=="edit"){
 			$submit="บันทึกการแก้ไข";
 			?>
-            <!-- <input type="file" name="cus_pic" /> -->
+             <input type="file" name="cus_pic" /> 
          	<input type="text" name="cus_first_name" value="<?=$rs[cus_first_name]?>"/>  -
          	<input type="text" name="cus_last_name" value="<?=$rs[cus_last_name]?>"/>  
             <? 
@@ -373,7 +373,7 @@ $rs_customer = mysql_fetch_array($result_customer);
 			}else{
 			?>
             <!-- แก้ไข-->
-           <input style='display:none;' type="button" onclick="parent.location='index.php?page=member_system&cus_id=<?=$cus_id?>&detail_cus=detail_cus&action2=edit'"  value="<?=$submit?>"/>
+           	<input  type="button" onclick="parent.location='index.php?page=member_system&cus_id=<?=$cus_id?>&detail_cus=detail_cus&action2=edit'"  value="<?=$submit?>"/>
             <input type="button" onclick="parent.location='index.php?page=member_system'"  value="ย้อนกลับ"/>
            <?
 			}

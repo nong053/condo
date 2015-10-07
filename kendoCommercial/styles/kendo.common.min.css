@@ -1582,7 +1582,8 @@ ul.k-menu-vertical .k-separator,.k-menu .k-group .k-separator {
 .k-grid td {
 	border-style: solid;
 	border-width: 0 0 1px 1px;
-	padding: .4em .6em;
+	/*padding: .4em .6em;*/
+	padding:0px;
 	overflow: hidden;
 	line-height: 1.6em;
 	vertical-align: middle;

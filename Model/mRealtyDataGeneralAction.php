@@ -17,6 +17,21 @@ if($_GET['paramAction']=="realtyFor"){
 	}
 	echo "[".$json."]";
 }
+
+if($_POST['paramAction']=="realtyDataGeneralDetailById"){
+	$RdgId=$_POST['RdgId'];
+	$strSQL="
+	select rdg.*,rt.rt_contructor_yet  from realty_data_general  rdg
+	LEFT JOIN  realty_type rt
+	on rdg.rt_id=rt.rt_id
+	WHERE rdg.rdg_id='$RdgId'
+	";
+	$result=mysql_query($strSQL);
+	if($result){
+	$rs=mysql_fetch_array($result);
+	echo $rs['rdg_detail'];
+	}
+}
 if($_POST['paramAction']=="realtyDataGeneralById"){
 	$RdgId=$_POST['RdgId'];
 	$strSQL="
@@ -34,7 +49,7 @@ if($_POST['paramAction']=="realtyDataGeneralById"){
 				,\"rt_id\":\"".$rs['rt_id']."\"
 				,\"cus_id\":\"".$rs['cus_id']."\"
 				,\"rdg_title\":\"".trim($rs['rdg_title'])."\"
-				,\"rdg_detail\":\"".nl2br($rs['rdg_detail'])."\"
+				
 				,\"rdg_owner_project\":\"".$rs['rdg_owner_project']."\"
 				,\"rdg_price\":\"".$rs['rdg_price']."\"
 				,\"rdg_price_rent\":\"".$rs['rdg_price_rent']."\"
@@ -169,7 +184,7 @@ if($_POST['paramAction']=="realtyDataGeneralSave"){
 	
 	$rdg_address_sub_district_id=$_POST['rdg_address_sub_district_id'];
 	$rdg_area_number=$_POST['rdg_area_number'];
-	$rdg_detail=nl2br($_POST['rdg_detail']);
+	$rdg_detail=$_POST['rdg_detail'];
 	$rdg_name_project=$_POST['rdg_name_project'];
 	$rdg_owner_project=$_POST['rdg_owner_project'];
 	$rdg_price=$_POST['rdg_price'];

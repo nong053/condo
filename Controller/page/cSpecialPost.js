@@ -12,36 +12,9 @@ $(document).ready(function(){
 		scrollable: false,
 	});
 	
-	$(".contactFormModal").click(function(){
-		$.ajax({
-			url:"Member/contactForm.php",
-			type:"post",
-			dataType:"html",
-			data:{"paramAdminID":this.id},
-			success:function(data){
-			
-				$("#contracFormtArea").html(data);
-				
-				$("form#contactUsForm").submit(function(){
-					$.ajax({
-						url:"./Model/mContact.php",
-						type:"post",
-						dataType:"html",
-						data:$(this).serialize(),
-						success:function(data){
-							if(data['data']=="success"){
-								alert("ส่ง Email เรียบร้อย");
-							}
-						}
-					
-					});
-					return false;
-				});
-				
-			}
-		});
-	});
-	//click contract from end
+	//call main function click contract from start
+	contactFormModalFn();
+	//call main function click contract from end
 	
 	
 	
