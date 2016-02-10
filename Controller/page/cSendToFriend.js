@@ -27,8 +27,10 @@ $("document").ready(function(){
 					data:{"paramAction":"sendToFriend","email_my_friend":$("#email_my_friend").val(),
 						"url_to_friend":$("#url_to_friend").val(),"detail_to_my_friend":$("#detail_to_my_friend").val()},
 					success:function(data){
+						//alert(data);
 						if(data=="success"){
 							alert("ส่งหน้านี้ให้เพื่อนเรียบร้อย");
+							$('#sendToMyFriendsFormModal').modal('hide');
 							
 						}
 					}

@@ -2,9 +2,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?
 include("config.inc.php");
-$user=$_POST['user'];
-$pass=$_POST['pass'];
+include("sql_injection.php");
+real_esc($_POST);
 
+
+
+$user= addslashes(trim($_POST['user']));
+$pass= addslashes(trim($_POST['pass']));
+
+/*
+$user= clean_input($_POST['user']);
+$pass= clean_input($_POST['pass']);
+echo "user=$user<br>";
+echo "pass=$pass<br>";
+*/
 $strSQL="select * from admin where admin_username='$user'&& admin_password='$pass'";
 $result=mysql_query($strSQL);
 
@@ -16,6 +27,7 @@ if($num=mysql_num_rows($result)){
 	$_SESSION['admin_surname']=$rs['admin_surname'];
 	$_SESSION['admin_status']=$rs['admin_status'];
 	$_SESSION['admin_ERROR']="";
+	$_SESSION['ses_cus_id']='9999999999';
 	//header("Location:admin/index.php");
 	echo"<script>window.location='admin/index.php'</script>";
 	

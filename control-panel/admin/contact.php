@@ -93,7 +93,7 @@ $values=1;
 }
 //##### Check manage user login end #####
 
-		$strSQL="select * from contact  where admin_id=$values";
+		$strSQL="select * from contact";
 		$result=mysql_query($strSQL);
 		$i=1;
 		while($rs=mysql_fetch_array($result)){
@@ -101,10 +101,7 @@ $values=1;
     <tr>
     	<td>
         <center>
-       <a href="contact_delete.php?id=<?=$rs[contact_id]?>" title="ลบ">
-       <img src="../images_system/b_drop.png" border="0" />
-       </a>
-       &nbsp;
+       <a href="contact_delete.php?id=<?=$rs[contact_id]?>" title="ลบ"><img src="../images_system/b_drop.png" border="0" /></a>
         <?=$i?>
         </center>
         </td>

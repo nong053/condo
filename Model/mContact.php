@@ -4,9 +4,6 @@ include("../config.inc.php");
 
 
 
-
-
-
 if($_POST['paramAction']=="sendEmail"){
 	
 	$contact_detail=$_POST['contact_detail'];
@@ -17,19 +14,34 @@ if($_POST['paramAction']=="sendEmail"){
 	
 	
 	$srtSQL2="select * from customer where cus_id='$admin_id'";
-	$result=mysql_query($srtSQL2);
+	$result2=mysql_query($srtSQL2);
 	$rs2=mysql_fetch_array($result2);
+	//echo 'cus_email'.$rs2['cus_email'];
 	//ส่งให้เจ้าของประกาศ
+	
 	$strTo2 = $rs2['cus_email'];
 	$strSubject2 = "สอบถามข้อมูลประกาศ(www.realthairealty.com)";
-	$strHeader2 ="สอบถามประกาศเลขที่ $rdg_id";
-	$strMessage2 = " คุณ $contact_fullname สอบถามเกี่ยวกับประกาศของท่านดังนี้ $contact_detail ข้อมูลติดต่อกลับเบอร์โทร $contact_tel E-mail $contact_email ";
-	$flgSend = @mail($strTo2,$strSubject2,$strMessage2,$strHeader2);  // @ = No Show Error //
+	//$strHeader2 ="สอบถามประกาศเลขที่ #".$rdg_id;
+	$strMessage2 = "สอบถามประกาศเลขที่ #$rdg_id คุณ$contact_fullname สอบถามเกี่ยวกับประกาศของท่านดังนี้ $contact_detail ข้อมูลติดต่อกลับเบอร์โทร $contact_tel E-mail $contact_email";
+	$flgSend = @mail($strTo2,$strSubject2,$strMessage2,'');  // @ = No Show Error //
+	
+	/*
+	$to="kosit2.arom@gmail.com";
+	$title="สอบถามข้อมูลประกาศ(www.realthairealty.com)";
+	$content="คุณ";
+	$header="สอบถามประกาศเลขที่ #";
+	
+	$sendmail=@mail($to,$title,$content,$header);
+	*/
+	
+	
 	if($flgSend){
 		echo'["success"]';
 	}else{
-		echo mysql_error();
+
+		echo 'error1'.mysql_error();
 	}
+	
 	
 }
 if($_POST['paramAction']=="saveContract"){

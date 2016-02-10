@@ -1,7 +1,15 @@
 <?php session_start();
 include("../config.inc.php");
 $rdg_id=$_POST['rdg_id'];
-$cus_id=$_SESSION['cus_id'];
+$cus_id=$_SESSION['ses_cus_id'];
+
+if($_POST['paramAction']=="get_cus_id"){
+
+	
+		echo $cus_id;
+	
+}
+
 if($_POST['paramAction']=="savePost"){
 	
 	$strSQL="insert into realty_save_post(cus_id,rdg_id)values('$cus_id','$rdg_id')";

@@ -1,7 +1,8 @@
+
 <script src="Controller/page/cSpecialPost.js"></script>  
 <?php 
-function numResultFn($rf_id){
-	$strSQLnum="select count(*) as allPage from realty_data_general  where rf_id='".$rf_id."'";
+function numResultFn($rf_id,$rt_id){
+	$strSQLnum="select count(*) as allPage from realty_data_general  where rf_id='".$rf_id."' and rt_id='$rt_id'";
 	$result=mysql_query($strSQLnum);
 	$rs=mysql_fetch_array($result);
 	return $rs['allPage'];
@@ -15,7 +16,7 @@ while($rsSCCate=mysql_fetch_array($resultSCCate)){
 
 		$strSLQPsale="
 		select rdg.rt_id,rt.rt_name,rdg.cus_id,rf_id,
-		rdg.rdg_id,rdg_title,rdg.rdg_address_no,
+		rdg.rdg_id,rdg_title,rdg.rdg_address_no,rdg.rdg_special,
 		rdg.rdg_address_province_id,p.PROVINCE_NAME,
 		rdg_address_district_id,am.AMPHUR_NAME,
 		rdg_address_sub_district_id,d.DISTRICT_NAME,
@@ -23,6 +24,7 @@ while($rsSCCate=mysql_fetch_array($resultSCCate)){
 		rdg_price,rdg_price_down,rdg_price_rent,rdg_price_project,
 		rdg_area_number,rdg_area_unit,ru.ru_name,rtc.rtc_detail,
 		rdg_update,
+		rdg_status_post,
 		rdg.rdg_estate_num,
 		(select ru2.ru_name  from realty_unit ru2 where ru2.ru_id= rdg.rdg_estate_unit) as rdg_estate_unit_name,
 		c.*
@@ -41,15 +43,19 @@ while($rsSCCate=mysql_fetch_array($resultSCCate)){
 		ON rtc.rtc_id=rt.rt_contructor_cate
 		LEFT JOIN customer c
 		ON c.cus_id= rdg.cus_id
-		where  rt.rt_contructor_cate=".$rsSCCate['rtc_id']." order by rdg_id  
+		where  rt.rt_contructor_cate=".$rsSCCate['rtc_id']." and c.cus_enable='Yes' and c.cus_status_special='Y' and rdg.rdg_special='Y' and rdg.rdg_status='Y' order by rdg.rdg_update desc 
 				
 		";
 ?>
- 
+
+
 <!--Blog Post-->        
 <div class="blog margin-bottom-5">
 <div class="row" >
 	<div class="panel panel-u" style="margin-bottom: 5px;">
+			
+			
+
                             <div class="panel-heading">
                                 <h3 class="panel-title"><i class="fa fa-tasks"></i> ประกาศ<?=$rsSCCate['rtc_detail'];?>พิเศษหน้าแรก</h3>
                             </div>
@@ -75,18 +81,18 @@ while($rsSCCate=mysql_fetch_array($resultSCCate)){
                                 		<tr >
 					                		<td>
 					                		<!--start  post  -->
-												<div class="col-md-12 shadow-wrapper" >
+												<div class="col-xs-12 shadow-wrapper" >
 													<div class="tag-box tag-box-v1 box-shadow shadow-effect-2" style="background: <?=$rsSCCate['rtc_bg_color'];?>">
 														
 														<!--start button top post -->
 														<div class="row">
-					                                		<div class="col-md-12">
+					                                		<div class="col-xs-12">
 					                                			<p>
-																	<button class="btn-u btn-u-xs btn-u-orange" type="button"><i class=" fa fa-search-plus"></i> ค้นหาพบ <?=numResultFn("1")?> ประกาศหน้าที่ 1 จาก <?=numResultFn("1")?> ประกาศ</button>
-																	<button class="btn-u btn-u-xs btn-u-orange" type="button"><i class="icon-social-facebook"></i> แซร์ผ่านเฟสบุ๊ค</button>
-																	<button class="btn-u btn-u-xs btn-u-orange" type="button"><i class=" icon-printer "></i> ปริ้น</button>
-																	<button class="btn-u btn-u-xs btn-u-orange" type="button"><i class="fa fa-download"></i> บันทึกสิ่งที่ค้นหา</button>
-																	<button class="btn-u btn-u-xs btn-u-orange" type="button"><i class="icon-grid "></i> ประกาศที่บันทึกไว้</button>
+																	<button class="btn-u btn-u-xs btn-u-orange" type="button"><i class=" fa fa-search-plus"></i> ค้นหาพบ <? echo numResultFn("1",$rsPsale['rt_id'])?> ประกาศหน้าที่ 1 จาก <?=numResultFn("1",$rsPsale['rt_id'])?> ประกาศ</button>
+																	<button  onClick="window.open('https://www.facebook.com/sharer.php?u=www.realthairealty.com/<?=$_SERVER['REQUEST_URI']?>')"; class="btn-u btn-u-xs btn-u-orange" type="button"><i class="icon-social-facebook"></i> แซร์ผ่านเฟสบุ๊ค</button>
+																	<button onClick="window.print()"; class="print btn-u btn-u-xs btn-u-orange" type="button"><i class=" icon-printer "></i> ปริ้น</button>
+																	<!-- <button  class=" btnSavePost btn-u btn-u-xs btn-u-orange" type="button"><i class="fa fa-download"></i> บันทึกสิ่งที่ค้นหา</button> -->
+																	<button onClick="window.open('index.php?page=postSaved')"; class="btn-u btn-u-xs btn-u-orange" type="button"><i class="icon-grid "></i> ประกาศที่บันทึกไว้</button>
 																</p>
 					                                		</div>
 					                                	</div>
@@ -94,13 +100,34 @@ while($rsSCCate=mysql_fetch_array($resultSCCate)){
 														
 														
 														<div class="row">
-															<div class="col-md-8 ">
-															<h2>ประกาศขายพิเศษ รหัส <?=$rsPsale['rdg_id']?></h2>
+															<div class="col-xs-8 ">
+															<h2>ประกาศขายพิเศษ รหัส <?=$rsPsale['rdg_id']?>
+															<?php 
+															if($rsPsale['rdg_status_post']=="soldOut"){
+															echo "<font color='red'>(ขายแล้ว)</font>";
+																
+															}else if($rsPsale['rdg_status_post']=="rented"){
+															echo "<font color='red'>(เช่าแล้ว)</font>";	
+															}
+															?>
+															</h2>
 															</div>
-															<div class="col-md-4 ">
-															<button onclick="window.location.href='index.php?page=post_sub_detail&rdg_id=<?=$rsPsale['rdg_id']?>&rtc_id=<?=$rsSCCate['rtc_id']?>'" class="box-margin-top5 btn-u btn-u-red btn-left-right" type="button"><i class="fa fa-building "></i> คลิ๊กรายละเอียด</button>
+															<div class="col-xs-4 ">
+															<button onclick="window.location.href='index.php?page=post_sub_detail&rdg_id=<?=$rsPsale['rdg_id']?>&rtc_id=<?=$rsSCCate['rtc_id']?>'" class="box-margin-top5 btn-u btn-u-red btn-left-right btnDetailReailty" type="button"><i class="fa fa-building "></i> คลิ๊กรายละเอียด</button>
 															
-																	<div class="col-md-7  useronlineSpecialPage">
+																	<div class="col-xs-7  useronlineSpecialPage">
+																	
+																	
+																	<!-- profile start -->
+																	<div>	
+																		<img width="80" border="0" src="control-panel/member_img/<?=$rsPsale['cus_pic']?>" class="rounded-x">
+																		<a href="index.php?page=profile_post&cus_id=<?=$rsPsale['cus_id']?>">
+																		<em>โปรไฟล์ผู้ประกาศ</em>
+																		</a>
+																	</div>
+																	
+																	<!-- profile end -->
+																	<!-- user online start -->	
 																	<div id="testimonials-9" class="carousel slide testimonials testimonials-v2 testimonials-bg-default">
 																		<div class="">
 																			<div class="item active">
@@ -121,16 +148,7 @@ while($rsSCCate=mysql_fetch_array($resultSCCate)){
 																		</div>
 																		
 																	</div>
-																	
-																	<!-- profile start -->
-																	<div>	
-																		<img width="80" border="0" src="control-panel/member_img/<?=$rsPsale['cus_pic']?>" class="rounded-x">
-																		<a href="index.php?page=profile_post&cus_id=<?=$rsPsale['cus_id']?>">
-																		<em>โปรไฟล์ผู้ประกาศ</em>
-																		</a>
-																	</div>
-																	<!-- profile end -->
-																		
+																	<!-- user online end -->
 																	</div>
 																	
 															
@@ -139,7 +157,7 @@ while($rsSCCate=mysql_fetch_array($resultSCCate)){
 															<brstyle='clear:both'>
 														</div>
 														<div class="row">
-															<div class="col-md-4">
+															<div class="col-xs-4">
 															<?php 
 															$strSQL="select * from realty_images where rdg_id='".$rsPsale['rdg_id']."' and  ri_set_first='0'  ORDER BY ri_set_first ";
 															$result=mysql_query($strSQL);
@@ -184,7 +202,7 @@ while($rsSCCate=mysql_fetch_array($resultSCCate)){
 															?>
 																
 															</div>
-															<div class="col-md-6">
+															<div class="col-xs-6">
 															<?if($rsPsale['rdg_title'])echo "<p>".$rsPsale['rdg_title']."</p>";?>
 															<b>ขาย</b> <?=$rsPsale['rt_name']?>  <?
 															if($rsPsale['rf_id']=="1"){//เพื่อขาย
@@ -242,12 +260,12 @@ while($rsSCCate=mysql_fetch_array($resultSCCate)){
 							
 														</div>
 														<div class="row box-margin-top5">
-															<div class="col-md-12">
+															<div class="col-xs-12">
 																<p>
-																<button data-target="#contactFormModal" data-toggle="modal" class="btn-u btn-u-xs btn-u-green contactFormModal" type="button" id="<?=$rsPsale['cus_id']?>"><i class="fa fa-child "></i> ติดต่อผู้ลงประกาศ</button>
+																<button data-target="#contactFormModal" data-toggle="modal" class="btn-u btn-u-xs btn-u-green contactFormModal" type="button" id="<?=$rsPsale['cus_id']?>-<?=$rsPsale['rdg_id']?>"><i class="fa fa-child "></i> ติดต่อผู้ลงประกาศ</button>
 																<button data-target="#mapContactModal" data-toggle="modal" class="btn-u btn-u-xs btn-u-green mapContactModal" type="button" id="<?=$rsPsale['rdg_id']?>"><i class="fa  fa-car"></i> แผนที่</button>
 																<button data-target="#imageSlideModal" data-toggle="modal" class="btn-u btn-u-xs btn-u-green imageSlideModal" type="button" id="<?=$rsPsale['rdg_id']?>"><i class="glyphicon glyphicon-picture"></i> ภาพสไลด์</button>
-																<button id="saveForLater" class="btn-u btn-u-xs btn-u-green saveForLater" type="button"><i class="fa fa-download"></i> เก็บไว้ดูภายหลัง</button>
+																<button id="<?=$rsPsale['rdg_id']?>" class="btn-u btn-u-xs btn-u-green btnSavePost" type="button"><i class="fa fa-download"></i> เก็บไว้ดูภายหลัง</button>
 																</p>
 															</div>
 														</div>
@@ -290,78 +308,5 @@ while($rsSCCate=mysql_fetch_array($resultSCCate)){
 	});
 	*/
 </script>
-  <div aria-labelledby="contactFormModal" role="dialog" tabindex="-1" class="modal fade" id="contactFormModal" style="display: none;">
-    <div role="document" class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button aria-label="Close" data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span></button>
-          <h4 id="gridModalLabel" class="modal-title">ติดต่อเจ้าของไปทางประกาศ</h4>
-        </div>
-        <div class="modal-body">
-        
-          	 <!-- from contract area start -->
-	         <div id="contracFormtArea"></div>
-	      	 <!-- from contract area end --> 
-	        
-        </div>
-        <!-- 
-        <div class="modal-footer">
-          <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
-          <button class="btn btn-primary" type="button">Save changes</button>
-        </div>
-         -->
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div>
+ 
   
-  <div aria-labelledby="mapContactModal" role="dialog" tabindex="-1" class="modal fade" id="mapContactModal" style="display: none;">
-    <div role="document" class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button aria-label="Close" data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span></button>
-          <h4 id="gridModalLabel" class="modal-title">แผนที่</h4>
-        </div>
-        <div class="modal-body" >
-          	 <!-- from contract area start -->
-	         <div id="mapArea" style="width:570px; height:400px;"></div>
-	      	 <!-- from contract area end --> 
-        </div>
-        <!-- 
-        <div class="modal-footer">
-          <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
-          <button class="btn btn-primary" type="button">Save changes</button>
-        </div>
-         -->
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div>
-  <div aria-labelledby="imageSlideModal" role="dialog" tabindex="-1" class="modal fade" id="imageSlideModal" style="display: none;">
-    <div role="document" class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button aria-label="Close" data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span></button>
-          <h4 id="gridModalLabel" class="modal-title">รูปภาพ</h4>
-        </div>
-        <div class="modal-body">
-        
-          <div id="galleryRealtyArea"></div>
-          <!-- 
-         <img alt="" src="assets/img/main/img9.jpg" width="550">
-         <ul style="margin-top:2px;" class="list-unstyled">
-			<button style="height:80px; width:100px;" class="btn-u btn-u-default" type="button">img1</button>
-			<button style="height:80px;width:100px;" class="btn-u btn-u-default" type="button">img2</button>
-			<button style="height:80px; width:100px;" class="btn-u btn-u-default" type="button">img3</button>
-			<button style="height:80px; width:100px;" class="btn-u btn-u-default" type="button">img4</button>
-			<button style="height:80px;width:100px;" class="btn-u btn-u-default" type="button">img5</button>
-		</ul>
-           -->
-        </div>
-        <!-- 
-        <div class="modal-footer">
-          <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
-          <button class="btn btn-primary" type="button">Save changes</button>
-        </div>
-         -->
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div>

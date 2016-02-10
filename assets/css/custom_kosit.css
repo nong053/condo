@@ -43,7 +43,7 @@ blockquote {
 }
 .sky-form .select i {
     height: 6px;
-    right: 0;
+    right: 1px;
     top: 10px;
     width: 9px;
 }
@@ -52,7 +52,12 @@ blockquote {
 	 border-radius: 0px;
 }
 .btn-search1{
-	 width: 480px;
+	font-size: 15px;
+    font-weight: bold;
+    height: 35px;
+    margin-left: 140px;
+    width: 200px;
+    background:orange;
 }
 .linkMainMenu{
    
@@ -88,20 +93,23 @@ blockquote {
 	top:0px;
 }
 .sky-form header {
-    background: #fff none repeat scroll 0 0;
+    /*background: #fff none repeat scroll 0 0;*/
     color: inherit;
     display: block;
     font-size: 20px;
     font-weight: 400;
     padding: 5px;
 }
+.sky-form fieldset {
+    background:  none repeat scroll 0 0;
+}
 .postRL{
 	width:200px;
 }
 .tag-box {
     background: #fafafa none repeat scroll 0 0;
-    margin-bottom: 10px;
-    padding: 5px;
+    margin-bottom: 0px;
+    padding: 2px;
 }
 .btn-left-right{
 	float:right
@@ -130,6 +138,115 @@ blockquote {
 header.one-green {
     background: #c7ffca none repeat scroll 0 0;
 }
+.headerTitleSearch{
+	padding-left: 11px;
+    padding-right: 16px;
+}
+#formSearchForSales{
+	background:#ffffce;
+}
+
+#formSearchForRent{
+	background:#c7ffca;
+}
 
 
+.sky-form header {
+    background:  none repeat scroll 0 0;
+}
+#formSubPost{
+	background:#ffffce;
+}
+blockquote.hero{
+	background:#c7ffca;
+	padding: 5px;
+}
+blockquote {
+    margin: 0;
+}
+.mainMenuPostRent{
+	background:#ffffce ;
+	color:#4765a0  ;
+}
+.bgLogo{
+	border:2px solid #4765a0 ;
+	/*background:#ffffce   ;*/
+}
+.tab-v3 .nav-pills li a:hover, .tab-v3 .nav-pills li.active a {
+    background: #79d5b3 none repeat scroll 0 0;
+    border: 1px solid #68af28;
+    color: #fff;
+}
+.tab-v3 .nav-pills li a {
+    background: #fafafa none repeat scroll 0 0;
+    border: 1px solid #eee;
+    color: #777;
+    font-size: 13px;
+    margin-bottom: 3px;
+    padding: 4px;
+}
+.tab-v3 .nav-pills li a .titleActive{
+	background: #79d5b3 none repeat scroll 0 0;
+}
+.btnDetailReailty{
+	font-size: 18px;
+	padding:5px;
+}
+.footer-v1 .footer {
+    background: #272727 none repeat scroll 0 0;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 40px 0;
+}
 
+/*CSS EDIT BY KHUN MUK START*/
+.easy-block-v2 img{
+	width:"";
+}
+/*
+.mainMenuPostRent {
+    background: #ffff7a none repeat scroll 0 0;
+    color: black;
+    font-weight: bold;
+}
+.sky-form  {
+    background: white none repeat scroll 0 0;
+    font-weight: bold;
+    padding: 0;
+}
+#muk_bg_rent_search{
+	 background:#95a5a6;
+}
+.muk_btn-u-submit{
+	 background:#ffff7a;
+	color:black;
+}
+.muk_btn-u-submit-sale{
+	 background:#ff93c8;
+	color:black;
+}
+.muk_btn-u-submit-sale:active{
+	 background:#ff93c8;
+	color:black;
+}
+.muk_btn-u-submit-sale:hover{
+	 background:#ff188c;
+	color:black;
+}
+
+.mainMenuPost{
+    background: #ff93c8 none repeat scroll 0 0;
+    color: black;
+    font-weight: bold;
+}
+.mainMenuPost:hover{
+    background: #ff188c none repeat scroll 0 0;
+    color: black;
+    font-weight: bold;
+}
+
+*/
+/*CSS EDIT BY KHUN MUK END*/
+p{
+	margin:0px;
+}

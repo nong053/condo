@@ -1,9 +1,13 @@
 <link rel="stylesheet" href="assets/css/pages/page_log_reg_v1.css">
 <script>
 	
-	
+	function isEmail(email) {
+	  var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	  return regex.test(email);
+	}
 	function check_cus(confrim){
 		//alert("confrim"+confrim);
+		//alert($("#confirmCondition:checked").val());
 		var check="";
 		
 		
@@ -17,24 +21,62 @@
 			check+="กรุณากรอกเบอร์โทร\n";
 		}
 		if(document.form_regis.cus_email.value==""){
+			
 			check+="กรุณากรอกE-mail\n";
+			
+			
+		}else{
+
+			
+			var email=document.form_regis.cus_email.value;
+			if(isEmail(email)){
+			
+			$.ajax({
+				url:"action/register_process.php",
+				type:"POST",
+				dataType:"json",
+				async:false,
+				data:{"action":"checkEmail","cus_email":email},
+				success:function(data){
+					//alert(data);
+					if(data=='thisEmailIsAlready'){
+						//alert("E-mail นี้มีการใช้งานแล้วครับ");
+						check+="E-mail นี้มีการใช้งานแล้ว\n";
+						//return false;
+					}
+				}	
+			});
+			
+			}else{
+				check+="รูปแบบ E-mail ไม่ถูกต้อง\n";
+			}
+			
+			
+			
+			
 		}
 		if(document.form_regis.cus_pass.value==""){
 			check+="กรุณากรอกรหัสผ่าน\n";
 		}
 		if(document.form_regis.cus_repass.value==""){
 			check+="กรุณากรอกหรัสผ่านซ้ำ\n";
-		}
+			
+		
 		if(document.form_regis.cus_pass.value != document.form_regis.cus_repass.value){
 			check+="กรอกรหัสผ่านไม่ตรงกัน\n";
+		}
+		}if($("#confirmCondition:checked").val()!="Y"){
+			check+="กดยอมรับข้อตกลงด้วยครับ\n";
 		}
 		
 		
 		if(document.form_regis.cus_confrim.value != confrim){
 			check+="กรอกหัสยืนยันไม่ถูกต้องครับ\n";
 		}
+
 		
 		if(check!=""){
+			
 			alert(check);
 			return false;
 		}else{
@@ -54,7 +96,8 @@
                         <div class="headline headline-md">
 							<h2><i class="fa fa fa-user"></i> สมัครสมาชิก</h2>
 						</div>
-                        <p>สมัครสมาชิกแล้ว? คลิ๊ก <a class="color-green" href="page_login.html">ลงชื่อเข้าใข้งาน</a> ด้วยบัญชีของคุณ.</p>                    
+
+                       <!--  <p>สมัครสมาชิกแล้ว? คลิ๊ก <a class="color-green" href="#" data-toggle="modal" data-target="#loginFormModal">ลงชื่อเข้าใข้งาน</a> ด้วยบัญชีของคุณ.</p>   -->                  
                     </div>
 
                     <label>ชื่อ</label>
@@ -103,12 +146,12 @@
                     <div class="row">
                         <div class="col-lg-6 checkbox">
                             <label>
-                                <input type="checkbox"> 
-                      			          อ่านข้อตกลง <a class="color-green" href="page_terms.html">เงื่อนไขการใช้งาน</a>
+                                <input type="checkbox" id="confirmCondition" name="confirmCondition" value='Y'> 
+                      			          อ่านข้อตกลง <a class="color-green" target="_blank" href="index.php?page=register_condition">เงื่อนไขการใช้งาน</a>
                             </label>                        
                         </div>
                         <div class="col-lg-6 text-right">
-                        	<input type="hidden" name="admin_id" id=""admin_id"" value='1'>
+                        	<input type="hidden" name="admin_id" id="admin_id" value='1'>
                             <button type="button" name="btnRegis" id="btnRegis" onclick="check_cus(<?=$confrim?>)" class="btn-u">สมัครสมาชิก</button>                        
                         </div>
                     </div>

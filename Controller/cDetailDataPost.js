@@ -127,7 +127,7 @@ var detailDataPostFn = function(paramRealtyID){
 					//alert(data);
 					if(data=="success"){
 						alert("บันทึกข้อมูลเรียบร้อยแล้ว");
-					}else if(data=="updata-success"){
+					}else if(data=="update-success"){
 						alert("แก้ไขข้อมูลเรียบร้อยแล้ว");
 					}
 					$("#saveDetailDataAlready").remove();
@@ -136,9 +136,9 @@ var detailDataPostFn = function(paramRealtyID){
 				}
 			});
 			
-			//$("[href|='#imageVideo']").click();
-			//$("#topcontrol").click();
-			//return false;
+			$("[href|='#imageVideo']").click();
+			$("#topcontrol").click();
+			return false;
 	});
 	//end footer button
 		

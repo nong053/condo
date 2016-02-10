@@ -49,12 +49,12 @@ $cus_rule_eng=$rs[cus_rule_eng];
             CKEDITOR.replace( 'cus_rule_th',{
 
           
-            filebrowserBrowseUrl : '/ckfinder/ckfinder.html',
-            filebrowserImageBrowseUrl : '/ckfinder/ckfinder.html?Type=Images',
-            filebrowserFlashBrowseUrl : '/ckfinder/ckfinder.html?Type=Flash',
-            filebrowserUploadUrl : '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
-            filebrowserImageUploadUrl : '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
-            filebrowserFlashUploadUrl : '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
+            filebrowserBrowseUrl : '../ckfinder/ckfinder.html',
+            filebrowserImageBrowseUrl : '../ckfinder/ckfinder.html?Type=Images',
+            filebrowserFlashBrowseUrl : '../ckfinder/ckfinder.html?Type=Flash',
+            filebrowserUploadUrl : '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+            filebrowserImageUploadUrl : '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+            filebrowserFlashUploadUrl : '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
 
             } );
         //]]>
@@ -75,12 +75,12 @@ $cus_rule_eng=$rs[cus_rule_eng];
             CKEDITOR.replace( 'cus_rule_eng',{
 
           
-            filebrowserBrowseUrl : '/ckfinder/ckfinder.html',
-            filebrowserImageBrowseUrl : '/ckfinder/ckfinder.html?Type=Images',
-            filebrowserFlashBrowseUrl : '/ckfinder/ckfinder.html?Type=Flash',
-            filebrowserUploadUrl : '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
-            filebrowserImageUploadUrl : '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
-            filebrowserFlashUploadUrl : '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
+            filebrowserBrowseUrl : '../ckfinder/ckfinder.html',
+            filebrowserImageBrowseUrl : '../ckfinder/ckfinder.html?Type=Images',
+            filebrowserFlashBrowseUrl : '../ckfinder/ckfinder.html?Type=Flash',
+            filebrowserUploadUrl : '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+            filebrowserImageUploadUrl : '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+            filebrowserFlashUploadUrl : '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
 
             } );
         //]]>

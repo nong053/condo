@@ -577,7 +577,7 @@
 		<div class="form-group">
 			<div class="col-lg-offset-3 col-lg-9">
 				<button type="button" id="btn-back-step3" class="btn-u btn-u-yellow">  ย้อนกลับ  </button>
-				<button class="btn-u btn-u-green" type="button">  ยืนยันและบันทึกข้อมูล  </button>
+				<button class="btn-u btn-u-green" type="button" id='btn-success'>  ยืนยันและบันทึกข้อมูล  </button>
 			</div>
 		</div>
 		

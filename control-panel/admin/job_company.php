@@ -143,6 +143,7 @@ border-right:#dedede solid 1px;
 <div id="Result">
 </div>
 <br style="clear:both">
+<!-- 
 <form name="form1" method="post">
 <table>
 	<tr>
@@ -182,3 +183,4 @@ border-right:#dedede solid 1px;
     </tr>
 </table>
 </form>
+ -->

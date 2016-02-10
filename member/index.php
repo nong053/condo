@@ -1,5 +1,11 @@
 <?php session_start();
 
+
+if(($_GET['cus_id']) and ($_SESSION['member_user_id']!="")){
+	$_SESSION['ses_cus_id']=$_GET['cus_id'];
+}
+
+
 /*#### Define  Session Start here. ####*/
 	if($_SESSION['sesRtID']=="" or $_SESSION['sesRfID']==""){
 		
@@ -117,6 +123,13 @@
 	<link rel="stylesheet" href="../kendoCommercial/styles/kendo.default.min.css" />
 	<script src="../kendoCommercial/js/kendo.all.min.js"></script>
 	
+	
+	<!-- loading -->
+    <link rel="stylesheet" href="../css/HoldOn.min.css">
+
+	<!-- java script loading -->
+	<script src="../Controller/HoldOn.min.js"></script>
+	
 </head>
 
 <body>    
@@ -139,9 +152,9 @@
     <!--=== Breadcrumbs ===-->
     <div class="breadcrumbs margin-bottom5">
         <div class="container">
-            <h1 class="pull-left">ประกาศของฉัน(<?=$_SESSION['ses_cus_email']?>)</h1>
+            <h1 class="pull-left">ประกาศของฉัน(<?=$_SESSION['ses_cus_email']?>#<?=$_SESSION['ses_cus_id']?>)</h1>
             <ul class="pull-right breadcrumb">
-                <li><a href="index.html">หน้าแรก</a></li>
+                <li><a href="index.php?page=post&loginType=loginForManage">หน้าแรก</a></li>
                  	<?php
 					   switch($_GET['page']){
 					   case 'post': echo"<li class='active'>ประกาศของฉัน</li>"; break;
@@ -173,13 +186,13 @@
                                 <a href="?page=profile"><i class="fa fa-magic"></i> ข้อมูลส่วนตัว</a>
                             </li>
                             <li>
-                                <span class="badge badge-u">New</span>                            
+                                                  
                                 <a href="?page=inbox"><i class="fa fa-ellipsis-h"></i> ข้อความของฉัน</a>
                             </li>
                             <li><a href="?page=stats"><i class="fa fa-quote-left"></i> ข้อมูลสถิติ</a></li>
 							<li>
                                                   
-                                <a href="../index.php"><i class="fa fa-asterisk"></i> ดูหน้าประกาศ</a>
+                                <a href="../index.php?page=profile_post&cus_id=<?=$_SESSION['ses_cus_id']?>"><i class="fa fa-asterisk"></i> ดูหน้าประกาศ</a>
                             </li>
                             <li>
                                                       
@@ -218,6 +231,8 @@
     <!--=== End Content Part ===-->
 
       <!--=== Footer Version 1 ===-->
+
+   
     <div class="footer-v1">
         
         <div class="copyright">
@@ -226,28 +241,27 @@
                     <div class="col-md-6">                     
                         <p>
                             2015 &copy; All Rights Reserved.
-                           <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+       
+                           <a href="www.realthairealty.com">www.realthairealty.com</a>
                         </p>
                     </div>
 
-                    <!-- Social Links -->
+                   
                     <div class="col-md-6">
                         <ul class="footer-socials list-inline">
                             <li>
-                                <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Facebook">
+                                <a href="https://www.facebook.com" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Facebook">
                                     <i class="fa fa-facebook"></i>
                                 </a>
                             </li>
+                          
+                             
                             <li>
-                                <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Skype">
-                                    <i class="fa fa-skype"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Google Plus">
+                                <a href="https://plus.google.com" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Google Plus">
                                     <i class="fa fa-google-plus"></i>
                                 </a>
                             </li>
+                           <!-- 
                             <li>
                                 <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Linkedin">
                                     <i class="fa fa-linkedin"></i>
@@ -268,13 +282,15 @@
                                     <i class="fa fa-dribbble"></i>
                                 </a>
                             </li>
+                             -->
                         </ul>
                     </div>
-                    <!-- End Social Links -->
+                   
                 </div>
             </div> 
-        </div><!--/copyright-->
+        </div>
     </div>     
+  
     <!--=== End Footer Version 1 ===-->
 </div><!--/End Wrapepr-->
 

@@ -14,6 +14,8 @@ $article_show=trim($_POST['article_show']);
 $action_article_del=$_GET['action_article_del'];
 $article_del_id=$_GET['article_del_id'];
 $article_id=$_POST['article_id'];
+$article_title=$_POST['article_title'];
+
 $main_menu_id=$_POST['main_menu_id'];
 $article_name=$_POST['article_name'];
 $member_user_id=$_SESSION['member_user_id'];
@@ -31,7 +33,10 @@ $result=mysql_query($strSQL);
 if(!$result){
 	echo"error".mysql_error();
 }else{
-	echo"<script>window.location=\"index.php?page=article_system\";</script>";
+	//
+	
+	echo"<script>window.location=\"index.php?page=article_system_by_menu&action_article=edit&article_id=$article_id&article_title=$article_title\";</script>";
+	//echo"<script>window.location=\"index.php?page=article_system\";</script>";
 	
 	}
 }
@@ -41,7 +46,9 @@ if($action_article=="add"){
 	$strSQL="insert into article(article_name,article_title,article_detail,article_name_eng,article_title_eng,article_detail_eng,main_menu_id,article_show,admin_id)values('$article_name','$article_title','$article_detail','$article_name_eng','$article_title_eng','$article_detail_eng','$main_menu_id','$article_show','$member_user_id')";
 	$result=mysql_query($strSQL);
 	if(!$result){echo"error".mysql_error();}else{
-	echo"<script>window.location=\"index.php?page=article_system\";</script>";}
+	//echo"<script>window.location=\"index.php?page=article_system\";</script>";
+		echo"<script>window.location=\"index.php?page=article_system_by_menu&action_article=edit&article_id=$article_id&article_title=$article_title\";</script>";
+	}
 }
 
 
@@ -49,7 +56,9 @@ if($action_article_del=="del"){
 	$strSQL="delete from article where article_id=$article_del_id";
 	$result=mysql_query($strSQL);
 	if(!$result){echo"error".mysql_error();}else{
-		echo"<script>window.location=\"index.php?page=article_system\";</script>";}
+		//echo"<script>window.location=\"index.php?page=article_system\";</script>";
+		echo"<script>window.location=\"index.php?page=article_system_by_menu&action_article=edit&article_id=$article_id&article_title=$article_title\";</script>";
+	}
 }
 
 ?>

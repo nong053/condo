@@ -2,6 +2,7 @@
 $rdg_id=$_GET['rdg_id'];
 
 if($conn){
+	/*
 	$strSLQBanner1="select * from banner_sum where pic_position='1'";
 	$resultBanner1=mysql_query($strSLQBanner1);
 	
@@ -16,7 +17,7 @@ if($conn){
 	
 	$strSLQBanner5="select * from banner_sum where pic_position='5'";
 	$resultBanner5=mysql_query($strSLQBanner5);
-	
+	*/
 	
 	
 	
@@ -24,12 +25,12 @@ if($conn){
 ?>
 <script src="Controller/page/cRight_content.js"></script>
 <!--Start Right Content -->
-        	<div class="col-md-4 magazine-page"> 
+        	<div class="col-xs-4 magazine-page"> 
                 <!-- Blog Posts -->
                 <div class="row">
 				<!--Start Ads-->
 				<!-- 
-					<div class="magazine-posts col-md-12 col-sm-6 margin-bottom-2">
+					<div class="magazine-posts col-xs-12 col-sm-6 margin-bottom-2">
 					
 					<div class="shadow-wrapper">
 						<blockquote class="hero box-shadow shadow-effect-2">
@@ -42,140 +43,240 @@ if($conn){
                     </div>
                     -->
 					<!--End Ads-->
-                    <div class="magazine-posts col-md-12 col-sm-6 margin-bottom-2">
+                    <!-- <div class="magazine-posts col-xs-12 col-sm-6 margin-bottom-2"> -->
                         
                         <div class="magazine-posts-img">
                             <a href="#">
-                            <?php 
-                            $rsBanner1=mysql_fetch_array($resultBanner1);
-                            //echo $rsBanner1['pic_name'];
-                            ?>
-                             <img src="control-panel/mypicture/1/<?=$rsBanner1['pic_name']?>" width="100%" height="100%" />
-                            <!-- <img alt="" src="assets/img/main/img10.jpg" class="img-responsive"> -->
+                           
+                            
+                            <div class='ads ads9'>
+                 			<?php 
+					    	if($rsAds8['pic_name']!=""){
+					    	?>
+					    	 <img src="control-panel/mypicture/1/<?=$rsAds8['pic_name']?>" width="100%" height="100%" />
+					    	
+					    	<?php 
+							}else{
+					    	echo "ตำแหน่งที่ 8";
+					    	}
+					    	?>
+                            </div>
                             </a>
                                                       
                         </div>
-                    </div>
+                    <!--</div>-->
 
-                    <div class="magazine-posts col-md-12 col-sm-6 margin-bottom-2">
+                   <!--  <div class="magazine-posts col-xs-12 col-sm-6 margin-bottom-2">-->
                         
                         <div class="magazine-posts-img">
                         
                             <a href="#">
                             
-                           <?php 
-                            $rsBanner2=mysql_fetch_array($resultBanner2);
-                            //echo $rsBanner1['pic_name'];
-                            ?>
-                             <img src="control-panel/mypicture/1/<?=$rsBanner2['pic_name']?>" width="100%" height="100%" />
-                            
+                           
+                             <div class='ads ads9'><?php 
+					    	if($rsAds9['pic_name']!=""){
+					    	?>
+					    	 <img src="control-panel/mypicture/1/<?=$rsAds9['pic_name']?>" width="100%" height="100%" />
+					    	
+					    	<?php 
+							}else{
+					    	echo "ตำแหน่งที่ 9";
+					    	}
+					    	?></div>
                             </a>
                                                             
                         </div>
-                    </div> 
+                   <!--  </div>  -->
 
                    
                  
                  
 
-					<div class="magazine-posts col-md-12 col-sm-6 margin-bottom-2">
+					<!--  <div class="magazine-posts col-xs-12 col-sm-6 margin-bottom-2">-->
                         
                         <div class="magazine-posts-img">
                         
                             <a href="#">
                             
-                            <?php 
-                            $rsBanner3=mysql_fetch_array($resultBanner3);
-                            //echo $rsBanner1['pic_name'];
-                            ?>
-                             <img src="control-panel/mypicture/1/<?=$rsBanner3['pic_name']?>" width="100%" height="100%" />
-                            
+                          
+                            <div class='ads ads9'><?php 
+					    	if($rsAds10['pic_name']!=""){
+					    	?>
+					    	 <img src="control-panel/mypicture/1/<?=$rsAds10['pic_name']?>" width="100%" height="100%" />
+					    	
+					    	<?php 
+							}else{
+					    	echo "ตำแหน่งที่ 10";
+					    	}
+					    	?></div>
                             </a>
                                                             
                         </div>
-                    </div>
-					<div class="magazine-posts col-md-12 col-sm-6 margin-bottom-2">
+                     <!--  </div> -->
+					<!--  <div class="magazine-posts col-xs-12 col-sm-6 margin-bottom-2">-->
                         
                         <div class="magazine-posts-img">
                             <a href="#">
                             
-                            <?php 
-                            $rsBanner4=mysql_fetch_array($resultBanner4);
-                            //echo $rsBanner1['pic_name'];
-                            ?>
-                             <img src="control-panel/mypicture/1/<?=$rsBanner4['pic_name']?>" width="100%" height="100%" />
                            
+                           	<div class='ads ads9'><?php 
+					    	if($rsAds11['pic_name']!=""){
+					    	?>
+					    	 <img src="control-panel/mypicture/1/<?=$rsAds11['pic_name']?>" width="100%" height="100%" />
+					    	
+					    	<?php 
+							}else{
+					    	echo "ตำแหน่งที่ 11";
+					    	}
+					    	?></div>
                             </a>
                                                             
                         </div>
-                    </div>
+                     <!--  </div> -->
 
 				
 
-					<div class="magazine-posts col-md-12 col-sm-6 margin-bottom-2">
+					<!--  <div class="magazine-posts col-xs-12 col-sm-6 margin-bottom-2">-->
                         
                         <div class="magazine-posts-img">
                             <a href="#">
                             
                            
-                              <?php 
-                            $rsBanner5=mysql_fetch_array($resultBanner5);
-                            //echo $rsBanner1['pic_name'];
-                            ?>
-                             <img src="control-panel/mypicture/1/<?=$rsBanner5['pic_name']?>" width="100%" height="100%" />
-                           
+                           <div class='ads ads9'><?php 
+					    	if($rsAds12['pic_name']!=""){
+					    	?>
+					    	 <img src="control-panel/mypicture/1/<?=$rsAds12['pic_name']?>" width="100%" height="100%" />
+					    	
+					    	<?php 
+							}else{
+					    	echo "ตำแหน่งที่ 12";
+					    	}
+					    	?></div>
                             </a>
                                                             
                         </div>
-                    </div>
-
+                     <!--  </div> -->
+                     <!--  <div class="magazine-posts col-xs-12 col-sm-6 margin-bottom-2">-->
+                        
+                        <div class="magazine-posts-img">
+                            <a href="#">
+                            
+                           
+                              
+                           <div class='ads ads9'><?php 
+					    	if($rsAds13['pic_name']!=""){
+					    	?>
+					    	 <img src="control-panel/mypicture/1/<?=$rsAds13['pic_name']?>" width="100%" height="100%" />
+					    	
+					    	<?php 
+							}else{
+					    	echo "ตำแหน่งที่ 13";
+					    	}
+					    	?></div>
+                            </a>
+                                                            
+                        </div>
+                     <!--  </div> -->
+                     <!--  <div class="magazine-posts col-xs-12 col-sm-6 margin-bottom-2">-->
+                        
+                        <div class="magazine-posts-img">
+                            <a href="#">
+                            
+                           
+                           <div class='ads ads9'><?php 
+					    	if($rsAds14['pic_name']!=""){
+					    	?>
+					    	 <img src="control-panel/mypicture/1/<?=$rsAds14['pic_name']?>" width="100%" height="100%" />
+					    	
+					    	<?php 
+							}else{
+					    	echo "ตำแหน่งที่ 14";
+					    	}
+					    	?></div>
+                            </a>
+                                                            
+                        </div>
+                     <!--  </div> -->
+                     <!--  <div class="magazine-posts col-xs-12 col-sm-6 margin-bottom-2">-->
+                        
+                        <div class="magazine-posts-img">
+                            <a href="#">
+                            
+                           
+                             
+                           <div class='ads ads9'><?php 
+					    	if($rsAds15['pic_name']!=""){
+					    	?>
+					    	 <img src="control-panel/mypicture/1/<?=$rsAds15['pic_name']?>" width="100%" height="100%" />
+					    	
+					    	<?php 
+							}else{
+					    	echo "ตำแหน่งที่ 15";
+					    	}
+					    	?></div>
+                            </a>
+                                                            
+                        </div>
+                     <!--  </div> -->
+                     <!--  <div class="magazine-posts col-xs-12 col-sm-6 margin-bottom-2">-->
+                        
+                        <div class="magazine-posts-img">
+                            <a href="#">
+                            
+                           
+                           <div class='ads ads9'><?php 
+					    	if($rsAds16['pic_name']!=""){
+					    	?>
+					    	 <img src="control-panel/mypicture/1/<?=$rsAds16['pic_name']?>" width="100%" height="100%" />
+					    	
+					    	<?php 
+							}else{
+					    	echo "ตำแหน่งที่ 16";
+					    	}
+					    	?></div>
+                            </a>
+                                                            
+                        </div>
+                     <!--  </div> -->
+                     <!--  <div class="magazine-posts col-xs-12 col-sm-6 margin-bottom-2">-->
+                        
+                        <div class="magazine-posts-img">
+                            <a href="#">
+                            
+                           
+                            
+                           <div class='ads ads9'><?php 
+					    	if($rsAds17['pic_name']!=""){
+					    	?>
+					    	 <img src="control-panel/mypicture/1/<?=$rsAds17['pic_name']?>" width="100%" height="100%" />
+					    	
+					    	<?php 
+							}else{
+					    	echo "ตำแหน่งที่ 17";
+					    	}
+					    	?></div>
+                            </a>
+                                                            
+                        </div>
+                     <!--  </div> -->
 					
 
 
-					<div class="magazine-posts col-md-12 col-sm-6 margin-bottom-2">
-                        
+					<!--  <div class="magazine-posts col-xs-12 col-sm-6 margin-bottom-2">-->
+                    <!-- <iframe marginWidth=0 marginHeight=0 src="http://www.bangkokbank.com/fxbanner/banner1.htm" frameBorder=0 width=173 scrolling=no height=165></iframe> -->
                         <div class="row">
-								<div class="col-md-6">
-								 <iframe id="ifrmBanner" scrolling="no" src="http://www.bangkokbank.com/MajorRates/MainBannerThai.htm" width="170" height="155" frameborder="0"></iframe> 
+								<div class="col-xs-6">
+								 <iframe id="ifrmBanner" scrolling="no" src="http://www.bangkokbank.com/MajorRates/MainBannerThai.htm" width="165" height="165" frameborder="0"></iframe> 
 								</div>
-								<div class="col-md-6">
-								<iframe marginWidth=0 marginHeight=0 src="http://www.bangkokbank.com/fxbanner/banner1.htm" frameBorder=0 width=173 scrolling=no height=165></iframe> 
+								<div class="col-xs-6">
+								<iframe src="http://www.scb.co.th:80/scb_api/scbapi.jsp?key=MjAxNTEyMjIwOTM5MTk=" framespacing='0' frameborder='no' scrolling='no' width='165' height='165'></iframe>
+								 
 								</div>
 						</div>
 						
                       
                        
-                    </div>
-
-					<!--Start Ads-->
-					<!-- 
-					<div class="magazine-posts col-md-12 col-sm-6 margin-bottom-2">
-						<div class="shadow-wrapper">
-							<blockquote class="hero box-shadow shadow-effect-2">
-								<p style="height:80px;">
-								Ads IMG
-								</p>
-							</blockquote>
-						</div>
-                    </div>
-                    -->
-					<!--End Ads-->
-
-					<!--Start Short Search-->
-					<!-- 
-				<div class="magazine-posts col-md-12 col-sm-6 margin-bottom-2">
-					<div class="shadow-wrapper">
-						<blockquote class="hero box-shadow shadow-effect-2">
-							
-						
-								<div class="headline"><h2>บริการฟรี</h2></div>
-								<button type="button" class="btn-u btn-u-blue"><i class="fa fa-cloud"></i>  ลงประกาศขาย</button>
-								<button type="button" class="btn-u btn-u-red"><i class="fa fa-bell-o"></i>ลงประกาศให้เช่า</button>
-							
-						</blockquote>
-					</div>
-                    </div>
-                     -->
+                  
 					
 
 
@@ -183,113 +284,16 @@ if($conn){
 					
 
 
-				<?php
-						if($_GET["page"]=="post_sub_detail"){
-							//echo"post_sub_detail";
-						}else{
-							//echo"not post_sub_detail";
-						?>
-
-						<div class="magazine-posts col-md-12 col-sm-6 margin-bottom-2">
-                        
-                        <div class="magazine-posts-img">
-                            <a href="#"><img alt="" src="assets/img/main/img1.jpg" class="img-responsive"></a>
-                                                            
-                        </div>
-                    </div>
-
-						<div class="magazine-posts col-md-12 col-sm-6 margin-bottom-2">
-                        
-                        <div class="magazine-posts-img">
-                            <a href="#"><img alt="" src="assets/img/main/img1.jpg" class="img-responsive"></a>
-                                                            
-                        </div>
-                    </div>
+				
 
 
-					<div class="magazine-posts col-md-12 col-sm-6 margin-bottom-2">
-                        
-                        <div class="magazine-posts-img">
-                            <a href="#"><img alt="" src="assets/img/main/img1.jpg" class="img-responsive"></a>
-                                                            
-                        </div>
-                    </div>
-							<!--Start Short Search-->
-							 <!-- 
-						<div class="magazine-posts col-md-12 col-sm-6 margin-bottom-2">
-							<div class="shadow-wrapper">
-								<blockquote class="hero box-shadow shadow-effect-2">
-									
-								
-										<div class="headline"><h2>บริการฟรี</h2></div>
-										<button type="button" class="btn-u btn-u-blue"><i class="fa fa-cloud"></i>  ลงประกาศขาย</button>
-										<button type="button" class="btn-u btn-u-red"><i class="fa fa-bell-o"></i>ลงประกาศให้เช่า</button>
-									
-								</blockquote>
-							</div>
-							</div>
-							 -->
-							<!--End Start Short Search-->
-
-
-
-							<div class="magazine-posts col-md-12 col-sm-6 margin-bottom-2">
-								
-								<div class="magazine-posts-img">
-									<a href="#"><img alt="" src="assets/img/main/img1.jpg" class="img-responsive"></a>
-																	
-								</div>
-							</div>
-
-								<div class="magazine-posts col-md-12 col-sm-6 margin-bottom-2">
-								
-								<div class="magazine-posts-img">
-									<a href="#"><img alt="" src="assets/img/main/img1.jpg" class="img-responsive"></a>
-																	
-								</div>
-							</div>
-
-
-							<div class="magazine-posts col-md-12 col-sm-6 margin-bottom-2">
-								
-								<div class="magazine-posts-img">
-									<a href="#"><img alt="" src="assets/img/main/img1.jpg" class="img-responsive"></a>
-																	
-								</div>
-							</div>
-
-						<?
-						}
-						?>
-
-
-					 <!-- banking -->
-                    <div class="row "> 
-                        <div class="col-md-12 shadow-wrapper">
-	                        <div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
-	                           <div class="headline"><h2>รวมสินเชื่อธนาคาร</h2></div>
-		                        <ul class="">
-		                            <li><a href="#">กรุงศรีอยุธยา</a> <i class="fa fa-angle-right"></i></li>
-		                            <li><a href="#">ไทยพาณิชย์</a> <i class="fa fa-angle-right"></i></li>
-		                            <li><a href="#">อาคารสงเคราะห์</a> <i class="fa fa-angle-right"></i></li>
-		                            <li><a href="#">แสตนด์ดาดชาเตอร์</a> <i class="fa fa-angle-right"></i></li>
-		                            <li><a href="#">ทหารไทย</a> <i class="fa fa-angle-right"></i></li>
-		                            <li><a href="#">กรุงไทย</a> <i class="fa fa-angle-right"></i></li>
-		                            <li><a href="#">กสิกรไทย</a> <i class="fa fa-angle-right"></i></li>
-		                            <li><a href="#">ธนชาติยูโอบี</a> <i class="fa fa-angle-right"></i></li>
-		                            <li><a href="#">ออมสิน </a> <i class="fa fa-angle-right"></i></li>
-		                            <li><a href="#">กรุงเทพ</a> <i class="fa fa-angle-right"></i></li>
-		                            <li><a href="#">สินเชื่อที่อยู่อาศัยสำหรับเชาวต่างประเทศ</a> <i class="fa fa-angle-right"></i></li>
-		
-		
-		                        </ul> 
-	                        </div>
-	                    </div>                          
-                 	</div>
+					<!-- banking -->
+                   	<?php 
+						include_once 'link_bank.php';
+					?>
                  	<!-- banking -->
-                 	 <!-- banking -->
                     <div class="row " style="display:none;"> 
-                        <div class="col-md-12 shadow-wrapper">
+                        <div class="col-xs-12 shadow-wrapper">
 	                        <div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
 	                           <div class="headline"><h2>นับจำนวนผู้เข้าชม</h2></div>
 		                        <?php 
@@ -335,7 +339,7 @@ if($conn){
 								<tr>
 								<td>
 	                               <div class="row">
-											<div class="col-md-4">
+											<div class="col-xs-4">
 												<div class="magazine-posts-img">
 													<a href="#">
 													<?php 
@@ -383,7 +387,7 @@ if($conn){
 													</a>						
 												</div>
 											</div>
-											<div class="col-md-8">
+											<div class="col-xs-8">
 											<b style="color:#1abc9c;">
 											<a href="index.php?page=post_sub_detail&rdg_id=<?=$rsSimilar['rdg_id']?>&rtc_id=<?=$_GET['rtc_id']?>">
 											
@@ -420,7 +424,16 @@ if($conn){
 					?>
 				
 
-
+					<!--start  box article  -->
+					<div id='articleArea'>
+					
+					</div>
+					<div id='articleByPageArea'>
+					
+					</div>
+					<!--start box article -->
+						
+						
                 <!-- End Blog Posts -->
             </div>
             <!-- End Right Content -->

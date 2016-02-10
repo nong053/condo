@@ -37,16 +37,10 @@ width:300px;
 <div id="box_style_l" style="float:left">
 <?php 
 
-//Check User and Management by User Start
-//ทำการ select admin_id ออกมาจาก table object_system
-$query_home="select admin_id from object_system WHERE
-object_system.admin_id=(select admin_id from admin
-where admin_username='".$member_user_url."');";
-$result_home=$obj_manage_data->select_data_proc($query_home);
-$rs_num=mysql_num_rows($result_home);
+
 
 //ทำการ select admin_id ออกมาจาก admin
-$query_admin_id="select admin_id from admin where admin_username='".$member_user_url."'";
+$query_admin_id="select admin_id from admin where admin_id='1'";
 $result_admin_id=$obj_manage_data->select_data_proc($query_admin_id);
 $rs_admin_id=mysql_fetch_array($result_admin_id);
 

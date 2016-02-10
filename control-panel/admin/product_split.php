@@ -1,7 +1,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?	
 	//header("Content-Type: text/html; charset=utf-8");
-	function pu_query($dbname,$sql,$ListPerPage=3)
+	function pu_query($dbname,$sql,$ListPerPage=10)
 	{
 		global $pages;
 		global $totalpage;

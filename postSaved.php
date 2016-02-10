@@ -1,13 +1,21 @@
+<?php session_start()?>
+<?php 
+$cus_id=$_SESSION['ses_cus_id'];
+if($_SESSION['ses_cus_id']==""){
+	echo"<script>alert('ท่านยังไม่ได้ Login');</script>";
+	echo"<script>window.location='index.php'</script>";
+}
+?>
 <script src='Controller/cSavedPost.js'></script>
+
 <div class="easy-block-v2">
 
 	<!-- start button link -->
 	<p>
-		<button class="btn-u btn-u-green" type="button"><i class="fa fa-cloud"></i> แชร์ไปที่เฟสบุ๊ค/กูเกิล</button>
-		<button class="btn-u btn-u-green" type="button"><i class="fa fa-bell-o"></i>ส่งหน้านี้ให้เพิ่อน</button>
-	
+		<button  onClick="window.open('https://www.facebook.com/sharer.php?u=www.realthairealty.com/<?=$_SERVER['REQUEST_URI']?>')"; class="btn-u btn-u-green" type="button"><i class="fa fa-cloud"></i> แชร์ไปที่เฟสบุ๊ค</button>
+		<button class="btn-u  btn-u-xs btn-u-green" data-toggle="modal" data-target="#sendToMyFriendsFormModal" type="button"><i class="fa fa-bell-o"></i>ส่งหน้านี้ให้เพิ่อน</button>
 		
-		<button class="btn-u btn-u-green" type="button"><i class="fa fa-download"></i>ปริ้น</button>
+		<button onClick="window.print()"; class="btn-u btn-u-green" type="button"><i class="fa fa-download"></i>ปริ้น</button>
 	
 	</p>
 	<!--end  button link -->
@@ -102,8 +110,9 @@
 										<?=$rsSP2['rdg_detail']?>
 				
 										<p>
-											<button class="btn-u  btn-u-xs btn-u-green" type="button"><i class="fa fa-child "></i> ติดต่อผู้ลงประกาศ</button>
-										<button class="btn-u  btn-u-xs btn-u-green" type="button"><i class="fa  fa-car"></i> แผนที่</button>
+											
+										<button id="<?=$rsSP2['cus_id']?>" type="button" class="btn-u btn-u-xs btn-u-green contactFormModal" data-toggle="modal" data-target="#contactFormModal"><i class="fa fa-child "></i> ติดต่อผู้ลงประกาศ</button>
+										<button id="<?=$rsSP2['rdg_id']?>" type="button" class="btn-u btn-u-xs btn-u-green mapContactModal" data-toggle="modal" data-target="#mapContactModal"><i class="fa  fa-car"></i> แผนที่</button>
 										
 										<button onclick="window.location.href='index.php?page=post_sub_detail'" class="btn-u  btn-u-xs btn-u-red" type="button"><i class="fa fa-building "></i> ดูรายละเอียด</button>
 										<button  class="btn-u  btn-u-xs btn-u-red btnDelSavedPost" id="<?=$rsSP2['rdg_id']?>" type="button"><i class="fa fa-building "></i> ลบ</button>

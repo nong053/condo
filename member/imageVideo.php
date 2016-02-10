@@ -21,7 +21,23 @@
 		</div>
 	</div>
 	
-	
+	<div class="headline"><h4>อัปโหลดไฟล์เอกสาร(.doc,.excel,.ppt,.pdf)</h4></div>
+	<!-- upload images -->
+	<form name="formUploadDoc" method="post" action="../Model/mImageVideo.php" class="formUploadPicture" enctype="multipart/form-data">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="fileUploadArea">
+				<input type="file"  id="doc_file"   name="doc_file[]" class="doc_file filestyle " data-input="false">
+				<input type="hidden"  name="action"  id="action" value="add"  >
+			</div>
+			<div class="btnUploadArea">
+				<button type="button" id="btnUploadDoc" class="btn-u btn-u-green  disPlaInline">คลิ๊กเพื่ออัปโหลดเอกสาร</button>
+			</div>
+		</div>
+	</div>
+	</form>
+	<div id='showfileAttach'></div>
+	<hr>
 	<div class="headline"><h4>อัปโหลดรูปภาพ</h4></div>
 	<!-- upload images -->
 	<form name="formUploadPicture" method="post" action="../Model/mImageVideo.php" class="formUploadPicture" enctype="multipart/form-data">
@@ -37,6 +53,10 @@
 		</div>
 	</div>
 	</form>
+	
+	
+	
+	
 		
 			
 	

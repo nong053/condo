@@ -35,7 +35,7 @@
 	$sql="DELETE FROM productcat_level2 WHERE productcat_level2_id = '$productcat_level2_id'";
 	mysql_query($sql)or die (mysql_error());
 	
-	echo"<script>window.location=\"index.php?page=ecommerce_system&select_ecommerce=productcat_level2\"</script>";
+	echo"<script>window.location=\"index.php?page=ecommerce_system&select_ecommerce=productcat_level2&productcat_id=$productcat_id\"</script>";
 	
 	
 	//header("Location: index.php?page=product");

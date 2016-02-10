@@ -314,10 +314,10 @@ rdr_parking
 				// checkbox management end
 			}
 			
-			if($result1  or $result2 or $result3 or $result4 ){
-				echo '["updata-success"]';
+			if($sucess or $result1  or $result2 or $result3 or $result4 ){
+				echo '["update-success"]';
 			}else{
-				echo '["not_seccess"]';
+				echo '["not_success"]';
 			}
 			
 			
@@ -408,9 +408,9 @@ rdr_parking
 	// checkbox management end
 	
 	if($sucess or $result1  or $result2 or $result3 or $result4 ){
-		echo '["seccess"]';
+		echo '["success"]';
 	}else{
-		echo '["not_seccess"]';
+		echo '["not_success"]';
 	}
 	// checkbox management end
 

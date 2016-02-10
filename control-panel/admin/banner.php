@@ -56,7 +56,7 @@ $admin_id=1;
 
 ?>
 <div id="dev_text" style="font-size:18px; font-weight:bold; color:#FFF; padding:5px; background-color:#333;">
-SMALL BANNER 280 X 100 px
+Manage Banner 
 </div>
 
 <table width="100%" cellpadding="0" cellspacing="0" style='border: 1px solid;'>
@@ -95,7 +95,7 @@ SMALL BANNER 280 X 100 px
     <? 
 	$action=$_GET['action'];
 	if($action=="edit"){
-	$pic_id=$_GET['pic_id'];
+	$pic_id_edit=$_GET['pic_id'];
 	
 	$strSQL="select * from banner_sum where pic_id=$pic_id";
 	//echo"hello";
@@ -127,11 +127,14 @@ SMALL BANNER 280 X 100 px
 	$pic_detail=$rs5[pic_detail];
 	$pic_link=$rs5[pic_link];
 	$main_menu_id=$rs5[main_menu_id];
-	
+	/*
 	$strSQL_main_menu="select * from main_menu where main_menu_id='$main_menu_id'";
 	$result_main_menu=mysql_query($strSQL_main_menu);
 	$rs_main_menu=mysql_fetch_array($result_main_menu);
-    
+    */
+	$strSQLRTC1="select * from realty_type_cate  where rtc_id='$main_menu_id' order by rtc_id";
+	$resultRTC1=mysql_query($strSQLRTC1);
+	$rsRTC1=mysql_fetch_array($resultRTC1);
 
 	
 	?>
@@ -162,11 +165,21 @@ SMALL BANNER 280 X 100 px
        
 		?>
 		
-         <?php 
+         <?php
+         
+         /* 
          if($rs_main_menu[main_menu_name]!="" and $rs_main_menu[main_menu_name_eng]!=""){
          	echo $rs_main_menu[main_menu_name]."".$rs_main_menu[main_menu_name_eng];
          }else{
          	echo"แสดงทุกหน้า";
+         }
+         */
+         if($main_menu_id=="All"){
+         	echo "ทุกหน้า";
+         }else if($main_menu_id=="home"){
+         	echo"หน้าแรก";
+         }else{
+         echo $rsRTC1['rtc_name'];
          }
          ?>
         </td>
@@ -199,13 +212,23 @@ SMALL BANNER 280 X 100 px
 <br>
 <h3>ขนาดโฆษณา ความกว้าง x ความสูง</h3>
 <p style='border:1px solid'>
-<b>ตำแหน่งที่ 1</b> ขนาด 410px X 250px <br>
-<b>ตำแหน่งที่ 2</b> ขนาด  410px X 250px <br>
-<b>ตำแหน่งที่ 3</b> ขนาด  410px X 250px <br>
-<b>ตำแหน่งที่ 4</b> ขนาด  410px X 250px <br>
-<b>ตำแหน่งที่ 5</b> ขนาด  410px X 250px <br>
-<b>ตำแหน่งที่ 6</b> ขนาด  760px X 120px <br>
-<b>ตำแหน่งที่ 7</b> ขนาด  555px X 100px <br>
+<b>ตำแหน่งที่ 1</b> ขนาด 10000 X 70 px <br>
+<b>ตำแหน่งที่ 2</b> ขนาด  490 X 88 px  <br>
+<b>ตำแหน่งที่ 3</b> ขนาด  10000 X 70 px <br>
+<b>ตำแหน่งที่ 4</b> ขนาด 200 X 650 px <br>
+<b>ตำแหน่งที่ 5</b> ขนาด 10000 X 70 px <br>
+<b>ตำแหน่งที่ 6</b> ขนาด  660 X 90 px <br>
+<b>ตำแหน่งที่ 7</b> ขนาด  660 X 90 px <br>
+<b>ตำแหน่งที่ 8</b> ขนาด  322 X 300 px <br>
+<b>ตำแหน่งที่ 9</b> ขนาด 322 X 300 px <br>
+<b>ตำแหน่งที่ 10</b> ขนาด 322 X 300 px <br>
+<b>ตำแหน่งที่ 11</b> ขนาด 322 X 300 px <br>
+<b>ตำแหน่งที่ 12</b> ขนาด 322 X 300 px <br>
+<b>ตำแหน่งที่ 13</b> ขนาด 322 X 300 px <br>
+<b>ตำแหน่งที่ 14</b> ขนาด 322 X 300 px <br>
+<b>ตำแหน่งที่ 15</b> ขนาด 322 X 300 px <br>
+<b>ตำแหน่งที่ 16</b> ขนาด 322 X 300 px <br>
+<b>ตำแหน่งที่ 17</b> ขนาด 322 X 300 px <br>
 </p>
 
 <form action="<?=$action_banner?>" method="post" enctype="multipart/form-data">
@@ -236,7 +259,8 @@ SMALL BANNER 280 X 100 px
 		<tr>
 			<td>
 			<?php 
-			$bannerPositionArray=array("1","2","3","4","5","6","7","8","9","10","11","12","13","14");
+			$bannerPositionArray=array("1","2","3","4","5","6","7","8","9","10",
+			"11","12","13","14","15","16","17");
 			?>
 			<select name="pic_position">
 				<option selected="" value="">- เลือกตำแหน่งของโฆษณา -</option>
@@ -244,11 +268,11 @@ SMALL BANNER 280 X 100 px
 				for($i=0;$i<count($bannerPositionArray);$i++){
 					if(($i+1)==$pic_position_edit){
 					?>
-					<option  selected='selected' value="<?=$i+1?>">หมายเลข <?=$bannerPositionArray[$i]?></option> 
+					<option  selected='selected' value="<?=$i+1?>">ตำแหน่งที่ <?=$bannerPositionArray[$i]?></option> 
 					<?php
 					}else{
 					?>
-					<option  value="<?=$i+1?>">หมายเลข <?=$bannerPositionArray[$i]?></option> 
+					<option  value="<?=$i+1?>">ตำแหน่งที่ <?=$bannerPositionArray[$i]?></option> 
 					<?php
 					}
 				}
@@ -336,6 +360,10 @@ SMALL BANNER 280 X 100 px
           <?
 			$strSQL="select * from main_menu where admin_id='$admin_id'";
 			$result=mysql_query($strSQL);
+			
+			$strSQLRTC="select * from realty_type_cate order by rtc_id";
+			$resultRTC=mysql_query($strSQLRTC);
+			
 			$num=mysql_num_rows($result);
 			/*$ps = new database();
 			$ps->selectSQL("main_menu");
@@ -343,10 +371,39 @@ SMALL BANNER 280 X 100 px
 			$num=mysql_num_rows($ps);
 			*/?>
             <select name="main_menu_id">
-            <option value="All">
-                	ทุกหน้า(All)
+            	<?php 
+            	if("All"==$main_menu_id_edit){
+            	?>
+            	<option selected='selected' value="All">
+                	ทุกหน้า
                 </option>
+                <?php 
+                }else{	
+				?>
+				 <option value="All">
+                	ทุกหน้า
+                </option>
+				<?php
+                }
+                if("home"==$main_menu_id_edit){
+             
+                ?>				
+                <option selected='selected' value="home">
+                	หน้าแรก
+                </option>
+                <?php
+                }else{
+                ?>
+                <option value="home">
+                	หน้าแรก
+                </option>	
+                <?php
+                }
+                ?>
+                
+                
             <?
+            /*
 			for($i=1;$i<=$num;$i++)
 			{
 			
@@ -364,6 +421,24 @@ SMALL BANNER 280 X 100 px
                 	<?=$rs[main_menu_name];?>(<?=$rs[main_menu_name_eng];?>)
                 </option>
             	<?
+				}
+			}
+			*/
+			?>
+			<?php 
+			while($rsRTC=mysql_fetch_array($resultRTC)){
+				if($rsRTC[rtc_id]==$main_menu_id_edit){
+				?>
+				<option selected='selected' value="<?=$rsRTC[rtc_id];?>">
+					<?=$rsRTC['rtc_name'];?>
+				</option>
+				<?php
+				}else{
+				?>
+				<option value="<?=$rsRTC[rtc_id];?>">
+					<?=$rsRTC['rtc_name'];?>
+				</option>
+				<?php	
 				}
 			}
 			?>
@@ -441,7 +516,7 @@ SMALL BANNER 280 X 100 px
         
            <td height="26">
            	<input type="hidden" name="pic_type_page" value="banner" >
-            <input type="hidden" name="pic_id" value="<?=$pic_id?>" />
+            <input type="hidden" name="pic_id" value="<?=$pic_id_edit?>" />
 			 <input type="hidden" name="admin_id" value="<?=$admin_id?>" />
 			 <input name="btnSubmit" type="submit" value="บันทึกข้อมูล">
 			<input name="btnReset" onclick="location.href='index.php?page=banner&action=add'" type="reset" value="ยกเลิก">

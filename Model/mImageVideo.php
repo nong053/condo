@@ -283,15 +283,97 @@
 		
 	}
 	
-if($_POST['action']=="addPicture"){
-		if(!$_FILES['picture_file']['name'][0]){
-			echo '["picture_empty"]';
-			exit();
+
+	
+if($_POST['action']=="addPDF"){	
+	
+	if((!$_FILES['doc_file']['name'][0]) and ($picture_file['type'] == "application/pdf")){
+		echo '["doc_empty"]';
+		echo "step1";
+		exit();
+	
+	}
+	if(trim($_FILES["doc_file"]["tmp_name"]) != "")
+	{
 		
+		$doc_date=date("d-m-y-h-i-s");
+		$rd_doc=$doc_date.$_FILES["doc_file"]["name"];
+		$sql="INSERT INTO realty_doc (rdg_id,rd_doc) VALUES ('$rdg_id','$rd_doc')";
+		mysql_query($sql)or die (mysql_error());
+		$doc_path = "../realtyDoc/" . $rdg_id;
+		mkdir_r($doc_path,0777);
+			
+			
+		
+		$result=move_uploaded_file($_FILES["doc_file"]["tmp_name"],"../realtyDoc/".$rdg_id."/".$rd_doc);
+		if($result){
+			echo'["success"]';
+		}else{
+		echo mysql_error();
 		}
+	}
+}	
+if($_POST['paramAction']=="showDoc"){
+
+	$strSQL="select * from realty_doc where rdg_id='$rdg_id' ORDER BY rd_id ";
+	$result=mysql_query($strSQL);
+
+	$i=1;
+	?>
+		<ul>
+		<?php
+		while($rs=mysql_fetch_array($result)){
+			?>
+				
+					<li><i class='fa fa-trash '></i> <a href="#" class='docDel' id='<?=$rs['rd_id']?>'><?=$rs['rd_doc']?></a></li>
+			
+			<?php
+		}
+		?>
+		</ul>
+		<?php
+	}
+if($_POST['paramAction']=="delDoc"){
+	$rd_id=$_POST['rd_id'];
+	
+	$strSQL1="select * from realty_doc WHERE rd_id='$rd_id'";
+	$result1=mysql_query($strSQL1);
+	$rs1=mysql_fetch_array($result1);
+	$path_doc="../realtyDoc/".$rs1['rdg_id']."/".$rs1['rd_doc'];
+	
+	$unlink=@unlink("$path_doc");
+	
+	
+		$strSQL="delete from realty_doc  WHERE rd_id='$rd_id'";
+		$result=mysql_query($strSQL);
+		if($result){
+			//continue
+			echo $rdg_id;
+		}
+	
+	
+}
+
+if($_POST['action']=="addPicture"){
+	if(!$_FILES['picture_file']['name'][0]){
+		echo '["picture_empty"]';
+		exit();
+	
+	}
 	if(trim($_FILES["picture_file"]["tmp_name"]) != "")
 		{
-			$ri_set_first="1";
+			//$ri_set_first="1";
+			//check immage for set home picture start
+			$strSQL="select * from realty_images  where rdg_id='$rdg_id'";
+			$result=mysql_query($strSQL);
+			$num=mysql_num_rows($result);
+			if($num==0){
+				$ri_set_first="0";
+			}else{
+				$ri_set_first="1";
+			}
+			//check immage for set home picture start
+			
 			$picture_date=date("d-m-y-h-i-s");
 			$sql="INSERT INTO realty_images (rdg_id,ri_set_first) VALUES ('$rdg_id','$ri_set_first')";
 			mysql_query($sql)or die (mysql_error());
@@ -331,7 +413,7 @@ if($_POST['action']=="addPicture"){
 			
 			echo'["success"]';
 		}
-	}
+}
 	
 	
 	if($_POST['paramAction']=="showPicture"){
@@ -405,6 +487,7 @@ if($_POST['action']=="addPicture"){
    
 	}
 	
+
 	if($_POST['paramAction']=="setFirst"){
 
 		$strSQL="UPDATE realty_images SET ri_set_first='1' WHERE rdg_id='$rdg_id'";

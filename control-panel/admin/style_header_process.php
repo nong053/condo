@@ -391,7 +391,7 @@ if($file_header_logo){
 	
 				$strSQL2="UPDATE object_system SET object_position='$object_position',object_color='$object_color',object_width='$object_width',object_height='$object_height' where object_position='$object_position'  and admin_id='$admin_id'";
 				$query=mysql_query($strSQL2);
-				if(!$query){echo"Error".mysql_error();}else{echo"ok";}
+				if(!$query){echo"Error".mysql_error();}
 }
 
 

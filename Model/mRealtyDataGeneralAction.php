@@ -43,20 +43,21 @@ if($_POST['paramAction']=="realtyDataGeneralById"){
 	$result=mysql_query($strSQL);
 	if($result){
 		$rs=mysql_fetch_array($result);
+		/*"rdg_address_project\":\"".$rs['rdg_address_project']."\"*/
 		echo "{
 				 \"rps_id\":\"".$rs['rps_id']."\"
 				,\"rf_id\":\"".$rs['rf_id']."\"
 				,\"rt_id\":\"".$rs['rt_id']."\"
 				,\"cus_id\":\"".$rs['cus_id']."\"
 				,\"rdg_title\":\"".trim($rs['rdg_title'])."\"
-				
+				,\"rdg_title_detail\":\"".trim($rs['rdg_title_detail'])."\"
 				,\"rdg_owner_project\":\"".$rs['rdg_owner_project']."\"
 				,\"rdg_price\":\"".$rs['rdg_price']."\"
 				,\"rdg_price_rent\":\"".$rs['rdg_price_rent']."\"
 				,\"rdg_price_down\":\"".$rs['rdg_price_down']."\"
 				,\"rdg_price_project\":\"".$rs['rdg_price_project']."\"
 				,\"rdg_name_project\":\"".$rs['rdg_name_project']."\"
-				,\"rdg_address_project\":\"".$rs['rdg_address_project']."\"
+			
 				,\"rdg_address_no\":\"".$rs['rdg_address_no']."\"
 				,\"rdg_address_province_id\":\"".$rs['rdg_address_province_id']."\"
 				,\"rdg_address_district_id\":\"".$rs['rdg_address_district_id']."\"
@@ -189,13 +190,14 @@ if($_POST['paramAction']=="realtyDataGeneralSave"){
 	$rdg_owner_project=$_POST['rdg_owner_project'];
 	$rdg_price=$_POST['rdg_price'];
 	$rdg_title=$_POST['rdg_title'];
+	$rdg_title_detail=$_POST['rdg_title_detail'];
 	$realtyFor=$_POST['realtyFor'];
 	$realtyType=$_POST['realtyType'];
 	$realtyUnit=$_POST['realtyUnit'];
 	$rdg_estate_num=$_POST['rdg_estate_num'];
 	$rdg_estate_unit=$_POST['rdg_estate_unit'];
 	$cus_id=$_SESSION['ses_cus_id'];
-	$rdg_datetime=date("y-m-d:h:i:s");
+	$rdg_datetime=date("Y-m-d H:i:s");
 	$paramLat=$_POST['paramLat'];
 	$paramLong=$_POST['paramLong'];
 	$rdg_map=$paramLat.",".$paramLong;
@@ -224,6 +226,14 @@ if($_POST['paramAction']=="realtyDataGeneralSave"){
 	}else{
 		$rdg_status=$rdg_status;
 	}
+	
+	
+	$rdg_status_post=$_POST['rdg_status_post'];
+	if($rdg_status_post==""){
+		$rdg_status_post="N";
+	}else{
+		$rdg_status_post=$_POST['rdg_status_post'];
+	}
 	/*
 	 rdg_special
 	 rdg_price_project
@@ -250,6 +260,7 @@ if($_POST['paramAction']=="realtyDataGeneralSave"){
 				rf_id='$realtyFor',
 				rt_id='$realtyType',
 				rdg_title='$rdg_title',
+				rdg_title_detail='$rdg_title_detail',
 				rdg_detail='$rdg_detail',
 				rdg_owner_project='$rdg_owner_project',
 				rdg_price='$rdg_price',
@@ -278,12 +289,13 @@ if($_POST['paramAction']=="realtyDataGeneralSave"){
 				rdg_bts='$rdg_bts',
 				rdg_harbor='$rdg_harbor',
 				rdg_bus='$rdg_bus',
-				rdg_status='$rdg_status'
+				rdg_status='$rdg_status',
+				rdg_status_post='$rdg_status_post'
 				where rdg_id='$paramEmbedRdgId'
 				";
 		$result=mysql_query($strSQL)or die(mysql_error());
 		if($result){
-			echo'["udate_success"]';
+			echo'["update_success"]';
 		}
 		
 	}else{
@@ -295,6 +307,7 @@ if($_POST['paramAction']=="realtyDataGeneralSave"){
 				rf_id,
 				rt_id,
 				rdg_title,
+				rdg_title_detail,
 				rdg_detail,
 				rdg_owner_project,
 				rdg_price,
@@ -325,7 +338,8 @@ if($_POST['paramAction']=="realtyDataGeneralSave"){
 				rdg_bts,
 				rdg_harbor,
 				rdg_bus,
-				rdg_status
+				rdg_status,
+				rdg_status_post
 				
 				
 			)VALUES
@@ -334,6 +348,7 @@ if($_POST['paramAction']=="realtyDataGeneralSave"){
 			'$realtyFor',
 			'$realtyType',
 			'$rdg_title',
+			'$rdg_title_detail',
 			'$rdg_detail',
 			'$rdg_owner_project',
 			'$rdg_price',
@@ -364,7 +379,8 @@ if($_POST['paramAction']=="realtyDataGeneralSave"){
 			'$rdg_bts',
 			'$rdg_harbor',
 			'$rdg_bus',
-			'$rdg_status'
+			'$rdg_status',
+			'$rdg_status_post'
 
 	)";
 		$sucess=mysql_query($strSQL)or die(mysql_error());
@@ -372,7 +388,16 @@ if($_POST['paramAction']=="realtyDataGeneralSave"){
 		if(!$sucess){
 			echo mysql_error();
 		}else{
-			echo "[[\"seccess\"],[".$rdg_id."]]";
+			echo "[[\"success\"],[".$rdg_id."]]";
+			
+			/* send mail to admin*/
+			/*
+			$strTo = "nn.it@hotmail.com";
+			$strSubject = "ลงประกาศใหม่";
+			$strHeader ="ลงปรกาศใหม่";
+			$strMessage = $rdg_title."รหัสผู้ลงประกาศ".$cus_id;
+			$flgSend = @mail($strTo,$strSubject,$strMessage,$strHeader);  // @ = No Show Error //
+			*/
 		}
 	}
 	

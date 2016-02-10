@@ -6,26 +6,44 @@ include("../config.inc.php");
 $rdg_id=$_POST['rdg_id'];
 $idArea=$_POST['idArea'];
 $status=$_POST['status'];
+$txtSearch=$_POST['txtSearch'];
 
 
 if($_POST['paramAction']=="showCurrentPost"){
 	
+	if($txtSearch!=""){
 	$strSQL="
-	select *
+	select *,rf.rf_name
 	from realty_data_general rdg
 	INNER JOIN realty_type rt
 	ON rdg.rt_id=rt.rt_id
-	where cus_id='$ses_cus_id' and rdg_status='$status' order by rdg_id 
+	INNER JOIN realty_for rf
+	ON rf.rf_id=rdg.rf_id
+	where cus_id='$ses_cus_id' and rdg_status='$status' and 
+	(rdg_id like '%$txtSearch%') or (rdg_title like '%$txtSearch%') or (rdg_detail like '%$txtSearch%')or (rf_name like '%$txtSearch%')
+	order by rdg_update desc
+	";
+	}else{
+	$strSQL="
+	select *,rf.rf_name
+	from realty_data_general rdg
+	INNER JOIN realty_type rt
+	ON rdg.rt_id=rt.rt_id
+	INNER JOIN realty_for rf
+	ON rf.rf_id=rdg.rf_id
+	where cus_id='$ses_cus_id' and rdg_status='$status' order by rdg_update desc
 ";
+	}
 	$result=mysql_query($strSQL);
 	?>
 	<table id="gridCurentPost<?=$idArea?>">
                 <colgroup>
-                	<col />
+                	<col style="width:50px" />
                     <col style="width:230px" />
                     <col />
                     <col style="width:110px" />
                     <col style="width:120px" />
+                    <col style="width:80px" />
                     <col style="width:200px" />
                 </colgroup>
                 <thead>
@@ -34,8 +52,9 @@ if($_POST['paramAction']=="showCurrentPost"){
                         <th data-field="fileld2">รายการ</th>
                         <th data-field="fileld3">ราคา</th>
                         <th data-field="fileld4">วันที่ประกาศ</th>
-                        <th data-field="fileld5">สถานะ</th>
-                        <th data-field="fileld6">จัดการ</th>
+                        <th data-field="fileld5">สถานะประกาศ</th>
+                        <th data-field="fileld6">ประเภท</th>
+                        <th data-field="fileld7">จัดการ</th>
                        
                     </tr>
                 </thead>
@@ -45,7 +64,7 @@ if($_POST['paramAction']=="showCurrentPost"){
 		?>
 		<tr>
 			<td>#<?=$rs[rdg_id]?></td>
-			<td><?=$rs[rt_name]?></td>
+			<td><?=$rs[rt_name]?>(<?=$rs[rf_name]?>)</td>
 			<td>
 		
 			<?php
@@ -73,7 +92,32 @@ if($_POST['paramAction']=="showCurrentPost"){
 			</td>
 			<!-- <td>1250,000</td> -->
 			<td><?=$rs[rdg_create]?></td>
-			<td><?=$rs[rdg_status]?></td>
+			<td>
+			<?php 
+			if($rs[rdg_status_post]=="N"){
+			
+			echo "<font color='green'>ยังไม่ขาย/เช่า</font>";
+				
+			}else if($rs[rdg_status_post]=="soldOut"){
+				echo "<font color='red'>ขายแล้ว</font>";
+			}else if($rs[rdg_status_post]=="rented"){
+				echo "<font color='red'>เช่าแล้ว</font>";
+			}else{
+				echo "<font color='green'>ยังไม่ขาย/เช่า</font>";
+			}
+			?>
+			
+			
+			</td>
+			<td>
+			<?php 
+			if($rs[rdg_special]=="Y"){
+				echo"<font color='green'>ประกาศพิเศษ</font>";
+			}ELSE{
+				echo"ประกาศฟรี";
+			}
+			?>
+			</td>
 			<td>
 			<button class="btn btn-danger btn-xs btnDelPost<?=$idArea?>" id='delPostId-<?=$rs[rdg_id]?>'><i class="fa fa-trash-o"></i> ลบ </button>
 			<button class="btn btn-warning btn-xs btnEditPost<?=$idArea?>" id='editPostId-<?=$rs[rdg_id]?>'><i class="fa fa-pencil"></i> แก้ไข</button>

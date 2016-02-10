@@ -4,7 +4,7 @@ var rdg_id=$("#paramEmbedRdgId").val();
 var imageVideoFn=function(rdg_id){
 		
 		//set file button
-		$(".buttonText").text('เลือกรูปภาพ');
+		//$(".buttonText").text('เลือกรูปภาพ');
 		
 		$('#btnUploadPicture').on('click', function() {
 		    var file_data = $('#picture_file').prop('files')[0];   
@@ -37,6 +37,76 @@ var imageVideoFn=function(rdg_id){
 
 
 	};
+	
+var docUploadFn=function(rdg_id){
+	showDocFn(rdg_id);
+		//set file button
+		//$(".buttonUpFile").text('เลือกไฟล์ pdf');
+		
+		$('#btnUploadDoc').on('click', function() {
+		    var file_data = $('#doc_file').prop('files')[0];   
+		    var form_data = new FormData();                  
+		    form_data.append('doc_file', file_data);
+		    form_data.append('rdg_id', rdg_id);
+		    form_data.append('action', "addPDF");
+		   // console.log(form_data);                             
+		    $.ajax({
+		                url: '../Model/mImageVideo.php', // point to server-side PHP script 
+		                dataType: 'json',  // what to expect back from the PHP script, if anything
+		                cache: false,
+		                contentType: false,
+		                processData: false,
+		                data: form_data,                         
+		                type: 'post',
+		                success: function(data){
+		                    console.log(data); // display response from the PHP script, if any
+		                    if(data=="picture_empty"){
+		                    	alert("เลือกไฟล์เอกสารก่อนค่ะ");
+		                    }else if(data=="success"){
+		                    	alert("บันทึกเอกสารสำเร็จ");
+		                    	$("span.badge").remove();
+		                    	showDocFn(rdg_id);
+		                    }
+		                }
+		     });
+		    return false;
+		});
+
+
+	};
+	var deldocFn=function(id){
+		$.ajax({
+			url:"../Model/mImageVideo.php",
+			type:"post",
+			dataType:"html",
+			data:{"paramAction":"delDoc","rd_id":id},
+			success:function(data){
+				
+				showDocFn(rdg_id);
+			}
+		});
+	
+	}
+	var showDocFn=function(rdg_id){
+		$.ajax({
+			url:"../Model/mImageVideo.php",
+			type:"post",
+			dataType:"html",
+			data:{"paramAction":"showDoc","rdg_id":rdg_id},
+			success:function(data){
+				$("#showfileAttach").html(data);
+					
+					$(".docDel").click(function(){
+						deldocFn(this.id);
+						return false;
+					});
+					
+					
+				}
+			
+		});
+	}
+	
 	var showPictureFn=function(){
 		$.ajax({
 			url:"../Model/mImageVideo.php",

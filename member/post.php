@@ -1,7 +1,6 @@
  <?php session_start();?>
  <!-- Tabs -->
 
-    
  <script src="../Controller/cPost.js"></script>
  
  
@@ -40,7 +39,7 @@
                        
                         <li ><a href="#currentPost" data-toggle="tab">ประกาศปัจจุบัน</a></li>
                         <li><a href="#nonePost" data-toggle="tab">ประกาศที่ไม่แสดง</a></li>
-						<li><a href="#expirePost" data-toggle="tab">ประกาศหมดอายุ</a></li>
+						<!-- <li><a href="#expirePost" data-toggle="tab">ประกาศหมดอายุ</a></li> -->
 						<?php 
 						if($_SESSION['sesRtID']!=""){
 							?>
@@ -92,6 +91,15 @@
 									<div class="panel-heading">
 										<h3 class="panel-title"><i class="fa fa-edit"></i> รายการประกาศปัจจุบัน</h3>
 									</div>
+									
+									<div class="form-group" style='padding:5px;'>
+										
+										<div class="col-lg-3" >
+											<input type="text" class="form-control" name="rdg_search" id="rdg_search" placeholder="พิมพ์รหัส หรือ หัวข้อประกาศ">
+										</div>
+										<div class="col-lg-3 "> <button class='btn btn-success btn-xs' id='btnCurrentSearch'>ค้นหาประกาศ</button> </div>
+									</div>
+									<br style='clear:both'>
 									
 									<div id="currentPostArea"></div>
 

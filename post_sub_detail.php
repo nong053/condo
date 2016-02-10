@@ -132,7 +132,7 @@ $rdg_id=$rs1['rdg_id'];
 													$resultBanner6=mysql_query($strSLQBanner6);
 													$rsBanner6=mysql_fetch_array($resultBanner6);
 													?>
-													 <img src="control-panel/mypicture/1/<?=$rsBanner6['pic_name']?>" width="100%" height="100%" />
+													<!--  <img src="control-panel/mypicture/1/<?=$rsBanner6['pic_name']?>" width="100%" height="100%" /> -->
 												
 											</div>
 											<!--end ads-->
@@ -230,12 +230,12 @@ $rdg_id=$rs1['rdg_id'];
 <a href="https://plus.google.com/share?url= ลิงค์" target="_blank"><img src="img/gplus-variation2.png" alt="Google" /></a>
 -->
 													
-														<button type="button"  onClick="window.open('http://www.facebook.com/sharer.php?u=www.realthairealty.com/<?=$_SERVER['REQUEST_URI']?>')"; class=" btn-u-xs btn btn-facebook-inversed"><i class="fa fa-facebook"></i> แชร์ไปที่เฟสบุ๊ค</button>
+														<button type="button"  onClick="window.open('https://www.facebook.com/sharer.php?u=www.realthairealty.com/<?=$_SERVER['REQUEST_URI']?>')"; class=" btn-u-xs btn btn-facebook-inversed"><i class="fa fa-facebook"></i> แชร์ไปที่เฟสบุ๊ค</button>
 														<button type="button" onClick="window.open('https://plus.google.com/share?url=www.realthairealty.com/<?=$_SERVER['REQUEST_URI']?>')"; class="btn-u  btn-u-xs btn-googleplus-inversed"><i class="fa fa-google-plus"></i> แชร์ไปที่กูเกิล</button>
 														<button type="button" data-target="#sendToMyFriendsFormModal" data-toggle="modal"   class="btn-u  btn-u-xs btn-u-green"><i class="fa fa-bell-o"></i>ส่งหน้านี้ให้เพิ่อน</button>
-														<button type="button" class="btn-u  btn-u-xs btn-u-green"><i class="fa fa-envelope-o"></i> เก็บหน้านี้ไว้ดูครั้งหน้า</button>
-														<button type="button" class="btn-u  btn-u-xs btn-u-green"><i class="fa fa-download"></i>คลิ๊กดูหน้าที่จัดเก็บไว้</button>
-														<button type="button"  class=" print btn-u  btn-u-xs btn-u-green"><i class="fa fa-download"></i>ปริ้น</button>
+														<button type="button" class="btn-u btn-u-xs btn-u-green btnSavePost" id="<?=$rs1['rdg_id']?>"><i class="fa fa-download"></i> เก็บไว้ดูภายหลัง</button>
+														<button type="button" onClick="window.open('index.php?page=postSaved')"; class="btn-u  btn-u-xs btn-u-green"><i class="fa fa-download"></i>คลิ๊กดูหน้าที่จัดเก็บไว้</button>
+														<button type="button" onClick="window.print()";  class=" print btn-u  btn-u-xs btn-u-green"><i class="fa fa-download"></i>ปริ้น</button>
 													</p>
 													<!--end  button link -->
 													
@@ -277,7 +277,37 @@ $rdg_id=$rs1['rdg_id'];
 												<!-- End Begin Easy Block -->                
 															  
 											</div>
-
+											
+	<!--ข้อมูลวีดีโอ-->	
+	<?php 
+	$sqlVDO="select * from realty_embed_video where rdg_id='$rdg_id'";
+	$resultVDO=mysql_query($sqlVDO)or die (mysql_error());
+	$numVDO=mysql_num_rows($resultVDO);
+	if($numVDO){
+	?>								
+	<div class="headline"><h4>วีดีโอ </h4></div>
+	
+		<div class="row">
+			<!-- Vimeo Video Start-->  
+				<?php 
+				
+				$rsVDO=mysql_fetch_array($resultVDO);
+				?>
+	
+				<div class="col-md-12">
+				
+						<?=$rsVDO['rev_embed_code']?>
+					
+				</div>
+			<!-- Vimeo Video End--> 
+		</div>
+	<?php }?>
+	<!--ข้อมูลวีดีโอ-->
+	
+	
+	
+	
+	
 											<div class="shadow-wrapper">
 													<div class="headline"><h4>ข้อมูลทั่วไป </h4></div>
 	<!-- -ข้อมูลทั่วไป-->
@@ -665,44 +695,46 @@ $rdg_id=$rs1['rdg_id'];
 	}
 	//if contractor and mantiaral
 	?>
+	
+	<?php 
+	$strsSQLAttach="select * from realty_doc where rdg_id='$rdg_id'";
+	$reslutAttach=mysql_query($strsSQLAttach);
+	?>
+	<div class="headline"><h4> <i class='fa fa-file-pdf-o'></i>เอกสารแนบ </h4></div>
+	<?php 
+	while($rsAttach=mysql_fetch_array($reslutAttach)){
+		?>
+		<!-- -ข้อมูลราคา-->
+		<div class="row">
+			<div class="col-md-9"><font color="red">Download</font> <a href="realtyDoc/<?=$rsAttach['rdg_id']?>/<?=$rsAttach['rd_doc']?>"  target="_blank"><?=$rsAttach['rd_doc']?></a></div>
+		</div>
+		<!-- -ข้อมูลราคา-->
+		<?php
+	}
+	?>
+	<br>
 	</div>
 													
 														
 
-												<!-- start main box3 -->
-														<div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
-															<h2>รวมสินเชื่อธนาคาร</h2>
-															<p>
-															<ul class="list-unstyled">
-																<li><i class="fa fa-check color-green"></i> กรุงศรีอยุธยา</li>
-																<li><i class="fa fa-check color-green"></i> ไทยพาณิชย์</li>
-																<li><i class="fa fa-check color-green"></i> อาคารสงเคราะห์</li>
-																<li><i class="fa fa-check color-green"></i> แสตนด์ดาดชาเตอร์</li>
-																<li><i class="fa fa-check color-green"></i> ทหารไทย</li>
-																<li><i class="fa fa-check color-green"></i> กรุงไทย</li>
-																<li><i class="fa fa-check color-green"></i> กสิกรไทย</li>
-																<li><i class="fa fa-check color-green"></i> ธนชาติยูโอบี</li>
-																<li><i class="fa fa-check color-green"></i> ออมสิน</li>
-																<li><i class="fa fa-check color-green"></i> กรุงเทพ</li>
-																<li><i class="fa fa-check color-green"></i> สินเชื่อที่อยู่อาศัยสำหรับเชาวต่างประเทศ</li>
-															
-															</ul>
-															</p>
-														</div>
-												<!-- end main box3 -->
+												<?php 
+												include_once 'link_bank.php';
+												?>
 
 												<!-- start main box4 -->
 														<div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
 															<h2>ฝากขอความไว้กับประกาศนี้</h2>
 															<p>
 															<!-- comment start -->
-															<div id="commentArea"></div>
-															
-															
+									
+															<div id="commentArea">
+																<div class="fb-comments" data-href="http://realthairealty.com/index.php?page=post_sub_detail&amp;rdg_id=<?=$rdg_id?>" data-numposts="5"></div>
+															</div>
 									                        <!-- comment end -->
 															</p>
 															<p>
 															<!--  form contact email start -->
+															<!-- 
 															<form name="commentForm" id="commentForm" action="#" class="sky-form">
 																<fieldset>                  
 																			
@@ -762,15 +794,18 @@ $rdg_id=$rs1['rdg_id'];
 																
 																</footer>
 															</form>
+															 -->
 															<!--  form contact email end -->
 															
 															</p>
 														</div>
+														<!-- 
 														<script>
 														$(document).ready(function(){
 															commentFn(<?=$rs1['rdg_id']?>);
 														});
 														</script>
+														-->
 												<!-- end main box4 -->
 												<!-- start main box5 -->
 														<div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
@@ -796,13 +831,13 @@ $rdg_id=$rs1['rdg_id'];
 																			<section>
 																				<label class="label">เบอร์โทร</label>
 																				<label class="input">
-																					<input type="text" name="contact_tel" id="contact_tel">
+																					<input type="tel" name="contact_tel" id="contact_tel">
 																				</label>
 																			</section>
 																			<section>
 																				<label class="label">อีเมลล์</label>
 																				<label class="input">
-																					<input type="text" name="contact_email" id="contact_email">
+																					<input type="email" name="contact_email" id="contact_email">
 																				</label>
 																			</section>
 																			
@@ -817,7 +852,7 @@ $rdg_id=$rs1['rdg_id'];
 																				<span class="color-red">*</span>
 																				</label>
 																				<label class="input" style='wdith:100px;'>
-																					<input type="text" name="cus_confrim" id="cus_confrim" class="form-control margin-bottom-20">
+																					<input type="text" name="cus_confrim_contact2" id="cus_confrim_contact2" class="form-control margin-bottom-20">
 																				</label>
 																				
 																			</section>

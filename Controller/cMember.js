@@ -1,3 +1,20 @@
+/* loading start */
+function startLoading(){
+	 HoldOn.open('sk-rect');
+	 }
+function stopLoading(){
+	HoldOn.close();
+	 }
+
+
+$(document).ajaxStart(function() {
+	startLoading();
+});
+$(document).ajaxStop(function() {
+	stopLoading();
+});
+/* loading end */
+
 //startcall realty for post
 		var callRealtyFor = function(defaultParam,setByHome){
 			
@@ -192,7 +209,8 @@
 				
 					$("#provinceArea").html(provinceHtml);
 					$("#rdg_address_province_id").change(function(){
-						//alert($(this).val());
+						//alert($( "#rdg_address_province_id option:selected" ).text());
+						searchPlace($( "#rdg_address_province_id option:selected" ).text());
 						callDistrict($(this).val(),rdg_address_district_id);
 					});
 					
@@ -231,6 +249,8 @@
 					$("#districtArea").html(districtHtml);
 					$("#rdg_address_district_id").change(function(){
 						//alert($(this).val());
+						var placeText=$( "#rdg_address_province_id option:selected" ).text()+" "+$( "#rdg_address_district_id option:selected" ).text();
+						searchPlace(placeText);
 						callSubDistrict($(this).val(),rdg_address_sub_district_id);
 					});
 					
@@ -240,6 +260,9 @@
 		};
 		//callDistrict();
 		//end district
+		
+		
+		
 		
 		//start sub district
 		var callSubDistrict = function(paramDistrictId,rdg_address_sub_district_id){
@@ -268,6 +291,11 @@
 						subDistrictHtml+="</select>";
 				
 					$("#subDistrictArea").html(subDistrictHtml);
+					
+					$("#rdg_address_sub_district_id").change(function(){
+						var placeText=$( "#rdg_address_province_id option:selected" ).text()+" "+$( "#rdg_address_district_id option:selected" ).text()+" "+$( "#rdg_address_sub_district_id option:selected" ).text();
+						searchPlace(placeText);
+					});
 					
 				}
 			});

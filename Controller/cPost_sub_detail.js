@@ -55,6 +55,8 @@
 		//contact_fullname
 		//contact_tel
 		//cus_confrim
+		alert($("#cus_confrim2").val());
+		alert(robot_gen);
 		var check="";
 		
 		if($("#contact_detail2").val()==""){
@@ -80,6 +82,42 @@
 	}
 	/*validation comment end*/
 	
+function check_contact_form2(robot_gen){
+		
+		
+		//alert("confrim"+confrim);
+		//cus_confrim
+		//contact_fullname
+		//contact_tel
+		//cus_confrim
+		
+		var check="";
+		
+		if($("#contact_detail").val()==""){
+			check+="กรอกรายละเอียดด้วยครับ\n";
+		}
+		if($("#contact_fullname").val()==""){
+			check+="กรอกชื่อด้วยครับ\n";
+		}
+		if($("#contact_tel").val()==""){
+			check+="กรอกเบอร์โทรด้วยครับ\n";
+		}
+		if(robot_gen != $("#cus_confrim_contact2").val()){
+			check+="บวกเลขไม่ถูกต้องครับ\n";
+		}
+		
+		
+		if(check!=""){
+			return check;
+		
+		}else{
+			return "ok";
+			
+		}
+		return false;
+	}
+
+	
 	$(document).ready(function(){
 		
 		$(".print").click(function(){
@@ -89,7 +127,11 @@
 		//click contract from start
 		$("form#contactUsForm").submit(function(){
 			
-			var varidate=check_contact_form($("#robot_gen").val());
+			
+			var varidate=check_contact_form2($("#robot_gen").val());
+			
+			//alert(varidate);
+			
 			if(varidate!="ok"){
 				alert(varidate);
 			}else{
@@ -97,11 +139,17 @@
 				$.ajax({
 					url:"./Model/mContact.php",
 					type:"post",
-					dataType:"html",
+					dataType:"json",
 					data:$(this).serialize(),
 					success:function(data){
-						if(data['data']=="success"){
+						//alert(data)
+						if(data=="success"){
 							alert("ส่งอีเมลล์เรียบร้อย");
+							
+							$("#contact_detail").val("");
+							$("#contact_fullname").val("");
+							$("#contact_tel").val("");
+							$("#contact_email").val("");
 							
 						}
 					}

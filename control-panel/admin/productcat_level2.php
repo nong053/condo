@@ -57,14 +57,16 @@ include("../config.inc.php");
 				</td>
 				<td width="187">
                 <div id="dev_picturetext">
-				วิชา
+				หัวข้อบทความ
                 </div>
 				</td>
+				<!--
 				<td width="307"> 
                 <div id="dev_picturetext">
 				รายละเอียด
                 </div>
 				</td>
+				-->
 				<td width="109">
                 <div id="dev_picturetext">
 				จำนวน
@@ -108,7 +110,10 @@ $values=1;
 }
 $productcat_id=$_GET["productcat_id"];
 //##### Check manage user login end #####
-
+/*
+			echo $values."=values<br>";
+			echo $productcat_id."=productcat_id<br>";
+*/
 			$strSQL="select * from productcat_level2  where admin_id='".$values."' and productcat_id='$productcat_id'";
 			$result=mysql_query($strSQL);
 			$i=1;
@@ -130,7 +135,7 @@ $productcat_id=$_GET["productcat_id"];
 				?>
                 <img src="images/announcement.gif" border="0" />
                 <? 
-				if(strlen($rs[productcat_name])>30){
+				if(strlen($rs[productcat_name])>100){
 				$productcat_name=mb_substr($rs[productcat_name],0,30, "UTF-8")."...";
 				echo "$productcat_name";
 				}else{
@@ -140,6 +145,7 @@ $productcat_id=$_GET["productcat_id"];
 				echo"</a>";
 				echo"</div>";
 				echo"</td>";
+				/*
 				echo"<td>";
 				if(strlen($rs[productcat_detail])>30){
 				$productcat_detail=mb_substr($rs[productcat_detail],0,30,"UTF-8")."...";
@@ -149,6 +155,7 @@ $productcat_id=$_GET["productcat_id"];
 				}
 				
 				echo"</td>";
+				*/
 				echo"<td>";
 				echo"<center>";
 				echo"$num";
@@ -160,7 +167,7 @@ $productcat_id=$_GET["productcat_id"];
 				
 				if($rs[productcat_id]!="10"){
 					
-				echo"<a onClick=\"return confirm('คุณต้องการลบหมวดสินค้านี้ ?');\" href=\"productcat_delete_level2.php?productcat_id=$rs[productcat_id]&productcat_level2_id=$rs[productcat_level2_id]&admin_id=".$rs_admin_id['admin_id']."\">";
+				echo"<a onClick=\"return confirm('คุณต้องการลบหัวข้อบทความนี้ ?');\" href=\"productcat_delete_level2.php?productcat_id=$rs[productcat_id]&productcat_level2_id=$rs[productcat_level2_id]&productcat_id=$productcat_id&admin_id=".$rs_admin_id['admin_id']."\">";
 				?>
                 <img src="images/b_drop.png" border="0" />
                 <?
@@ -170,7 +177,7 @@ $productcat_id=$_GET["productcat_id"];
 				}else{
 					
 				}
-				echo"<a href=\"index.php?page=ecommerce_system&select_ecommerce=productcat_level2&action=edit&productcat_level2_id=$rs[productcat_level2_id]&admin_id=".$rs_admin_id['admin_id']."\">";
+				echo"<a href=\"index.php?page=ecommerce_system&select_ecommerce=productcat_level2&action=edit&productcat_level2_id=$rs[productcat_level2_id]&productcat_id=$productcat_id&admin_id=".$rs_admin_id['admin_id']."\">";
 				?>
                 <img src="images/b_edit.png" border="0" />
                 <?
@@ -188,8 +195,12 @@ $productcat_id=$_GET["productcat_id"];
 		<br style="clear:both" />
 		<br style="clear:both" />
 				
-		<?php if($_GET['action']=="edit"){
-		$productcat_level2_id=$_GET['productcat_level2_id'];
+		<?php 
+
+		$productcat_level2_id=$_GET['productcat_level2_id'];	
+
+		if($_GET['action']=="edit"){
+	
 		$strSQL="select * from productcat_level2 where productcat_level2_id=$productcat_level2_id";
 		$result=mysql_query($strSQL);
 		if(!$result){echo"nono".mysql_error();}
@@ -217,12 +228,12 @@ $productcat_id=$_GET["productcat_id"];
 		<form action="<?=$action?>" method="post">
 		<div id="footer"> 
 		  <div id="tr">
-				<div id="text_footer">ชื่อวิชา</div>
+				<div id="text_footer">หัวข้อบทความ</div>
 				<div id="text_feild">
 				<input type="text" name="productcat_name" value="<?=$productcat_name?>" />
 				</div>
 			</div>
-            <div id="tr">
+            <div style='display:none;' id="tr">
 				<div id="text_footer"> Category Productcat Name</div>
 				<div id="text_feild">
 				<input type="text" name="productcat_name_eng" value="<?=$productcat_name_eng?>" />
@@ -234,7 +245,7 @@ $productcat_id=$_GET["productcat_id"];
 				<input type="text" name="productcat_detail" value="<?=$productcat_detail?>" />
 				</div>
 			</div>
-            <div id="tr">
+            <div style='display:none;' id="tr">
 				<div id="text_footer">Detail Category Productcat</div>
 				<div id="text_feild">
 				<input type="text" name="productcat_detail_eng" value="<?=$productcat_detail_eng?>" />
@@ -245,6 +256,7 @@ $productcat_id=$_GET["productcat_id"];
 				<div id="text_submit">
 				<input type="hidden" name="admin_id" id="admin_id" value="<?= $rs_admin_id['admin_id']?>">
 				<input type="hidden" name="productcat_level2_id" value="<?=$productcat_level2_id?>" />
+				<input type="hidden" name="productcat_id" value="<?=$productcat_id?>" />
 				<input type="submit" name="submit" value="<?=$submit?>" />
 				<input type="button" name="btnBack" value="ย้อนกลับ"onclick="window.history.back()" />
 				</div>

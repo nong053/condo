@@ -57,20 +57,21 @@ include("../config.inc.php");
 				</td>
 				<td width="187">
                 <div id="dev_picturetext">
-				หมวดสินค้า
+				หน้าอสังหาฯ
                 </div>
 				</td>
 				<td width="307"> 
                 <div id="dev_picturetext">
-				รายละเอียดสินค้า
+				รายละเอียด
                 </div>
 				</td>
 				<td width="109">
                 <div id="dev_picturetext">
-				จำนวนสินค้า
+				จำนวน
 				</div>
 				</td>
-				<td width="152">
+			
+				<td width="152" style='display:none;'>
                 <div id="dev_picturetext">
                 <center>
 				จัดการ
@@ -82,16 +83,16 @@ include("../config.inc.php");
 			
 			<?php 
 //##### Check manage user login end #####
-//$admin_id=trim($_SESSION['member_user_url2']);
+$member_user_url=trim($_SESSION['member_user_url2']);
 //ทำการ select admin_id ออกมาจาก table product category
 $query_home="select admin_id from productcat WHERE
 productcat.admin_id=(select admin_id from admin
-where admin_id='".$admin_id."');";
+where admin_username='".$member_user_url."');";
 $result_home=$obj_manage_data->select_data_proc($query_home);
 $rs_num=mysql_num_rows($result_home);
 
 //ทำการ select admin_id ออกมาจาก admin
-$query_admin_id="select admin_id from admin where admin_id='".$admin_id."'";
+$query_admin_id="select admin_id from admin where admin_username='".$member_user_url."'";
 $result_admin_id=$obj_manage_data->select_data_proc($query_admin_id);
 $rs_admin_id=mysql_fetch_array($result_admin_id);
 
@@ -112,7 +113,7 @@ $values=1;
 			$result=mysql_query($strSQL);
 			$i=1;
 			while($rs=mysql_fetch_array($result)){
-				$strSQL2="select * from product where productcat_id=$rs[productcat_id]";
+				$strSQL2="select * from productcat_level2 where productcat_id=$rs[productcat_id]";
 				$result2=mysql_query($strSQL2);
 				$num=mysql_num_rows($result2);
 				
@@ -125,7 +126,7 @@ $values=1;
 				echo"</td>";
 				echo"<td>";
 				echo"<div id=\"dev_picturelink\">";
-				echo"<a href=\"index.php?page=ecommerce_system&select_ecommerce=product&productcat_id=$rs[productcat_id]\">";
+				echo"<a href=\"index.php?page=ecommerce_system&select_ecommerce=productcat_level2&productcat_id=$rs[productcat_id]\">";
 				?>
                 <img src="images/announcement.gif" border="0" />
                 <? 
@@ -153,13 +154,13 @@ $values=1;
 				echo"$num";
 				echo"</center>";
 				echo"</td>";
-				echo"<td>";
+				echo"<td style='display:none;'>";
 				echo"<div id=\"dev_picturelink\">";
 				echo"<center>";
 				
-				if($rs[productcat_id]!="10"){
+				if($rs[productcat_id]!="0"){
 					
-				echo"<a onClick=\"return confirm('คุณต้องการลบหมวดสินค้านี้ ?');\" href=\"productcat_delete.php?productcat_id=$rs[productcat_id]&admin_id=".$rs_admin_id['admin_id']."\">";
+				echo"<a onClick=\"return confirm('คุณต้องการลบบทความของอสังหาริมทรัพย์นี้?');\" href=\"productcat_delete.php?productcat_id=$rs[productcat_id]&admin_id=".$rs_admin_id['admin_id']."\">";
 				?>
                 <img src="images/b_drop.png" border="0" />
                 <?
@@ -209,31 +210,31 @@ $values=1;
 		$productcat_detail_eng="";
 		}
 		?>
-		<b><?=$submit?></b>
+		<b><?//$submit?></b>
 		<br style="clear:both" />
 		<br style="clear:both" />		
 		
-		<form action="<?=$action?>" method="post">
+		<form action="<?=$action?>" method="post" style='display:none;'>
 		<div id="footer"> 
 		  <div id="tr">
-				<div id="text_footer">ชื่อหมวดสินค้า</div>
+				<div id="text_footer">บทความของอสังหาริมทรัพย์</div>
 				<div id="text_feild">
 				<input type="text" name="productcat_name" value="<?=$productcat_name?>" />
 				</div>
 			</div>
-            <div id="tr">
+            <div style='display:none;' id="tr">
 				<div id="text_footer"> Category Productcat Name</div>
 				<div id="text_feild">
 				<input type="text" name="productcat_name_eng" value="<?=$productcat_name_eng?>" />
 				</div>
 			</div>
 			<div id="tr">
-				<div id="text_footer">รายละเอียดหมวดสินค้า</div>
+				<div id="text_footer">รายละเอียดบทความของอสังหาริมทรัพย์</div>
 				<div id="text_feild">
 				<input type="text" name="productcat_detail" value="<?=$productcat_detail?>" />
 				</div>
 			</div>
-            <div id="tr">
+            <div style='display:none;' id="tr">
 				<div id="text_footer">Detail Category Productcat</div>
 				<div id="text_feild">
 				<input type="text" name="productcat_detail_eng" value="<?=$productcat_detail_eng?>" />
@@ -245,6 +246,7 @@ $values=1;
 				<input type="hidden" name="admin_id" id="admin_id" value="<?= $rs_admin_id['admin_id']?>">
 				<input type="hidden" name="productcat_id" value="<?=$productcat_id?>" />
 				<input type="submit" name="submit" value="<?=$submit?>" />
+				
 				
 				</div>
 			</div>

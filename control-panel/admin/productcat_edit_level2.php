@@ -1,7 +1,10 @@
-<meta http-equiv="content-type" content="text/html; charcet=utf-8" />
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <?php 
 include("../config.inc.php");
 $productcat_level2_id=$_POST['productcat_level2_id'];
+$productcat_id=$_POST['productcat_id'];
+
 $productcat_name=$_POST['productcat_name'];
 $productcat_detail=$_POST['productcat_detail'];
 $productcat_name_eng=trim($_POST['productcat_name_eng']);
@@ -12,11 +15,10 @@ $result=mysql_query($strSQL);
 if(!$result){
 echo"nonon".mysql_error();
 }else{
-	echo"<script>alert(\"Edit Data is Success\");</script>";
-	
-	echo"<script>window.location=\"index.php?page=ecommerce_system&select_ecommerce=productcat_level2\"</script>";
+	echo"<script>alert(\"แก้ไขข้อมูลเรียบร้อย\");</script>";
+	echo"<script>window.location=\"index.php?page=ecommerce_system&select_ecommerce=productcat_level2&productcat_id=$productcat_id\"</script>";
 	exit();	
-	echo"<script>window.location=\"index.php?page=ecommerce_system&select_ecommerce=productcat_level2\"</script>";
+	echo"<script>window.location=\"index.php?page=ecommerce_system&select_ecommerce=productcat_level2&productcat_id=$productcat_id\"</script>";
 	
 //header("Location:index.php?page=productcat");
 /*echo"<script>window.location=\"index.php?page=productcat\";</script>";*/

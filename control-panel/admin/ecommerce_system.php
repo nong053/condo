@@ -164,6 +164,7 @@
 		$select_ecommerce=$_GET['select_ecommerce'];
 		switch($select_ecommerce){
 			case'productcat' :$select1="select";break;
+			case'productcat_level2' :$select6="select";break;
 			case'product' :$select2="select";break;
 			case'product_payment_methods' :$select3="select";break;
 			case'product_payment_check' :$select4="select";break;
@@ -181,8 +182,21 @@
             		<li>
                 		<div id="<?=$select1?>">
               		 		<a href="index.php?page=ecommerce_system&select_ecommerce=productcat">
+						
                             <div id="devmagin" style="margin:5px;">
-              			 	หมวดสินค้า
+              			 	หน้าอสังหาริมทรัพย์
+                     		</div>
+              			 	</a>
+                    	 </div>
+                 
+               		 </li>
+
+					 <li>
+                		<div id="<?=$select6?>">
+              		 		<!--<a href="index.php?page=ecommerce_system&select_ecommerce=productcat_level2">-->
+							<a href="#">
+                            <div id="devmagin" style="margin:5px;">
+              			 	หัวข้อบทความ
                      		</div>
               			 	</a>
                     	 </div>
@@ -194,13 +208,13 @@
                 		<div id="<?=$select2?>">
               		 		<a href="#">
                             <div id="devmagin" style="margin:5px;">
-              			 	สินค้า
+              			 	บทความ
                      		</div>
               			 	</a>
                     	 </div>
                  
                		 </li>
-                    <!--
+                   <!-- 
                      <li>
                 		<div id="<?=$select3?>">
               		 		<a href="index.php?page=ecommerce_system&select_ecommerce=product_payment_methods">
@@ -211,21 +225,8 @@
                     	 </div>
                  
                		 </li>
-                     -->
-                    
                      
-                    
                      <li>
-                		<div id="<?=$select5?>">
-              		 		<a href="index.php?page=ecommerce_system&select_ecommerce=product_check_order">
-                            <div id="devmagin" style="margin:5px;">
-              			 	ยืนยันการชำเงิน
-                     		</div>
-              			 	</a>
-                    	 </div>
-                 
-               		 </li>
-               		 <li>
                 		<div id="<?=$select4?>">
               		 		<a href="index.php?page=ecommerce_system&select_ecommerce=product_payment_check">
                             <div id="devmagin" style="margin:5px;">
@@ -235,6 +236,19 @@
                     	 </div>
                  
                		 </li>
+                     
+                    
+                     <li>
+                		<div id="<?=$select5?>">
+              		 		<a href="index.php?page=ecommerce_system&select_ecommerce=product_check_order">
+                            <div id="devmagin" style="margin:5px;">
+              			 	ตรวจสอบการสั่งชื้อ
+                     		</div>
+              			 	</a>
+                    	 </div>
+                 
+               		 </li>
+               		-->
             </ul>
         
         
@@ -258,6 +272,7 @@
 		
 		switch($select_ecommerce){
 			case'productcat':include("productcat.php");break;
+			case'productcat_level2':include("productcat_level2.php");break;
 			case'product':include("product.php");break;
 			case'product_payment_methods':include("product_payment_methods.php");break;
 			

@@ -53,16 +53,37 @@ include("../config.inc.php");
 									?>
 									<div class="optonArea formHidden">
 										<div class="checkbox">
+											<?php 
+											if($_SESSION['sesSpecialPost']=="N"){
+												?>
 											<label>
-											<input type="radio" checked='checked' name="rdg_special" class="rdg_special"  value="N" checked="checked"> ประกาศฟรี 
+												<input type="radio"  name="rdg_special" class="rdg_special"  value="N" checked="checked"> ประกาศฟรี 
 											</label>
 											<label>
-											<input type="radio" name="rdg_special" class="rdg_special" value="Y"> ประกาศพิเศษหน้าแรก
+												<input type="radio" name="rdg_special" class="rdg_special" value="Y"> ประกาศพิเศษหน้าแรก
 											</label>
+												<?php
+											}else{
+												?>
+											<label>
+												<input type="radio"  name="rdg_special" class="rdg_special"  value="N" > ประกาศฟรี 
+											</label>
+											<label>
+												<input type="radio" name="rdg_special" class="rdg_special" value="Y" checked="checked"> ประกาศพิเศษหน้าแรก
+											</label>
+												<?php
+												}
+											?>
+											
 										</div>
 									</div>
 								</div>
 							</div>
+							
+							
+							
+							
+							
 							
 							<div class="form-group formHidden">
 							
@@ -154,6 +175,13 @@ include("../config.inc.php");
 									<input type="text" placeholder="หัวข้อประกาศ" id="rdg_title" name="rdg_title" class="form-control">
 								</div>
 							</div>
+							<div class="form-group">
+								<label class="col-lg-3 control-label" for="rdg_title_detail"> รายระเอียดเบื้องต้น </label>
+								<div class="col-lg-9">
+									<textarea placeholder="รายระเอียดเบื้องต้น" id="rdg_title_detail" name="rdg_title_detail" class="form-control"></textarea>
+								</div>
+							</div>
+							
 
 							<div class="form-group">
 								<label class="col-lg-3 control-label" for="rdg_detail"> รายละเอียดประกาศ </label>
@@ -163,8 +191,16 @@ include("../config.inc.php");
 								    <script type="text/javascript">
 								        //<![CDATA[
 								            CKEDITOR.replace( 'rdg_detail',{
+									            
 								            	enterMode: CKEDITOR.ENTER_BR,
-								                shiftEnterMode: CKEDITOR.ENTER_BR
+								                shiftEnterMode: CKEDITOR.ENTER_BR,
+								                filebrowserBrowseUrl : '../control-panel/ckfinder/ckfinder.html',
+								                filebrowserImageBrowseUrl : '../control-panel/ckfinder/ckfinder.html?Type=Images',
+								                filebrowserFlashBrowseUrl : '../control-panel/ckfinder/ckfinder.html?Type=Flash',
+								                filebrowserUploadUrl : '../control-panel/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+								                filebrowserImageUploadUrl : '../control-panel/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+								                filebrowserFlashUploadUrl : '../control-panel/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
+								    								                
 								     
 								            } );
 								        //]]>
@@ -326,7 +362,9 @@ include("../config.inc.php");
 
 																	<div class="form-group">
 																		<label class="col-lg-3 control-label" for="rdg_map"> ปักหมุดแผนที่</label>
-																		<div class="col-lg-9 " > <button class="btn-u btn-u-orange" id="btnCreateMarker">คลิ๊กเพื่อปักหมุด</button></div>
+																		<div class="col-lg-9 " > 
+																		<!-- <button class="btn-u btn-u-orange" id="btnCreateMarker">คลิ๊กเพื่อปักหมุด</button>-->
+																		</div> 
 																		<div class="col-lg-12">
 																			
 																			
@@ -451,6 +489,8 @@ include("../config.inc.php");
 								</div>
 							</div>
 					</form>
+					
+					
 		<!-- End content mainData-->
 		</div>
 		<!-- End mainData -->

@@ -9,9 +9,9 @@ $password="010535546";
 $dbname="realthairealty_db";
 
 /*
-$username="zcarlet";
+$username="realthairealty";
 $password="010535546";
-$dbname="zcarlet_db";
+$dbname="realthai_db";
 */
 
 

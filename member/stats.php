@@ -33,6 +33,19 @@ $rsCountYesterday=mysql_fetch_array($resultCountYesterday);
 //echo $rsCountYesterday['NUM']."<br>";;
 /*this count Yesterday  end*/
 
+/*this count Yesterday start*/
+$strSQLCountWeek="
+SELECT dr.NUM as NUM FROM realty_data_general rdg
+LEFT JOIN daily_realty dr
+ON rdg.rdg_id=dr.rdg_id
+where rdg.cus_id='$cus_id'
+and DATE = '".date('Y-m-d',strtotime("-7 day"))."'
+		";
+$resultCountWeek=mysql_query($strSQLCountWeek);
+$rsCountWeek=mysql_fetch_array($resultCountWeek);
+//echo $rsCountWeek['NUM']."<br>";;
+/*this count Yesterday  end*/
+
 /*this count this month  start*/
 $strSQLCountThisMonth="
 		SELECT sum(dr.NUM) as NUM FROM realty_data_general rdg 
@@ -118,6 +131,13 @@ $rsCountLastYear=mysql_fetch_array($resultCountLastYear);
 								<td><?php echo number_format($rsCountYesterday['NUM'],0);?> คน</td>
 								
 							</tr>
+							<tr>
+								<td>จำนวนคนที่เปิดประกาศของคุณในสัปดาห์ที่แล้ว</td>
+								
+								<td><?php echo number_format($rsCountWeek['NUM'],0);?> คน</td>
+								
+							</tr>
+							
 							<tr>
 								<td>จำนวนคนที่เปิดประกาศของคุณในเดือนนี้</td>
 								

@@ -34,15 +34,25 @@ $("document").ready(function(){
 			}
 		});
 	}
+	
+	$(".forgotPassFormModal").click(function(){
+		$('#loginFormModal').modal('hide');
+	});
+	
+	
+	
 	$("#btnLogin").click(function(){
-			
 			
 			if(validation()){
 				$.ajax({
 					url:"Model/mSecurity.php",
 					type:"post",
 					dataType:"json",
-					data:{"paramAction":"loginAction","cus_email":$("#cus_email").val(),"cus_password":$("#cus_password").val()},
+					data:{"paramAction":"loginAction","cus_email":$("#cus_email").val(),
+						"cus_password":$("#cus_password").val(),
+						"cus_remember":$("#cus_remember:checked").val()
+							
+					},
 					success:function(data){
 						if(data=="success"){
 							alert("เข้าสู่ระบบเรียบร้อย");

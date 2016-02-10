@@ -63,6 +63,8 @@ $cus_fax=$_POST['cus_fax'];
 $cus_other=$_POST['cus_other'];
 $cus_address=$_POST['cus_address'];
 $cus_id=$_POST['cus_id'];
+$cus_status_special=$_GET['cus_status_special'];
+
 
 
 
@@ -144,27 +146,51 @@ if(!$result){
 </div>
 <?
 $cus_id=$_GET['cus_id'];
-//echo"order_status$order_status";
+//echo"order_status=$order_status";
 ?>
 <br style="clear:both" />
 <div id="dev_title">
 <form action="member_action2.php" method="post">
 <table>
-	<tr>
-    <? /*
+	<? /*
 	$strSQL="select * from cus_order order_id='$order_id'";
 	$result=mysql_query($strSQL);
 	$rs=mysql_fetch_array($result);*/
 	if($order_status=="Yes"){
-	$selected1="checked";}else{$selected2="checked";}
+	$selected1="checked";
+	}else{
+	$selected2="checked";
+	}
+	
+	
+	if($cus_status_special=='Y'){
+		$selected21="checked";
+	}else{
+		$selected22="checked";
+	}
 	?>
-     	<td width="343"><input type="radio"  name="cus_status" value="Yes" <?=$selected1?> />&nbsp; เปิดการใช้งาน
+	
+ 	<tr>
+     	<td><input type="radio" name="cus_status" value="No"  <?=$selected2?>/><img src='./images/logout.gif'><font color='white'>&nbsp;ปิดการใช้งาน</font>
+        </td>
+    </tr>
+	<tr>
+     	<td ><input type="radio"  name="cus_status" value="Yes" <?=$selected1?> /><img width="16" border="0" height="16" align="absbottom" src="images/support.gif"><font color='white'>&nbsp;เปิดการใช้งาน(อนุญาติให้ลงประกาศฟรีได้)</font>
+        </td>
+    </tr>
+   
+    <tr>
+     	<td><input type="radio" name="cus_status_special" value="N" <?=$selected22?> /><img src='./images/logout.gif'> <font color='white'>&nbsp;ปิดการใช้งานประกาศพิเศษ</font>
         </td>
     </tr>
     <tr>
-     	<td><input type="radio" name="cus_status" value="No"  <?=$selected2?>/>&nbsp; ปิดการใช้งาน
+    
+     	<td ><input type="radio"  name="cus_status_special" value="Y" <?=$selected21?>><img width="16" border="0" height="16" align="absbottom" src="images/support.gif"><font color='white'>&nbsp;เปิดการใช้ประกาศพิเศษ(<font color='red'>อนุญาติให้ลงประกาศพิเศษ</font>)</font>
         </td>
     </tr>
+   
+    
+    
     <tr>
     	<td>
         <input type="submit" value="บันทึกการเปลี่ยนแปลง" />

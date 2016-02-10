@@ -8,9 +8,9 @@ $password="010535546";
 $dbname="realthairealty_db";
 
 /*
-$username="workphp_user";
+$username="realthairealty";
 $password="010535546";
-$dbname="workphp_rwdb";
+$dbname="realthai_db";
 */
 $result=mysql_connect($hostname,$username,$password);
 mysql_query("SET NAMES utf8");

@@ -2,17 +2,17 @@
 <?php
 class connect_mysql{
 	var $var_hostname = "localhost";
-	
+
 	var $var_user = "root";
 	var $var_pass ="010535546";
 	var $var_dbname= "realthairealty_db";
 
 	/*
-	var $var_user = "workphp_user";
+	var $var_user = "realthairealty";
 	var $var_pass ="010535546";
-	var $var_dbname= "workphp_rwdb";
-	*/
-
+	var $var_dbname= "realthai_db";
+	
+*/
 
 
 

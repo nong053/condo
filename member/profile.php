@@ -71,58 +71,49 @@ $rsCus=mysql_fetch_array($resultCus);
 	<div class="form-group">												
 		<label for="inputEmail1" class="col-lg-3 control-label"> คำนำหน้า</label>
 		<div class=" col-lg-1">
-			<div class="checkbox">
-				<label>
+			<label>
+					<select name='cus_title_name' id='cus_title_name'>
 					<?php 
+					
 					if($rsCus['cus_title_name']==1){
-						?>
-						<input type="radio" checked='checked' name="cus_title_name" value="1"> นาย 
-						<?php 
-					}else{
-						?>
-						<input type="radio" name="cus_title_name" value="1"> นาย 
-						<?php 
-					}
 					?>
+						<option value='1' selected='selected'>เป็นเจ้าของสินทรัพย์เอง</option>
+						<option value='2'>ตัวแทนอสังหาริมทรัพย์</option>
+						<option value='3'>โฆษณาโครงการใหม่</option>
+						
+					<?php
 					
-				</label>
-			</div>
-		</div>
-		<div class=" col-lg-1">
-			<div class="checkbox">
-				<label>
-					<?php 
-					if($rsCus['cus_title_name']==2){
+					}if($rsCus['cus_title_name']==2){
 						?>
-						<input type="radio" checked='checked' name="cus_title_name" value="2"> นาง 
-						<?php 
+						<option value='1' >เป็นเจ้าของสินทรัพย์เอง</option>
+						<option value='2' selected='selected'>ตัวแทนอสังหาริมทรัพย์</option>
+						<option value='3'>โฆษณาโครงการใหม่</option>
+						
+						<?php
+
+					}if($rsCus['cus_title_name']==3){
+						?>
+						<option value='1' >เป็นเจ้าของสินทรัพย์เอง</option>
+						<option value='2' >ตัวแทนอสังหาริมทรัพย์</option>
+						<option value='3' selected='selected'>โฆษณาโครงการใหม่</option>
+						
+						<?php
+
 					}else{
 						?>
-						<input type="radio" name="cus_title_name" value="2"> นาง 
-						<?php 
+						<option value='1' selected='selected'>เป็นเจ้าของสินทรัพย์เอง</option>
+						<option value='2'>ตัวแทนอสังหาริมทรัพย์</option>
+						<option value='3'>โฆษณาโครงการใหม่</option>
+						
+						<?php
 					}
 					?>
-					
+						
+					</select>
 				</label>
-			</div>
 		</div>
-		<div class=" col-lg-2">
-			<div class="checkbox">
-				<label>
-					<?php 
-					if($rsCus['cus_title_name']==3){
-						?>
-						<input type="radio" checked='checked' name="cus_title_name" value="3"> นางสาว 
-						<?php 
-					}else{
-						?>
-						<input type="radio" name="cus_title_name" value="3"> นางสาว 
-						<?php 
-					}
-					?>
-				</label>
-			</div>
-		</div>
+		
+		
 	</div>
 
 

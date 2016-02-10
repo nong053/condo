@@ -1,4 +1,134 @@
+//fine lat and lon by area
+var geocoder; // กำหนดตัวแปรสำหรับ เก็บ Geocoder Object ใช้แปลงชื่อสถานที่เป็นพิกัด  
+var map; // กำหนดตัวแปร map ไว้ด้านนอกฟังก์ชัน เพื่อให้สามารถเรียกใช้งาน จากส่วนอื่นได้  
+var my_Marker; // กำหนดตัวแปรสำหรับเก็บตัว marker  
+var GGM; // กำหนดตัวแปร GGM ไว้เก็บ google.maps Object จะได้เรียกใช้งานได้ง่ายขึ้น  
+function setupMap(paramShowMarker,currentLat,currentLong,mapId) {
 	
+	
+	var latLongEmbedHtml="";
+	
+	var myOptions = {
+	  zoom: 15,
+	  center: new google.maps.LatLng(currentLat,currentLong),
+	  mapTypeId: google.maps.MapTypeId.ROADMAP
+	};
+	if(mapId!=""){
+		mapId=mapId;
+	}else{
+		mapId="map-canvas";
+	}
+
+	var map = new google.maps.Map(document.getElementById(mapId),
+		myOptions);
+	
+	if(paramShowMarker==true){
+	$(".paramLatLong").remove();
+	latLongEmbedHtml="<input type=\"hidden\" name=\"paramLat\" id=\"paramLat\" class=\"paramLatLong\" value=\""+currentLat+"\">";
+	latLongEmbedHtml+="<input type=\"hidden\" name=\"paramLong\" id=\"paramLong\" class=\"paramLatLong\" value=\""+currentLong+"\">";
+	$("#paramLatLong").html(latLongEmbedHtml);
+	
+	var marker = new google.maps.Marker({
+	map:map,
+	position: new google.maps.LatLng(currentLat,currentLong),
+	draggable: true
+	});
+	}
+	
+	var infowindow = new google.maps.InfoWindow({
+	//map:map,
+	//content: "ตำแหน่งที่ตั้ง",
+	//position:  new google.maps.LatLng(13.857326299999999, 100.7267414)
+	});
+	
+
+
+	google.maps.event.addListener(map,'click',function(event){
+		
+		if(!marker){
+			alert("คลิ๊กปุ่มปักหมุดก่อนครับ");
+			return false;
+		}
+
+		infowindow.open(map,marker);
+		//infowindow.setContent('ปักหมุดตรงนี้' + event.latLng);
+		infowindow.setContent('ปักหมุดตรงนี้');
+		//alert(event.latLng);
+		
+		var latt="";
+		var long="";
+		//find lat
+		latt=event.latLng+"";
+		latt=latt.split(",");
+		latt=latt[0].split("(");
+		latt=latt[1];
+		
+		
+		//find long
+		long=event.latLng+"";
+		long=long.split(",");
+		long=long[1].split(")");
+		long=long[0];
+		
+	
+		
+		
+		infowindow.setPosition(event.latLng);
+		marker.setPosition(event.latLng);
+		
+		/*
+		alert(latt);
+		alert(long);
+		*/
+		
+		$(".paramLatLong").remove();
+		latLongEmbedHtml="<input type=\"hidden\" name=\"paramLat\" id=\"paramLat\" class=\"paramLatLong\" value=\""+latt+"\">";
+		latLongEmbedHtml+="<input type=\"hidden\" name=\"paramLong\" id=\"paramLong\" class=\"paramLatLong\" value=\""+long+"\">";	
+		$("#paramLatLong").html(latLongEmbedHtml);
+	
+	
+	});
+
+
+}
+function initialize() { 
+	// ฟังก์ชันแสดงแผนที่  
+    GGM=new Object(google.maps); // เก็บตัวแปร google.maps Object ไว้ในตัวแปร GGM  
+    geocoder = new GGM.Geocoder(); // เก็บตัวแปร google.maps.Geocoder Object  
+    // กำหนดจุดเริ่มต้นของแผนที่  
+}  
+
+// ส่วนของฟังก์ชันค้นหาชื่อสถานที่ในแผนที่  
+var searchPlace=function(areaText){ // ฟังก์ชัน สำหรับคันหาสถานที่ ชื่อ searchPlace  
+    var AddressSearch=areaText;// เอาค่าจาก textbox ที่กรอกมาไว้ในตัวแปร  
+    if(geocoder){ // ตรวจสอบว่าถ้ามี Geocoder Object   
+        geocoder.geocode({  
+             address: AddressSearch // ให้ส่งชื่อสถานที่ไปค้นหา  
+        },function(results, status){ // ส่งกลับการค้นหาเป็นผลลัพธ์ และสถานะ  
+            if(status == GGM.GeocoderStatus.OK) { // ตรวจสอบสถานะ ถ้าหากเจอ  
+                var my_Point=results[0].geometry.location; // เอาผลลัพธ์ของพิกัด มาเก็บไว้ที่ตัวแปร  
+
+                //alert(my_Point.lat());
+                //alert(my_Point.lng());
+                setupMap(true,my_Point.lat(),my_Point.lng(),"");
+                
+            } 
+        });  
+    }         
+}  
+$(document).ready(function(){
+	
+	    $("<script/>", {  
+	      "type": "text/javascript",  
+	      src: "http://maps.google.com/maps/api/js?v=3.2&sensor=false&language=th&callback=initialize"  
+	    }).appendTo("body");  
+
+	/*
+	setTimeout(function(){
+		searchPlace("กาฬสินธุ์");
+	},1000);
+	*/
+});
 var postFn=function(loginType){
 
 			
@@ -8,7 +138,6 @@ var postFn=function(loginType){
 		var paramRealtyID="";
 		var Lat="";
 		var Lng="";
-		
 		
 		
 		//start map
@@ -78,104 +207,25 @@ var postFn=function(loginType){
 		
 	
 		
-		function setupMap(paramShowMarker,currentLat,currentLong,mapId) {
-			
-			
-			var latLongEmbedHtml="";
-			
-			var myOptions = {
-			  zoom: 15,
-			  center: new google.maps.LatLng(currentLat,currentLong),
-			  mapTypeId: google.maps.MapTypeId.ROADMAP
-			};
-			if(mapId!=""){
-				mapId=mapId;
-			}else{
-				mapId="map-canvas";
-			}
-
-			var map = new google.maps.Map(document.getElementById(mapId),
-				myOptions);
-			
-			if(paramShowMarker==true){
-			$(".paramLatLong").remove();
-			latLongEmbedHtml="<input type=\"hidden\" name=\"paramLat\" id=\"paramLat\" class=\"paramLatLong\" value=\""+currentLat+"\">";
-			latLongEmbedHtml+="<input type=\"hidden\" name=\"paramLong\" id=\"paramLong\" class=\"paramLatLong\" value=\""+currentLong+"\">";
-			$("#paramLatLong").html(latLongEmbedHtml);
-			
-			var marker = new google.maps.Marker({
-			map:map,
-			position: new google.maps.LatLng(currentLat,currentLong),
-			draggable: true
-			});
-			}
-			
-			var infowindow = new google.maps.InfoWindow({
-			//map:map,
-			//content: "ตำแหน่งที่ตั้ง",
-			//position:  new google.maps.LatLng(13.857326299999999, 100.7267414)
-			});
-			
-
-
-			google.maps.event.addListener(map,'click',function(event){
-				
-				if(!marker){
-					alert("คลิ๊กปุ่มปักหมุดก่อนครับ");
-					return false;
-				}
-	
-				infowindow.open(map,marker);
-				//infowindow.setContent('ปักหมุดตรงนี้' + event.latLng);
-				infowindow.setContent('ปักหมุดตรงนี้');
-				//alert(event.latLng);
-				
-				var latt="";
-				var long="";
-				//find lat
-				latt=event.latLng+"";
-				latt=latt.split(",");
-				latt=latt[0].split("(");
-				latt=latt[1];
-				
-				
-				//find long
-				long=event.latLng+"";
-				long=long.split(",");
-				long=long[1].split(")");
-				long=long[0];
-				
-			
-				
-				
-				infowindow.setPosition(event.latLng);
-				marker.setPosition(event.latLng);
-				
-				/*
-				alert(latt);
-				alert(long);
-				*/
-				
-				$(".paramLatLong").remove();
-				latLongEmbedHtml="<input type=\"hidden\" name=\"paramLat\" id=\"paramLat\" class=\"paramLatLong\" value=\""+latt+"\">";
-				latLongEmbedHtml+="<input type=\"hidden\" name=\"paramLong\" id=\"paramLong\" class=\"paramLatLong\" value=\""+long+"\">";	
-				$("#paramLatLong").html(latLongEmbedHtml);
-			
-			
-			});
-
-
-		}
+		
 		
 		
 		
 			var validation = function(){
 				var validateStr="";
+				
+				
+				if($("#rdg_title").val()=="" || $("#rdg_title").val()==null){
+					validateStr+="กำหนดหัวข้อประกาศด้วยค่ะ \n"
+					
+				}
+				
 				if($("select#realtyType").val()=="" || $("select#realtyType").val()==null){
 					validateStr+="กำหนดประเภทอสังหาริมทรัพย์ด้วยค่ะ \n"
 					
 				}
-				/*
+				
+				
 				if($("select#rdg_address_province_id").val()=="" || $("select#rdg_address_province_id").val()==null){
 					validateStr+="กำหนดจังหวัดด้วยค่ะ \n"
 					
@@ -189,6 +239,7 @@ var postFn=function(loginType){
 					validateStr+="กำหนดตำบลด้วยค่ะ \n"
 					
 				}
+				/*
 				if($("select#realtyUnit").val()=="" || $("select#realtyUnit").val()==null){
 					validateStr+="กำหนดหน่วยของพื้นที่ด้วยค่ะ \n"
 					
@@ -367,6 +418,8 @@ var postFn=function(loginType){
 						//####rdg_title####
 						
 						$("#rdg_title").val(data['rdg_title']);
+						//alert(data['rdg_title_detail']);
+						$("#rdg_title_detail").val(data['rdg_title_detail']);
 						
 						
 						
@@ -381,7 +434,7 @@ var postFn=function(loginType){
 						$("#rdg_owner_project").val(data['rdg_owner_project']);
 						
 						//####rdg_address_project####
-						$("#rdg_address_project").val(data['rdg_address_project']);
+						//$("#rdg_address_project").val(data['rdg_address_project']);
 						
 						//####rdg_price_project####
 						$("#rdg_price_project").val(data['rdg_price_project']);
@@ -556,15 +609,18 @@ var postFn=function(loginType){
 				});
 			};
 			
-			
-			var showPostFn=function(idArea,status){
+			$("#btnCurrentSearch").click(function(){
+				//alert($("#rdg_search").val());
+				showPostFn("currentPostArea","Y",$("#rdg_search").val());
+			})
+			var showPostFn=function(idArea,status,txtSearch){
 				
 				$.ajax({
 					url:"../Model/mCurrentPost.php",
 					type:"post",
 					dataType:"html",
 					async:false,
-					data:{"paramAction":"showCurrentPost","idArea":idArea,"status":status},
+					data:{"paramAction":"showCurrentPost","idArea":idArea,"status":status,"txtSearch":txtSearch},
 					success:function(data){
 						$("#"+idArea).html(data);
 						
@@ -603,6 +659,7 @@ var postFn=function(loginType){
 							id=id.split("-");
 							id=id[1];
 							//command delete
+							
 							if(confirm("ยืนยันไม่แสดงประกาศนี้")){
 								disableOrAblePostFn(id,status);
 								showPostFn(idArea,status);
@@ -616,7 +673,7 @@ var postFn=function(loginType){
 							id=id.split("-");
 							id=id[1];
 							//command delete
-							if(confirm("ยืนยันไม่แสดงประกาศนี้")){
+							if(confirm("ยืนยันต้องการแสดงประกาศนี้")){
 								disableOrAblePostFn(id,status);
 								showPostFn(idArea,status);
 							}
@@ -638,7 +695,7 @@ var postFn=function(loginType){
 							
 							
 							$.ajax({
-								url:"../Member/form_post.php",
+								url:"../member/form_post.php",
 								type:"post",
 								dataType:"html",
 								async:false,
@@ -815,6 +872,7 @@ var postFn=function(loginType){
 					success:function(data){
 						$("#imageVideoArea").html(data);
 						imageVideoFn($("#paramEmbedRdgId").val());
+						docUploadFn($("#paramEmbedRdgId").val());
 					}
 				});
 				
@@ -859,6 +917,13 @@ var postFn=function(loginType){
 							}
 						});
 						
+						$("#btn-success").click(function(){
+							alert("ประกาศของท่านพร้อมใช้งานแล้ว");
+							//alert("ส่งประกาศของท่านให้ผู้ดูแลระบบตรวจสอบเรียบร้อย\nเมื่อผ่านการตรวจสอบทางทีมงานจะส่ง Email แจ้งให้ทราบขอบคุณที่ใช้บริการ");
+							//$("[href|='#currentPost']").click();
+							window.location='index.php?page=post&loginType=loginForManage';
+						});
+						
 						
 						
 					}
@@ -883,9 +948,10 @@ var postFn=function(loginType){
 					dataType:"json",
 					data:$( "form#formRealtyDataGe").serialize(),
 					success:function(data){
+					
 						var rdg_id=data[1];
-						//alert(rdg_id);
-						if(data[0]=="seccess"){
+						
+						if(data[0]=="success"){
 							alert("บันทึกข้อมูลเรียบร้อย");
 							setTimeout(function(){
 								$("[href|='#detailData']").click();
@@ -894,7 +960,7 @@ var postFn=function(loginType){
 							
 							$("#paramEmbedRdgId").remove();
 							$("#paramEmbedRdgIdArea").append("<input type='hidden' name='paramEmbedRdgId' id='paramEmbedRdgId' value="+rdg_id+" >");
-						}else if(data[0]=="udate_success"){
+						}else if(data[0]=="update_success"){
 							alert("แก้ไขข้อมูลเรียบร้อย");
 							$("[href|='#detailData']").click();
 							$("#topcontrol").click();
@@ -912,7 +978,7 @@ var postFn=function(loginType){
 	$("[href|='#newPost']").click(function(){
 		$(".postRealty").empty();
 		$.ajax({
-			url:"../Member/form_post.php",
+			url:"../member/form_post.php",
 			type:"post",
 			dataType:"html",
 			async:false,
@@ -934,7 +1000,7 @@ var postFn=function(loginType){
 	$("[href|='#memberNewPost']").click(function(){
 		
 		$.ajax({
-			url:"../Member/memberFormPost.php",
+			url:"../member/memberFormPost.php",
 			type:"post",
 			dataType:"html",
 			async:false,

@@ -1,4 +1,7 @@
 $(document).ready(function(){
+	
+	
+	
 	//callProvince("","","","2");
 	$("table#gridPostDedail").kendoGrid({
 		//height: 550,
@@ -12,6 +15,16 @@ $(document).ready(function(){
 		scrollable: false,
 	});
 	
+	$("#infoToEmailSubSearch").click(function(){
+		
+		if($("#cus_id").val()!=""){
+			alert("แจ้งเตือนทาง E-mail เรียบร้อย");
+		}else{
+			alert("ท่านยังไม่ลงชื่อเข้าใช้งาน");
+		}
+		return false;
+		
+	});
 	$("form#formSubPost").submit(function(){
 		
 		$.ajax({
@@ -20,7 +33,16 @@ $(document).ready(function(){
 			dataType:"html",
 			data:$(this).serialize(),
 			success:function(data){
+				
+				//alert($("#rdg_line_sale_bts2").val());
+				//alert($("#rdg_bts2").val());
+				
+				//call function callLineSubBTS start
+				callLineSubBTS($("#rdg_line_sale_bts2").val(),$("#rdg_bts2").val());
+				//call function callLineSubBTS end
+				
 				$("#mainContrainArea").html(data);
+				
 				
 				
 				
@@ -31,6 +53,7 @@ $(document).ready(function(){
 		
 	
 	});
+	/*
 	$(".btnSavePost").click(function(){
 		//alert(this.id);
 		var rdg_id=this.id;
@@ -65,4 +88,9 @@ $(document).ready(function(){
 		
 		return false;
 	});
+	*/
+	//call function button
+	contactFormModalFn();
+	mapContactModalFn();
+	imageSlideModalFn();
 });

@@ -84,6 +84,7 @@ $about_map=$rs[about_map];
     
     <form action="process_about.php" method="post"> 
     <table border="0" cellpadding="0" cellspacing="0">
+	<!-- 
 		<tr>
 			<td>
 			Code แผนที่จาก Google
@@ -94,6 +95,7 @@ $about_map=$rs[about_map];
 				<textarea id="about_map" name="about_map" cols="100" rows="10"><?=$about_map?></textarea>
 			</td>
 		</tr>
+	 -->
     	<tr>
         	
             <td>
@@ -123,12 +125,12 @@ $about_map=$rs[about_map];
             CKEDITOR.replace( 'about_detail',{
 
           
-            filebrowserBrowseUrl : '/ckfinder/ckfinder.html',
-            filebrowserImageBrowseUrl : '/ckfinder/ckfinder.html?Type=Images',
-            filebrowserFlashBrowseUrl : '/ckfinder/ckfinder.html?Type=Flash',
-            filebrowserUploadUrl : '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
-            filebrowserImageUploadUrl : '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
-            filebrowserFlashUploadUrl : '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
+            filebrowserBrowseUrl : '../ckfinder/ckfinder.html',
+            filebrowserImageBrowseUrl : '../ckfinder/ckfinder.html?Type=Images',
+            filebrowserFlashBrowseUrl : '../ckfinder/ckfinder.html?Type=Flash',
+            filebrowserUploadUrl : '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+            filebrowserImageUploadUrl : '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+            filebrowserFlashUploadUrl : '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
 
             } );
         //]]>
@@ -137,41 +139,12 @@ $about_map=$rs[about_map];
             </td>
        </tr>
        
-       <tr><td>Detail
-            </td>
-        </tr>
-        <tr>
-        	
-            <td>
-
-
-
-
-<!--CKEditor-->
-    <textarea cols="80" id="about_detail_eng" name="about_detail_eng" rows="10" ><?=$about_detail_eng?></textarea>
-    <script type="text/javascript">
-        //<![CDATA[
-            CKEDITOR.replace( 'about_detail_eng',{
-
-          
-            filebrowserBrowseUrl : '/ckfinder/ckfinder.html',
-            filebrowserImageBrowseUrl : '/ckfinder/ckfinder.html?Type=Images',
-            filebrowserFlashBrowseUrl : '/ckfinder/ckfinder.html?Type=Flash',
-            filebrowserUploadUrl : '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
-            filebrowserImageUploadUrl : '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
-            filebrowserFlashUploadUrl : '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
-
-            } );
-        //]]>
-    </script>
-    <!--CKEditor-->
-            </td>
-       </tr>
+      
        <tr>
             
             	
                 <td>
-                <input type="submit" value="Submit"> <input type="reset" value="Cancel">
+                <input type="submit" value="บันทึก"> <input type="reset" value="ยกเลิก">
                 </td>
             
         </tr>

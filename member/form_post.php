@@ -57,6 +57,63 @@ $rsRT=mysql_fetch_array($resultRT);
 									</div>
 								</div>
 							</div>
+							
+							
+							<div class="form-group " >
+								<label class="col-lg-3 control-label"> สถานะประกาศ</label>
+								
+										<?php if($rsRT['rdg_status_post']=="N" || $rsRT['rdg_status_post']==""){
+											
+										?>
+										<div class="checkbox">
+											<label>
+											<input type="radio" name="rdg_status_post" class="rdg_status_post" value="N" checked="checked"> รอการขายหรือเช่า
+											</label>
+											<label>
+											<input type="radio"  name="rdg_status_post"   class="rdg_status_post" value="soldOut"> 	ขายแล้ว 
+											</label>
+											<label>
+											<input type="radio" name="rdg_status_post" class="rdg_status_post" value="rented"> เช่าแล้ว
+											</label>
+											
+										</div>
+										<?php }else if($rsRT['rdg_status_post']=="soldOut"){
+											?>
+											<div class="checkbox">
+												<label>
+												<input type="radio" name="rdg_status_post" class="rdg_status_post" value="N" > รอการขายหรือเช่า
+												</label>
+												<label>
+												<input type="radio"  name="rdg_status_post"   class="rdg_status_post" value="soldOut" checked="checked"> 	ขายแล้ว 
+												</label>
+												<label>
+												<input type="radio" name="rdg_status_post" class="rdg_status_post" value="rented"> เช่าแล้ว
+												</label>
+												
+											</div>
+											<?php
+										}else if($rsRT['rdg_status_post']=="rented"){
+											?>
+											<div class="checkbox">
+												<label>
+												<input type="radio" name="rdg_status_post" class="rdg_status_post" value="N" > รอการขายหรือเช่า
+												</label>
+												<label>
+												<input type="radio"  name="rdg_status_post"   class="rdg_status_post" value="soldOut"> 	ขายแล้ว 
+												</label>
+												<label>
+												<input type="radio" name="rdg_status_post" class="rdg_status_post" value="rented" checked="checked"> เช่าแล้ว
+												</label>
+												
+											</div>
+											<?php
+										}?>
+									
+								
+							</div>
+							
+							
+							
 							<div class="form-group" style="display:none;">
 								<label class="col-lg-3 control-label"> ประกาศพิเศษหน้าแรก</label>
 								<div id="realtySpecialArea">
@@ -158,6 +215,14 @@ $rsRT=mysql_fetch_array($resultRT);
 									<input type="text" placeholder="หัวข้อประกาศ" id="rdg_title" name="rdg_title" class="form-control">
 								</div>
 							</div>
+							
+							<div class="form-group">
+								<label class="col-lg-3 control-label" for="rdg_title_detail"> รายระเอียดเบื้องต้น </label>
+								<div class="col-lg-9">
+									<textarea placeholder="รายระเอียดเบื้องต้น" id="rdg_title_detail" name="rdg_title_detail" class="form-control"></textarea>
+								</div>
+							</div>
+							
 
 							<div class="form-group">
 								<label class="col-lg-3 control-label" for="rdg_detail"> รายละเอียดประกาศ </label>
@@ -169,7 +234,14 @@ $rsRT=mysql_fetch_array($resultRT);
 								        //<![CDATA[
 								            CKEDITOR.replace( 'rdg_detail',{
 								            	enterMode: CKEDITOR.ENTER_BR,
-								                shiftEnterMode: CKEDITOR.ENTER_BR
+								                shiftEnterMode: CKEDITOR.ENTER_BR,
+								                filebrowserBrowseUrl : '../control-panel/ckfinder/ckfinder.html',
+								                filebrowserImageBrowseUrl : '../control-panel/ckfinder/ckfinder.html?Type=Images',
+								                filebrowserFlashBrowseUrl : '../control-panel/ckfinder/ckfinder.html?Type=Flash',
+								                filebrowserUploadUrl : '../control-panel/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+								                filebrowserImageUploadUrl : '../control-panel/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+								                filebrowserFlashUploadUrl : '../control-panel/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
+								    								                
 								     
 								            } );
 								        //]]>
@@ -227,13 +299,14 @@ $rsRT=mysql_fetch_array($resultRT);
 																	<input type="text" placeholder="เจ้าของโครงการ" id="rdg_owner_project" name="rdg_owner_project" class="form-control">
 																</div>
 															</div>
-															
+															<!-- 
 															<div class="form-group newProjectRealty">
 																<label class="col-lg-3 control-label" for="rdg_address_project"> ที่อยู่โครงการ  </label>
 																<div class="col-lg-9">
 																	<textarea placeholder="ทีอยู่โครงการ" id="rdg_address_project" name="rdg_address_project" class="form-control"></textarea>
 																</div>
 															</div>
+															 -->
 															<div class="form-group newProjectRealty">
 																<label for="rdg_price" class="col-lg-3 control-label"> ราคาโครงการเริ่มต้น </label>
 																<div class="col-lg-5">
@@ -331,7 +404,11 @@ $rsRT=mysql_fetch_array($resultRT);
 
 																	<div class="form-group">
 																		<label class="col-lg-3 control-label" for="rdg_map"> ปักหมุดแผนที่</label>
-																		<div class="col-lg-9 " > <button class="btn-u btn-u-orange" id="btnCreateMarker">คลิ๊กเพื่อปักหมุด</button></div>
+																		<div class="col-lg-9 " > 
+																		<!-- 
+																		<button class="btn-u btn-u-orange" id="btnCreateMarker">คลิ๊กเพื่อปักหมุด</button>
+																		 -->
+																		</div>
 																		<div class="col-lg-12">
 																			
 																			

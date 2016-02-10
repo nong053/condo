@@ -59,21 +59,15 @@ include("../config.inc.php");
 /*include("fckeditor/fckeditor.php");*/
 $member_user_id=$_SESSION['member_user_id'];
 ?>
-
-
-
-    
-    
-    
-    
-    
-    
-    
+  
 <? 
-$action_article=$_GET['action_article'];
-if($action_article=="edit"){
 $article_id=$_GET['article_id'];
-$strSQL="select * from article where article_id=$article_id";
+$action_article=$_GET['action_article'];
+//echo "article_id=$article_id";
+//echo "article_id0=".$article_id;
+if($action_article=="edit"){
+//echo "article_id1=".$article_id;
+$strSQL="select * from article where article_id='$article_id'";
 $result=mysql_query($strSQL);
 $rs=mysql_fetch_array($result);
 
@@ -94,6 +88,7 @@ $article_name_edit=$rs[article_name];
 
 
 }
+//echo "article_id2=".$article_id;
 			
 
 ?>	
@@ -101,6 +96,7 @@ $article_name_edit=$rs[article_name];
 <title>จัดการ บทความ</title>
 <div id="dev_text" style="font-size:13px; font-weight:bold; color:#FFF; padding:5px; background-color:#333;">
 <?
+/*
 $strSQL="select * from main_menu where admin_id='$member_user_id'";
 $result=mysql_query($strSQL);
 $num=mysql_num_rows($result);
@@ -115,7 +111,10 @@ $num=mysql_num_rows($result);
   		
 		}
 	}
+	*/
+	echo $_GET['article_title'];
 	?>
+
 
 </div>
 <div class="content_about_us" style="background-color:#FFF;">
@@ -246,12 +245,12 @@ $num=mysql_num_rows($result);
             CKEDITOR.replace( 'article_detail',{
 
           
-            filebrowserBrowseUrl : '/ckfinder/ckfinder.html',
-            filebrowserImageBrowseUrl : '/ckfinder/ckfinder.html?Type=Images',
-            filebrowserFlashBrowseUrl : '/ckfinder/ckfinder.html?Type=Flash',
-            filebrowserUploadUrl : '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
-            filebrowserImageUploadUrl : '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
-            filebrowserFlashUploadUrl : '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
+            filebrowserBrowseUrl : '../ckfinder/ckfinder.html',
+            filebrowserImageBrowseUrl : '../ckfinder/ckfinder.html?Type=Images',
+            filebrowserFlashBrowseUrl : '../ckfinder/ckfinder.html?Type=Flash',
+            filebrowserUploadUrl : '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+            filebrowserImageUploadUrl : '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+            filebrowserFlashUploadUrl : '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
 
             } );
         //]]>
@@ -282,12 +281,12 @@ $num=mysql_num_rows($result);
             CKEDITOR.replace( 'article_detail_eng',{
 
           
-            filebrowserBrowseUrl : '/ckfinder/ckfinder.html',
-            filebrowserImageBrowseUrl : '/ckfinder/ckfinder.html?Type=Images',
-            filebrowserFlashBrowseUrl : '/ckfinder/ckfinder.html?Type=Flash',
-            filebrowserUploadUrl : '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
-            filebrowserImageUploadUrl : '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
-            filebrowserFlashUploadUrl : '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
+            filebrowserBrowseUrl : '../ckfinder/ckfinder.html',
+            filebrowserImageBrowseUrl : '../ckfinder/ckfinder.html?Type=Images',
+            filebrowserFlashBrowseUrl : '../ckfinder/ckfinder.html?Type=Flash',
+            filebrowserUploadUrl : '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+            filebrowserImageUploadUrl : '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+            filebrowserFlashUploadUrl : '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
 
             } );
         //]]>
@@ -299,8 +298,10 @@ $num=mysql_num_rows($result);
          <tr>
             	
                 <td>
+
                 <input type="hidden" value="<?=$action_article?>" name="action_article" />
-                <input type="hidden" value="<?=$article_id?>"  name="article_id"/>
+                <input type="hidden" value="<?=$_GET['article_title']?>" name="article_title" />
+                <input type="hidden" value="<?=$_GET['article_id']?>"  name="article_id"/>
                 <input type="submit" value="บันทึกข้อมูล">
                 <input type="reset" value="ยกเลิก">
                 </td>

@@ -455,13 +455,17 @@ $bgcolor=($j++%2)?'#FFFFCC':'#FFFFFF';
         <td>
         <div id="dev_picturelink">
         
-        <a href="member_action.php?cus_id=<?=$rs[cus_id]?>&action2=check_member&order_status=<?=$rs[cus_enable]?>&TB_iframe=true&height=210&width=315" rel="sexylightbox">
+        <a href="member_action.php?cus_id=<?=$rs[cus_id]?>&action2=check_member&order_status=<?=$rs[cus_enable]?>&cus_status_special=<?=$rs[cus_status_special]?>&TB_iframe=true&height=300&width=500" rel="sexylightbox">
         <img src="images/announcement.gif" border="0" />
         <?
-        if($rs[cus_enable]=="Yes"){
+        if(($rs[cus_enable]=="Yes") and ($rs[cus_status_special]!="Y")){
         	
-        	echo"อนุมัติเรียบร้อย";
-        }else{
+        	echo"อนุมัติเรียบร้อย(ลงประกาศฟรีได้)";
+        	
+        }if(($rs[cus_enable]=="Yes") and ($rs[cus_status_special]=="Y")){
+        	
+        	echo"อนุมัติเรียบร้อย(ลงประกาศพิเศษได้)";
+        }else if($rs[cus_enable]!="Yes"){
 			echo"รอการอนุมัติ";
         	
         }
@@ -488,9 +492,16 @@ $bgcolor=($j++%2)?'#FFFFCC':'#FFFFFF';
        <!-- <img src="images/b_edit.png"  border="0"/>-->
         ดูข้อมูล
         </a>
+        
+        <a href="../../member/index.php?page=post&loginType=loginForManage&cus_id=<?=$rs[cus_id]?>" target='_blank'/>
+        <img src="images/knowledgebase.gif" border="0" />
+       <!-- <img src="images/b_edit.png"  border="0"/>-->
+        ดูประกาศ
+        </a>
+        
         <a href="member_action2.php?cus_id=<?=$rs[cus_id]?>&action=del">
         <img src="images/b_drop.png" border="0" />
-        ลบ 
+         
         </a>
         </center>
         </div>

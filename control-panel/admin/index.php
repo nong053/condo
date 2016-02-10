@@ -302,13 +302,16 @@ p{
          		<li><a href="index.php?page=select"><img src="images/pic_small/Settings.png"  border="0" align="absbottom" /> เลือกรายการ</a></li>
             	<li><a href="index.php?page=home"><img src="images/clientarea.gif" border="0" align="absbottom" /> หน้าแรก</a></li>
             	
-            	<li><a href="index.php?page=article_system_by_menu&action_article=edit&article_id=35"><img src="images/Maps_alt.png" border="0" align="absbottom" />  แผนผังเว็บไซต์ </a></li>
-            	<li><a href="index.php?page=article_system_by_menu&action_article=edit&article_id=34"><img src="images/Phone.png" border="0" align="absbottom" /> ติดต่อโฆษณาหน้าแรก   </a></li>
-            	<li><a href="index.php?page=article_system_by_menu&action_article=edit&article_id=33"><img src="images/details.gif" border="0" align="absbottom" /> นโยบายและเงื่อนไข</a></li>
-            	<li><a href="index.php?page=article_system_by_menu&action_article=edit&article_id=36"><img src="images/iFile.png" border="0" align="absbottom" /> ข้อตกลงการบริการ</a></li>
+            	<li><a href="index.php?page=article_system_by_menu&action_article=edit&article_id=35&article_title=แผนผังเว็บไซต์ "><img src="images/Maps_alt.png" border="0" align="absbottom" />  แผนผังเว็บไซต์ </a></li>
+            	<li><a href="index.php?page=article_system_by_menu&action_article=edit&article_id=34&article_title=ติดต่อโฆษณาหน้าแรก"><img src="images/Phone.png" border="0" align="absbottom" /> ติดต่อโฆษณาหน้าแรก   </a></li>
+            	<li><a href="index.php?page=article_system_by_menu&action_article=edit&article_id=33&article_title=นโยบายและเงื่อนไข "><img src="images/details.gif" border="0" align="absbottom" /> นโยบายและเงื่อนไข</a></li>
+            	<li><a href="index.php?page=article_system_by_menu&action_article=edit&article_id=36&article_title=ข้อตกลงการบริการ"><img src="images/iFile.png" border="0" align="absbottom" /> ข้อตกลงการบริการ</a></li>
             	<li><a href="index.php?page=banner"><img src="images/order.gif" width="16" height="16" border="0" align="absbottom" /> ระบบจัดการโฆษณา</a></li>
-                
-        
+                <!-- 
+                <li><a href="index.php?page=article_system2"><img src="images/order.gif" width="16" height="16" border="0" align="absbottom" /> บทความ</a></li>
+                -->
+                <li><a href="index.php?page=ecommerce_system"><img src="images/order.gif" width="16" height="16" border="0" align="absbottom" /> บทความ</a></li>
+         		
                 <li><a href="index.php?page=about"><img src="images/details.gif" border="0" align="absbottom" /> เกี่ยวกับเรา</a></li>
                 <!-- <li><a href="index.php?page=vdo_system"><img src="images/downloads.gif" width="16" height="16" border="0" align="absbottom" /> วีดีโอ</a></li> -->
 				<li><a href="index.php?page=contact"><img src="images/submit-ticket.gif" width="16" height="16" border="0" align="absbottom" /> ติดต่อเรา</a></li>
@@ -325,10 +328,11 @@ p{
                 <!-- <li><a href="index.php?page=picturecat"><img src="images/Maps_alt.png" border="0" align="absbottom" /> อัลบั้ลรูปภาพ</a></li> -->
                 <li><a href="index.php?page=member_system"><img src="images/BeejiveIM_Dalt2.png" border="0" align="absbottom" /> ระบบสมาชิก</a></li>
                 <li><a href="index.php?page=seo_system"><img src="images/pic_small/Things.png" border="0" align="absbottom" /> ระบบโปรโมทเว็บ(SEO)</a></li>
-                 <li><a href="index.php?page=job_system"><img src="images/pic_small/Settings.png" border="0" align="absbottom" /> จัดการประกาศพิเศษ</a></li> 
-				  
+                <li><a href="index.php?page=job_system"><img src="images/pic_small/Settings.png" border="0" align="absbottom" /> จัดการประกาศพิเศษ</a></li> 
+				 <!-- 
 				<li><a href="index.php?page=menu_system"><img src="images/pic_small/Macristocracy.png" border="0" align="absbottom" /> จัดการเมนู</a></li>
-                <li><a href="index.php?page=article_system"><img src="images/pic_small/BeejiveIM_alt2.png" border="0" align="absbottom" /> บทความ</a></li>
+                <li><a href="index.php?page=article_system"><img src="images/pic_small/BeejiveIM_alt2.png" border="0" align="absbottom" /> บทความ for admin</a></li>
+                 -->
 				<li><a href="index.php?page=style_header"><img src="../images_system/color3.png" width="16" height="16"  border="0" align="absbottom" /> จัดการโลโก้</a></li>
 				
 				
@@ -449,6 +453,9 @@ p{
 			case 'article_system':
 				include("article_system.php");
 				break;
+			case 'article_system2':
+				include("article_system2.php");
+				break;
 			case 'job_system':
 				include("job_system.php");
 				break;
@@ -481,7 +488,7 @@ p{
 				break;
 				
 			default:
-				include("$default_page");
+				//include("$default_page");
 				break;
 				
 		}	

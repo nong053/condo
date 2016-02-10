@@ -18,6 +18,7 @@
  *
  * @return boolean
  */
+$userPathReal="";
 function CheckAuthentication()
 {
 	// WARNING : DO NOT simply return "true". By doing so, you are allowing
@@ -29,18 +30,41 @@ function CheckAuthentication()
 	// ... where $_SESSION['IsAuthorized'] is set to "true" as soon as the
 	// user logs in your system. To be able to use session variables don't
 	// forget to add session_start() at the top of this file.
-
-	if($_SESSION['member_user_url2']){
-		$picturecat_path=$_SESSION['member_user_url2'];
-		//$picturecat_path="/userfiles/".$_SESSION['member_user_url2'];
+	//echo $_SESSION['member_user_id'];
+	
+	//$_SESSION['ses_cus_id'];
+	
+	
+	//echo "userPathReal=".$userPathReal;
+	//echo "userPathReal=".$_SESSION['ses_cus_id'];
+	
+	if($_SESSION['ses_cus_id']){
+		//$picturecat_path=$_SESSION['member_user_id'];
+		$picturecat_path1="userfiles";
+		if(!is_dir($picturecat_path1)){
+			umask(0);
+			mkdir($picturecat_path1,0777);
+			
+		}else{
+			//echo"ok1";
+		}
+		
+		$picturecat_path="userfiles/".$_SESSION['ses_cus_id']."/";
+		
 		if(!is_dir($picturecat_path)){
 		umask(0);
-		mkdir("userfiles/".$picturecat_path,0777);
+		mkdir($picturecat_path,0777);
+		
+		}else{
+			//echo"ok2";
 		}
-	return true;
+		
+		return true;
 	}else{
 	return false;
 	}
+	
+	//return true;
 }
 
 
@@ -72,7 +96,8 @@ Examples:
 	*/
 	//$baseUrl = '/userfiles/';
 	//$baseUrl = "/prototype-nnit/".$_SESSION['member_user_url2']."/";
-	$baseUrl = "/userfiles/".$_SESSION['member_user_url2']."/";
+	$baseUrl = "/userfiles/".$_SESSION['ses_cus_id']."/";
+	
 /*
 ATTENTION: The trailing slash is required.
 */
